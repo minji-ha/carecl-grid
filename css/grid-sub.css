@@ -291,3 +291,6 @@
 .sub-body .ab-intro{white-space:nowrap}
 @media (max-width:860px){ .sub-body .ab-intro{white-space:normal} .sub-body .ab-intro br{display:none} }
 .sub-body .dp-head:has(.ab-intro){max-width:none}
+/* 떠 있는 기기 — 눕히지 않고 똑바로 */
+.ab-float img{transform:none}
+.ab-float{width:clamp(36px,2.8vw,50px)}
