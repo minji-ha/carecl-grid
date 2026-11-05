@@ -295,3 +295,6 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 .header__lang,.header__nav .header__lang a{font-size:13px!important}
 /* 영문·숫자 보정용으로 감싼 글자는 언제나 글줄 안에 (기존 "… span{display:block}" 규칙에 걸려 단어마다 줄바꿈되던 문제) */
 .lat,.num-en,.en{display:inline!important;margin:0!important;padding:0!important;width:auto!important}
+
+/* 헤더 메뉴 글자 세로 가운데 — Caviar Dreams는 소문자 위주라 글자 상자 가운데보다 약 2px 아래로 보인다 → 2px 올림 */
+.hnav__top,.header__util > a,.header__lang{position:relative;top:-2px}
