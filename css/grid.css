@@ -277,3 +277,5 @@ body,
    어느 숫자가 영문 옆인지는 js/grid-header.js가 골라 <span class="num-en">으로 감싼다 */
 @font-face{font-family:"Caviar Num";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0030-0039}
 .num-en{font-family:"Caviar Num","Caviar Dreams","SUIT",system-ui,sans-serif}
+/* Caviar Dreams 숫자는 대문자보다 약 6% 낮아(74 : 79) 영문 옆에서 작고 가늘어 보인다 → 대문자 높이에 맞춘다 */
+.num-en{font-size:1.06em;line-height:0}

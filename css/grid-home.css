@@ -199,3 +199,6 @@
   .gshop .gshop__copy *{opacity:1!important;transform:none!important}
   .gstep{--p:1!important;--t:1!important}
 }
+/* 단계 번호와 단계 이름 — 크기 차이를 줄이고 같은 기준선에 */
+.gstep__head{font-size:clamp(17px,1.45vw,24px)}
+.gstep__head em{font-size:1.3em;vertical-align:baseline;margin-right:.18em}
