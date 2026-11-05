@@ -612,3 +612,18 @@ body:has(main.sub) .foot{margin-top:0!important}
 /* R&D 특허증 — 뒤 회색 판·그림자 없이 특허증만 */
 .sub-body .dp-tall__img--doc{background:none!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
 .sub-body .dp-tall__img--doc img{width:min(72%,480px)!important;box-shadow:0 18px 40px -20px rgba(30,20,10,.35)}
+
+/* ── 상세페이지 블록 간격 통일 — 본문의 큰 묶음(섹션 · 사진 · 카드)은 모두 같은 간격 하나로 ──
+   섹션 자체의 위아래 안쪽 여백은 없애고, 이웃한 묶음 사이에만 --blk 를 둔다 */
+:root{--blk:clamp(64px,7vw,112px)}
+.sub-body > *{margin-top:0!important;margin-bottom:0!important}
+.sub-body > section,.sub-body > div{padding-top:0!important;padding-bottom:0!important}
+.sub-body > * + *{margin-top:var(--blk)!important}
+.sub-body{padding-block:var(--blk)!important}
+/* 묶음 안: 머리(라벨·제목·설명) → 내용 간격도 한 값으로 */
+.sub-body .dp__in > * + *{margin-top:clamp(32px,3.2vw,52px)}
+.sub-body .ct-cards{margin-top:clamp(16px,1.4vw,22px)!important}
+/* 위 규칙이 일부 블록의 더 구체적인 여백 규칙에 밀려서 — :not(#_)로 우선순위를 올려 확실히 통일 */
+.sub-body > *:not(#_){margin-top:0!important;margin-bottom:0!important}
+.sub-body > * + *:not(#_){margin-top:var(--blk)!important}
+.sub-body > section:not(#_),.sub-body > div:not(#_){padding-top:0!important;padding-bottom:0!important}
