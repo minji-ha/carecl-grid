@@ -269,3 +269,6 @@ body,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
   font-family:"Caviar Dreams","SUIT",system-ui,sans-serif
 }
+
+/* 좌우 여백 하나로 — 헤더 로고 선 = 메인 · 상세 본문 선 (90px@1440 → 60px@1440) */
+:root{--gut:clamp(20px,4.2vw,80px)}
