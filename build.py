@@ -449,6 +449,7 @@ def sub_page(group, led, items, idx):
         return 'src="assets/img/' + IMG_MAP.get(name, name) + '"'
     body = re.sub(r'src="(assets/img/[^"]+)"', img, body)
     # 섹션마다 LED 색 지정
+    body = body.replace('<div class="qcard rv">', '<div class="qcard rv"><span class="qcard__logo" aria-hidden="true">' + LOGO + '</span>')   # 문구 카드 뒤 큰 로고
     body = re.sub(r'<section class="(sec|figbreak|dp)', lambda m: '<section data-led="' + led + '" class="' + m.group(1), body)
     # 회사 소개의 파티클 캔버스 → 9구 LED 헤드
     body = re.sub(r'<div class="about__visual ceo__visual" id="brandParticles">.*?</div></div>',

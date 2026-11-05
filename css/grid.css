@@ -301,3 +301,7 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 
 /* 좌우 여백 조금 더 (60px → 80px @1440) — 헤더 로고 · KR/EN, 메인 · 상세 본문 모두 같은 선 */
 :root{--gut:clamp(22px,5.6vw,108px)}
+
+/* 회색 글씨 더 진하게 (보조 글자색 #6B625C → #4A423C) */
+:root{--ink-2:#4A423C}
+.gcontact__links a,.gstep__desc,.ghead__kr,.gwhy__q,.gtile__no,.gcc__desc,.foot__bar,.hnav__in small,.tres__note,.dp-pics figcaption{color:#4A423C}

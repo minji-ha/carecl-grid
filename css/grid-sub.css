@@ -324,3 +324,10 @@
 .t5__ring{stroke:#FFC9A8;filter:drop-shadow(0 0 4px rgba(255,170,120,.9))}
 .t5__hand{display:none}
 .t5 b{color:#FFD3B6;text-shadow:0 0 10px rgba(255,160,110,.95),0 0 22px rgba(255,140,90,.7),0 0 2px rgba(255,255,255,.9)}
+
+/* Our Story 마지막 문구 카드 — 오른쪽 아래 아주 큰 주황 careCL 로고, 흐릿하게 */
+.qcard{isolation:isolate}
+.qcard__logo{position:absolute;z-index:-1;right:-6%;bottom:-18%;width:min(78%,1100px);color:var(--accent);
+  opacity:.32;filter:blur(10px);pointer-events:none}
+.qcard__logo svg{display:block;width:100%;height:auto}
+.qcard > *:not(.qcard__logo){position:relative}
