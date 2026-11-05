@@ -682,3 +682,4 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .why-box .ab-bar + p{margin-top:clamp(20px,2vw,30px)}
 @media (max-width:1100px){ .sub-body .why-box p br{display:none} }
 .sub-body .why-box .why-box__t{max-width:none!important;margin-inline:auto}
+.sub-body > section.why-box:not(#_){padding:clamp(56px,5.6vw,96px) clamp(24px,5vw,90px)!important}
