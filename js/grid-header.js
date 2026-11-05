@@ -8,6 +8,7 @@
     while (walk.nextNode()) nodes.push(walk.currentNode);
     nodes.forEach(function (n) {
       if (!/[A-Za-z0-9]/.test(n.nodeValue) || (n.parentNode.classList && n.parentNode.classList.contains('en'))) return;
+      if (/flex|grid/.test(getComputedStyle(n.parentNode).display)) return;
       var frag = document.createDocumentFragment();
       n.nodeValue.split(/([A-Za-z0-9][A-Za-z0-9 &.,'’\-\/]*[A-Za-z0-9.]|[A-Za-z0-9])/).forEach(function (part, i) {
         if (!part) return;
@@ -42,6 +43,7 @@
     for (var i = all.length - 1; i >= 0; i--) {
       var n = all[i], t = n.nodeValue;
       if (!/[0-9A-Za-z]/.test(t) || n.parentNode.classList.contains('num-en') || n.parentNode.classList.contains('lat')) continue;
+      if (/flex|grid/.test(getComputedStyle(n.parentNode).display)) continue;   // 플렉스·그리드 바로 안의 글은 쪼개면 글자마다 칸이 되어 줄이 바뀐다
       var re = /[0-9]+/g, m, cuts = [];
       while (/[0-9]/.test(t) && (m = re.exec(t))) {
         var before = near(i, m.index - 1, -1), after = near(i, m.index + m[0].length, 1);

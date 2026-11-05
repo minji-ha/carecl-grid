@@ -293,3 +293,5 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 .header .lat,.header .num-en{-webkit-text-stroke:0!important}
 .hnav__top,.header__util > a{font-size:clamp(15px,1.12vw,17px)!important}
 .header__lang,.header__nav .header__lang a{font-size:13px!important}
+/* 영문·숫자 보정용으로 감싼 글자는 언제나 글줄 안에 (기존 "… span{display:block}" 규칙에 걸려 단어마다 줄바꿈되던 문제) */
+.lat,.num-en,.en{display:inline!important;margin:0!important;padding:0!important;width:auto!important}
