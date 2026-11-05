@@ -292,26 +292,13 @@ def page_index():
     </div>
   </section>
 
-  <!-- 02 철학 -->
-  <section class="gintro" aria-labelledby="gintro-title">
-    <div class="gintro__pin">
-      <div class="gintro__copy">
-        <p class="glabel">The Philosophy of careCL</p>
-        <span class="gintro__logo" aria-hidden="true">{LOGO}</span>
-        <h2 class="gintro__title" id="gintro-title">같은 나이, 다른 노화.</h2>
-        <p class="gintro__sub">케어클은 주름보다 먼저 나이 드는 방식을 읽습니다.</p>
-        <a class="gpill" href="about.html">Why careCL</a>
-      </div>
-    </div>
-  </section>
-
   <!-- 03 홈케어 5단계 — 사진이 세로선을 타고 내려와 한 줄로 맞춰진다 -->
   <section class="gsteps" data-gsteps aria-labelledby="gsteps-title">
     <div class="gsteps__pin">
       <div class="gsteps__lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="ghead">
-        <p class="glabel">Home Aging Care</p>
-        <h2 class="ghead__big" id="gsteps-title">5 STEPS</h2>
+        <span class="gsteps__logo" aria-hidden="true">{LOGO}</span>
+        <h2 class="ghead__big" id="gsteps-title" aria-label="careCL 5 STEPS">5 STEPS</h2>
         <p class="ghead__kr">내 노화 타입에 맞춘 홈케어 5단계</p>
       </div>
       <ol class="gsteps__row">

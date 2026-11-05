@@ -134,3 +134,15 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
 .sub-body h2,.sub-body h3,.sub-body .dp-title,.sub-body .sec-title{font-family:var(--f-title);font-weight:600;letter-spacing:-.03em}
 .sub-body .dp-title{font-size:clamp(32px,4vw,72px);line-height:1.2}
 .sub-body .label{color:var(--accent)}
+
+/* 내린 뒤 다시 나오는 헤더 — 오렌지 막대 + 흰 글자 · 흰 로고 (메인 맨 위 영상 위는 투명 그대로) */
+.header.is-solid{background:var(--accent)!important;border-bottom-color:transparent;box-shadow:0 10px 30px -18px rgba(120,50,15,.45)}
+.header.is-solid .header__logo,
+.header.is-solid .hnav__top,
+.header.is-solid .header__util > a,
+.header.is-solid .header__lang,
+.header.is-solid .header__lang a{color:#fff!important}
+.header.is-solid .header__lang a:not([aria-current="true"]){opacity:.7}
+.header.is-solid .hnav__top::after,.header.is-solid .header__util > a::after{background:#fff}
+.header.is-solid .header__menu span{background:#fff}
+.header.is-solid .hnav__in{border-top-color:var(--ink)}
