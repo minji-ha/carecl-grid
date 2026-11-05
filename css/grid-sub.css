@@ -297,3 +297,24 @@
 
 /* 각 섹션 제목 위 작은 영문 라벨(● Our Story 등) — 주황색 */
 .sub-body .dp-label{color:var(--accent)!important}
+
+/* Our Story 04 Method 사진 — 오른쪽 위 '5초' 타이머: 살구색 글씨 + 5초마다 한 바퀴 차오르는 링과 바늘 */
+.sub-body .dp-band__img--timer{position:relative}
+.t5{position:absolute;top:clamp(14px,1.8vw,26px);right:clamp(14px,1.8vw,26px);width:clamp(72px,6.4vw,104px);aspect-ratio:1;border-radius:50%;
+  display:grid;place-items:center;background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 10px 26px -12px rgba(120,60,30,.35)}
+.t5 svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.t5__track{fill:none;stroke:rgba(244,168,128,.28);stroke-width:4}
+.t5__ring{fill:none;stroke:#F4A880;stroke-width:4;stroke-linecap:round;stroke-dasharray:276.5;stroke-dashoffset:276.5;animation:t5ring 5s linear infinite}
+.t5__hand{transform-origin:50px 50px;animation:t5hand 5s linear infinite}
+.t5__hand line{stroke:#F4A880;stroke-width:2.5;stroke-linecap:round;opacity:.7}
+.t5 b{position:relative;font-family:var(--f-title);font-weight:400;font-size:clamp(26px,2.4vw,40px);line-height:1;color:#F09A6C;letter-spacing:-.02em}
+.t5 b small{font-size:.42em;margin-left:2px;font-family:"SUIT",sans-serif}
+@keyframes t5ring{0%{stroke-dashoffset:276.5}92%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes t5hand{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.t5__ring{animation:none;stroke-dashoffset:0}.t5__hand{animation:none}}
+/* 5초 타이머 — 더 크고 또렷하게 (어두운 머리카락 위에서도 보이게) */
+.t5{width:clamp(96px,8.4vw,136px);background:rgba(255,255,255,.88)}
+.t5__track{stroke:rgba(240,150,105,.22);stroke-width:5}
+.t5__ring{stroke:#EE8E5E;stroke-width:5}
+.t5__hand line{stroke:#EE8E5E;opacity:.55}
+.t5 b{font-size:clamp(34px,3vw,52px);color:#E9834F}
