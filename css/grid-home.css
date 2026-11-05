@@ -130,22 +130,22 @@
 .gshop__pin > .gwrap{width:100%}
 .gshop__card{
   --e:0;position:relative;aspect-ratio:21/9;max-height:calc(100svh - var(--head) - 60px);margin-inline:auto;overflow:hidden;
-  /* 알약 모양 창 → 둥근 사진 카드 (js가 --e 0→1을 넣는다) */
-  clip-path:inset(calc((1 - var(--e)) * 34%) calc((1 - var(--e)) * 38%) round calc(var(--r) + (1 - var(--e)) * 400px));
-  will-change:clip-path;
+  border-radius:var(--r);
+  /* 조금 작은 카드 → 제 크기 (js가 --e 0→1) */
+  transform:scale(calc(.86 + var(--e) * .14));transform-origin:50% 60%;will-change:transform;
 }
 .gshop__card img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
-  transform:scale(var(--z,1.3));filter:blur(calc((1 - var(--e)) * 6px)) saturate(calc(.6 + var(--e) * .4));will-change:transform,filter;
+  position:absolute;left:0;top:-9%;width:100%;height:118%;object-fit:cover;object-position:50% 40%;
+  transform:translate3d(0,var(--py,0%),0) scale(var(--z,1.12));will-change:transform;
 }
-.gshop__card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,6,.5),rgba(20,12,6,0) 62%);opacity:var(--e)}
+.gshop__card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,6,.5),rgba(20,12,6,0) 62%);opacity:calc(.35 + var(--e) * .65)}
 .gshop__copy{position:absolute;left:clamp(26px,5vw,90px);top:50%;transform:translateY(-50%);z-index:1;color:#fff}
 .gshop__copy h2{margin:0;font-family:var(--f-title);font-weight:600;font-size:clamp(30px,3.6vw,62px);letter-spacing:-.02em;line-height:1.08}
 .gshop__copy p{margin:.8em 0 1.9em;font-size:clamp(14px,1.1vw,18px);opacity:.92}
 /* 글은 다 열린 뒤 한 줄씩 아래에서 올라온다 */
-.gshop__copy h2 > span,.gshop__copy p > span{display:inline-block;clip-path:inset(0 0 -.2em 0)}
+.gshop__copy h2 > span,.gshop__copy p > span{display:inline-block}
 .gshop__copy h2 > span{display:block}
-.gshop__copy h2 > span,.gshop__copy p > span,.gshop__copy .gpill{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.gshop__copy h2 > span,.gshop__copy p > span,.gshop__copy .gpill{opacity:0;transform:translateY(18px);transition:opacity 1s ease,transform 1.2s cubic-bezier(.16,1,.3,1)}
 .gshop.is-open .gshop__copy h2 > span,.gshop.is-open .gshop__copy p > span,.gshop.is-open .gshop__copy .gpill{opacity:1;transform:none}
 .gshop.is-open .gshop__copy h2 > span:nth-child(2){transition-delay:.1s}
 .gshop.is-open .gshop__copy p > span{transition-delay:.22s}
@@ -185,7 +185,7 @@
   .gsteps__lines{display:none}
 
   .gshop{height:200vh}
-  .gshop__card{aspect-ratio:4/5;clip-path:inset(calc((1 - var(--e)) * 26%) calc((1 - var(--e)) * 22%) round calc(var(--r) + (1 - var(--e)) * 300px))}
+  .gshop__card{aspect-ratio:4/5}
   .gshop__card img{object-position:62% 50%}
   .gshop__card::after{background:linear-gradient(0deg,rgba(20,12,6,.6),rgba(20,12,6,0) 60%)}
   .gshop__copy{top:auto;bottom:28px;transform:none;left:24px;right:24px}
