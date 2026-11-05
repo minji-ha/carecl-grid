@@ -54,7 +54,8 @@ def head(title, desc, sub=False, css=(), body_cls=""):
 <link rel="preload" href="fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&display=swap">
 <link rel="stylesheet" href="css/stem.css?v={VER}">
 <link rel="stylesheet" href="css/home261019.css?v={VER}">
 {subcss}{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" not in c)}<link rel="stylesheet" href="css/grid.css?v={VER}">

@@ -240,3 +240,16 @@ body,
 /* 남아 있던 보라·초록 LED 색 표시(탭 밑줄·라벨 점)도 오렌지로 */
 html[data-led-now]{--led:var(--accent)!important}
 .subtabs a::after{background:var(--accent)!important}
+
+/* 한글 서체 → IBM Plex Sans KR Light (SIL OFL — 상업적 이용 무료). & 기호도 이 서체로 나온다 (Caviar Dreams에서 & 제외) */
+:root{
+  --f-title:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-ui:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-kr:"Caviar Dreams","IBM Plex Sans KR","Pretendard",system-ui,sans-serif;
+}
+body,
+.subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
+  font-family:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif
+}
+body,body *{font-weight:300!important}

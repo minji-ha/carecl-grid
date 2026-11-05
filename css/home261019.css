@@ -161,7 +161,7 @@
 
 /* 히어로 합쳐지는 제목 — 로고 서체 Caviar Dreams (자료/drive/10. 글꼴)
    글꼴이 오기 전 굵은 대체 글꼴이 잠깐 보이지 않게 block + 미리 받기(build.py head) */
-@font-face{font-family:"Caviar Dreams";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block}
+@font-face{font-family:"Caviar Dreams";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0000-0025,U+0027-FFFF}   /* & 는 빼서 한글 서체의 &로 */
 .hero__title--merge,.hero__title--merge .mg{font-family:"Caviar Dreams","Metropolis",system-ui,sans-serif;font-weight:400;letter-spacing:0}
 /* 히어로 제목 위아래 간격 — 위(소제목과)는 좁히고 아래(한글 문장과)는 살짝 띄워 균형 */
 .hero__title--merge{margin-top:.16em;line-height:.92}
