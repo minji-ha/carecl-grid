@@ -240,7 +240,7 @@ GSTEPS = [  # (번호, EN, 한글, 설명, 사진, 출발 높이 vh — 단계�
     ("05", "Check", "다시 읽기", "다시 읽으면, 변화가 보입니다.", "g-step5b.jpg", 135),
 ]
 
-GWHY_IMG = ["a-zone3.jpg", "d-grid-glass2.jpg", "e-techfit-lit-43.jpg", "g-clinic-session.jpg"]   # CORE 순서
+GWHY_IMG = ["g-why-types.jpg", "g-why-map.jpg", "e-techfit-lit-43.jpg", "g-clinic-session.jpg"]   # CORE 순서
 
 GLINEUP = [  # (분류, 이름, 설명, 누끼, 링크)
     ("Device", "TechFit", "5초 스탬핑 고주파 디바이스", "cut-device.png", "products.html"),
