@@ -264,3 +264,13 @@
 .sub-body .dp-tall__notes p,.sub-body .dp-item p,.sub-body .ab-wide__copy p:not(.dp-band__t){font-size:clamp(17px,1.4vw,21px)!important;line-height:1.8!important}
 .sub-body .dp-body,.sub-body .dp-band__copy,.sub-body .dp-tall__copy,.sub-body .dp-bleed__copy{max-width:34em}
 .sub-body .tcard .tres__k,.sub-body .dp-facts dd{font-size:clamp(16px,1.15vw,19px)}
+
+/* 본문 한 단계 더 (18~21px → 19~23px), 제목도 함께 */
+.sub-body .dp-body p,.sub-body .dp-lead,.sub-body .dp-band__copy p:not(.dp-band__t),.sub-body .dp-bleed__copy p:not(.dp-acc):not(.dp-band__t),
+.sub-body .dp-tall__notes p,.sub-body .dp-item p,.sub-body .ab-wide__copy p:not(.dp-band__t){font-size:clamp(18px,1.55vw,23px)!important;line-height:1.75!important}
+.sub-body .dp-body,.sub-body .dp-band__copy,.sub-body .dp-tall__copy,.sub-body .dp-bleed__copy{max-width:32em}
+.sub-body .dp-title{font-size:clamp(32px,3.3vw,54px)!important}
+.sub-body .dp-band__t,.sub-body .dp-tall__t{font-size:clamp(30px,2.9vw,46px)!important}
+.sub-body .dp-label{font-size:14px}
+.sub-body .dp-item h4{font-size:clamp(21px,1.75vw,28px)}
+.sub-body .tcard .tres__k,.sub-body .dp-facts dd{font-size:clamp(17px,1.3vw,20px)}

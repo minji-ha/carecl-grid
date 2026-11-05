@@ -220,3 +220,11 @@
 .gcc:hover .gcc__go svg{stroke:var(--accent)}
 @media (max-width:1080px){ .gcontact__cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:480px){ .gcontact__cards{grid-template-columns:1fr} .gcc{min-height:0} }
+
+/* 메인 작은 글 키움 */
+.ghead__kr{font-size:clamp(17px,1.35vw,21px)}
+.gstep__kr{font-size:clamp(16px,1.15vw,18px)}
+.gstep__desc{font-size:clamp(14px,1vw,16px)}
+.gwhy__q{font-size:clamp(17px,1.35vw,21px)}
+.gcc__desc{font-size:15px}
+.gshop__copy p{font-size:clamp(16px,1.3vw,20px)}
