@@ -457,3 +457,59 @@
   .sub-body #results .tres2__col{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sub-body #results .tres--center{padding-inline:16px}
 }
+
+/* R&D 숫자 결과 v4 — 높이 줄임 · 기기 크게 · 왼쪽 3 / 오른쪽 3 / 아래 1 · 같은 크기 카드 · 카드와 기기를 잇는 선 */
+.sub-body #results .tres--center{padding:clamp(40px,4vw,68px) clamp(24px,4vw,72px) clamp(36px,3.4vw,56px)}
+.sub-body #results .tres2{margin-top:clamp(20px,2vw,34px)}
+.sub-body #results .tcard{width:212px!important;height:96px;min-height:0!important;padding:12px 10px;gap:4px}
+.sub-body #results .tcard .tres__k{white-space:nowrap}
+.sub-body #results .tcard .tres__v{font-size:clamp(24px,2vw,32px)}
+.tres2__lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.tres2__lines path{fill:none;stroke:rgba(255,170,125,.55);stroke-width:1.2}
+.tres2__lines circle{fill:#FF9A62}
+@media (min-width:1081px){
+  .sub-body #results .tres2{height:clamp(470px,38vw,560px);--rx:clamp(300px,26vw,390px);--ry:clamp(110px,9vw,140px);--cy:42%}
+  .sub-body #results .tres2__dev{top:0;translate:-50% 0;z-index:1}
+  .sub-body #results .tres2__dev img{height:clamp(340px,28vw,430px)}
+  .sub-body #results .tcard{z-index:1;top:calc(var(--cy) + sin(var(--a)) * var(--ry))}
+  .sub-body #results .tres2__col--l .tcard:nth-child(1){--a:212deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(2){--a:180deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(3){--a:148deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(4){left:50%;top:auto;bottom:0;translate:-50% 0!important}
+  .sub-body #results .tres2__col--r .tcard:nth-child(1){--a:-32deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(2){--a:0deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(3){--a:32deg}
+}
+@media (max-width:1080px){ .tres2__lines{display:none} .sub-body #results .tcard{width:auto!important} }
+@media (min-width:1081px){ .sub-body #results .tres2{--ry:clamp(200px,16vw,232px);--rx:clamp(310px,27vw,400px)} }
+
+/* R&D 숫자 결과 v5 — 선 없음, 카드 7개를 기기 둘레 원호(왼쪽 위 → 아래 → 오른쪽 위)에 같은 각도 간격으로 */
+.tres2__lines{display:none}
+@media (min-width:1081px){
+  .sub-body #results .tres2{height:clamp(540px,43vw,620px);--rx:clamp(330px,27vw,400px);--ry:clamp(210px,16vw,232px);--cy:36%}
+  .sub-body #results .tres2__dev img{height:clamp(300px,25vw,360px)}
+  .sub-body #results .tcard{left:calc(50% + cos(var(--a)) * var(--rx))!important;top:calc(var(--cy) + sin(var(--a)) * var(--ry))!important;bottom:auto!important;translate:-50% -50%!important}
+  .sub-body #results .tres2__col--l .tcard:nth-child(1){--a:215deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(2){--a:173.33deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(3){--a:131.67deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(4){--a:90deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(1){--a:-35deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(2){--a:6.67deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(3){--a:48.33deg}
+}
+/* v5.1 — 타원 대신 원(같은 반지름)으로 해서 카드 7개 사이 간격을 똑같이, 높이도 낮춤 */
+@media (min-width:1081px){
+  .sub-body #results .tres2{height:486px;--rx:236px;--ry:236px;--cy:200px}
+  .sub-body #results .tres2__dev{top:calc(var(--cy) - 180px);translate:-50% 0}
+  .sub-body #results .tres2__dev img{height:360px}
+}
+/* 아래 카드 위치 보정(예전 규칙이 더 구체적이라 덮어씀) + 각주는 판 바깥 아래로 */
+@media (min-width:1081px){ .sub-body #results .tres2__col--l .tcard:nth-child(4){translate:-50% -50%!important;top:calc(var(--cy) + sin(var(--a)) * var(--ry))!important;bottom:auto!important} }
+.sub-body #results .tres__note--out{display:block;text-align:center;margin:18px var(--side) 0!important;color:var(--ink-2)!important;font-size:13px}
+/* v5.2 — 원 반지름을 넓혀 카드 간격을 더 벌림 */
+@media (min-width:1081px){ .sub-body #results .tres2{height:590px;--rx:292px;--ry:292px;--cy:240px} }
+/* v5.3 — 아래쪽 카드끼리 겹치지 않게 반지름 더 넓히고 카드 폭 조금 줄임 */
+@media (min-width:1081px){
+  .sub-body #results .tres2{height:650px;--rx:330px;--ry:330px;--cy:262px}
+  .sub-body #results .tcard{width:196px!important}
+}
