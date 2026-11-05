@@ -553,3 +553,20 @@ body:has(main.sub) .foot{margin-top:0!important}
 .ct-card:hover .ct-card__go svg{stroke:var(--accent)}
 @media (max-width:1080px){ .ct-cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:480px){ .ct-cards{grid-template-columns:1fr} .ct-card{min-height:150px} }
+
+/* Contact 머리 — 건물 사진(careCL 간판) 넓은 카드 위 왼쪽에 제목·안내 */
+.ct-hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:2079/756;min-height:300px}
+.ct-hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;border-radius:0!important}
+.ct-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.55) 34%,rgba(255,255,255,0) 58%)}
+.ct-hero__copy{position:absolute;z-index:2;left:clamp(24px,4vw,64px);top:50%;transform:translateY(-50%);max-width:48%}
+.ct-hero__copy .dp-title{margin-top:12px}
+.ct-hero__body{margin:clamp(14px,1.4vw,22px) 0 0;font-size:clamp(16px,1.25vw,19px);line-height:1.75;color:#433B35}
+.sub-body #location .dp-facts{grid-template-columns:1fr}
+@media (max-width:860px){
+  .ct-hero{aspect-ratio:auto;min-height:0;display:flex;flex-direction:column}
+  .ct-hero__bg{position:relative;height:auto;aspect-ratio:16/9}
+  .ct-hero::before{display:none}
+  .ct-hero__copy{position:static;transform:none;max-width:none;padding:22px}
+  .ct-hero__body br{display:none}
+}
+.ct-hero__copy{max-width:38%}
