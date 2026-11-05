@@ -367,3 +367,16 @@
 .sub-body .dp--quotecard .dp-quote{font-weight:600!important}
 .sub-body .dp--quotecard .dp-quote .lat,.sub-body .dp--quotecard .dp-quote .en{font-weight:600!important;-webkit-text-stroke:.6px currentColor!important}
 .sub-body .dp--quotecard .dp-quote small,.sub-body .dp--quotecard .dp-quote small *{font-weight:400!important;-webkit-text-stroke:0!important}
+
+/* ── 세로 여백 정리 (너무 넓다는 의견) — 섹션 사이 간격을 한 단계로 맞춰 줄임 ── */
+:root{--vgap:clamp(56px,6vw,104px)}
+.sub-body .dp{padding-block:var(--vgap)}
+.sub-body .dp + .dp{padding-top:0}
+.sub-body .zz,.sub-body .dp-band,.sub-body .dp-tall,.sub-body .dp-bleed,.sub-body .ab-wide,.sub-body .dp-pics{margin-block:var(--vgap)!important}
+.sub-body .dp-band + .dp-band{margin-top:calc(var(--vgap) * .7)!important}
+.sub-body .dp-full{margin-top:clamp(36px,3.6vw,60px)}
+.sub-body .dp > .dp-full:first-child{margin-top:0}
+.sub-body .dp-grid,.sub-body .dp-facts{margin-top:clamp(32px,3vw,52px)}
+.sub-body > section:first-child{padding-top:clamp(40px,4vw,72px)!important}
+.sub-body .dp-head .dp-body{margin-top:clamp(14px,1.4vw,22px)}
+.sub + .foot,.foot{margin-top:clamp(56px,5vw,96px)}
