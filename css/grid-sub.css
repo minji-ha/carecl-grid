@@ -380,3 +380,5 @@
 .sub-body > section:first-child{padding-top:clamp(40px,4vw,72px)!important}
 .sub-body .dp-head .dp-body{margin-top:clamp(14px,1.4vw,22px)}
 .sub + .foot,.foot{margin-top:clamp(56px,5vw,96px)}
+/* About 살구색 카드 v3 — 떠 있는 기기 뺌, 글은 세로 가운데, 여성 조금 더 크게(카드 높이 3:1 → 2.5:1) */
+.sub-body .ab-wide{aspect-ratio:5/2}
