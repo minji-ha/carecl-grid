@@ -157,3 +157,35 @@
 /* 세로 인물 사진이 들어가는 사진+글 블록 — 4:5로 얼굴이 잘리지 않게 */
 .sub-body .dp-band__img--portrait{aspect-ratio:4/5!important}
 .sub-body .dp-band__img--portrait img{object-position:50% 20%}
+
+/* ── 읽기 좋게 (본문이 작고 흐리다는 의견) ─────────────────────────
+   · 본문 17~19px · 굵기 400 · 더 진한 색 · 한 줄 길이 제한(약 36자)으로 줄바꿈 정리
+   · 사진+글 블록은 한 화면 안에 들어오게 사진 높이를 화면 높이로 제한 */
+.sub-body .dp-body p,.sub-body .dp-lead,.sub-body .dp-band__copy p:not(.dp-band__t),.sub-body .dp-bleed__copy p:not(.dp-acc):not(.dp-band__t),
+.sub-body .dp-tall__notes p,.sub-body .dp-item p{
+  font-size:clamp(16px,1.25vw,19px)!important;line-height:1.85!important;color:#433B35!important;letter-spacing:-.005em!important
+}
+.sub-body .dp-head{max-width:880px}
+.sub-body .dp-body,.sub-body .dp-band__copy,.sub-body .dp-tall__copy,.sub-body .dp-bleed__copy{max-width:36em}
+.sub-body .dp-title{font-size:clamp(30px,3vw,48px)!important}
+.sub-body .dp-band__t,.sub-body .dp-tall__t{font-size:clamp(28px,2.6vw,42px)!important;margin-bottom:.1em}
+.sub-body .dp-label{font-size:13px}
+.sub-body .dp-item h4{font-size:clamp(20px,1.6vw,26px)}
+/* 사진은 한 화면 안에 — 세로 사진은 화면 높이에 맞춰 폭을 줄이고 가운데 */
+.sub-body .dp-band__img,.sub-body .dp-tall__img,.sub-body .dp-bleed__img{
+  width:min(100%,calc((100svh - var(--head) - 120px) * var(--ar,1.333)));justify-self:center
+}
+.sub-body .dp-tall__img,.sub-body .dp-band__img--portrait{--ar:.8}
+/* 사진과 글을 세로 가운데로, 섹션 간격은 한 화면에 한 묶음이 보이게 */
+.sub-body .dp-band,.sub-body .dp-tall,.sub-body .dp-bleed{align-items:center;margin-block:clamp(80px,9vh,140px)}
+@media (max-width:860px){
+  .sub-body .dp-band__img,.sub-body .dp-tall__img,.sub-body .dp-bleed__img{width:100%}
+  .sub-body .dp-body,.sub-body .dp-band__copy,.sub-body .dp-tall__copy,.sub-body .dp-bleed__copy{max-width:none}
+}
+
+/* 사진이 칸보다 좁아질 때 글 쪽으로 붙인다 (가운데 빈 틈 없이) */
+.sub-body .dp-band__img,.sub-body .dp-bleed__img{justify-self:end}
+.sub-body .dp-band--rev .dp-band__img,.sub-body .dp-bleed--rev .dp-bleed__img{justify-self:start}
+.sub-body .dp-tall__img{justify-self:start}
+.sub-body .dp-tall--rev .dp-tall__img{justify-self:end}
+@media (max-width:860px){ .sub-body .dp-band__img,.sub-body .dp-bleed__img,.sub-body .dp-tall__img{justify-self:stretch} }

@@ -252,7 +252,7 @@ body,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
   font-family:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif
 }
-body,body *{font-weight:300!important}
+body,body *{font-weight:400!important}
 
 /* 메뉴 펼침 — 영문 크게, 한글 작게 */
 .hnav__in b{font-size:17px!important;line-height:1.3}
