@@ -215,3 +215,16 @@ body,
 .header.is-solid .header__lang a{color:var(--ink)!important}
 .header.is-solid .hnav:hover .hnav__top,.header.is-solid .hnav__top[aria-current="page"],.header.is-solid .header__util > a:hover{color:var(--accent)!important}
 .header.is-solid .header__menu span{background:var(--ink)}
+
+/* 한글 서체 → 나눔스퀘어라운드 (네이버, 상업적 이용 무료)
+   로고 서체 Caviar Dreams처럼 획 끝이 둥글고 반듯한 기하형이라 섞여도 한 서체처럼 보인다 */
+:root{
+  --f-title:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif;
+  --f-ui:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif;
+  --f-kr:"Caviar Dreams","NanumSquareRound","Pretendard",system-ui,sans-serif;
+}
+body,
+.subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
+  font-family:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif
+}
