@@ -786,3 +786,21 @@ body:has(main.sub) .foot{margin-top:0!important}
   .sub-body .mpanel{grid-template-columns:1fr;gap:24px}
   .sub-body .mpanel__vis:not(#_){max-width:300px}
 }
+/* '세 가지 모드' v2 — 리드 문장 한 줄 · 왼쪽 버튼과 오른쪽 카드(사진+본문)의 위아래를 맞춤 */
+#modes .dp-body{max-width:none}
+@media (min-width:900px){ #modes .dp-lead{white-space:nowrap} }
+@media (min-width:561px){
+  .sub-body .modes{align-items:stretch}
+  .sub-body .modes__tabs:not(#_){position:static;height:100%}
+  .sub-body .mpanel{height:100%;box-sizing:border-box;padding:clamp(20px,2.4vw,36px);border-radius:var(--r);background:#fff;box-shadow:var(--shadow)}
+  .sub-body .mpanel__vis:not(#_){border-radius:calc(var(--r) - 6px)}
+  .sub-body .mpanel__copy .dp-label{margin-top:0}
+  .sub-body .mpanel__body p:last-child{margin-bottom:0}
+}
+@media (min-width:1101px){
+  .sub-body .modes__tabs .mtab{flex:1 1 0;min-height:0;align-content:center}
+  /* 사진 칸이 본문 높이만큼 세로로 채워져 카드 하나로 보이게 */
+  .sub-body .mpanel{align-items:stretch}
+  .sub-body .mpanel__vis:not(#_){aspect-ratio:auto;max-width:none;height:100%;min-height:320px}
+  .sub-body .mpanel__copy{align-self:center}
+}
