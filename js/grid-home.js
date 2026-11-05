@@ -2,7 +2,7 @@
    · 5 STEPS: 사진이 세로선을 타고 서로 다른 높이에서 내려와 한 줄로 맞춰진 뒤 글이 나온다
    · 네 가지 기준: 오른쪽 글이 화면 가운데 오면 왼쪽 사진이 바뀐다
    · 라인업: 좌우 슬라이더 (화살표 · 끌기 · 진행 막대), 처음엔 카드가 차례로 들어온다
-   · 공식몰: 카드가 제 크기로 커지고 안쪽 사진은 천천히 흐른다(시차), 글은 부드럽게 올라온다 */
+   · 공식몰: 카드가 제 크기로 커지고 사진이 부드럽게 확대된다, 글은 부드럽게 올라온다 */
 (function () {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mobile = matchMedia('(max-width: 767px)');
@@ -111,7 +111,7 @@
     }
   }
 
-  // 공식몰 — 화면에 들어오며 카드가 제 크기로 커지고(0~0.5), 안쪽 사진은 스크롤과 반대로 천천히 흐른다(시차). 올라가면 거꾸로
+  // 공식몰 — 화면에 들어오며 카드가 제 크기로 커지고(0~0.5), 다 커진 뒤 사진이 부드럽게 확대된다. 올라가면 거꾸로
   var shop = document.querySelector('[data-gshop]');
   if (shop && !reduce) {
     var card = shop.querySelector('[data-gshop-card]');
@@ -120,8 +120,8 @@
       var p = clamp((innerHeight - r.top) / r.height);
       var e = ease(clamp((p - .1) / .4));
       card.style.setProperty('--e', e.toFixed(4));
-      card.style.setProperty('--py', (6 - p * 12).toFixed(3) + '%');      // 사진은 아래 → 위로 천천히
-      card.style.setProperty('--z', (1.12 - e * .06).toFixed(4));
+      card.style.setProperty('--py', '0%');                                // 사진은 움직이지 않고
+      card.style.setProperty('--z', (1 + .1 * ease(clamp((p - .45) / .55))).toFixed(4));   // 다 커진 뒤 천천히 부드럽게 확대
       shop.classList.toggle('is-open', e > .9);
     };
     addEventListener('scroll', shopFrame, { passive: true });

@@ -369,7 +369,7 @@ def page_index():
     <div class="gwrap">
       <h2 class="ghead__big ghead__big--ink" id="gcontact-title">Contact us</h2>
       <p class="ghead__kr">careCL — 정밀하게 읽고, 부위별로 되돌리다</p>
-      <a class="gpill gpill--solid" href="inquiry.html">문의하기</a>
+      <a class="gpill" href="inquiry.html">문의하기</a>
       <nav class="gcontact__links" aria-label="문의 종류">{contact_links}</nav>
     </div>
   </section>
