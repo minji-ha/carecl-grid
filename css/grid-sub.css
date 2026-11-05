@@ -860,3 +860,5 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .howto2__steps li:not(:last-child)::after{content:none!important;display:none}
 /* 마무리 CTA 일러스트 — 아래 흐림 없이(라벨이 보이게) · 미색 배경은 흰 바탕에 녹임 */
 .sub-body .tcta__vis img:not(#_){-webkit-mask-image:linear-gradient(180deg,#000 86%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(180deg,#000 86%,rgba(0,0,0,0) 100%);mix-blend-mode:multiply}
+/* Aging Lab 머리말 서브 비주얼(배경 사진) 삭제 — Company처럼 제목만 */
+.sub .subhead--aging-lab::before{content:none!important;display:none!important}
