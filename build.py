@@ -466,7 +466,7 @@ def sub_page(group, led, items, idx):
         vis_html = (f'<div class="subhead__vis subhead__vis--{vis[1]}" aria-hidden="true">'
                     f'<img src="assets/img/{vis[0]}?v={VER}" alt="" decoding="async"></div>') if vis else ""
     head_html = f"""<main class="sub">
-  <section class="subhead{' subhead--vis' if vis else ''}" data-led="{led}">
+  <section class="subhead{' subhead--vis' if vis else ''} subhead--{group.lower().replace(' ', '-')}" data-led="{led}">
     <div class="subhead__top">
       {vis_html}
       <div class="wrap">
