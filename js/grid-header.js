@@ -93,7 +93,7 @@
   if (window.WOW && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var targets = [].slice.call(document.querySelectorAll(
       '.rv, .sub-body .zz__copy, .sub-body .zz__img, .sub-body .zz__nums li, .sub-body .dp-band__copy, .sub-body .dp-bleed__copy, .sub-body .ab-wide__copy,' +
-      '.ghead, .gwhy__item, .gcontact .ghead__big, .gcontact .ghead__kr, .gcontact .gpill, .gcc, .gshop__card'));
+      '.ghead, .gcontact .ghead__big, .gcontact .ghead__kr, .gcontact .gpill, .gcc, .gshop__card'));
     targets.forEach(function (el) {
       if (el.closest('.header, .subhead, .gsteps, .wow')) return;   // 헤더 · 머리말 · 5 STEPS(자체 효과)는 제외
       var d = parseInt(el.getAttribute('data-d') || '0', 10);

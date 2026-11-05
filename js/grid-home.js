@@ -49,19 +49,27 @@
     arm();
   }
 
-  // 네 가지 기준
+  // 네 가지 기준 — 화면 가운데에 가장 가까운 항목을 선명하게 (위아래 어느 쪽으로 스크롤해도 항상 하나는 또렷)
   var whyItems = [].slice.call(document.querySelectorAll('[data-why]'));
   var whyPics = [].slice.call(document.querySelectorAll('[data-why-pic]'));
-  if (whyItems.length && 'IntersectionObserver' in window) {
-    var wio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var i = whyItems.indexOf(e.target);
-        whyItems.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
-        whyPics.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+  if (whyItems.length) {
+    var whyCur = -1, whyTick = false;
+    var whyUpdate = function () {
+      whyTick = false;
+      var mid = innerHeight / 2, best = 0, bestD = Infinity;
+      whyItems.forEach(function (el, k) {
+        var r = el.getBoundingClientRect();
+        var d = mid < r.top ? r.top - mid : (mid > r.bottom ? mid - r.bottom : 0);
+        if (d < bestD) { bestD = d; best = k; }
       });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    whyItems.forEach(function (el) { wio.observe(el); });
+      if (best === whyCur) return;
+      whyCur = best;
+      whyItems.forEach(function (el, k) { el.classList.toggle('is-on', k === best); });
+      whyPics.forEach(function (el, k) { el.classList.toggle('is-on', k === best); });
+    };
+    addEventListener('scroll', function () { if (!whyTick) { whyTick = true; requestAnimationFrame(whyUpdate); } }, { passive: true });
+    addEventListener('resize', whyUpdate);
+    whyUpdate();
   }
 
   // 라인업 슬라이더 — 화살표 · 마우스 끌기 · 진행 막대

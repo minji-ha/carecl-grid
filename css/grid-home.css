@@ -228,3 +228,6 @@
 .gwhy__q{font-size:clamp(17px,1.35vw,21px)}
 .gcc__desc{font-size:15px}
 .gshop__copy p{font-size:clamp(16px,1.3vw,20px)}
+/* 네 가지 기준 — 선명하지 않은 항목도 읽을 수 있을 만큼은 보이게 */
+.gwhy__item{opacity:.38;transition:opacity .45s ease}
+.gwhy__item.is-on{opacity:1}
