@@ -672,3 +672,13 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub .subhead--aging-lab::before{background:url(../assets/img/a-head-bg.jpg) center 18%/cover no-repeat}
 @media (max-width:767px){ .sub .subhead--aging-lab::before{background-position:center 18%} }
 .sub-body .tcta__btn--fill:hover{background:#B8501C!important;border-color:#B8501C!important;color:#fff!important}
+
+/* 6 Aging Types '왜 같은 나이인데도…' — 사진 없이 연한 살구 둥근 박스, 가운데 정렬, 제목·글 사이 주황 바 */
+.sub-body .why-box{margin-inline:var(--side)!important;padding:clamp(52px,5.4vw,90px) clamp(24px,5vw,90px)!important;border-radius:var(--r);
+  background:#FDF0E8;text-align:center}
+.sub-body .why-box__t{margin:0;font-family:var(--f-title);font-weight:400;font-size:clamp(28px,2.6vw,42px);line-height:1.36;letter-spacing:-.01em;color:var(--ink)}
+.sub-body .why-box .ab-bar{margin:clamp(20px,2vw,30px) auto 0}
+.sub-body .why-box p{margin:clamp(18px,1.6vw,26px) auto 0;max-width:none;font-size:clamp(16px,1.2vw,19px);line-height:1.85;color:#433B35}
+.sub-body .why-box .ab-bar + p{margin-top:clamp(20px,2vw,30px)}
+@media (max-width:1100px){ .sub-body .why-box p br{display:none} }
+.sub-body .why-box .why-box__t{max-width:none!important;margin-inline:auto}
