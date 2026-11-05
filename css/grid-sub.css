@@ -127,9 +127,9 @@
 @media (max-width:767px){ .sub .subhead__title{font-size:min(8.2vw,40px)} }
 
 /* Technology 메뉴(careCL Technology · Product) 머리말 배경 — 42396.jpg 물방울 사진을 흐리고 연하게 (assets/img/t-head-bubble.jpg)
-   화면 맨 위(헤더 뒤)부터 하위 메뉴까지 깔리고, 아래 끝은 흰색으로 자연스럽게 이어진다 */
+   화면 맨 위(헤더 뒤)부터 하위 메뉴까지 깔린다 (아래 흰 그라데이션 없음) */
 .sub .subhead--technology{position:relative;isolation:isolate}
 .sub .subhead--technology::before{
   content:"";position:absolute;left:0;right:0;top:calc(-1 * var(--head));bottom:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(255,255,255,0) 55%,#fff 100%),url(../assets/img/t-head-bubble.jpg) center 40%/cover no-repeat;
+  background:url(../assets/img/t-head-bubble.jpg) center 40%/cover no-repeat;
 }
