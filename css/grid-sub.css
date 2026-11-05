@@ -854,3 +854,7 @@ body:has(main.sub) .foot{margin-top:0!important}
     width:30px;height:30px;border-radius:50%;display:grid;place-items:center;transform:translateY(-50%);
     background:#fff;box-shadow:0 4px 14px -4px rgba(0,0,0,.18);font-size:14px;color:var(--accent)}
 }
+/* How to Use 단계 박스 v3 — 모드별 색 빼고 모두 주황 · 화살표 없음 */
+.sub-body .howto2__steps li,.sub-body .howto2__s--glow,.sub-body .howto2__s--ems{--c:#E0662B!important}
+.sub-body .howto2__s--ems .howto2__ic{background:radial-gradient(circle,var(--c) 0 3.2px,transparent 3.8px) 0 0/10px 10px content-box,color-mix(in srgb,var(--c) 9%,#fff)}
+.sub-body .howto2__steps li:not(:last-child)::after{content:none!important;display:none}
