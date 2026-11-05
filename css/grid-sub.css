@@ -385,3 +385,6 @@
 /* About 첫 큰 사진(늘린이미지) — 사진 비율 그대로(2078:757), 자르지 않음 */
 .sub-body .dp-full--native img{aspect-ratio:2078/757!important;object-fit:cover}
 @media (max-width:860px){ .sub-body .dp-full--native img{aspect-ratio:2078/757!important} }
+/* About 살구색 카드 — 제목과 문장 사이 주황 바 */
+.ab-bar{display:block;width:clamp(44px,3.6vw,64px);height:3px;border-radius:3px;background:var(--accent);margin:clamp(20px,2vw,32px) 0 0}
+.sub-body .ab-wide__copy .ab-bar + p{margin-top:clamp(18px,1.8vw,28px)!important}

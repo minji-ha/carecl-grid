@@ -55,6 +55,7 @@ def head(title, desc, sub=False, css=(), body_cls=""):
 <link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="css/stem.css?v={VER}">
 <link rel="stylesheet" href="css/home261019.css?v={VER}">
 {subcss}{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" not in c)}<link rel="stylesheet" href="css/grid.css?v={VER}">
@@ -145,6 +146,7 @@ def tail(three=True, js=(), fab=True, mods=()):
     return (AIFAB if fab else "") + f"""<script src="libs/lenis.min.js"></script>
 <script src="js/led.js?v={VER}"></script>
 <script src="js/stem.js?v={VER}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 <script src="js/grid-header.js?v={VER}"></script>
 {"".join(f'<script src="{j}?v={VER}"></script>' + chr(10) for j in js)}{mod}</body>
 </html>

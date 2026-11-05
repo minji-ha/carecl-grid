@@ -85,4 +85,22 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   // 메뉴에 마우스를 가져가면 (화면 맨 위로 올리면) 다시 보이게
   addEventListener('pointermove', function (e) { if (e.clientY < 30) h.classList.remove('is-hidden'); }, { passive: true });
+
+  // WOW.js — 내용이 화면에 들어오면 위에서 아래로 내려앉는다 (animate.css fadeInDown)
+  // 기존 등장 효과(.rv)는 WOW로 바꾸고, 같은 줄의 순서(data-d)는 지연 시간으로 옮긴다
+  if (window.WOW && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var targets = [].slice.call(document.querySelectorAll(
+      '.rv, .sub-body .zz__copy, .sub-body .zz__img, .sub-body .zz__nums li, .sub-body .dp-band__copy, .sub-body .dp-bleed__copy, .sub-body .ab-wide__copy,' +
+      '.ghead, .gwhy__item, .gcontact .ghead__big, .gcontact .ghead__kr, .gcontact .gpill, .gcc, .gshop__card'));
+    targets.forEach(function (el) {
+      if (el.closest('.header, .subhead, .gsteps, .wow')) return;   // 헤더 · 머리말 · 5 STEPS(자체 효과)는 제외
+      var d = parseInt(el.getAttribute('data-d') || '0', 10);
+      if (el.parentElement && el.parentElement.classList.contains('zz__nums')) d = [].indexOf.call(el.parentElement.children, el);
+      if (el.classList.contains('gcc')) d = [].indexOf.call(el.parentElement.children, el);
+      el.classList.remove('rv');
+      el.classList.add('wow', 'fadeInDown');
+      if (d) el.setAttribute('data-wow-delay', (d * 0.12).toFixed(2) + 's');
+    });
+    new WOW({ offset: 60, mobile: true, live: false }).init();
+  }
 })();
