@@ -202,3 +202,21 @@
 /* 단계 번호와 단계 이름 — 크기 차이를 줄이고 같은 기준선에 */
 .gstep__head{font-size:clamp(17px,1.45vw,24px)}
 .gstep__head em{font-size:1.3em;vertical-align:baseline;margin-right:.18em}
+
+/* 문의 — 문의 종류 4개를 카드로 (영문 라벨 · 한글 이름 · 연락처 · 화살표). 마우스를 올리면 오렌지 */
+.gcontact__cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.2vw,22px);margin-top:clamp(44px,4.4vw,80px);text-align:left}
+.gcc{
+  position:relative;display:flex;flex-direction:column;min-height:clamp(200px,15vw,260px);padding:clamp(22px,1.8vw,32px);
+  border-radius:var(--r);background:#F7F4F1;transition:background .4s ease,transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;
+}
+.gcc:hover{background:var(--accent);transform:translateY(-6px);box-shadow:var(--shadow)}
+.gcc__en{font-style:normal;font-family:var(--f-ui);font-size:12px;letter-spacing:.16em;color:var(--accent);transition:color .3s ease}
+.gcc__kr{display:block;margin-top:10px;font-size:clamp(19px,1.5vw,24px);font-weight:400;color:var(--ink);transition:color .3s ease}
+.gcc__desc{margin:12px 0 0;flex:1;font-size:14px;line-height:1.75;color:var(--ink-2);transition:color .3s ease}
+.gcc__go{align-self:flex-end;width:42px;height:42px;border-radius:50%;border:2.5px solid var(--hair);display:grid;place-items:center;transition:border-color .3s ease,background .3s ease}
+.gcc__go svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;transition:stroke .3s ease}
+.gcc:hover .gcc__en,.gcc:hover .gcc__kr,.gcc:hover .gcc__desc{color:#fff}
+.gcc:hover .gcc__go{border-color:#fff;background:#fff}
+.gcc:hover .gcc__go svg{stroke:var(--accent)}
+@media (max-width:1080px){ .gcontact__cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:480px){ .gcontact__cards{grid-template-columns:1fr} .gcc{min-height:0} }

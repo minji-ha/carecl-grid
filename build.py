@@ -278,7 +278,12 @@ def page_index():
             <b class="gtile__name">{name}</b>
           </a>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
 
-    contact_links = "".join(f'<a href="{h}">{kr}<span>{en}</span></a>' for en, kr, desc, h in CONTACTS)
+    contact_links = "\n".join(f"""        <a class="gcc" href="{h}" style="--i:{i}">
+          <em class="gcc__en">{en}</em>
+          <b class="gcc__kr">{kr}</b>
+          <p class="gcc__desc">{desc}</p>
+          <i class="gcc__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+        </a>""" for i, (en, kr, desc, h) in enumerate(CONTACTS))
 
     body = f"""<main class="ghome">
 
@@ -370,7 +375,9 @@ def page_index():
       <h2 class="ghead__big ghead__big--ink" id="gcontact-title">Contact us</h2>
       <p class="ghead__kr">careCL — 정밀하게 읽고, 부위별로 되돌리다</p>
       <a class="gpill" href="contact.html">문의하기</a>
-      <nav class="gcontact__links" aria-label="문의 종류">{contact_links}</nav>
+      <nav class="gcontact__cards" aria-label="문의 종류">
+{contact_links}
+      </nav>
     </div>
   </section>
 
