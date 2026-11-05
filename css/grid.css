@@ -288,3 +288,8 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
    큰 글씨는 최대 .45px로 묶어 거의 그대로, 상세페이지 큰 제목은 원래 굵기 유지 */
 .lat,.num-en{-webkit-text-stroke:min(.03em,.45px) currentColor;paint-order:stroke fill}
 .subhead__title .lat,.subhead__title .num-en{-webkit-text-stroke:inherit}
+
+/* 헤더 메뉴 — 다시 얇게(획 덧그리기 없음), 크기만 조금 키움 */
+.header .lat,.header .num-en{-webkit-text-stroke:0!important}
+.hnav__top,.header__util > a{font-size:clamp(15px,1.12vw,17px)!important}
+.header__lang,.header__nav .header__lang a{font-size:13px!important}
