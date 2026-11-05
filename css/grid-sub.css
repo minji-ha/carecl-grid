@@ -705,3 +705,7 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .why-box::before{width:clamp(260px,28vw,420px);aspect-ratio:1;left:-6%;bottom:-38%;border:1.5px solid rgba(224,102,43,.18)}
 .sub-body .why-box::after{width:clamp(180px,18vw,280px);aspect-ratio:1;right:-3%;top:-30%;border:1.5px solid rgba(224,102,43,.14);
   background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0))}
+/* Technology 마지막 (얼굴 그리드) — 화면 끝까지 붙던 사진도 다른 블록처럼 좌우 여백 안으로 */
+.sub-body .tcta--split{margin-inline:var(--side)!important;width:auto;column-gap:clamp(36px,5vw,90px)}
+.sub-body .tcta--split .tcta__copy{padding-left:0!important}
+.sub-body .tcta__vis{margin:0!important}
