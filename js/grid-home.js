@@ -1,8 +1,8 @@
 /* GRID 시안 메인 (2026-11-05)
-   · 철학: 세로선 위 사진들이 각자 다른 속도로 위로 흘러간다 (가운데 글은 멈춤)
    · 5 STEPS: 사진이 세로선을 타고 서로 다른 높이에서 내려와 한 줄로 맞춰진 뒤 글이 나온다
    · 네 가지 기준: 오른쪽 글이 화면 가운데 오면 왼쪽 사진이 바뀐다
-   · 라인업: 화살표 · 점 · 제품 클릭 / 4.5초마다 다음 제품 */
+   · 라인업: 화면에 들어오면 카드가 차례로 올라온다
+   · 공식몰: 도착하면 사진이 살짝 확대, 다시 올라가면 원래대로 */
 (function () {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mobile = matchMedia('(max-width: 767px)');
@@ -14,23 +14,12 @@
   }
 
   var hero = document.querySelector('.hero');
-  var intro = document.querySelector('[data-gintro]');
-  var floats = intro ? [].slice.call(intro.querySelectorAll('[data-float]')) : [];
   var steps = document.querySelector('[data-gsteps]');
   var cards = steps ? [].slice.call(steps.querySelectorAll('[data-gstep]')) : [];
   var LAND = [0, .1, .22, .06, .16];   // 단계별로 출발 시점을 엇갈리게
 
   function frame() {
     if (hero) document.body.classList.toggle('on-hero', hero.getBoundingClientRect().bottom > 60);
-
-    if (intro && !reduce) {
-      var p = progress(intro);
-      floats.forEach(function (f) {
-        var y0 = parseFloat(f.style.getPropertyValue('--y'));
-        var sp = parseFloat(f.dataset.float);
-        f.style.transform = 'translate3d(-50%,' + (y0 - p * sp * 150).toFixed(2) + 'vh,0)';
-      });
-    }
 
     if (steps && !mobile.matches && !reduce) {
       var q = progress(steps);
@@ -76,35 +65,22 @@
   }
 
   // 라인업
-  var line = document.querySelector('[data-gline]');
-  if (line) {
-    var infos = [].slice.call(line.querySelectorAll('[data-line-info]'));
-    var cuts = [].slice.call(line.querySelectorAll('[data-line-cut]'));
-    var dots = [].slice.call(line.querySelectorAll('[data-line-dots] i'));
-    var track = line.querySelector('[data-line-track]');
-    var at = 0, timer;
-    var last = 0;
-    function go(i) {
-      last = at;
-      at = (i + cuts.length) % cuts.length;
-      infos.forEach(function (el, k) { el.classList.toggle('is-on', k === at); });
-      cuts.forEach(function (el, k) { el.classList.toggle('is-on', k === at); });
-      dots.forEach(function (el, k) { el.classList.toggle('is-on', k === at); });
-      // 고른 제품이 무대 왼쪽에 오도록
-      track.style.transform = 'translateX(' + (-offsetOf(at)) + 'px)';
-    }
-    function offsetOf(i) {   // 앞 제품들은 모두 작은 폭(--cw)이라 개수만큼 밀면 된다
-      var probe = cuts.filter(function (c, k) { return k !== i && k !== last; })[0];   // 크기가 바뀌는 중이 아닌 것으로 잰다
-      var cs = getComputedStyle(probe);
-      return i * (parseFloat(cs.width) + (parseFloat(getComputedStyle(track).columnGap) || 0));
-    }
-    function restart() { clearInterval(timer); if (!reduce) timer = setInterval(function () { go(at + 1); }, 4500); }
-    line.querySelector('[data-line-prev]').addEventListener('click', function () { go(at - 1); restart(); });
-    line.querySelector('[data-line-next]').addEventListener('click', function () { go(at + 1); restart(); });
-    cuts.forEach(function (c, k) { c.addEventListener('click', function () { go(k); restart(); }); });
-    line.addEventListener('pointerenter', function () { clearInterval(timer); });
-    line.addEventListener('pointerleave', restart);
-    addEventListener('resize', function () { go(at); });
-    restart();
+  var grid = document.querySelector('[data-gtiles]');
+  if (grid && !reduce && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-tiles');
+    var tio = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { grid.classList.add('is-in'); tio.disconnect(); }
+    }, { rootMargin: '0px 0px -15% 0px' });
+    tio.observe(grid);
+  }
+
+  // 공식몰 사진 확대/축소
+  var shop = document.querySelector('[data-gshop]');
+  if (shop && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      var e = es[0];
+      if (e.isIntersecting) shop.classList.add('is-zoom');
+      else if (e.boundingClientRect.top > 0) shop.classList.remove('is-zoom');   // 위로 되돌아갔을 때만
+    }, { threshold: .55 }).observe(shop);
   }
 })();

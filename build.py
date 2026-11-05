@@ -52,12 +52,11 @@ def head(title, desc, sub=False, css=(), body_cls=""):
 <link rel="icon" href="assets/img/carecl-logo.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/metropolis-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-{"" if sub else '<link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>' + chr(10)}<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="css/stem.css?v={VER}">
 <link rel="stylesheet" href="css/home261019.css?v={VER}">
-{subcss}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
-{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" not in c)}<link rel="stylesheet" href="css/grid.css?v={VER}">
+{subcss}{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" not in c)}<link rel="stylesheet" href="css/grid.css?v={VER}">
 {"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" in c)}<script type="importmap">{{"imports":{{"three":"./libs/three/three.module.min.js"}}}}</script>
 </head>
 <body{(' class="' + body_cls + '"') if body_cls else ""}>
@@ -146,6 +145,7 @@ def tail(three=True, js=(), fab=True, mods=()):
     return (AIFAB if fab else "") + f"""<script src="libs/lenis.min.js"></script>
 <script src="js/led.js?v={VER}"></script>
 <script src="js/stem.js?v={VER}"></script>
+<script src="js/grid-header.js?v={VER}"></script>
 {"".join(f'<script src="{j}?v={VER}"></script>' + chr(10) for j in js)}{mod}</body>
 </html>
 """
@@ -230,17 +230,6 @@ MAIN_STEM_BUBBLE = True
 
 # ── GRID 시안 메인 (2026-11-05 고객 수정요청: 쥬베룩 톤 — 세로선 그리드 · 둥근 이미지 카드 · 넓은 좌우 여백) ──
 # 사진 카드 규격은 하나: 둥근 모서리 + 아주 옅은 그림자.
-INTRO_FLOATS = [  # (이미지, 세로선 번호 0~5, 처음 위치 vh, 크기 vw, 속도)
-    ("c-gel-drop.jpg", 0, 70, 15, 1.25),
-    ("d-grid-glass2.jpg", 1, 18, 9, 0.9),
-    ("n-techfit-stand.jpg", 2, 104, 9, 1.1),
-    ("e-serum-water-v.jpg", 3, 8, 16, 0.75),
-    ("p-mask.jpg", 4, 86, 9, 1.35),
-    ("c-techfit-case.jpg", 5, 30, 15, 1.0),
-    ("e-gel-glass.jpg", 4, 2, 7, 0.6),
-    ("n-mask-light.jpg", 1, 120, 12, 1.5),
-]
-
 GSTEPS = [  # (번호, EN, 한글, 설명, 사진, 출발 높이 vh — 단계마다 다르게 내려온다)
     ("01", "Notice", "알아차림", "어느 날, 거울 속 얼굴이 낯설어집니다.", "g-step1.jpg", 120),
     ("02", "Read", "나의 노화 타입", "6가지 중, 내가 나이 드는 방식을 찾습니다.", "g-step2.jpg", 80),
@@ -263,10 +252,6 @@ GLINEUP = [  # (분류, 이름, 설명, 누끼, 링크)
 
 def page_index():
     HERO_MERGE = hero_merge()
-    floats = "\n".join(
-        f'        <figure class="gfloat gcard" data-float="{sp}" style="--line:{ln};--y:{y}vh;--s:{s}vw"><img src="assets/img/{im}" alt="" loading="lazy"></figure>'
-        for im, ln, y, s, sp in INTRO_FLOATS)
-
     steps = "\n".join(f"""        <li class="gstep" data-gstep style="--from:{fy}vh;--i:{i}">
           <figure class="gstep__img gcard"><img src="assets/img/{im}?v={VER}" alt="{kr}" loading="lazy"></figure>
           <div class="gstep__txt">
@@ -286,17 +271,14 @@ def page_index():
             <a class="gpill" href="{h}">{lk}</a>
           </article>""" for i, (no, t, q, lk, h, *_) in enumerate(CORE))
 
-    on = ' class="is-on"'
-    lineup_info = "\n".join(f"""          <div class="gline__info{" is-on" if i == 0 else ""}" data-line-info>
-            <em class="glabel">{tag}</em>
-            <h3>{name}</h3>
-            <p>{desc}</p>
-            <a class="gpill gpill--sm" href="{h}">Learn more</a>
-          </div>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
-    lineup_cuts = "\n".join(
-        f'            <button type="button" class="gline__cut{" is-on" if i == 0 else ""}" data-line-cut aria-label="{name}"><img src="assets/img/{cut}?v={VER}" alt="{name}" loading="lazy"></button>'
-        for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
-    lineup_dots = "".join(f'<i{on if i == 0 else ""}></i>' for i in range(len(GLINEUP)))
+    tiles = "\n".join(f"""        <a class="gtile" href="{h}" style="--i:{i}">
+          <span class="gtile__no">{i + 1:02d}</span>
+          <em class="gtile__tag">{tag}</em>
+          <span class="gtile__img"><img src="assets/img/{cut}?v={VER}" alt="" loading="lazy"></span>
+          <b class="gtile__name">{name}</b>
+          <span class="gtile__desc">{desc}</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
 
     contact_links = "".join(f'<a href="{h}">{kr}<span>{en}</span></a>' for en, kr, desc, h in CONTACTS)
 
@@ -312,12 +294,9 @@ def page_index():
     </div>
   </section>
 
-  <!-- 02 철학 — 세로선을 따라 사진이 흘러가고 가운데 글은 멈춰 있다 -->
-  <section class="gintro" data-gintro aria-labelledby="gintro-title">
+  <!-- 02 철학 -->
+  <section class="gintro" aria-labelledby="gintro-title">
     <div class="gintro__pin">
-      <div class="gintro__floats" aria-hidden="true">
-{floats}
-      </div>
       <div class="gintro__copy">
         <p class="glabel">The Philosophy of careCL</p>
         <span class="gintro__logo" aria-hidden="true">{LOGO}</span>
@@ -331,6 +310,7 @@ def page_index():
   <!-- 03 홈케어 5단계 — 사진이 세로선을 타고 내려와 한 줄로 맞춰진다 -->
   <section class="gsteps" data-gsteps aria-labelledby="gsteps-title">
     <div class="gsteps__pin">
+      <div class="gsteps__lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="ghead">
         <p class="glabel">Home Aging Care</p>
         <h2 class="ghead__big" id="gsteps-title">5 STEPS</h2>
@@ -363,7 +343,7 @@ def page_index():
     </div>
   </section>
 
-  <!-- 05 라인업 — 둥근 판 위 왼쪽 정보 카드 + 오른쪽 제품 -->
+  <!-- 05 라인업 — 제품마다 따로 선 카드 (들어올 때 차례로 올라온다) -->
   <section class="gline" data-gline aria-labelledby="gline-title">
     <div class="gwrap">
       <div class="ghead">
@@ -371,18 +351,8 @@ def page_index():
         <h2 class="ghead__title" id="gline-title">진단 결과에 맞춰 <span class="gacc">조합하는 제품</span></h2>
         <p class="ghead__kr">디바이스와 전용 코스메틱을 내 노화 타입에 맞게 고릅니다.</p>
       </div>
-      <div class="gline__board">
-        <div class="gline__card">
-{lineup_info}
-          <div class="gline__dots" data-line-dots>{lineup_dots}</div>
-        </div>
-        <div class="gline__stage">
-          <button type="button" class="gline__nav gline__nav--prev" data-line-prev aria-label="이전 제품"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <div class="gline__track" data-line-track>
-{lineup_cuts}
-          </div>
-          <button type="button" class="gline__nav gline__nav--next" data-line-next aria-label="다음 제품"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-        </div>
+      <div class="gline__grid" data-gtiles>
+{tiles}
       </div>
     </div>
   </section>
@@ -390,7 +360,7 @@ def page_index():
   <!-- 06 공식몰 -->
   <section class="gshop" aria-labelledby="gshop-title">
     <div class="gwrap">
-      <div class="gshop__card gcard">
+      <div class="gshop__card gcard" data-gshop>
         <img src="assets/img/m-model-set.jpg?v={VER}" alt="TechFit 풀세트와 디바이스를 든 모델" loading="lazy">
         <div class="gshop__copy">
           <h2 id="gshop-title">Shop the Official Store</h2>

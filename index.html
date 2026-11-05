@@ -10,12 +10,10 @@
 <link rel="preload" href="fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="css/stem.css?v=261105222309">
-<link rel="stylesheet" href="css/home261019.css?v=261105222309">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/grid.css?v=261105222309">
-<link rel="stylesheet" href="css/grid-home.css?v=261105222309">
+<link rel="stylesheet" href="css/stem.css?v=261105224603">
+<link rel="stylesheet" href="css/home261019.css?v=261105224603">
+<link rel="stylesheet" href="css/grid.css?v=261105224603">
+<link rel="stylesheet" href="css/grid-home.css?v=261105224603">
 <script type="importmap">{"imports":{"three":"./libs/three/three.module.min.js"}}</script>
 </head>
 <body>
@@ -57,27 +55,17 @@
 
   <!-- 01 메인 영상 (그대로) -->
   <section class="hero" aria-label="메인 영상">
-    <img class="hero__poster" src="assets/img/main-film-poster.jpg?v=261105222309" alt="">
-    <video class="hero__video" src="assets/video/main-film.mp4?v=261105222309" poster="assets/img/main-film-poster.jpg?v=261105222309"
+    <img class="hero__poster" src="assets/img/main-film-poster.jpg?v=261105224603" alt="">
+    <video class="hero__video" src="assets/video/main-film.mp4?v=261105224603" poster="assets/img/main-film-poster.jpg?v=261105224603"
            autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
     <div class="hero__copy" data-merge>
       <h1 class="hero__title hero__title--merge" aria-label="care Clinical Level — careCL"><span class="mg mg--care">care</span><span class="mg mg--drop" data-mg data-mg-at=".62,1">&nbsp;</span><span class="mg mg--cl">C</span><span class="mg mg--drop" data-mg data-mg-at="0.531,0.680">L</span><span class="mg mg--drop" data-mg data-mg-at="0.443,0.591">I</span><span class="mg mg--drop" data-mg data-mg-at="0.354,0.503">N</span><span class="mg mg--drop" data-mg data-mg-at="0.266,0.414">I</span><span class="mg mg--drop" data-mg data-mg-at="0.177,0.326">C</span><span class="mg mg--drop" data-mg data-mg-at="0.089,0.237">A</span><span class="mg mg--drop" data-mg data-mg-at="0.000,0.149">L</span><span class="mg mg--drop" data-mg data-mg-at=".62,1">&nbsp;</span><span class="mg mg--cl">L</span><span class="mg mg--drop" data-mg data-mg-at="0.465,0.680">E</span><span class="mg mg--drop" data-mg data-mg-at="0.310,0.525">V</span><span class="mg mg--drop" data-mg data-mg-at="0.155,0.370">E</span><span class="mg mg--drop" data-mg data-mg-at="0.000,0.215">L</span></h1>
     </div>
   </section>
 
-  <!-- 02 철학 — 세로선을 따라 사진이 흘러가고 가운데 글은 멈춰 있다 -->
-  <section class="gintro" data-gintro aria-labelledby="gintro-title">
+  <!-- 02 철학 -->
+  <section class="gintro" aria-labelledby="gintro-title">
     <div class="gintro__pin">
-      <div class="gintro__floats" aria-hidden="true">
-        <figure class="gfloat gcard" data-float="1.25" style="--line:0;--y:70vh;--s:15vw"><img src="assets/img/c-gel-drop.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="0.9" style="--line:1;--y:18vh;--s:9vw"><img src="assets/img/d-grid-glass2.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="1.1" style="--line:2;--y:104vh;--s:9vw"><img src="assets/img/n-techfit-stand.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="0.75" style="--line:3;--y:8vh;--s:16vw"><img src="assets/img/e-serum-water-v.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="1.35" style="--line:4;--y:86vh;--s:9vw"><img src="assets/img/p-mask.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="1.0" style="--line:5;--y:30vh;--s:15vw"><img src="assets/img/c-techfit-case.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="0.6" style="--line:4;--y:2vh;--s:7vw"><img src="assets/img/e-gel-glass.jpg" alt="" loading="lazy"></figure>
-        <figure class="gfloat gcard" data-float="1.5" style="--line:1;--y:120vh;--s:12vw"><img src="assets/img/n-mask-light.jpg" alt="" loading="lazy"></figure>
-      </div>
       <div class="gintro__copy">
         <p class="glabel">The Philosophy of careCL</p>
         <span class="gintro__logo" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538.82 132.97" role="img" aria-label="careCL">
@@ -98,6 +86,7 @@
   <!-- 03 홈케어 5단계 — 사진이 세로선을 타고 내려와 한 줄로 맞춰진다 -->
   <section class="gsteps" data-gsteps aria-labelledby="gsteps-title">
     <div class="gsteps__pin">
+      <div class="gsteps__lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="ghead">
         <p class="glabel">Home Aging Care</p>
         <h2 class="ghead__big" id="gsteps-title">5 STEPS</h2>
@@ -105,7 +94,7 @@
       </div>
       <ol class="gsteps__row">
         <li class="gstep" data-gstep style="--from:120vh;--i:0">
-          <figure class="gstep__img gcard"><img src="assets/img/g-step1.jpg?v=261105222309" alt="알아차림" loading="lazy"></figure>
+          <figure class="gstep__img gcard"><img src="assets/img/g-step1.jpg?v=261105224603" alt="알아차림" loading="lazy"></figure>
           <div class="gstep__txt">
             <p class="gstep__head"><em>01</em> Notice</p>
             <b class="gstep__kr">알아차림</b>
@@ -113,7 +102,7 @@
           </div>
         </li>
         <li class="gstep" data-gstep style="--from:80vh;--i:1">
-          <figure class="gstep__img gcard"><img src="assets/img/g-step2.jpg?v=261105222309" alt="나의 노화 타입" loading="lazy"></figure>
+          <figure class="gstep__img gcard"><img src="assets/img/g-step2.jpg?v=261105224603" alt="나의 노화 타입" loading="lazy"></figure>
           <div class="gstep__txt">
             <p class="gstep__head"><em>02</em> Read</p>
             <b class="gstep__kr">나의 노화 타입</b>
@@ -121,7 +110,7 @@
           </div>
         </li>
         <li class="gstep" data-gstep style="--from:150vh;--i:2">
-          <figure class="gstep__img gcard"><img src="assets/img/g-step3.jpg?v=261105222309" alt="시작된 자리" loading="lazy"></figure>
+          <figure class="gstep__img gcard"><img src="assets/img/g-step3.jpg?v=261105224603" alt="시작된 자리" loading="lazy"></figure>
           <div class="gstep__txt">
             <p class="gstep__head"><em>03</em> Map</p>
             <b class="gstep__kr">시작된 자리</b>
@@ -129,7 +118,7 @@
           </div>
         </li>
         <li class="gstep" data-gstep style="--from:95vh;--i:3">
-          <figure class="gstep__img gcard"><img src="assets/img/g-step4.jpg?v=261105222309" alt="맞춤 케어" loading="lazy"></figure>
+          <figure class="gstep__img gcard"><img src="assets/img/g-step4.jpg?v=261105224603" alt="맞춤 케어" loading="lazy"></figure>
           <div class="gstep__txt">
             <p class="gstep__head"><em>04</em> Care</p>
             <b class="gstep__kr">맞춤 케어</b>
@@ -137,7 +126,7 @@
           </div>
         </li>
         <li class="gstep" data-gstep style="--from:135vh;--i:4">
-          <figure class="gstep__img gcard"><img src="assets/img/g-step5.jpg?v=261105222309" alt="다시 읽기" loading="lazy"></figure>
+          <figure class="gstep__img gcard"><img src="assets/img/g-step5.jpg?v=261105224603" alt="다시 읽기" loading="lazy"></figure>
           <div class="gstep__txt">
             <p class="gstep__head"><em>05</em> Check</p>
             <b class="gstep__kr">다시 읽기</b>
@@ -157,10 +146,10 @@
       </div>
       <div class="gwhy__grid">
         <div class="gwhy__media gcard" aria-hidden="true">
-          <img class="gwhy__pic is-on" data-why-pic src="assets/img/a-zone3.jpg?v=261105222309" alt="" loading="lazy">
-          <img class="gwhy__pic" data-why-pic src="assets/img/d-grid-glass2.jpg?v=261105222309" alt="" loading="lazy">
-          <img class="gwhy__pic" data-why-pic src="assets/img/e-techfit-lit-43.jpg?v=261105222309" alt="" loading="lazy">
-          <img class="gwhy__pic" data-why-pic src="assets/img/g-clinic-session.jpg?v=261105222309" alt="" loading="lazy">
+          <img class="gwhy__pic is-on" data-why-pic src="assets/img/a-zone3.jpg?v=261105224603" alt="" loading="lazy">
+          <img class="gwhy__pic" data-why-pic src="assets/img/d-grid-glass2.jpg?v=261105224603" alt="" loading="lazy">
+          <img class="gwhy__pic" data-why-pic src="assets/img/e-techfit-lit-43.jpg?v=261105224603" alt="" loading="lazy">
+          <img class="gwhy__pic" data-why-pic src="assets/img/g-clinic-session.jpg?v=261105224603" alt="" loading="lazy">
         </div>
         <div class="gwhy__list">
           <article class="gwhy__item is-on" data-why>
@@ -193,7 +182,7 @@
     </div>
   </section>
 
-  <!-- 05 라인업 — 둥근 판 위 왼쪽 정보 카드 + 오른쪽 제품 -->
+  <!-- 05 라인업 — 제품마다 따로 선 카드 (들어올 때 차례로 올라온다) -->
   <section class="gline" data-gline aria-labelledby="gline-title">
     <div class="gwrap">
       <div class="ghead">
@@ -201,58 +190,55 @@
         <h2 class="ghead__title" id="gline-title">진단 결과에 맞춰 <span class="gacc">조합하는 제품</span></h2>
         <p class="ghead__kr">디바이스와 전용 코스메틱을 내 노화 타입에 맞게 고릅니다.</p>
       </div>
-      <div class="gline__board">
-        <div class="gline__card">
-          <div class="gline__info is-on" data-line-info>
-            <em class="glabel">Device</em>
-            <h3>TechFit</h3>
-            <p>5초 스탬핑 고주파 디바이스</p>
-            <a class="gpill gpill--sm" href="products.html">Learn more</a>
-          </div>
-          <div class="gline__info" data-line-info>
-            <em class="glabel">Device</em>
-            <h3>CLB</h3>
-            <p>고주파 마사지기</p>
-            <a class="gpill gpill--sm" href="products.html">Learn more</a>
-          </div>
-          <div class="gline__info" data-line-info>
-            <em class="glabel">Cosmetic</em>
-            <h3>Collagen Booster Gel</h3>
-            <p>디바이스와 함께 쓰는 콜라겐 부스터 젤</p>
-            <a class="gpill gpill--sm" href="products.html#cosmetics">Learn more</a>
-          </div>
-          <div class="gline__info" data-line-info>
-            <em class="glabel">Cosmetic</em>
-            <h3>Grid Mask</h3>
-            <p>관리 부위를 안내하는 그리드 마스크</p>
-            <a class="gpill gpill--sm" href="products.html#cosmetics">Learn more</a>
-          </div>
-          <div class="gline__info" data-line-info>
-            <em class="glabel">Cosmetic</em>
-            <h3>Toning Serum</h3>
-            <p>디바이스 사용 전후에 쓰는 토닝 세럼</p>
-            <a class="gpill gpill--sm" href="products.html#cosmetics">Learn more</a>
-          </div>
-          <div class="gline__info" data-line-info>
-            <em class="glabel">Accessory</em>
-            <h3>Firenze Bag</h3>
-            <p>디바이스 전용 가죽 케이스</p>
-            <a class="gpill gpill--sm" href="products.html">Learn more</a>
-          </div>
-          <div class="gline__dots" data-line-dots><i class="is-on"></i><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="gline__stage">
-          <button type="button" class="gline__nav gline__nav--prev" data-line-prev aria-label="이전 제품"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <div class="gline__track" data-line-track>
-            <button type="button" class="gline__cut is-on" data-line-cut aria-label="TechFit"><img src="assets/img/cut-device.png?v=261105222309" alt="TechFit" loading="lazy"></button>
-            <button type="button" class="gline__cut" data-line-cut aria-label="CLB"><img src="assets/img/cut-clb.png?v=261105222309" alt="CLB" loading="lazy"></button>
-            <button type="button" class="gline__cut" data-line-cut aria-label="Collagen Booster Gel"><img src="assets/img/cut-gel.png?v=261105222309" alt="Collagen Booster Gel" loading="lazy"></button>
-            <button type="button" class="gline__cut" data-line-cut aria-label="Grid Mask"><img src="assets/img/cut-mask.png?v=261105222309" alt="Grid Mask" loading="lazy"></button>
-            <button type="button" class="gline__cut" data-line-cut aria-label="Toning Serum"><img src="assets/img/cut-serum.png?v=261105222309" alt="Toning Serum" loading="lazy"></button>
-            <button type="button" class="gline__cut" data-line-cut aria-label="Firenze Bag"><img src="assets/img/cut-case.png?v=261105222309" alt="Firenze Bag" loading="lazy"></button>
-          </div>
-          <button type="button" class="gline__nav gline__nav--next" data-line-next aria-label="다음 제품"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-        </div>
+      <div class="gline__grid" data-gtiles>
+        <a class="gtile" href="products.html" style="--i:0">
+          <span class="gtile__no">01</span>
+          <em class="gtile__tag">Device</em>
+          <span class="gtile__img"><img src="assets/img/cut-device.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">TechFit</b>
+          <span class="gtile__desc">5초 스탬핑 고주파 디바이스</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="gtile" href="products.html" style="--i:1">
+          <span class="gtile__no">02</span>
+          <em class="gtile__tag">Device</em>
+          <span class="gtile__img"><img src="assets/img/cut-clb.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">CLB</b>
+          <span class="gtile__desc">고주파 마사지기</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="gtile" href="products.html#cosmetics" style="--i:2">
+          <span class="gtile__no">03</span>
+          <em class="gtile__tag">Cosmetic</em>
+          <span class="gtile__img"><img src="assets/img/cut-gel.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">Collagen Booster Gel</b>
+          <span class="gtile__desc">디바이스와 함께 쓰는 콜라겐 부스터 젤</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="gtile" href="products.html#cosmetics" style="--i:3">
+          <span class="gtile__no">04</span>
+          <em class="gtile__tag">Cosmetic</em>
+          <span class="gtile__img"><img src="assets/img/cut-mask.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">Grid Mask</b>
+          <span class="gtile__desc">관리 부위를 안내하는 그리드 마스크</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="gtile" href="products.html#cosmetics" style="--i:4">
+          <span class="gtile__no">05</span>
+          <em class="gtile__tag">Cosmetic</em>
+          <span class="gtile__img"><img src="assets/img/cut-serum.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">Toning Serum</b>
+          <span class="gtile__desc">디바이스 사용 전후에 쓰는 토닝 세럼</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="gtile" href="products.html" style="--i:5">
+          <span class="gtile__no">06</span>
+          <em class="gtile__tag">Accessory</em>
+          <span class="gtile__img"><img src="assets/img/cut-case.png?v=261105224603" alt="" loading="lazy"></span>
+          <b class="gtile__name">Firenze Bag</b>
+          <span class="gtile__desc">디바이스 전용 가죽 케이스</span>
+          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
       </div>
     </div>
   </section>
@@ -260,8 +246,8 @@
   <!-- 06 공식몰 -->
   <section class="gshop" aria-labelledby="gshop-title">
     <div class="gwrap">
-      <div class="gshop__card gcard">
-        <img src="assets/img/m-model-set.jpg?v=261105222309" alt="TechFit 풀세트와 디바이스를 든 모델" loading="lazy">
+      <div class="gshop__card gcard" data-gshop>
+        <img src="assets/img/m-model-set.jpg?v=261105224603" alt="TechFit 풀세트와 디바이스를 든 모델" loading="lazy">
         <div class="gshop__copy">
           <h2 id="gshop-title">Shop the Official Store</h2>
           <p>진단 결과에 맞는 구성으로 담아 보세요.</p>
@@ -310,8 +296,9 @@
   </div>
 </footer>
 <script src="libs/lenis.min.js"></script>
-<script src="js/led.js?v=261105222309"></script>
-<script src="js/stem.js?v=261105222309"></script>
-<script src="js/grid-home.js?v=261105222309"></script>
+<script src="js/led.js?v=261105224603"></script>
+<script src="js/stem.js?v=261105224603"></script>
+<script src="js/grid-header.js?v=261105224603"></script>
+<script src="js/grid-home.js?v=261105224603"></script>
 </body>
 </html>
