@@ -315,3 +315,5 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 
 /* & 기호 — 로고 서체(가는 획) 옆에서 두껍게 튀지 않도록 얇은 SUIT &, 획 덧그리기 없음 */
 .amp{display:inline!important;font-family:"SUIT",sans-serif!important;font-weight:200!important;-webkit-text-stroke:0!important;font-size:.92em}
+/* AI 피부 진단 플로팅 버튼 — 링크 없는 <button>이라 기본 버튼 모양만 지움 */
+button.aifab{border:0;font:inherit;cursor:default;-webkit-appearance:none;appearance:none}

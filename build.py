@@ -134,10 +134,11 @@ FOOTER = f"""<footer class="foot">
 """
 
 
-AIFAB = ('<a class="aifab" href="survey.html" aria-label="AI 피부 진단 시작하기"><span class="aifab__ico">'
+# 링크 없는 버튼(2026-11-06 요청) — 진단 비공개 중에도 보이게 <a> 대신 <button>
+AIFAB = ('<button type="button" class="aifab" aria-label="AI 피부 진단"><span class="aifab__ico">'
          '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.2 14 8.4 20.2 10.4 14 12.4 12 18.6 10 12.4 3.8 10.4 10 8.4Z" fill="currentColor"/>'
          '<circle cx="19.4" cy="4.2" r="1.7" fill="currentColor" opacity=".9"/><circle cx="4.8" cy="18.4" r="1.2" fill="currentColor" opacity=".7"/></svg></span>'
-         '<span class="aifab__txt">AI 피부 진단</span></a>\n')
+         '<span class="aifab__txt">AI 피부 진단</span></button>\n')
 
 
 def tail(three=True, js=(), fab=True, mods=()):
