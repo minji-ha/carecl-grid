@@ -228,3 +228,15 @@ body,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
   font-family:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif
 }
+
+/* 서브 머리말 여백 다시 맞추기 — 헤더와 라벨 사이는 넉넉히, 제목 아래 탭까지는 짧게 */
+.subhead{padding-top:clamp(64px,6.5vw,120px)}
+.subhead--vis .subhead__top .wrap{min-height:0}
+.subhead__top .wrap{padding-bottom:clamp(44px,4.4vw,80px)}
+.subhead__title{font-size:clamp(36px,4.4vw,80px);line-height:1.05;margin-top:.35em}
+.subhead__kr{margin-top:clamp(14px,1.2vw,20px)}
+.subhead__vis{top:calc(-1 * clamp(64px,6.5vw,120px))}
+.subtabs{margin-top:0}
+/* 남아 있던 보라·초록 LED 색 표시(탭 밑줄·라벨 점)도 오렌지로 */
+html[data-led-now]{--led:var(--accent)!important}
+.subtabs a::after{background:var(--accent)!important}
