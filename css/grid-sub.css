@@ -590,3 +590,22 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .dp:has(+ :not(.dp)){padding-bottom:0}
 .sub-body :not(.dp) + .dp{padding-top:0}
 .sub-body .dp > .dp__in > :first-child{margin-top:0!important}
+
+/* R&D 숫자 결과 v7 — 어두운 판 대신 사이트 톤에 맞춘 살구빛 그라데이션 + 기기 뒤 흰 빛, 카드는 흰 유리 느낌 */
+.sub-body #results .tres--center{
+  background:
+    radial-gradient(48% 62% at 50% 46%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.5) 38%,rgba(255,255,255,0) 70%),
+    linear-gradient(160deg,#FDF1E9 0%,#F9DCCB 48%,#F3C2A5 100%);
+  box-shadow:0 30px 70px -40px rgba(190,100,50,.45)
+}
+.sub-body #results .tres--center::before{display:none}
+.sub-body #results .tres--center::after{background:radial-gradient(closest-side,rgba(224,102,43,.18),rgba(224,102,43,0))}
+.sub-body #results .tres__head .dp-title,.sub-body #results .tres__head .dp-body,.sub-body #results .tres__head .dp-body *{color:var(--ink)!important}
+.sub-body #results .tres__head .dp-body{opacity:.85}
+.sub-body #results .tres__head .dp-label{color:var(--accent)!important}
+.sub-body #results .tcard{background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 14px 30px -18px rgba(170,85,40,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.sub-body #results .tcard .tres__v{color:var(--accent)}
+.sub-body #results .tcard .tres__k{color:#4A423C}
+.sub-body #results .tres2__dev img{filter:drop-shadow(0 26px 28px rgba(150,70,30,.28))}
+.sub-body #results .tres2__dev::after{background:radial-gradient(closest-side,rgba(190,100,50,.25),rgba(190,100,50,0))}
