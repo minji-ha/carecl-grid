@@ -772,3 +772,17 @@ body:has(main.sub) .foot{margin-top:0!important}
 }
 /* Aging Map '먼저 관리할 곳부터 순서대로.' 사진 — 위 '22개의 좌표' 사진과 같은 높이(4:3) */
 .sub-body .dp-tall__img--short:not(#_){aspect-ratio:4/3}
+/* Technology '세 가지 모드' — 모드 버튼은 왼쪽에 세로 한 줄, 내용은 오른쪽 · 사진은 작게 */
+@media (min-width:561px){
+  .sub-body .modes{display:grid;grid-template-columns:clamp(150px,18vw,230px) minmax(0,1fr);column-gap:clamp(20px,4vw,64px);align-items:start;margin-top:clamp(32px,3vw,52px)}
+  .sub-body .modes__tabs:not(#_){grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:10px;overflow:visible;margin-inline:0;padding-inline:0;position:sticky;top:calc(var(--head,72px) + 24px)}
+  .sub-body .modes__tabs .mtab{width:100%;min-width:0;padding:14px 16px}
+  .sub-body .modes__panels{grid-column:2;grid-row:1;min-width:0}
+  .sub-body .mpanel{margin-top:0;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,3vw,56px);align-items:center}
+  .sub-body .mpanel__vis:not(#_){aspect-ratio:1/1;max-width:400px;width:100%}
+  .sub-body .mpanel__t{margin-top:12px;font-size:clamp(24px,2.1vw,34px)}
+}
+@media (min-width:561px) and (max-width:1100px){
+  .sub-body .mpanel{grid-template-columns:1fr;gap:24px}
+  .sub-body .mpanel__vis:not(#_){max-width:300px}
+}
