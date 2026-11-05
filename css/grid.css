@@ -171,14 +171,15 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
 .subtabs{margin-top:clamp(28px,2.8vw,50px)}
 .sub-body > .dp:first-child,.sub-body > section:first-child{padding-top:clamp(56px,6vw,110px)}
 
-/* 제목 · 메뉴명은 최대한 두껍게 — 한글은 에스코어드림 Heavy, 영문 Caviar Dreams는 굵은 글꼴이 없어 획을 덧그린다 */
+/* 제목 — 한글은 에스코어드림 600, 영문(Caviar Dreams)만 획을 덧그려 두껍게.
+   영문 글자 묶음은 js/grid-header.js가 <span class="en">으로 감싼다 */
 .subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
-.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,
-.hnav__top,.header__util > a,.subtabs a,.mnav a.mnav__top,.mnav a.mnav__sub,.hnav__in b{
-  font-family:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;font-weight:800;
-  -webkit-text-stroke:.035em currentColor;paint-order:stroke fill;
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
+  font-family:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;font-weight:600;
 }
-.hnav__top,.header__util > a,.subtabs a,.mnav a.mnav__sub,.hnav__in b{-webkit-text-stroke:.6px currentColor}
+.en{-webkit-text-stroke:.035em currentColor;paint-order:stroke fill}
+.hnav__in b .en,.gstep__head .en,.gtile__name .en{-webkit-text-stroke:.7px currentColor}
+
 
 /* 다시 나오는 헤더 — 반투명 오렌지 + 뒤 블러 (쥬베룩처럼 뒤가 비친다) */
 .header.is-solid{
@@ -186,6 +187,21 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
   -webkit-backdrop-filter:blur(20px) saturate(1.4)!important;backdrop-filter:blur(20px) saturate(1.4)!important;
 }
 
-/* 전체 글씨 두껍게 — 본문 SUIT 600, 영문 Caviar Dreams는 획 덧그리기 */
-body{font-weight:600;-webkit-text-stroke:.35px currentColor}
-.hnav__top,.header__util > a,.header__lang a,.subtabs a,.mnav a{font-weight:800;-webkit-text-stroke:.9px currentColor}
+/* 본문 한글 SUIT 500, 메뉴명(영문)만 두껍게 */
+body{font-weight:500}
+.hnav__top,.header__util > a,.header__lang a,.subtabs a,.mnav a.mnav__top{-webkit-text-stroke:.9px currentColor}
+.hnav__in small,.mnav small{font-weight:500;-webkit-text-stroke:0}
+
+/* 최종 굵기 정리 — 한글은 모두 400, 작은 글자는 영문도 400 그대로, 아주 큰 영문 제목만 획을 덧그려 두껍게 */
+body,
+.subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,
+.hnav__top,.header__util > a,.header__lang a,.subtabs a,.mnav a,.hnav__in b,.hnav__in small{font-weight:400!important;font-synthesis:none}
+.hnav__top,.header__util > a,.header__lang a,.subtabs a,.mnav a,.hnav__in b,.hnav__in small,.en{-webkit-text-stroke:0!important}
+.subhead__title .en,.ghead__big .en,.ghead__title .en,.gwhy__title .en,.sec-title .en,.dp-title .en,.gshop__copy h2 .en,.sub-body h2 .en{
+  -webkit-text-stroke:.03em currentColor!important;paint-order:stroke fill
+}
+
+/* 굵기 최종 — 상세페이지 머리말 제목만 두껍게, 나머지는 모두 일반 두께 */
+.en,.ghead__big .en,.ghead__title .en,.gwhy__title .en,.sec-title .en,.dp-title .en,.gshop__copy h2 .en,.sub-body h2 .en{-webkit-text-stroke:0!important}
+.subhead__title .en{-webkit-text-stroke:.03em currentColor!important;paint-order:stroke fill}

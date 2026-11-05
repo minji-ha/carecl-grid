@@ -348,15 +348,17 @@ def page_index():
     <div class="gwrap"><div class="gline__bar" aria-hidden="true"><i data-line-bar></i></div></div>
   </section>
 
-  <!-- 06 공식몰 -->
-  <section class="gshop" aria-labelledby="gshop-title">
-    <div class="gwrap">
-      <div class="gshop__card gcard" data-gshop>
-        <img src="assets/img/m-model-set.jpg?v={VER}" alt="TechFit 풀세트와 디바이스를 든 모델" loading="lazy">
-        <div class="gshop__copy">
-          <h2 id="gshop-title">Shop the Official Store</h2>
-          <p>진단 결과에 맞는 구성으로 담아 보세요.</p>
-          <a class="gpill gpill--light" href="{SHOP_HREF}">Shop 바로가기</a>
+  <!-- 06 공식몰 — 알약 모양 창이 열리듯 사진이 펼쳐지고, 다 열리면 글이 한 줄씩 올라온다 -->
+  <section class="gshop" data-gshop aria-labelledby="gshop-title">
+    <div class="gshop__pin">
+      <div class="gwrap">
+        <div class="gshop__card" data-gshop-card>
+          <img src="assets/img/m-model-set.jpg?v={VER}" alt="TechFit 풀세트와 디바이스를 든 모델" data-gshop-img>
+          <div class="gshop__copy">
+            <h2 id="gshop-title"><span>Shop the</span> <span>Official Store</span></h2>
+            <p><span>진단 결과에 맞는 구성으로 담아 보세요.</span></p>
+            <a class="gpill gpill--light" href="{SHOP_HREF}">Shop 바로가기</a>
+          </div>
         </div>
       </div>
     </div>

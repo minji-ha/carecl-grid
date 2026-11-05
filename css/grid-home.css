@@ -125,14 +125,31 @@
 .js-tiles .gline__track.is-in .gtile{opacity:1;transform:none;transition:opacity .7s ease calc(var(--i) * .08s),transform 1s cubic-bezier(.16,1,.3,1) calc(var(--i) * .08s),background .4s ease}
 
 /* ── 06 공식몰 ─────────────────────────────────── */
-.gshop{padding-block:var(--sec) 0}
-.gshop__card{position:relative;aspect-ratio:21/9}
-.gshop__card img{object-position:50% 40%;transform:scale(1);transition:transform 2.2s cubic-bezier(.16,1,.3,1)}
-.gshop__card.is-zoom img{transform:scale(1.08)}   /* 도착하면 살짝 확대, 다시 올라가면 원래대로 */
-.gshop__card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,6,.42),rgba(20,12,6,0) 60%)}
+.gshop{height:240vh;margin-top:calc(var(--sec) * .5)}
+.gshop__pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.gshop__pin > .gwrap{width:100%}
+.gshop__card{
+  --e:0;position:relative;aspect-ratio:21/9;max-height:calc(100svh - var(--head) - 60px);margin-inline:auto;overflow:hidden;
+  /* 알약 모양 창 → 둥근 사진 카드 (js가 --e 0→1을 넣는다) */
+  clip-path:inset(calc((1 - var(--e)) * 34%) calc((1 - var(--e)) * 38%) round calc(var(--r) + (1 - var(--e)) * 400px));
+  will-change:clip-path;
+}
+.gshop__card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  transform:scale(var(--z,1.3));filter:blur(calc((1 - var(--e)) * 6px)) saturate(calc(.6 + var(--e) * .4));will-change:transform,filter;
+}
+.gshop__card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,6,.5),rgba(20,12,6,0) 62%);opacity:var(--e)}
 .gshop__copy{position:absolute;left:clamp(26px,5vw,90px);top:50%;transform:translateY(-50%);z-index:1;color:#fff}
-.gshop__copy h2{margin:0;font-family:var(--f-title);font-weight:600;font-size:clamp(28px,3.2vw,54px);letter-spacing:-.03em;line-height:1.1}
-.gshop__copy p{margin:.7em 0 1.8em;font-size:clamp(14px,1.1vw,18px);opacity:.9}
+.gshop__copy h2{margin:0;font-family:var(--f-title);font-weight:600;font-size:clamp(30px,3.6vw,62px);letter-spacing:-.02em;line-height:1.08}
+.gshop__copy p{margin:.8em 0 1.9em;font-size:clamp(14px,1.1vw,18px);opacity:.92}
+/* 글은 다 열린 뒤 한 줄씩 아래에서 올라온다 */
+.gshop__copy h2 > span,.gshop__copy p > span{display:inline-block;clip-path:inset(0 0 -.2em 0)}
+.gshop__copy h2 > span{display:block}
+.gshop__copy h2 > span,.gshop__copy p > span,.gshop__copy .gpill{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.gshop.is-open .gshop__copy h2 > span,.gshop.is-open .gshop__copy p > span,.gshop.is-open .gshop__copy .gpill{opacity:1;transform:none}
+.gshop.is-open .gshop__copy h2 > span:nth-child(2){transition-delay:.1s}
+.gshop.is-open .gshop__copy p > span{transition-delay:.22s}
+.gshop.is-open .gshop__copy .gpill{transition-delay:.34s}
 
 /* ── 07 문의 ──────────────────────────────────── */
 .gcontact{padding-block:var(--sec) 0;text-align:center}
@@ -167,15 +184,18 @@
   .gline__nav{width:44px;height:44px}
   .gsteps__lines{display:none}
 
-  .gshop__card{aspect-ratio:4/5}
+  .gshop{height:200vh}
+  .gshop__card{aspect-ratio:4/5;clip-path:inset(calc((1 - var(--e)) * 26%) calc((1 - var(--e)) * 22%) round calc(var(--r) + (1 - var(--e)) * 300px))}
   .gshop__card img{object-position:62% 50%}
-  .gshop__card::after{background:linear-gradient(0deg,rgba(20,12,6,.55),rgba(20,12,6,0) 60%)}
+  .gshop__card::after{background:linear-gradient(0deg,rgba(20,12,6,.6),rgba(20,12,6,0) 60%)}
   .gshop__copy{top:auto;bottom:28px;transform:none;left:24px;right:24px}
 
   .gcontact__links a{flex:1 1 50%;border-left:0;padding-block:6px}
 }
 @media (prefers-reduced-motion:reduce){
-  .gsteps{height:auto}
-  .gsteps__pin{position:relative}
+  .gsteps,.gshop{height:auto}
+  .gsteps__pin,.gshop__pin{position:relative;height:auto}
+  .gshop__card{--e:1!important}
+  .gshop .gshop__copy *{opacity:1!important;transform:none!important}
   .gstep{--p:1!important;--t:1!important}
 }
