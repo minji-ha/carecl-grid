@@ -318,3 +318,9 @@
 .t5__ring{stroke:#EE8E5E;stroke-width:5}
 .t5__hand line{stroke:#EE8E5E;opacity:.55}
 .t5 b{font-size:clamp(34px,3vw,52px);color:#E9834F}
+/* 5초 타이머 v2 — 배경·바늘 없이, 도는 링 + 빛나는 살구색 글씨만 */
+.t5{background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.t5__track{stroke:rgba(255,214,190,.35)}
+.t5__ring{stroke:#FFC9A8;filter:drop-shadow(0 0 4px rgba(255,170,120,.9))}
+.t5__hand{display:none}
+.t5 b{color:#FFD3B6;text-shadow:0 0 10px rgba(255,160,110,.95),0 0 22px rgba(255,140,90,.7),0 0 2px rgba(255,255,255,.9)}
