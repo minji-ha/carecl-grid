@@ -487,7 +487,7 @@ def sub_page(group, led, items, idx):
   </div>
 </main>
 """
-    return (head(f"{title_kr} | careCL 케어클", f"careCL {title_kr}", sub=True, css=("css/detail.css",))
+    return (head(f"{title_kr} | careCL 케어클", f"careCL {title_kr}", sub=True, css=("css/detail.css", "css/grid-sub.css"))
             + header(GROUP_HREF[group]) + head_html + FOOTER + tail(three=False))
 
 
