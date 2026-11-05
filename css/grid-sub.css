@@ -627,3 +627,29 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body > *:not(#_){margin-top:0!important;margin-bottom:0!important}
 .sub-body > * + *:not(#_){margin-top:var(--blk)!important}
 .sub-body > section:not(#_),.sub-body > div:not(#_){padding-top:0!important;padding-bottom:0!important}
+
+/* ── 상세페이지 제목·소제목 통일 ──
+   · 섹션 제목(dp-title · zz__t · dp-band__t · dp-tall__t · tcta__t)은 모두 같은 크기
+   · 제목 위 영문 소제목(dp-label · tcta__label …)은 모두 같은 모양: 주황 점 + 주황 글자 14px */
+.sub-body .dp-title,.sub-body .zz__t,.sub-body .dp-band__t,.sub-body .dp-tall__t,.sub-body .tcta__t,.sub-body .ab-wide__copy .dp-band__t{
+  font-size:clamp(30px,2.9vw,46px)!important;line-height:1.36!important;letter-spacing:-.01em!important
+}
+.sub-body .tcta__t small{font-size:.32em;letter-spacing:.12em}
+.sub-body .dp-label,.sub-body .tcta__label,.sub-body .why5__head .dp-label{
+  display:flex;align-items:center;gap:.7em;margin:0;font-family:var(--f-ui);font-size:14px!important;letter-spacing:.2em!important;
+  line-height:1.6!important;color:var(--accent)!important;text-transform:none
+}
+.sub-body .tcta__label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.sub-body .dp-label::before{background:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)!important}
+.sub-body .dp-label + .dp-title,.sub-body .dp-label + .zz__t,.sub-body .dp-label + .dp-band__t,.sub-body .tcta__label + .tcta__t{margin-top:18px!important}
+/* 사진+글 블록 안의 소제목도 같은 모양으로 (본문 문단 규칙보다 우선) */
+.sub-body .dp-band__copy p.dp-label,.sub-body .dp-bleed__copy p.dp-label,.sub-body .zz__copy p.dp-label,.sub-body .dp-tall__copy p.dp-label{
+  font-size:14px!important;letter-spacing:.2em!important;line-height:1.6!important;color:var(--accent)!important;margin:0!important
+}
+/* 소제목 통일 마무리 — 사진 블록 안 소제목이 본문 규칙에 밀리지 않게 */
+.sub-body p.dp-label:not(#_){font-size:14px!important;letter-spacing:.2em!important;line-height:1.6!important;color:var(--accent)!important}
+/* 긴 소개 문장 두 줄로 — 줄 길이 제한을 풀고, 화면이 좁으면 자연스럽게 줄바꿈 */
+.sub-body .dp-head:has(.p-2line),.sub-body .dp-body:has(.p-2line){max-width:none!important}
+@media (min-width:1200px){ .sub-body .p-2line{white-space:nowrap;font-size:clamp(16px,1.25vw,19px)!important} }
+@media (max-width:1199px){ .sub-body .p-2line br{display:none} }
