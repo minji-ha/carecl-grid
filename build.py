@@ -197,10 +197,10 @@ STEP_CUTS = ["cut-gel.png", "cut-mask.png", "cut-device.png", "cut-serum.png", "
 STEP_FINAL_CUT = "cut-fullset.webp"   # 마지막 단계 뒤 가운데 큰 물방울 속
 
 CONTACTS = [
-    ("Global Business", "해외 사업", "수출 · 해외 유통 문의<br>support@carecl.co.kr", "contact.html"),
-    ("Partnership", "유통 · 제휴", "총판 및 제휴 제안<br>support@carecl.co.kr", "partnership.html"),
-    ("Media / PR", "미디어", "취재 · 광고 · 협찬<br>support@carecl.co.kr", "press.html"),
-    ("General", "일반 문의", "제품 사용 · A/S<br>TEL +82 31-943-1028", "inquiry.html"),
+    ("Global Business", "해외 사업", "수출 · 해외 유통 문의<br>support@carecl.co.kr", "contact.html#global"),
+    ("Partnership", "유통 · 제휴", "총판 및 제휴 제안<br>support@carecl.co.kr", "contact.html#partnership"),
+    ("Media / PR", "미디어", "취재 · 광고 · 협찬<br>support@carecl.co.kr", "contact.html#press"),
+    ("General", "일반 문의", "제품 사용 · A/S<br>TEL +82 31-943-1028", "contact.html#inquiry"),
 ]
 
 
@@ -369,7 +369,7 @@ def page_index():
     <div class="gwrap">
       <h2 class="ghead__big ghead__big--ink" id="gcontact-title">Contact us</h2>
       <p class="ghead__kr">careCL — 정밀하게 읽고, 부위별로 되돌리다</p>
-      <a class="gpill" href="inquiry.html">문의하기</a>
+      <a class="gpill" href="contact.html">문의하기</a>
       <nav class="gcontact__links" aria-label="문의 종류">{contact_links}</nav>
     </div>
   </section>
@@ -398,10 +398,6 @@ MENU = [
                             ("Aging Map 22", "aging-map.html", "22개 관리 부위")]),
     ("Technology", "red", [("careCL Technology", "technology.html", "TECH FIT 기술"),
                            ("Product", "products.html", "디바이스 · 코스메틱")]),
-    ("Contact", "green", [("Global Business", "contact.html", "해외 사업 문의"),
-                          ("Distributor / Partnership", "partnership.html", "유통 · 제휴 문의"),
-                          ("Media / PR", "press.html", "미디어 문의"),
-                          ("General Inquiry", "inquiry.html", "일반 문의")]),
 ]
 # 머리말 제목 줄바꿈 (탭 이름은 그대로 한 줄)
 TITLE_BREAK = {"careCL Technology": "careCL<br>Technology", "Awards & Certification": "Awards &amp;<br>Certification"}
@@ -492,6 +488,12 @@ def sub_page(group, led, items, idx):
 for _g, _led, _items in MENU:
     for _i, (_, _slug, _) in enumerate(_items):
         PAGES[_slug] = (lambda g=_g, l=_led, it=_items, i=_i: sub_page(g, l, it, i))
+
+# 문의 4개 페이지는 Company > Contact 한 페이지로 (GRID 시안 261105) — 예전 주소는 그 자리로
+for _old, _id in (("partnership.html", "partnership"), ("press.html", "press"), ("inquiry.html", "inquiry")):
+    PAGES[_old] = (lambda o=_old, i=_id: '<!doctype html><meta charset="utf-8"><title>Contact</title>'
+                   f'<meta http-equiv="refresh" content="0;url=contact.html#{i}">'
+                   f'<link rel="canonical" href="contact.html"><a href="contact.html#{i}">Contact</a>')
 
 # 코스메틱은 Product 페이지 안으로 (261102) — 예전 주소는 그 자리로
 PAGES["cosmetics.html"] = lambda: ('<!doctype html><meta charset="utf-8"><title>Product</title>'

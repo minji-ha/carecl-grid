@@ -100,3 +100,24 @@
   .sub .subtabs__in{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
   .sub .subtabs a{flex:none;padding:10px 18px;font-size:13px}
 }
+
+/* 하위 메뉴 v2 — 버튼 대신 글자만 가운데 정렬, 지금 페이지는 진하게 + 아래 오렌지 점 (메뉴 펼침과 같은 결) */
+.sub .subtabs__in{gap:clamp(22px,2.6vw,46px)}
+.sub .subtabs a,.sub .subtabs a:hover,.sub .subtabs a[aria-current="page"]{
+  position:relative;padding:10px 0 16px;border:0;border-radius:0;background:none;font-size:15px;color:#9A918A
+}
+.sub .subtabs a:hover{color:var(--ink)}
+.sub .subtabs a[aria-current="page"]{color:var(--ink)}
+.sub .subtabs a::after{
+  display:block!important;content:"";position:absolute;left:50%;right:auto;bottom:2px;width:6px;height:6px;margin-left:-3px;
+  border-radius:50%;background:var(--accent)!important;transform:scale(0)!important;transition:transform .35s cubic-bezier(.16,1,.3,1)!important
+}
+.sub .subtabs a[aria-current="page"]::after{transform:scale(1)!important}
+.sub .subtabs a:hover::after{transform:scale(.6)!important}
+@media (max-width:767px){ .sub .subtabs a,.sub .subtabs a:hover,.sub .subtabs a[aria-current="page"]{padding:8px 0 14px;font-size:14px} .sub .subtabs__in{gap:22px} }
+
+/* 문의 카드 연락처 */
+.sub-body .ct-links{margin-top:16px!important;color:var(--ink)!important;font-size:15px!important;line-height:1.8}
+.sub-body .ct-links a{border-bottom:1px solid var(--hair)}
+.sub-body .ct-links a:hover{color:var(--accent);border-color:var(--accent)}
+.sub-body [id]{scroll-margin-top:calc(var(--head) + 30px)}
