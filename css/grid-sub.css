@@ -770,5 +770,5 @@ body:has(main.sub) .foot{margin-top:0!important}
   .sub-body .dp-grid:has(.dp-item--flip){grid-template-columns:1fr}
   .sub-body .dp-item--flip .dp-item__face{width:56%}
 }
-/* Aging Map '먼저 관리할 곳부터 순서대로.' 사진 — 높이만 살짝 낮게 */
-@media (min-width:861px){ .sub-body .dp-tall__img--short{aspect-ratio:15/16} }
+/* Aging Map '먼저 관리할 곳부터 순서대로.' 사진 — 위 '22개의 좌표' 사진과 같은 높이(4:3) */
+.sub-body .dp-tall__img--short:not(#_){aspect-ratio:4/3}
