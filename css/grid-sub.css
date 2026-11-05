@@ -274,3 +274,20 @@
 .sub-body .dp-label{font-size:14px}
 .sub-body .dp-item h4{font-size:clamp(21px,1.75vw,28px)}
 .sub-body .tcard .tres__k,.sub-body .dp-facts dd{font-size:clamp(17px,1.3vw,20px)}
+
+/* About 살구색 카드 — 배경 더 연하게(about-carecl02-bg-light.jpg) + 제목 위에 둥둥 떠 있는 TECH FIT (불릿) */
+.sub-body .ab-wide{background:linear-gradient(180deg,#FEE9E0,#FEEBE4 50%)}
+.ab-float{position:relative;display:block;width:clamp(44px,3.4vw,60px);height:clamp(110px,8.4vw,150px);margin:0 0 clamp(14px,1.4vw,24px) 6px}
+.ab-float img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:rotate(-24deg);
+  filter:drop-shadow(0 14px 14px rgba(120,60,30,.22));animation:abFloat 3.6s ease-in-out infinite}
+.ab-float::after{content:"";position:absolute;left:10%;right:-10%;bottom:-10px;height:10px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(120,60,30,.22),rgba(120,60,30,0));animation:abShadow 3.6s ease-in-out infinite}
+@keyframes abFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes abShadow{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.75);opacity:.55}}
+@media (prefers-reduced-motion:reduce){.ab-float img,.ab-float::after{animation:none}}
+@media (max-width:860px){ .sub-body .ab-wide{background:#FEEAE2} }
+/* About 첫 소개 문장 — 두 줄로 (줄 길이 제한 풀기) */
+.sub-body .dp-body:has(.ab-intro){max-width:none}
+.sub-body .ab-intro{white-space:nowrap}
+@media (max-width:860px){ .sub-body .ab-intro{white-space:normal} .sub-body .ab-intro br{display:none} }
+.sub-body .dp-head:has(.ab-intro){max-width:none}
