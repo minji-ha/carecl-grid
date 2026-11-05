@@ -74,3 +74,8 @@
 
 /* 머리말 · 탭도 본문과 같은 왼쪽 선에 */
 .sub .subhead .wrap,.sub .subtabs .wrap{padding-inline:var(--side)}
+
+/* 상세페이지 폭 = 헤더 폭 (왼쪽 로고 ~ 오른쪽 KR/EN 끝) — 화면이 넓어도 최대폭으로 줄이지 않는다 */
+:root{--side:var(--gut);--sgut:var(--gut)}
+.sub-body .dp__in{max-width:none}
+.sub .subhead .wrap,.sub .subtabs .wrap{max-width:none;margin-inline:0}
