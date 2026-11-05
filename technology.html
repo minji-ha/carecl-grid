@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TECH FIT 기술 | careCL 케어클</title>
+<meta name="description" content="careCL TECH FIT 기술">
+<link rel="icon" href="assets/img/carecl-logo.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/metropolis-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="css/stem.css?v=261105222309">
+<link rel="stylesheet" href="css/home261019.css?v=261105222309">
+<link rel="stylesheet" href="css/sub.css?v=261105222309">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/detail.css?v=261105222309">
+<link rel="stylesheet" href="css/grid.css?v=261105222309">
+<script type="importmap">{"imports":{"three":"./libs/three/three.module.min.js"}}</script>
+</head>
+<body>
+<div class="glines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<header class="header">
+  <a class="header__logo" href="index.html" aria-label="careCL 홈"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538.82 132.97" role="img" aria-label="careCL">
+<path fill="currentColor" fill-rule="nonzero" d="M72.82 111.66 L80.49 114.40 C79.09 116.34 77.51 118.19 75.73 119.97 C67.06 128.64 56.59 132.97 44.32 132.97 C32.10 132.97 21.66 128.64 13.00 119.97 C4.33 111.31 0.00 100.84 0.00 88.57 C0.00 76.35 4.33 65.91 13.00 57.24 C21.66 48.58 32.10 44.24 44.32 44.24 C56.59 44.24 67.06 48.58 75.73 57.24 C77.51 59.02 79.09 60.85 80.49 62.73 L72.82 65.56 C72.01 64.59 71.15 63.62 70.24 62.65 C63.08 55.55 54.44 51.99 44.32 51.99 C34.26 51.99 25.65 55.56 18.49 62.69 C11.33 69.82 7.75 78.45 7.75 88.57 C7.75 98.68 11.33 107.32 18.49 114.48 C25.65 121.64 34.26 125.22 44.32 125.22 C54.44 125.22 63.08 121.64 70.24 114.48 C71.15 113.57 72.01 112.62 72.82 111.66"/>
+<path fill="currentColor" fill-rule="nonzero" d="M178.18 95.83 L178.18 81.46 C176.83 74.36 173.47 68.11 168.09 62.73 C160.93 55.57 152.29 51.99 142.17 51.99 C132.05 51.99 123.41 55.57 116.26 62.73 C109.10 69.89 105.52 78.53 105.52 88.64 C105.52 98.76 109.10 107.39 116.26 114.52 C123.41 121.65 132.05 125.22 142.17 125.22 C152.29 125.22 160.93 121.64 168.09 114.48 C173.47 109.10 176.83 102.88 178.18 95.83 M185.45 130.71 L178.18 130.71 L178.18 114.56 C176.78 116.45 175.25 118.25 173.58 119.97 C164.91 128.64 154.45 132.97 142.17 132.97 C129.95 132.97 119.51 128.64 110.85 119.97 C102.18 111.31 97.85 100.86 97.85 88.64 C97.85 76.37 102.18 65.91 110.85 57.24 C119.51 48.57 129.95 44.24 142.17 44.24 C154.45 44.24 164.91 48.57 173.58 57.24 C175.25 58.96 176.78 60.77 178.18 62.65 L178.18 51.43 L185.45 51.43 L185.45 130.71"/>
+<path fill="currentColor" fill-rule="nonzero" d="M209.67 51.43 L216.93 51.43 L216.93 65.88 C218.44 63.73 220.19 61.65 222.18 59.66 C228.58 53.26 235.15 49.89 241.88 49.57 L241.88 57.48 C237.30 57.70 232.57 60.26 227.67 65.15 C220.78 71.99 217.20 80.20 216.93 89.78 L216.93 130.71 L209.67 130.71 L209.67 51.43"/>
+<path fill="currentColor" fill-rule="nonzero" d="M319.14 59.26 C312.84 54.41 305.52 51.99 297.18 51.99 C287.12 51.99 278.50 55.56 271.35 62.69 C264.19 69.82 260.61 78.45 260.61 88.57 C260.61 96.91 263.03 104.23 267.87 110.52 L319.14 59.26 M272.80 115.85 C279.63 122.10 287.76 125.22 297.18 125.22 C307.30 125.22 315.94 121.64 323.10 114.48 C324.01 113.57 324.87 112.62 325.68 111.66 L333.35 114.40 C331.95 116.34 330.36 118.19 328.59 119.97 C319.92 128.64 309.45 132.97 297.18 132.97 C284.96 132.97 274.52 128.64 265.86 119.97 C257.19 111.31 252.86 100.84 252.86 88.57 C252.86 76.35 257.19 65.91 265.86 57.24 C274.52 48.58 284.96 44.24 297.18 44.24 C307.68 44.24 316.85 47.39 324.71 53.69 C326.00 54.77 327.30 55.95 328.59 57.24 C329.07 57.72 329.53 58.21 329.96 58.69 L324.47 64.18 L272.80 115.85"/>
+<path fill="currentColor" fill-rule="nonzero" d="M455.82 110.12 L461.31 115.05 C448.72 126.51 433.89 132.24 416.83 132.24 C398.53 132.24 382.93 125.80 370.05 112.91 C357.15 100.02 350.71 84.42 350.71 66.12 C350.71 47.88 357.15 32.29 370.05 19.38 C382.93 6.46 398.53 0.00 416.83 0.00 C433.89 0.00 448.72 5.73 461.31 17.20 L455.82 22.20 C444.74 12.35 431.74 7.43 416.83 7.43 C400.63 7.43 386.80 13.16 375.33 24.62 C363.87 36.09 358.14 49.92 358.14 66.12 C358.14 82.38 363.87 96.23 375.33 107.70 C386.80 119.16 400.63 124.89 416.83 124.89 C431.74 124.89 444.74 119.97 455.82 110.12"/>
+<path fill="currentColor" fill-rule="nonzero" d="M481.50 130.71 L481.50 1.53 L488.76 1.53 L488.76 123.44 L538.82 123.44 L538.82 130.71 L481.50 130.71"/>
+</svg></a>
+  <div class="header__pill">
+    <nav class="header__nav" aria-label="주 메뉴"><div class="hnav"><a class="hnav__top" href="about.html">Company</a><div class="hnav__sub"><div class="hnav__in"><a href="about.html"><b>About careCL</b><small>회사 소개</small></a><a href="greeting.html"><b>Our Story</b><small>브랜드 스토리</small></a><a href="rnd.html"><b>R&amp;D / Patent</b><small>연구개발 · 특허</small></a><a href="certification.html"><b>Awards &amp; Certification</b><small>수상 · 인증</small></a><a href="contact.html"><b>Contact</b><small>문의</small></a></div></div></div><div class="hnav"><a class="hnav__top" href="aging-types.html">Aging Lab</a><div class="hnav__sub"><div class="hnav__in"><a href="aging-types.html"><b>6 Aging Types</b><small>6가지 노화 타입</small></a><a href="aging-map.html"><b>Aging Map 22</b><small>22개 관리 부위</small></a></div></div></div><div class="hnav"><a class="hnav__top" href="technology.html" aria-current="page">Technology</a><div class="hnav__sub"><div class="hnav__in"><a href="technology.html"><b>careCL Technology</b><small>TECH FIT 기술</small></a><a href="products.html"><b>Product</b><small>디바이스 · 코스메틱</small></a></div></div></div></nav>
+    <nav class="header__nav header__nav--right header__util" aria-label="쇼핑 · 로그인 · 언어">
+      <a href="products.html">Shop</a><a href="#">Login</a>
+      <span class="header__lang"><a href="#" aria-current="true" lang="ko">KR</a><i aria-hidden="true">/</i><a href="#" lang="en">EN</a></span>
+    </nav>
+  </div>
+  <button class="header__menu" type="button" data-menu aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+</header>
+<nav class="mnav" aria-label="모바일 메뉴"><div class="mnav__grp"><a class="mnav__top" href="about.html">Company</a><a class="mnav__sub" href="about.html">About careCL<small>회사 소개</small></a><a class="mnav__sub" href="greeting.html">Our Story<small>브랜드 스토리</small></a><a class="mnav__sub" href="rnd.html">R&amp;D / Patent<small>연구개발 · 특허</small></a><a class="mnav__sub" href="certification.html">Awards &amp; Certification<small>수상 · 인증</small></a><a class="mnav__sub" href="contact.html">Contact<small>문의</small></a></div><div class="mnav__grp"><a class="mnav__top" href="aging-types.html">Aging Lab</a><a class="mnav__sub" href="aging-types.html">6 Aging Types<small>6가지 노화 타입</small></a><a class="mnav__sub" href="aging-map.html">Aging Map 22<small>22개 관리 부위</small></a></div><div class="mnav__grp"><a class="mnav__top" href="technology.html">Technology</a><a class="mnav__sub" href="technology.html">careCL Technology<small>TECH FIT 기술</small></a><a class="mnav__sub" href="products.html">Product<small>디바이스 · 코스메틱</small></a></div>
+  <div class="mnav__util"><a href="products.html">Shop</a><a href="#">Login</a><span class="header__lang"><a href="#" aria-current="true">KR</a><i aria-hidden="true">/</i><a href="#">EN</a></span></div>
+</nav>
+<main class="sub">
+  <section class="subhead subhead--vis" data-led="red">
+    <div class="subhead__top">
+      <div class="subhead__vis subhead__vis--cut cut--tall" aria-hidden="true"><img src="assets/img/h-techfit-lit.webp?v=261105222309" alt="" decoding="async"></div>
+      <div class="wrap">
+        <p class="label">Technology</p>
+        <h1 class="subhead__title">careCL<br>Technology</h1>
+        <p class="subhead__kr">TECH FIT 기술</p>
+      </div>
+    </div>
+    <nav class="subtabs" aria-label="Technology 하위 메뉴"><div class="wrap subtabs__in"><a href="technology.html" aria-current="page">careCL Technology</a><a href="products.html">Product</a></div></nav>
+  </section>
+  <div class="sub-body">
+<section data-led="red" class="dp">
+  <div class="dp__in">
+    <div class="dp-head">
+      <div>
+        <p class="dp-label rv">Beauty Device Technology</p>
+        <h2 class="dp-title rv">지나가지 않고,<br>머무릅니다.</h2>
+      </div>
+      <div class="dp-body rv">
+        <p class="dp-lead">피부에 닿는 순간 시작되고, 한 자리에서 5초를 머문 뒤, 다음 칸으로 옮깁니다.</p>
+      </div>
+    </div>
+  </div>
+  <!-- 스탬핑 영상(유튜브) 자리 — 영상 받으면 아래 img를 지우고
+       <iframe src="https://www.youtube-nocookie.com/embed/영상ID?rel=0" title="TECH FIT 스탬핑샷" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+       를 넣는다. 그 전까지는 사진이 16:9 자리를 채운다. -->
+  <div class="vidslot rv"><img src="assets/img/c-overhead.jpg" alt="careCL TECH FIT" loading="lazy"></div>
+</section>
+
+<section data-led="red" class="dp-tall">
+  <div class="dp-tall__copy">
+    <div><p class="dp-label rv">01 · Stamping SHOT</p>
+    <h2 class="dp-tall__t rv" style="margin-top:22px">한 칸에 5초,<br>빠짐없이.</h2></div>
+    <div class="dp-tall__notes rv">
+      <p>피부에 닿는 순간 시작되고, 한 자리에서 5초를 머문 뒤, 다음 칸으로 옮깁니다.</p>
+      <p>그리드 위를 한 칸씩, 빠짐없이. TECH FIT의 스탬핑샷입니다.</p>
+    </div>
+  </div>
+  <figure class="dp-tall__img rv"><img src="assets/img/d-grid-glass.jpg" alt="격자 무늬 그리드 마스크" loading="lazy"></figure>
+</section>
+
+<section data-led="red" class="dp dp--tint" id="why5">
+  <div class="dp__in">
+    <div class="why5__head">
+      <p class="dp-label rv">02 · Why 5 Seconds</p>
+      <h2 class="dp-title rv">쪼개는 대신, 늘렸습니다</h2>
+      <div class="dp-body rv">
+        <p>클리닉의 고주파 장비는 높은 출력의 한 샷을 짧은 펄스 여러 번으로 나누어 약 1초 안에 전달합니다.<br>
+        홈케어 기기는 출력을 안전 기준 안으로 낮추고 바이폴라 방식을 씁니다.<br>
+        그래서 careCL은 한 자리에 머무는 시간을 5초로 늘렸습니다.</p>
+        <p><strong>1샷 = 5초.</strong> 피부에 닿는 순간 출력이 시작되고, 5초 동안 그 자리에서 반복 전달한 뒤 멈춥니다.</p>
+      </div>
+    </div>
+    <div class="why5">
+      <div class="why5__row rv">
+        <div class="why5__name"><b>클리닉<br>고주파 장비</b><small>한 샷을 짧은 펄스 여러 번으로 나누어 약 1초 안에 전달</small></div>
+        <div class="why5__chart">
+          <span class="why5__cap" style="width:20%">1 SHOT ≈ 1초</span>
+          <div class="why5__track"><span class="why5__pulses"><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="why5__axis"><span style="left:0%">0초</span><span style="left:20%">1초</span><span style="left:40%">2초</span><span style="left:60%">3초</span><span style="left:80%">4초</span><span style="left:100%">5초</span></div>
+        </div>
+        <div class="why5__tag"><b>짧고 강하게</b><small>높은 출력을 짧은 순간에 나누어 전달</small></div>
+      </div>
+      <div class="why5__row why5__row--on rv" data-d="1">
+        <div class="why5__name"><b>TECH FIT<br>1샷 = 5초</b><small>피부에 닿는 순간 출력이 시작되고 한 자리에 머무르며 5초 동안 반복 전달</small></div>
+        <div class="why5__chart">
+          <span class="why5__cap" style="width:100%">1 SHOT = 5초</span>
+          <div class="why5__track"><span class="why5__wave"></span></div>
+          <div class="why5__axis"><span style="left:0%">0초</span><span style="left:20%">1초</span><span style="left:40%">2초</span><span style="left:60%">3초</span><span style="left:80%">4초</span><span style="left:100%">5초</span></div>
+        </div>
+        <figure class="why5__pic"><img src="assets/img/t-techfit-use.jpg" alt="눈밑에 TECH FIT을 대고 관리하는 모습" loading="lazy"></figure>
+        <div class="why5__tag"><b>낮게, 오래,<br> 한 자리에</b><small>안전한 출력으로 5초 동안 머무르며 전달</small></div>
+      </div>
+      <p class="why5__pat rv">대한민국 등록특허 제10-2938674호</p>
+    </div>
+  </div>
+</section>
+
+<section data-led="red" class="dp" id="modes">
+  <div class="dp__in">
+    <div class="dp-head">
+      <div>
+        <p class="dp-label rv">03 · TECH FIT의 기술</p>
+        <h2 class="dp-title rv">세 가지 모드,<br>세 가지 원리</h2>
+      </div>
+      <div class="dp-body rv"><p class="dp-lead">SHOT · GLOW · EMS. 헤드마다 다른 빛으로 모드를 알려 줍니다.</p></div>
+    </div>
+    <div class="modes rv">
+    <input class="modes__r" type="radio" name="tfmode" id="mode-face" checked>
+    <input class="modes__r" type="radio" name="tfmode" id="mode-eye">
+    <input class="modes__r" type="radio" name="tfmode" id="mode-body">
+    <input class="modes__r" type="radio" name="tfmode" id="mode-glow">
+    <input class="modes__r" type="radio" name="tfmode" id="mode-ems">
+    <div class="modes__tabs" role="tablist">
+      <label for="mode-face" class="mtab mtab--face"><i aria-hidden="true"></i><b>FACE SHOT</b><small>Firming</small></label>
+      <label for="mode-eye" class="mtab mtab--eye"><i aria-hidden="true"></i><b>EYE SHOT</b><small>Eye line</small></label>
+      <label for="mode-body" class="mtab mtab--body"><i aria-hidden="true"></i><b>BODY SHOT</b><small>Body</small></label>
+      <label for="mode-glow" class="mtab mtab--glow"><i aria-hidden="true"></i><b>GLOW</b><small>Luminosity</small></label>
+      <label for="mode-ems" class="mtab mtab--ems"><i aria-hidden="true"></i><b>EMS</b><small>Contour</small></label>
+    </div>
+    <div class="modes__panels">
+      <div class="mpanel mpanel--face">
+        <figure class="mpanel__vis"><div class="led9 mpanel__led" data-led9-style="panel" data-led9="red" aria-hidden="true"><canvas></canvas></div><figcaption><i aria-hidden="true"></i>FACE SHOT</figcaption></figure>
+        <div class="mpanel__copy">
+          <p class="dp-label">SHOT · 복합 고주파</p>
+          <h3 class="mpanel__t">부위마다 다른 주파수를,<br>특허받은 방식으로</h3>
+          <div class="mpanel__body">
+            <p>TECH FIT의 SHOT 모드는 1MHz, 2MHz, 3MHz 세 가지 주파수를 조합하는 복합 고주파(Multi-RF) 방식입니다. 얼굴과 눈가, 바디는 피부의 두께와 굴곡이 서로 다릅니다. 그래서 하나의 주파수를 모든 부위에 쓰지 않고, 모드마다 다른 주파수 조합으로 설계했습니다.</p>
+            <p>이 복합 고주파를 careCL의 특허 기술인 5초 스탬핑샷으로 전달합니다. 피부에 닿는 순간을 감지해 출력을 조절하고, 한 자리에 5초간 머무르며 반복 전달합니다.</p>
+            <p class="mpanel__pat">대한민국 등록특허 제10-2938674호</p>
+            <dl class="mpanel__spec"><div><dt>주파수</dt><dd>3 · 2 · 1MHz</dd></div><div><dt>사용 부위</dt><dd>이마 · 미간 · 볼 · 팔자 · 턱선</dd></div></dl>
+            <p class="mpanel__note">3×3으로 배치한 9포인트 전극이 에너지를 한 점이 아닌 헤드 면 전체로 나누어 전달합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mpanel mpanel--eye">
+        <figure class="mpanel__vis"><div class="led9 mpanel__led" data-led9-style="panel" data-led9="green" aria-hidden="true"><canvas></canvas></div><figcaption><i aria-hidden="true"></i>EYE SHOT</figcaption></figure>
+        <div class="mpanel__copy">
+          <p class="dp-label">SHOT · 복합 고주파</p>
+          <h3 class="mpanel__t">부위마다 다른 주파수를,<br>특허받은 방식으로</h3>
+          <div class="mpanel__body">
+            <p>TECH FIT의 SHOT 모드는 1MHz, 2MHz, 3MHz 세 가지 주파수를 조합하는 복합 고주파(Multi-RF) 방식입니다. 얼굴과 눈가, 바디는 피부의 두께와 굴곡이 서로 다릅니다. 그래서 하나의 주파수를 모든 부위에 쓰지 않고, 모드마다 다른 주파수 조합으로 설계했습니다.</p>
+            <p>이 복합 고주파를 careCL의 특허 기술인 5초 스탬핑샷으로 전달합니다. 피부에 닿는 순간을 감지해 출력을 조절하고, 한 자리에 5초간 머무르며 반복 전달합니다.</p>
+            <p class="mpanel__pat">대한민국 등록특허 제10-2938674호</p>
+            <dl class="mpanel__spec"><div><dt>주파수</dt><dd>3 · 2MHz</dd></div><div><dt>사용 부위</dt><dd>눈매 라인 — 눈썹 아래 · 눈가 · 눈밑</dd></div></dl>
+            <p class="mpanel__note">3×3으로 배치한 9포인트 전극이 에너지를 한 점이 아닌 헤드 면 전체로 나누어 전달합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mpanel mpanel--body">
+        <figure class="mpanel__vis"><div class="led9 mpanel__led" data-led9-style="panel" data-led9="yellow" aria-hidden="true"><canvas></canvas></div><figcaption><i aria-hidden="true"></i>BODY SHOT</figcaption></figure>
+        <div class="mpanel__copy">
+          <p class="dp-label">SHOT · 복합 고주파</p>
+          <h3 class="mpanel__t">부위마다 다른 주파수를,<br>특허받은 방식으로</h3>
+          <div class="mpanel__body">
+            <p>TECH FIT의 SHOT 모드는 1MHz, 2MHz, 3MHz 세 가지 주파수를 조합하는 복합 고주파(Multi-RF) 방식입니다. 얼굴과 눈가, 바디는 피부의 두께와 굴곡이 서로 다릅니다. 그래서 하나의 주파수를 모든 부위에 쓰지 않고, 모드마다 다른 주파수 조합으로 설계했습니다.</p>
+            <p>이 복합 고주파를 careCL의 특허 기술인 5초 스탬핑샷으로 전달합니다. 피부에 닿는 순간을 감지해 출력을 조절하고, 한 자리에 5초간 머무르며 반복 전달합니다.</p>
+            <p class="mpanel__pat">대한민국 등록특허 제10-2938674호</p>
+            <dl class="mpanel__spec"><div><dt>주파수</dt><dd>2 · 1MHz</dd></div><div><dt>사용 부위</dt><dd>목 · 데콜테 · 팔뚝 · 손등 · 무릎</dd></div></dl>
+            <p class="mpanel__note">3×3으로 배치한 9포인트 전극이 에너지를 한 점이 아닌 헤드 면 전체로 나누어 전달합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mpanel mpanel--glow">
+        <figure class="mpanel__vis"><div class="led9 mpanel__led" data-led9-style="panel" data-led9="purple" aria-hidden="true"><canvas></canvas></div><figcaption><i aria-hidden="true"></i>GLOW</figcaption></figure>
+        <div class="mpanel__copy">
+          <p class="dp-label">GLOW · EP + 갈바닉</p>
+          <h3 class="mpanel__t">짧은 전기 리듬으로,<br>스킨케어를 마무리합니다</h3>
+          <div class="mpanel__body">
+            <p>EP(일렉트로포레이션)는 계속 흐르는 전류가 아니라, 아주 짧은 전기 펄스를 일정한 리듬으로 반복하는 기술입니다. 스탬핑을 마치고 마스크를 뗀 뒤, 피부에 남은 에센스가 잘 스며들도록 돕습니다.</p>
+            <p>여기에 아주 약한 직류 전류를 일정한 방향으로 흘려보내는 갈바닉을 더해, 바른 스킨케어가 피부에 고르게 밀착되도록 했습니다.</p>
+            <p class="mpanel__note">젤이나 수분 세럼을 바른 피부 위에서 부드럽게 움직이며 사용합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mpanel mpanel--ems">
+        <figure class="mpanel__vis"><div class="led9 mpanel__led" data-led9-style="panel" data-led9="cycle" aria-hidden="true"><canvas></canvas></div><figcaption><i aria-hidden="true"></i>EMS</figcaption></figure>
+        <div class="mpanel__copy">
+          <p class="dp-label">EMS · 저주파</p>
+          <h3 class="mpanel__t">근육에 보내는<br>작은 신호</h3>
+          <div class="mpanel__body">
+            <p>우리가 몸을 움직일 때 뇌는 근육에 전기 신호를 보냅니다. EMS는 바깥에서 비슷한 저주파 전기 신호를 보내 근육에 자극을 전달합니다.</p>
+            <p class="mpanel__note">턱선에서 귀 방향으로, 목을 따라 천천히 움직이며 루틴을 마무리합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section data-led="red" class="dp dp--tint" id="howto">
+  <div class="dp__in">
+    <!-- 261102: 영상이 화면을 꽉 채우면 스크롤이 영상에 걸려서, 글은 왼쪽(제목 아래) · 영상은 오른쪽 -->
+    <div class="howto-grid">
+      <div class="howto-grid__copy">
+        <p class="dp-label rv">04 · How to Use</p>
+        <h2 class="dp-title rv">그리드 위에,<br>한 칸씩</h2>
+        <div class="dp-body rv">
+        <ol class="howto">
+          <li><em>①</em><span>그리드 마스크를 붙이고, 한 칸씩 5초 스탬핑</span><b>SHOT</b></li>
+          <li><em>②</em><span>마스크를 떼고, 남은 에센스로 부드럽게 마무리</span><b>GLOW</b></li>
+          <li><em>③</em><span>턱선과 목을 따라 정돈</span><b>EMS</b></li>
+        </ol>
+        <p class="howto__plan"><strong>하루 10~20분 · SHOT 주 3회 · GLOW · EMS 매일</strong></p>
+        <p>마스크가 없는 날이나 목·바디에는 Collagen Booster Gel을 사용하세요.</p>
+        </div>
+      </div>
+      <div class="vid howto-grid__vid rv"><iframe src="https://www.youtube-nocookie.com/embed/CYKixmEv_Q4?rel=0" title="TECH FIT 사용 가이드" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- 마무리 CTA (261102) — 흰 배경 얼굴 그리드 사진 왼쪽 · 글 오른쪽 왼쪽 정렬 -->
+<section class="tcta tcta--split">
+  <div class="tcta__copy">
+    <p class="tcta__label rv">Start with your type</p>
+    <h2 class="tcta__t rv">
+      <span>어디에,<small>22 Zones</small></span>
+      <span>얼마 동안,<small>5 Sec</small></span>
+      <span>얼마나 일정하게.<small>주 3회</small></span>
+    </h2>
+    <p class="tcta__sub rv">어디부터 시작할지는 내 노화 타입이 알려줍니다.</p>
+    <div class="tcta__btns rv"><a href="aging-types.html" class="tcta__btn tcta__btn--fill">내 노화 타입 알아보기 <i aria-hidden="true">→</i></a><a href="products.html" class="tcta__btn">TECH FIT 보기 <i aria-hidden="true">→</i></a></div>
+  </div>
+  <figure class="tcta__vis rv"><img src="assets/img/t-face-zones-lab.jpg" alt="얼굴 위 관리 부위 그리드 — 미간 · 눈밑 · 앞광대 · 턱 · 목" loading="lazy"></figure>
+</section>
+
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a class="foot__logo" href="index.html" aria-label="careCL 홈"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538.82 132.97" role="img" aria-label="careCL">
+<path fill="currentColor" fill-rule="nonzero" d="M72.82 111.66 L80.49 114.40 C79.09 116.34 77.51 118.19 75.73 119.97 C67.06 128.64 56.59 132.97 44.32 132.97 C32.10 132.97 21.66 128.64 13.00 119.97 C4.33 111.31 0.00 100.84 0.00 88.57 C0.00 76.35 4.33 65.91 13.00 57.24 C21.66 48.58 32.10 44.24 44.32 44.24 C56.59 44.24 67.06 48.58 75.73 57.24 C77.51 59.02 79.09 60.85 80.49 62.73 L72.82 65.56 C72.01 64.59 71.15 63.62 70.24 62.65 C63.08 55.55 54.44 51.99 44.32 51.99 C34.26 51.99 25.65 55.56 18.49 62.69 C11.33 69.82 7.75 78.45 7.75 88.57 C7.75 98.68 11.33 107.32 18.49 114.48 C25.65 121.64 34.26 125.22 44.32 125.22 C54.44 125.22 63.08 121.64 70.24 114.48 C71.15 113.57 72.01 112.62 72.82 111.66"/>
+<path fill="currentColor" fill-rule="nonzero" d="M178.18 95.83 L178.18 81.46 C176.83 74.36 173.47 68.11 168.09 62.73 C160.93 55.57 152.29 51.99 142.17 51.99 C132.05 51.99 123.41 55.57 116.26 62.73 C109.10 69.89 105.52 78.53 105.52 88.64 C105.52 98.76 109.10 107.39 116.26 114.52 C123.41 121.65 132.05 125.22 142.17 125.22 C152.29 125.22 160.93 121.64 168.09 114.48 C173.47 109.10 176.83 102.88 178.18 95.83 M185.45 130.71 L178.18 130.71 L178.18 114.56 C176.78 116.45 175.25 118.25 173.58 119.97 C164.91 128.64 154.45 132.97 142.17 132.97 C129.95 132.97 119.51 128.64 110.85 119.97 C102.18 111.31 97.85 100.86 97.85 88.64 C97.85 76.37 102.18 65.91 110.85 57.24 C119.51 48.57 129.95 44.24 142.17 44.24 C154.45 44.24 164.91 48.57 173.58 57.24 C175.25 58.96 176.78 60.77 178.18 62.65 L178.18 51.43 L185.45 51.43 L185.45 130.71"/>
+<path fill="currentColor" fill-rule="nonzero" d="M209.67 51.43 L216.93 51.43 L216.93 65.88 C218.44 63.73 220.19 61.65 222.18 59.66 C228.58 53.26 235.15 49.89 241.88 49.57 L241.88 57.48 C237.30 57.70 232.57 60.26 227.67 65.15 C220.78 71.99 217.20 80.20 216.93 89.78 L216.93 130.71 L209.67 130.71 L209.67 51.43"/>
+<path fill="currentColor" fill-rule="nonzero" d="M319.14 59.26 C312.84 54.41 305.52 51.99 297.18 51.99 C287.12 51.99 278.50 55.56 271.35 62.69 C264.19 69.82 260.61 78.45 260.61 88.57 C260.61 96.91 263.03 104.23 267.87 110.52 L319.14 59.26 M272.80 115.85 C279.63 122.10 287.76 125.22 297.18 125.22 C307.30 125.22 315.94 121.64 323.10 114.48 C324.01 113.57 324.87 112.62 325.68 111.66 L333.35 114.40 C331.95 116.34 330.36 118.19 328.59 119.97 C319.92 128.64 309.45 132.97 297.18 132.97 C284.96 132.97 274.52 128.64 265.86 119.97 C257.19 111.31 252.86 100.84 252.86 88.57 C252.86 76.35 257.19 65.91 265.86 57.24 C274.52 48.58 284.96 44.24 297.18 44.24 C307.68 44.24 316.85 47.39 324.71 53.69 C326.00 54.77 327.30 55.95 328.59 57.24 C329.07 57.72 329.53 58.21 329.96 58.69 L324.47 64.18 L272.80 115.85"/>
+<path fill="currentColor" fill-rule="nonzero" d="M455.82 110.12 L461.31 115.05 C448.72 126.51 433.89 132.24 416.83 132.24 C398.53 132.24 382.93 125.80 370.05 112.91 C357.15 100.02 350.71 84.42 350.71 66.12 C350.71 47.88 357.15 32.29 370.05 19.38 C382.93 6.46 398.53 0.00 416.83 0.00 C433.89 0.00 448.72 5.73 461.31 17.20 L455.82 22.20 C444.74 12.35 431.74 7.43 416.83 7.43 C400.63 7.43 386.80 13.16 375.33 24.62 C363.87 36.09 358.14 49.92 358.14 66.12 C358.14 82.38 363.87 96.23 375.33 107.70 C386.80 119.16 400.63 124.89 416.83 124.89 C431.74 124.89 444.74 119.97 455.82 110.12"/>
+<path fill="currentColor" fill-rule="nonzero" d="M481.50 130.71 L481.50 1.53 L488.76 1.53 L488.76 123.44 L538.82 123.44 L538.82 130.71 L481.50 130.71"/>
+</svg></a>
+      </div>
+      </div>
+    <div class="foot__row">
+      <nav class="foot__nav" aria-label="푸터 메뉴">
+        <a href="about.html">Company</a><a href="aging-types.html">Aging Lab</a><a href="technology.html">Technology</a>
+      </nav>
+      <div class="foot__sns"><a href="#" aria-label="Instagram"><img src="assets/img/sns/instagram.svg" alt=""></a><a href="#" aria-label="Facebook"><img src="assets/img/sns/facebook.svg" alt=""></a><a href="#" aria-label="YouTube"><img class="is-wide" src="assets/img/sns/youtube.svg" alt=""></a><a href="#" aria-label="KakaoTalk"><img src="assets/img/sns/kakaotalk.svg" alt=""></a></div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <span>CARECL CO.,Ltd. · CEO Hyungkyu Choi · 사업자등록번호 591-88-03097 · 통신판매업 제2025-고양일산동-0585호</span>
+    <span>TEL +82 31-943-1028 · support@carecl.co.kr</span>
+    <span>© 2026 CARECL. All rights reserved.</span>
+  </div>
+</footer>
+<script src="libs/lenis.min.js"></script>
+<script src="js/led.js?v=261105222309"></script>
+<script src="js/stem.js?v=261105222309"></script>
+</body>
+</html>

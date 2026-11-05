@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>왼쪽 패널 시안 1 — 빛 입자 얼굴 홀로그램</title>
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="panel"><canvas class="stage"></canvas><span class="tag">시안 1 · 빛 입자 얼굴 홀로그램</span></div>
+<script src="lab.js"></script>
+<script>
+(function () {
+  var cv = document.querySelector('.stage'), ctx = cv.getContext('2d');
+  var W = 0, H = 0, DPR = Math.min(2, devicePixelRatio || 1);
+  var FW = 500, FH = 572;           // face-dots.png 좌표계
+  var parts = [], stars = [], t0 = performance.now(), ready = false;
+  var heat = {}, focus = null, result = null;
+
+  /* 얼굴 영역 (이미지 좌표) — 답할 때 해당 부위 점이 주황으로 물든다 */
+  var REGION = {
+    '이마': [[250, 140, 48]], '미간': [[250, 196, 16]], '눈가': [[186, 214, 20], [314, 214, 20]],
+    '눈밑': [[208, 240, 18], [294, 240, 18]], '앞광대': [[193, 263, 22], [308, 263, 22]],
+    '볼': [[192, 290, 26], [309, 290, 26]], '심부볼': [[200, 300, 26], [300, 300, 26]],
+    '팔자': [[226, 293, 14], [274, 293, 14]], '입가': [[226, 318, 14], [274, 318, 14]],
+    '턱선': [[186, 322, 22], [314, 322, 22], [250, 360, 22]], '목': [[250, 410, 32]]
+  };
+  /* Aging Map 22 좌표 */
+  var P22 = [[250,110],[205,135],[295,135],[250,196],[186,214],[314,214],[208,240],[294,240],[193,263],[308,263],[250,270],
+             [192,292],[309,292],[226,293],[274,293],[226,318],[274,318],[186,322],[314,322],[250,360],[250,410],[250,338]];
+
+  /* 사진 밝기만큼 점을 뿌린다 — 밝은 곳(이마·콧등·광대)일수록 점이 빽빽하고 크다 */
+  function sample(img) {
+    var c = document.createElement('canvas'); c.width = FW; c.height = FH;
+    var g = c.getContext('2d'); g.drawImage(img, 0, 0, FW, FH);
+    var d = g.getImageData(0, 0, FW, FH).data, out = [], N = 14000, tries = 0;
+    while (out.length < N && tries < 600000) {
+      tries++;
+      var x = Math.random() * FW, y = Math.random() * FH, l = d[((y | 0) * FW + (x | 0)) * 4] / 255;
+      // 사진 배경의 별은 거의 버려 사람 윤곽이 또렷하게 (머리 타원 + 목·어깨 사다리꼴 밖은 15%만 남김)
+      var hx = (x - 250) / 132, hy = (y - 225) / 190, body = y > 330 && Math.abs(x - 250) < 62 + (y - 330) * 1.9;
+      if (hx * hx + hy * hy > 1 && !body && Math.random() > .15) continue;
+      if (Math.random() < Math.pow(l, 1.7)) out.push([x, y, l]);
+    }
+    return out;
+  }
+
+  function resize() {
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    // 얼굴 바깥을 듬성듬성 채우는 별 — 사람과 구분되게 적고 어둡게, 드물게 크고 밝은 별
+    stars = [];
+    var n = Math.max(70, Math.min(260, W * H / 5200 | 0));
+    for (var i = 0; i < n; i++) {
+      var big = Math.random() < .06;
+      stars.push({ x: Math.random() * W, y: Math.random() * H, s: big ? Math.random() * 1.4 + 1.4 : Math.random() * 1.1 + .4,
+                   a: big ? .4 : .1 + Math.random() * .16, ph: Math.random() * 6.28, v: .02 + Math.random() * .06, big: big });
+    }
+  }
+
+  function spawn(p) {
+    // 우주처럼 멀리서 날아와 얼굴에 모인다
+    var a = Math.random() * 6.283, r = Math.max(W, H) * (.5 + Math.random() * .6);
+    p.sx = W / 2 + Math.cos(a) * r; p.sy = H / 2 + Math.sin(a) * r;
+    p.d = Math.pow(Math.random(), .7) * 1.8 + (1 - p.l) * .6;   // 밝은 점부터 먼저 자리 잡는다
+  }
+  function init(img) {
+    parts = sample(img).map(function (tg) {
+      var p = { tx: tg[0], ty: tg[1], l: tg[2], ph: Math.random() * 6.28, s: Math.random() * .5 + .75 };
+      spawn(p); return p;
+    });
+    t0 = performance.now(); ready = true;
+  }
+  function scatter() { parts.forEach(spawn); t0 = performance.now(); }
+
+  function heatAt(x, y) {
+    var h = 0;
+    for (var k in heat) (REGION[k] || []).forEach(function (r) { var dx = x - r[0], dy = y - r[1], d = Math.sqrt(dx * dx + dy * dy); if (d < r[2] * 1.5) h = Math.max(h, heat[k] * (1 - d / (r[2] * 1.5))); });
+    return Math.min(1, h);
+  }
+
+  function frame(now) {
+    requestAnimationFrame(frame);
+    ctx.clearRect(0, 0, W, H);
+    // 배경 별
+    stars.forEach(function (s) {
+      var y = (s.y - now * s.v / 60) % H; if (y < 0) y += H;          // 아주 천천히 위로 떠오른다
+      var al = s.a * (.55 + .45 * Math.sin(now / 900 + s.ph));
+      ctx.fillStyle = 'rgba(255,240,226,' + al.toFixed(3) + ')';
+      if (s.big) {
+        ctx.beginPath(); ctx.arc(s.x, y, s.s / 2, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(255,200,160,' + (al * .18).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(s.x, y, s.s * 2.2, 0, 6.283); ctx.fill();
+      } else ctx.fillRect(s.x, y, s.s, s.s);
+    });
+    if (!ready) return;
+    var t = (now - t0) / 1000;
+    var top = 140, bot = 80, sc = Math.min(W / FW * 1.02, (H - top - bot) / FH);
+    var ox = W / 2 - FW * sc / 2, oy = top + (H - top - bot - FH * sc) / 2;
+    var scanY = (Math.sin(now / 1700) * .5 + .5) * FH;
+    ctx.globalCompositeOperation = 'lighter';
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i], k = Math.min(1, Math.max(0, (t - p.d) / 2.2)), e = 1 - Math.pow(1 - k, 4);
+      if (e <= 0) continue;
+      var tx = ox + (p.tx + Math.sin(now / 1300 + p.ph) * .6) * sc, ty = oy + (p.ty + Math.cos(now / 1500 + p.ph) * .6) * sc;
+      // 흩어진 자리 → 사진 속 자리로, 시간 기준으로 모인다 (프레임 수와 무관)
+      var x = p.sx + (tx - p.sx) * e, y = p.sy + (ty - p.sy) * e;
+      var h = heatAt(p.tx, p.ty), near = Math.max(0, 1 - Math.abs(p.ty - scanY) / 18);
+      var tw = .8 + .2 * Math.sin(now / 600 + p.ph * 3);
+      var al = Math.min(1, (.25 + p.l * .85) * tw + near * .35) * (.25 + .75 * e);
+      var r = 255, gg = 246 - h * 120, b = 236 - h * 180;
+      ctx.fillStyle = 'rgba(' + r + ',' + (gg | 0) + ',' + (b | 0) + ',' + al.toFixed(3) + ')';
+      var size = p.s * (.35 + p.l * 1.35) * Math.max(.75, sc) * (1 + h * .9 + near * .5);
+      if (size > 2) { ctx.beginPath(); ctx.arc(x, y, size / 2, 0, 6.283); ctx.fill(); }
+      else ctx.fillRect(x - size / 2, y - size / 2, size, size);
+    }
+    var done = Math.min(1, Math.max(0, (t - 3.2) / 1.2));
+    if (done > 0) {
+      // 스캔 띠
+      var sy = oy + scanY * sc, grd = ctx.createLinearGradient(0, sy - 26, 0, sy + 26);
+      grd.addColorStop(0, 'rgba(240,168,119,0)'); grd.addColorStop(.5, 'rgba(240,168,119,' + (.08 * done) + ')'); grd.addColorStop(1, 'rgba(240,168,119,0)');
+      ctx.fillStyle = grd; ctx.fillRect(ox + 60 * sc, sy - 26, (FW - 120) * sc, 52);
+      // 22 좌표
+      P22.forEach(function (q, j) {
+        var x = ox + q[0] * sc, y = oy + q[1] * sc, h = heatAt(q[0], q[1]);
+        var rad = (1.1 + h * 2 + (.5 + .5 * Math.sin(now / 500 + j)) * .5) * done;
+        var gl = ctx.createRadialGradient(x, y, 0, x, y, rad * 4);
+        gl.addColorStop(0, h > .2 ? 'rgba(255,160,100,.9)' : 'rgba(255,200,160,.45)'); gl.addColorStop(1, 'rgba(255,150,90,0)');
+        ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(x, y, rad * 4, 0, 6.283); ctx.fill();
+      });
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // 지금 읽는 부위 라벨 / 결과 TOP3 라벨
+    var labels = result ? result.areas : (focus ? [focus] : []);
+    labels.forEach(function (name, j) {
+      var rs = REGION[name] || [], rg = rs[result && j % 2 && rs[1] ? 1 : 0]; if (!rg) return;
+      var x = ox + rg[0] * sc, y = oy + rg[1] * sc, left = x < W / 2;
+      var ex = left ? Math.max(16, x - 70 * Math.max(.8, sc)) : Math.min(W - 16, x + 70 * Math.max(.8, sc)), ey = y - 22 - j * 6;
+      ctx.strokeStyle = 'rgba(240,168,119,.85)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(ex, ey); ctx.stroke();
+      ctx.fillStyle = '#F0A877'; ctx.beginPath(); ctx.arc(x, y, 2.4, 0, 6.283); ctx.fill();
+      ctx.font = '600 12px Pretendard, sans-serif'; ctx.textAlign = left ? 'right' : 'left';
+      ctx.fillText((result ? (j + 1) + '. ' : '') + name, ex + (left ? -4 : 4), ey - 4);
+    });
+    ctx.textAlign = 'left';
+  }
+
+  addEventListener('resize', resize);
+  resize(); requestAnimationFrame(frame);
+  var img = new Image(); img.onload = function () { init(img); }; img.src = 'face-dots.png';
+  Lab.start({
+    onStep: function (s) { if (s.area) { heat[s.area] = Math.min(1, (heat[s.area] || 0) + .34); focus = s.area; } },
+    onResult: function (r) { result = r; r.areas.forEach(function (a) { heat[a] = 1; }); },
+    onReset: function () { heat = {}; focus = null; result = null; scatter(); }
+  });
+})();
+</script>
+</body>
+</html>

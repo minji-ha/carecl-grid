@@ -1,0 +1,132 @@
+/* =========================================================
+   GRID 시안 (2026-11-05) — 고객 수정요청: 쥬베룩 톤
+   · 흰 바탕 + 화면을 5칸으로 나누는 옅은 세로선
+   · 좌우 여백 넓게, 내용 폭 정리
+   · 사진은 한 가지 카드 규격(둥근 모서리 + 옅은 그림자)
+   · 영문 Jost(Futura 계열 기하 산세리프) + 한글 Pretendard
+   stem.css · home261019.css 위에 얹는다 (모든 페이지)
+   ========================================================= */
+:root{
+  --ink:#1E1A17;
+  --ink-2:#6B625C;
+  --nav:#1E1A17;
+  --accent:#E0662B;            /* 고객 시안(5 STEPS) 오렌지 */
+  --accent-2:#F6E3D6;
+  --soft:#F6F5F3;
+  --hair:rgba(30,26,23,.12);
+  --line:rgba(30,26,23,.07);   /* 배경 세로선 */
+  --led:var(--accent);
+  --f-title:"Jost","Pretendard",system-ui,sans-serif;
+  --f-ui:"Jost","Pretendard",system-ui,sans-serif;
+  --gut:clamp(20px,6.25vw,120px);   /* 좌우 여백 — STEM 45px → 90px@1440 */
+  --head:88px;
+  --sec:clamp(100px,11vw,200px);
+  --r:clamp(16px,1.6vw,28px);       /* 카드 모서리 */
+  --shadow:0 28px 60px -24px rgba(30,20,10,.16),0 6px 18px -8px rgba(30,20,10,.06);
+}
+body{background:#fff;color:var(--ink);letter-spacing:-.01em}
+
+/* ── 배경 세로선 (화면 5칸) ─────────────────────── */
+.glines{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.glines i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.glines i:nth-child(1){left:20%}
+.glines i:nth-child(2){left:40%}
+.glines i:nth-child(3){left:60%}
+.glines i:nth-child(4){left:80%}
+@media (max-width:767px){
+  .glines i:nth-child(1){left:25%}
+  .glines i:nth-child(2){left:50%}
+  .glines i:nth-child(3){left:75%}
+  .glines i:nth-child(4){display:none}
+}
+
+/* ── 헤더 — 로고 왼쪽, 메뉴는 오른쪽 둥근 알약 ───────── */
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  padding-inline:var(--gut);height:var(--head);
+}
+.header__logo{width:clamp(104px,8vw,138px);color:var(--ink);transition:color .3s ease}
+.header__pill{
+  display:flex;align-items:center;gap:clamp(18px,2.2vw,40px);height:54px;padding:0 clamp(20px,2vw,34px);
+  border-radius:999px;background:rgba(255,255,255,.78);
+  -webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.6);box-shadow:0 10px 30px -14px rgba(30,20,10,.22);
+}
+.header__nav{gap:clamp(18px,2vw,36px)}
+.hnav{height:54px}
+.hnav__top,.header__nav a{
+  font-family:var(--f-ui);font-weight:500;text-transform:none;letter-spacing:0;
+  font-size:clamp(14px,1vw,16px);color:var(--nav);
+}
+.hnav__top::after,.header__nav a::after{display:none}
+.hnav:hover .hnav__top,.hnav__top[aria-current="page"],.header__nav > a:hover{color:var(--accent)}
+.header__util{gap:clamp(14px,1.4vw,24px);padding-left:clamp(14px,1.4vw,24px);border-left:1px solid var(--hair);height:22px}
+.header__lang,.header__nav .header__lang a{font-size:12px}
+.hnav__sub{left:50%;translate:-50% 0;top:calc(100% + 10px);min-width:240px}
+.hnav__sub::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.hnav__in{border-radius:20px;border:0;box-shadow:var(--shadow);padding:10px}
+.header__nav .hnav__in a{border-radius:12px}
+.hnav__in b{text-transform:none;font-size:15px;letter-spacing:0}
+.header__menu{
+  width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.85);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 8px 24px -12px rgba(30,20,10,.25)
+}
+.header__menu span{left:15px;right:15px;background:var(--ink)}
+.header__menu span:nth-child(1){top:19px}
+.header__menu span:nth-child(2){top:28px}
+@media (max-width:1080px){
+  :root{--head:72px}
+  .header__pill{display:none}
+  .header__menu{display:block}
+}
+.mnav{background:#fff}
+.mnav a{font-family:var(--f-title);text-transform:none}
+
+/* ── 공용 글자 ───────────────────────────────── */
+.label{font-family:var(--f-ui);font-weight:600;font-size:12px;letter-spacing:.28em;color:var(--accent)}
+.label::before{display:none}
+.sec-title{font-family:var(--f-title);font-weight:600;letter-spacing:-.025em}
+.btn-line,.btn-roll{border-radius:999px}
+.btn-line{border:1.5px solid var(--accent);color:var(--accent);font-family:var(--f-ui);font-weight:600;letter-spacing:.02em;text-transform:none}
+.btn-line:hover{background:var(--accent);color:#fff}
+
+/* ── 로딩 — 글자만 ─────────────────────────────── */
+.loader__head{display:none}
+.loader__logo{color:var(--accent)}
+
+/* ── 서브 페이지 ───────────────────────────────── */
+.sub{background:transparent}
+.subhead__title{font-family:var(--f-title);font-weight:600;letter-spacing:-.03em}
+.subtabs{background:transparent}
+.subtabs a{font-family:var(--f-ui);font-weight:500;text-transform:none;border-radius:999px}
+.subtabs a[aria-current="page"]{color:var(--accent)}
+/* 사진은 모두 같은 카드 규격 (누끼 PNG·로고·도면은 제외) */
+.sub-body img:not([src$=".png"]):not([src$=".svg"]):not([src*="/doc/"]):not([src*="/sns/"]){border-radius:var(--r)}
+.sub-body figure,.sub-body .dp-media,.sub-body .media{border-radius:var(--r)}
+
+/* ── 푸터 ─────────────────────────────────────── */
+.foot{background:var(--soft);border-top:0;margin-top:var(--sec)}
+.foot__logo{max-width:420px;color:var(--ink)}
+.foot__side h2,.foot__nav a{font-family:var(--f-ui);text-transform:none;font-weight:500}
+.foot__bar{background:transparent;color:var(--ink-2);border-top:1px solid var(--hair)}
+.aifab{border-radius:999px}
+
+/* 화면 끝까지 닿던 큰 사진도 여백 안쪽 카드로 */
+.dp-full,.dp-tall__img{margin-inline:var(--gut);border-radius:var(--r);box-shadow:var(--shadow)}
+.dp-full img,.dp-tall__img img{border-radius:0!important}
+
+/* 로고도 알약 안에 — 내용이 헤더 밑으로 지나가도 겹쳐 보이지 않게 (메인 영상 위에서는 투명) */
+.header__logo{
+  box-sizing:content-box;padding:15px 24px;border-radius:999px;background:rgba(255,255,255,.78);
+  -webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
+  box-shadow:0 10px 30px -14px rgba(30,20,10,.22);margin-left:-24px;
+  transition:background .3s ease,box-shadow .3s ease,color .3s ease;
+}
+body.on-hero .header__logo{background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (max-width:1080px){ .header__logo{padding:13px 20px;margin-left:-8px;width:96px} }
+
+/* 서브 본문 제목 — 가는 글씨 대신 메인과 같은 굵기 */
+.sub-body h2,.sub-body h3,.sub-body .dp-title,.sub-body .sec-title{font-family:var(--f-title);font-weight:600;letter-spacing:-.03em}
+.sub-body .dp-title{font-size:clamp(32px,4vw,72px);line-height:1.2}
+.sub-body .label{color:var(--accent)}

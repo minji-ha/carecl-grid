@@ -1,0 +1,303 @@
+/* =========================================================
+   홈페이지 수정요청 261019 — stem.css 위에 얹는 보정
+   ========================================================= */
+/* 전체 — 마우스 커서 LED 색 빛은 led.js에서 껐다 */
+.led-glow,.led-dot{display:none!important}
+
+/* 1a 헤더 흰 배경 70% (뒤 화면이 비친다) */
+.header{background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}
+/* 1e 로고 안티에일리어싱 */
+.header__logo svg,.loader__logo svg{shape-rendering:geometricPrecision}
+.header__logo{-webkit-font-smoothing:antialiased;backface-visibility:hidden}
+
+/* 1b·c·d 메뉴 — 마우스를 올리면 소제목이 펼쳐진다 */
+.header__nav{align-items:center}
+.hnav{position:relative;height:var(--head);display:flex;align-items:center}
+.hnav__top{
+  font-family:var(--f-ui);font-weight:400;text-transform:uppercase;
+  font-size:clamp(12px,1.042vw,17px);line-height:1;color:var(--nav);letter-spacing:.02em;position:relative;padding-block:6px;
+}
+.hnav__top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.hnav:hover .hnav__top::after,.hnav:focus-within .hnav__top::after,.hnav__top[aria-current="page"]::after{transform:scaleX(1)}
+.hnav__sub{
+  position:absolute;left:-22px;top:100%;min-width:260px;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .28s ease,transform .28s ease,visibility 0s linear .28s;
+}
+.hnav:hover .hnav__sub,.hnav:focus-within .hnav__sub{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.hnav__in{
+  display:flex;flex-direction:column;padding:12px 10px;border-radius:0 0 14px 14px;
+  background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 18px 36px -18px rgba(51,27,15,.28);border-top:1px solid var(--hair);
+}
+.header__nav .hnav__in a{display:block;padding:9px 12px;border-radius:8px;transition:background .2s ease}
+.header__nav .hnav__in a::after{display:none}
+.hnav__in a:hover{background:var(--soft)}
+.hnav__in b{display:block;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:13.5px;letter-spacing:.03em;color:var(--nav)}
+.hnav__in small{display:block;margin-top:2px;font-size:12px;color:var(--ink-2);text-transform:none;letter-spacing:0}
+.header__util{align-items:center;gap:clamp(16px,2vw,36px)}
+.header__lang{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-ui);font-size:11px;letter-spacing:.06em;color:var(--ink-2)}
+.header__nav .header__lang a{font-size:11px;padding:0;color:var(--ink-2)}
+.header__nav .header__lang a::after{display:none}
+.header__lang a[aria-current="true"]{color:var(--nav);font-weight:600}
+.header__lang i{font-style:normal;opacity:.5}
+/* 모바일 메뉴 — 묶음별 */
+.mnav__grp{display:flex;flex-direction:column;padding-block:10px;border-bottom:1px solid var(--hair)}
+.mnav a.mnav__top{border:0;padding-block:4px}
+.mnav a.mnav__sub{border:0;font-family:var(--f-ui);font-size:15px;font-weight:500;padding:6px 0 6px 2px;line-height:1.3}
+.mnav a.mnav__sub small{display:inline;margin-left:8px;font-size:12px}
+.mnav__util{display:flex;align-items:center;gap:24px;padding-top:18px}
+.mnav .mnav__util > a{border:0;font-size:18px;padding:0}
+.mnav .header__lang a{border:0;font-size:14px;padding:0}
+
+/* 1f 히어로 — care CLINICAL LEVEL → careCL / 1h 아래 검정 안개 제거 */
+.hero::after{display:none}
+.hero__copy{text-shadow:0 1px 18px rgba(0,0,0,.18)}
+.hero__title--merge{font-size:clamp(40px,7vw,128px);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.mg{display:inline-block;vertical-align:bottom}
+.mg--care{font-weight:400;letter-spacing:-.03em}
+.mg--drop{overflow:hidden;white-space:nowrap}
+@media (max-width:520px){.hero__title--merge{font-size:min(8.4vw,44px)}}
+
+/* 4 네 가지 기준 — 가운데 물방울 속 로고 */
+.bubble{position:relative;aspect-ratio:1/1}
+.bubble canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
+.bubble__fallback{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);color:var(--ink);transition:opacity .6s ease}
+.bubble__fallback svg{display:block;width:100%;height:auto}
+.bubble.is-ready .bubble__fallback{opacity:0}
+.core__bubble{width:clamp(260px,28vw,440px)}
+.core__center{top:47%}
+/* 4d AI 피부 진단 — 도드라지는 버튼 */
+.aicta{
+  position:relative;display:inline-flex;align-items:center;gap:16px;padding:12px 26px 12px 12px;border-radius:100px;
+  background:#C46A3A;color:#fff;box-shadow:0 18px 34px -16px rgba(196,106,58,.75);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,background .3s ease;
+}
+.aicta::before{content:"";position:absolute;inset:-6px;border-radius:inherit;border:1px solid rgba(196,106,58,.45);animation:aiPulse 2.6s ease-out infinite;pointer-events:none}
+@keyframes aiPulse{0%{opacity:.9;transform:scale(.96)}100%{opacity:0;transform:scale(1.12)}}
+.aicta:hover{transform:translateY(-3px);background:#A8521F;box-shadow:0 24px 40px -16px rgba(168,82,31,.8)}
+.aicta__ico{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.22)}
+.aicta__ico svg{width:24px;height:24px;animation:aiSpin 7s linear infinite}
+.aicta__txt{display:flex;flex-direction:column;line-height:1.25}
+.aicta__txt small{font-family:var(--f-ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.aicta__txt b{font-size:clamp(17px,1.5vw,22px);font-weight:700;letter-spacing:-.02em}
+.aicta__arr{font-size:22px;margin-left:6px;transition:transform .35s ease}
+.aicta:hover .aicta__arr{transform:translateX(5px)}
+
+/* 5a 환기용 이미지 — 높이를 절반으로 */
+.sys__img{aspect-ratio:2400/980}   /* 원래(2400/1405)의 약 70% — 얼굴 위아래가 잘리지 않게 */
+.sys__img img{object-position:50% 40%}
+
+/* 6a 콜렉션 — 좌우로 넘겨 보는 제품 줄 */
+.hscroll{margin-top:clamp(34px,4vw,70px)}
+.hscroll__list{
+  list-style:none;margin:0;display:flex;gap:clamp(14px,1.6vw,28px);overflow-x:auto;overscroll-behavior-x:contain;
+  padding:4px var(--gut) 10px;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);scrollbar-width:none;cursor:grab;
+}
+.hscroll__list::-webkit-scrollbar{display:none}
+.hscroll__list.is-drag{cursor:grabbing;scroll-snap-type:none}
+.hscroll__list.is-drag a{pointer-events:none}
+.pcard{flex:0 0 clamp(230px,24vw,370px);scroll-snap-align:start}
+.pcard a{display:block;user-select:none;-webkit-user-drag:none}
+.pcard__img{aspect-ratio:4/5;overflow:hidden;background:#EEEDEB}
+.pcard__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.pcard a:hover .pcard__img img{transform:scale(1.05)}
+.pcard em{display:block;margin-top:16px;font-style:normal;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.2em;color:var(--ink-2)}
+.pcard b{display:block;margin-top:6px;font-family:var(--f-title);font-weight:500;text-transform:uppercase;font-size:clamp(18px,1.6vw,26px);letter-spacing:-.01em}
+.pcard span{display:block;margin-top:4px;font-size:14px;color:var(--ink-2)}
+.hscroll__foot{display:flex;align-items:center;gap:clamp(20px,3vw,50px);margin-top:clamp(24px,2.6vw,40px)}
+.hscroll__bar{flex:1;height:2px;background:var(--hair);position:relative;overflow:hidden}
+.hscroll__bar i{position:absolute;top:0;bottom:0;left:0;width:30%;background:var(--ink)}
+.hscroll__btns{display:flex;gap:10px}
+
+/* 7 다섯 단계 — 왼쪽에 붙어 있는 물방울, 오른쪽으로 단계가 지나간다 (3D 기기 회전 효과는 뺐다) */
+/* 원래 지그재그 배치(단계 글이 왼쪽·오른쪽 번갈아) 그대로, 3D 기기 대신 물방울이 글 반대편으로 옮겨 간다 */
+.steps__stage{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.steps__stage{--bx:24vw}
+.steps__stage.is-right{--bx:-24vw}
+.steps__bubble{width:min(34vw,500px,62vh);translate:var(--bx) 0;transition:translate 1s cubic-bezier(.65,0,.35,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.steps__shop{position:absolute;left:50%;translate:var(--bx) 0;bottom:clamp(30px,7vh,80px);pointer-events:auto;
+  opacity:0;transform:translate(-50%,24px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.steps__stage.is-last .steps__shop{opacity:1;transform:translate(-50%,0)}
+.steps__stage:not(.is-last) .steps__shop{pointer-events:none}
+
+/* 7c SHOP 링크 — 아래서 색이 차오르고 글자가 굴러 올라가며 바뀐다 (STEM 버튼 효과) */
+.btn-roll{
+  position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:16px;
+  min-width:220px;padding:0 30px;height:56px;border:1px solid var(--ink);color:var(--ink);
+  font-family:var(--f-ui);font-weight:500;font-size:clamp(13px,1vw,15px);letter-spacing:.14em;text-transform:uppercase;
+  transition:color .4s ease,border-color .4s ease;
+}
+.btn-roll::before{content:"";position:absolute;inset:0;z-index:-1;background:#C46A3A;transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.btn-roll__t{position:relative;display:block;height:1.3em;overflow:hidden;line-height:1.3}
+.btn-roll__t span{display:block;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.btn-roll__arr{font-size:1.2em;transition:transform .4s ease}
+.btn-roll:hover::before,.btn-roll:focus-visible::before{transform:scaleY(1)}
+.btn-roll:hover .btn-roll__t span,.btn-roll:focus-visible .btn-roll__t span{transform:translateY(-100%)}
+.btn-roll:hover .btn-roll__arr,.btn-roll:focus-visible .btn-roll__arr{transform:translateX(5px)}
+.btn-roll:hover,.btn-roll:focus-visible{color:#fff;border-color:#C46A3A}
+.btn-roll--solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-roll--lg{height:64px;min-width:280px;font-size:clamp(14px,1.1vw,17px);box-shadow:0 20px 40px -20px rgba(51,27,15,.6)}
+
+/* 8 하부 — CARECL 롤링 삭제, 푸터는 큰 careCL은 두고 세로 글자 HOME AGING CARE만 삭제 */
+
+@media (max-width:860px){
+  .core__bubble{width:min(70vw,320px)}
+  .aicta{padding:10px 20px 10px 10px;gap:12px}
+  .aicta__ico{width:44px;height:44px}
+  .sys__img img{aspect-ratio:2400/1100}
+  .steps__stage{display:none}
+  .step,.step:nth-child(even){width:auto;margin-left:0}
+  .pcard{flex-basis:68vw}
+  .hscroll__btns{display:none}
+}
+@media (prefers-reduced-motion:reduce){.aicta::before,.aicta__ico svg{animation:none}}
+.steps__bubble{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.steps__stage.is-last .steps__bubble{transform:translateY(-5vh) scale(.94)}
+
+/* 오른쪽 아래 AI 피부 진단 버튼 — 섹션 LED 색 대신 제품 패키지의 밝은 오렌지로 고정 */
+.aifab,html:not([data-led-now]) .aifab,html[data-led-off] .aifab{background:#EA7A2C;box-shadow:0 10px 22px -10px rgba(234,122,44,.75),0 0 18px -6px rgba(234,122,44,.6)}
+.aifab:hover,html:not([data-led-now]) .aifab:hover,html[data-led-off] .aifab:hover{background:#D2661C;box-shadow:0 14px 26px -10px rgba(210,102,28,.8),0 0 22px -6px rgba(234,122,44,.7)}
+
+/* 히어로 합쳐지는 제목 — 로고 서체 Caviar Dreams (자료/drive/10. 글꼴)
+   글꼴이 오기 전 굵은 대체 글꼴이 잠깐 보이지 않게 block + 미리 받기(build.py head) */
+@font-face{font-family:"Caviar Dreams";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block}
+.hero__title--merge,.hero__title--merge .mg{font-family:"Caviar Dreams","Metropolis",system-ui,sans-serif;font-weight:400;letter-spacing:0}
+/* 히어로 제목 위아래 간격 — 위(소제목과)는 좁히고 아래(한글 문장과)는 살짝 띄워 균형 */
+.hero__title--merge{margin-top:.16em;line-height:.92}
+.hero__copy .hero__kr{margin-top:clamp(10px,1.2vw,18px)}
+
+/* 콜렉션 — 마우스를 올리면 같은 제품의 다른 컷으로 바뀐다 */
+.pcard__img{position:relative}
+.pcard__img img{transition:transform 1s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+.pcard__alt{position:absolute;inset:0;opacity:0;transform:scale(1.06)}
+.pcard a:hover .pcard__alt,.pcard a:focus-visible .pcard__alt{opacity:1;transform:scale(1)}
+.pcard a:hover .pcard__img img:first-child{transform:scale(1.04)}
+@media (hover:none){.pcard__alt{display:none}}
+/* 히어로 제목 위아래 글자 — 조금 키움 */
+.hero__copy .hero__eyebrow{font-size:clamp(12px,1.08vw,17px)}
+.hero__copy .hero__kr{font-size:clamp(14px,1.22vw,19px)}
+
+/* 3 케어클의 철학 — 수정 원고 (영문 원고 받기 전까지) */
+.phil__label{margin:0;font-family:var(--f-kr);font-weight:500;font-size:clamp(15px,1.25vw,20px);color:var(--ink-2);letter-spacing:-.01em}
+.phil .phil__title{margin-top:clamp(22px,2.4vw,40px);max-width:none;font-weight:600;font-size:clamp(28px,3.4vw,56px);line-height:1.35}
+.phil__sub{margin:clamp(30px,3.2vw,56px) 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(22px,2.5vw,42px);line-height:1.45;letter-spacing:-.02em;color:var(--ink)}
+
+/* 5 환기용 이미지 — 높이를 조금 더 줄이고 인물을 3/4 크기로 (PC). 사진 배경과 같은 살구색 위에 가운데 두고 양옆은 흐리게 이어 붙인다 */
+@media (min-width:861px){
+  .sys__img{aspect-ratio:2400/900;background:radial-gradient(120% 140% at 50% 40%,#EDC5B2 0%,#E7BBA7 60%,#DDB09C 100%)}
+  .sys__img img{position:absolute;left:50%;top:-1.5%;width:75%;height:auto;object-fit:initial;
+    translate:-50% 0;transform-origin:50% 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+}
+.steps__stage .steps__shop{position:absolute}
+.steps__stage .steps__shop{bottom:max(24px,calc(50% - min(17vw,250px,31vh) - 92px))}
+
+/* 5 환기용 이미지 — 왼쪽 글씨는 흰색, 기울기 없이 */
+.sys__en{font-style:normal}
+@media (min-width:861px){
+  .sys__title{color:#fff;text-shadow:0 2px 24px rgba(120,60,30,.18)}
+}
+
+/* 물방울 v2 (js/bubble.js 레이마칭 메타볼)
+   · 로고: 흩어진 물방울이 원 밖에서 모여들도록 캔버스를 물방울보다 넓게 (가로 넘침은 섹션에서 자름)
+   · 데일리 루틴: 캔버스가 무대 전체를 덮고, 위치·흩어짐은 스크립트가 스크롤에 맞춰 그린다 */
+.core{overflow-x:clip}
+.bubble canvas.bubble__gl--wide{inset:-70%;width:240%!important;height:240%!important;pointer-events:none}
+.steps__stage .steps__bubble{position:absolute;inset:0;width:auto;aspect-ratio:auto;translate:none;transform:none!important;transition:none}
+/* 넓은 화면에서 물방울이 무대(최대 1280px) 가장자리에서 잘리지 않게 — 캔버스는 화면 폭 전체, 가운데는 무대 가운데에 맞춘다 */
+.steps{overflow-x:clip}
+.steps__stage .steps__bubble{left:50%;right:auto;width:100vw;translate:-50% 0}
+/* 메뉴가 노션 구조(5개)로 늘어서, 로고와 겹치기 시작하는 1080px 이하는 햄버거 메뉴로 */
+@media (max-width:1080px){
+  .header{grid-template-columns:40px 1fr 40px}
+  .header__nav{display:none}
+  .header__logo{grid-column:2;justify-self:center}
+  .header__menu{display:block;grid-column:3;justify-self:end}
+}
+/* 히어로 상단 Anti-Aging Skincare — 두꺼운 글씨 */
+.hero__eyebrow{font-weight:700}
+
+/* 데일리 루틴 v3 (STEM 방식) — 작은 물방울이 글 옆을 따라다니고, 마지막 단계 뒤에는 가운데 큰 물방울 + 라인업 + SHOP
+   위치·크기는 js/bubble.js가 그린다. 아래 빈 칸(steps__expand)이 마무리 연출의 스크롤 길이 */
+.steps__expand{height:140svh}
+.steps__stage .steps__shop{top:calc(50% + var(--shopY,200px));bottom:auto;left:50%;translate:none;opacity:0;transform:translate(-50%,24px);pointer-events:none}
+.steps__stage.is-last .steps__shop{opacity:0;transform:translate(-50%,24px)}
+.steps__stage.is-final .steps__shop{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+@media (max-width:860px){ .steps__expand{display:none} }
+
+/* 부드러운 스크롤 (Lenis) 기본 규칙 */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* 메인 물방울 숨김 (build.py MAIN_BUBBLES = False)
+   · 네 가지 기준: bubble.js를 안 불러오니 가운데에 정적 careCL 로고(.bubble__fallback)만 남는다
+   · 데일리 루틴: 물방울 무대·마무리 구간을 빼고, 단계별 사진을 글 반대편에 원형으로 (지그재그) */
+.steps--still .steps__stage,.steps--still .steps__expand{display:none}
+@media (min-width:861px){
+  .steps--still .steps__list{margin-top:0}
+  .steps--still .step,.steps--still .step:nth-child(even){width:auto;margin-left:0;min-height:0;padding-block:clamp(40px,5vw,80px);
+    grid-template-columns:auto minmax(0,1fr) minmax(0,44%);grid-template-rows:1fr auto 1fr;grid-template-areas:". . img" "num text img" ". . img";opacity:.45}
+  .steps--still .step:nth-child(even){grid-template-columns:minmax(0,44%) auto minmax(0,1fr);grid-template-areas:"img . ." "img num text" "img . ."}
+  .steps--still .step.is-on{opacity:1}
+  .steps--still .step__num{grid-area:num;align-self:start}
+  .steps--still .step>div:not(.step__img){align-self:start}
+  .steps--still .step>div:not(.step__img){grid-area:text}
+  .steps--still .step__img{display:block;grid-area:img;justify-self:center;align-self:center;width:min(100%,340px);aspect-ratio:1/1;border-radius:50%;overflow:hidden}
+  .steps--still .step__img img{width:100%;height:100%;object-fit:cover}
+}
+
+/* 네 가지 기준 가운데 — 투명 콜라겐 젤 방울 (js/gel.js, build.py MAIN_GEL)
+   데모와 같은 크기가 나오도록 높이 560px 무대, 중심은 가운데 careCL 로고에 맞춘다.
+   캔버스는 글자·선 아래에 두고 클릭을 막지 않는다. */
+.gel{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(100%,1200px);height:560px;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+.gel.is-ready{opacity:1}
+.gel canvas{display:block;width:100%;height:100%}
+@media (max-width:860px){
+  .gel{top:0;transform:translateX(-50%);width:100%;height:min(118vw,480px)}
+  [data-gel] .core__center{min-height:min(118vw,480px);justify-content:center}
+}
+
+/* 메인 물방울 (js/stembubble.js, build.py MAIN_STEM_BUBBLE) — 물방울구현.html 이식
+   · 네 가지 기준: 캔버스 중심을 가운데 careCL 자리(44%)에 맞추고 글자·선 아래에 깐다
+   · 데일리 루틴: 고정 무대(.steps__bubble) 전체를 채운다 */
+.sb-canvas{display:block;pointer-events:none}
+/* 네 가지 기준: 원본처럼 화면 폭 전체 · 위아래 1.6배로 넓혀 처음 흩어진 방울이 잘리지 않게.
+   (방울 크기는 stembubble.js에서 같은 비율로 줄여 모인 방울은 이전과 같은 크기) 위아래 끝은 부드럽게 사라진다 */
+.sb-canvas--core{position:absolute;left:50%;top:calc(47% - 80%);width:100vw;height:160%;transform:translateX(-50%);z-index:0;
+  -webkit-mask-image:linear-gradient(transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 14%,#000 86%,transparent 100%)}
+[data-sb-core]{position:relative}
+.core > .wrap{position:relative;z-index:1}
+.sb-canvas--steps{position:absolute;inset:0;width:100%;height:100%}
+@media (max-width:860px){
+  .sb-canvas--core{top:calc(min(118vw,480px) * -.3);height:calc(min(118vw,480px) * 1.6)}
+  [data-sb-core] .core__center{min-height:min(118vw,480px);justify-content:center}
+}
+[data-sb-steps] .steps__stage .steps__shop{top:auto;bottom:clamp(24px,5vh,60px)}
+/* 모바일 데일리 루틴도 물방울 — 원본처럼 방울은 화면 위쪽 가운데, 단계 글은 아래에서 차례로 */
+@media (max-width:860px){
+  [data-sb-steps] .steps__stage{display:block}
+  [data-sb-steps] .steps__list{margin-top:calc(-100svh + var(--head))}
+  /* 단계 목록은 스크롤 길이만 만들고 보이지 않는다 — 글은 방울 아래 고정 자리(.sb-cap)에서 한 단계씩 바뀐다 */
+  [data-sb-steps] .step,[data-sb-steps] .step:nth-child(even),[data-sb-steps] .step.is-on{min-height:90svh;padding:0;border-top:0;opacity:0!important;pointer-events:none}
+  [data-sb-steps] .sb-cap{display:block}
+  [data-sb-steps] .step__img{display:none}
+  [data-sb-steps] .steps__expand{display:block;height:130svh}
+}
+
+/* 모바일 데일리 루틴 고정 글 자리 (js/stembubble.js가 단계 글을 복제해 넣는다) */
+.sb-cap{display:none;position:absolute;left:var(--gut);right:var(--gut);top:66%;z-index:2}
+.sb-cap__item{position:absolute;left:0;right:0;top:0;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.sb-cap__item.is-on{opacity:1;transform:none}
+.sb-cap__item .step__num{display:block;font-family:var(--f-ui);font-weight:200;font-style:italic;font-size:44px;line-height:1;color:var(--pale)}
+.sb-cap__item .step__title{margin:6px 0 0;font-family:var(--f-title);font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.02em;color:var(--ink)}
+.sb-cap__item .step__kr{display:block;margin-top:4px;font-size:13px;font-weight:600;color:var(--ink)}
+.sb-cap__item .step__desc{margin:10px 0 0;font-size:14px;line-height:1.75;color:var(--ink-2);word-break:keep-all}
+/* 모바일 데일리 루틴은 효과 없이 — 글·SHOP도 바로 바뀐다 */
+@media (max-width:860px){
+  [data-sb-steps] .sb-cap__item{transition:none;transform:none}
+  [data-sb-steps] .steps__stage .steps__shop{transition:none}
+}

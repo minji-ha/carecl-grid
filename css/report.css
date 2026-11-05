@@ -1,0 +1,78 @@
+/* =========================================================
+   careCL — 진단 결과 리포트 보정
+   기본 디자인은 css/checkup-result.css(개발 화면 결과지 스타일, 자동 생성)를 그대로 쓴다.
+   여기에는 우리 사이트에서만 필요한 보정만 둔다.
+   ========================================================= */
+
+/* 결과지 안의 표(가로 스크롤)가 그리드 칸을 밀어 넓히지 않게 — 칸은 화면 폭을 넘지 않는다 */
+.sv__body,.sv__form{min-width:0}
+@media (max-width:1100px){.sv{grid-template-columns:minmax(0,1fr)}}
+
+/* 설문 오른쪽 칸 · report.html 안에서 결과지가 가운데 오도록 */
+.sv__form .checkup,.report-body .checkup{width:100%}
+.report-body{padding:clamp(40px,5vw,80px) var(--gut,24px) clamp(60px,7vw,120px)}
+
+/* 다시 하기 — 눈에 띄게 주황 버튼 */
+.checkup .cku-result-actions{display:flex;justify-content:center;margin-top:28px}
+.checkup .cku-btn.cku-retry{
+  min-width:220px;padding:18px 36px;border:0;border-radius:999px;
+  background:#C46A3A;color:#fff;font-size:16px;font-weight:700;letter-spacing:-.01em;
+  box-shadow:0 12px 24px -12px rgba(196,106,58,.7);cursor:pointer;text-decoration:none;
+  transition:background .2s ease,transform .2s ease;
+}
+.checkup .cku-btn.cku-retry:hover{background:#A8521F;transform:translateY(-2px)}
+
+/* AI 맞춤 상담 — 중요한 말에 형광펜처럼 밑줄 강조 */
+.checkup .cku-ai-hl{background:linear-gradient(transparent 58%,rgba(224,123,69,.55) 58%);color:#fff;font-weight:700;padding:0 1px;border-radius:2px}
+
+/* 결과 커버 — 유형 이름 옆에 노화 신호 오각형 */
+.checkup .cku-cover.has-radar{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);column-gap:16px;align-items:center}
+.checkup .cku-cover.has-radar > .cku-stats{grid-column:1 / -1}
+.checkup .cku-cover-radar{position:relative;grid-row:1 / span 3;grid-column:2;display:grid;place-items:center;align-self:stretch}
+.checkup .cku-cover-radar svg{width:100%;max-width:300px;height:auto;overflow:visible}
+.checkup .cku-cover-radar .sv__sweep{width:58%}
+.checkup .cku-cover-radar .rd-axis{font-family:var(--f-kr);font-size:13px;font-weight:600;fill:#bfb3a8}
+.checkup .cku-cover-radar .rd-axis.is-on{fill:#fff}
+.checkup .cku-cover-radar .rd-role{font-family:var(--f-kr);font-size:11px;font-weight:700;fill:#F0A877}
+.checkup .cku-cover-radar .rd-dot{fill:#fff;stroke:#C46A3A;stroke-width:2.5}
+.checkup .cku-cover-radar .rd-halo{fill:rgba(240,168,119,.4);transform-box:fill-box;transform-origin:center;animation:svHalo 2.2s ease-out infinite}
+@media (max-width:640px){
+  .checkup .cku-cover.has-radar{grid-template-columns:1fr}
+  .checkup .cku-cover-radar{grid-row:auto;grid-column:auto;margin:14px auto 0;width:100%;max-width:280px}
+}
+
+/* 로그인 전 — 상세 카드를 흐리게 깔고 잠금 상자를 띄운다 */
+.checkup .cku-lock{position:relative;margin-top:16px}
+.checkup .cku-lock-preview{display:grid;gap:16px;filter:blur(7px);opacity:.6;pointer-events:none;user-select:none;
+  max-height:760px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(#000 35%,transparent 100%);mask-image:linear-gradient(#000 35%,transparent 100%)}
+.checkup .cku-lock-box{position:absolute;left:50%;top:70px;transform:translateX(-50%);width:min(480px,calc(100% - 24px));
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:32px 26px 28px;
+  border-radius:24px;background:#FDFCFA;border:1px solid var(--n-200);box-shadow:0 30px 60px -22px rgba(43,39,36,.28)}
+.checkup .cku-lock-ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--orange-100);color:var(--orange)}
+.checkup .cku-lock-title{margin:0;font-size:20px;font-weight:700;line-height:1.45;letter-spacing:-.02em;color:var(--ink);word-break:keep-all}
+.checkup .cku-lock-desc{margin:0;font-size:14px;line-height:1.7;color:var(--n-600);word-break:keep-all}
+.checkup .cku-lock-list{list-style:none;margin:4px 0 6px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.checkup .cku-lock-list li{font-size:12px;padding:6px 11px;border-radius:999px;background:var(--n-50);border:1px solid var(--n-200);color:var(--n-700)}
+.checkup .cku-lock-btn{min-width:240px}
+@media (max-width:640px){
+  .checkup .cku-lock-box{top:40px;padding:26px 18px 22px}
+  .checkup .cku-lock-title{font-size:18px}
+  .checkup .cku-lock-desc br{display:none}
+}
+
+/* 성분 설명 상자 — hidden 속성이 디자인 display 규칙에 지지 않게 */
+.checkup [data-ing-detail][hidden],.checkup .cku-review-more[hidden]{display:none}
+
+/* 결과 화면 — 아이보리 상자 대신 오른쪽 전체를 아이보리로 채우고, 흰 카드가 떠 있게 */
+.sv__body:has(.cku-result),.report-body:has(.cku-result){background:#F1ECE5}
+.checkup .cku-result{background:transparent;padding:0;border-radius:0;box-shadow:none;border:0}
+.checkup .cku-result .cku-card:not(.cku-card-dark){background:#fff;border-color:transparent;}
+.checkup .cku-result .cku-card{
+  box-shadow:0 1px 2px rgba(60,40,25,.04),0 14px 34px -16px rgba(60,40,25,.22)}
+.checkup .cku-result .cku-cover{box-shadow:0 18px 40px -18px rgba(30,20,12,.45)}
+.checkup .cku-lock-box{background:#fff;box-shadow:0 20px 50px -18px rgba(60,40,25,.3)}
+
+/* 결과지 개선 시안 안에서 띄울 때(report.html?embed=1) — 사이트 메뉴·푸터·버튼·마우스 효과 없이 결과지만 */
+.is-embed .header,.is-embed .mnav,.is-embed .foot,.is-embed .aifab,.is-embed .loader,.is-embed .led-glow,.is-embed .led-dot{display:none!important}
+.is-embed .sub{padding-top:0}

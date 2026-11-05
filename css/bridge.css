@@ -1,0 +1,183 @@
+/* =========================================================
+   진단 설문 · 결과 리포트 연결용
+   survey.css / report.css는 기존 사이트에서 그대로 가져왔다.
+   그 파일들이 쓰는 예전 변수 이름을 새 디자인 값으로 이어 준다.
+   ========================================================= */
+:root{
+  --announce-h:0px;
+  --header-h:var(--head);
+  --en:var(--f-ui);
+  --display:var(--f-title);
+  --n-100:#F4F2EF; --n-200:#E6E1DB; --n-300:#CFC7BE; --n-400:#A79E96;
+  --n-500:#7D746B; --n-600:#6B635B; --n-900:#1F1A16;
+  /* 예전 하늘색 자리 → 케어클 오렌지 계열 */
+  --sky-50:#FBF1EA; --sky-100:#F5DFD0; --sky-400:#E08A52;
+  --sky-500:#C46A3A; --sky-600:#A8521F; --sky-700:#8C4419;
+  --orange:#C46A3A; --orange-600:#A8521F;
+  --sage:#9C948B; --stone:#ECE7E0; --porcelain:#FDFCFA;
+  --hud:#E08A52; --hud-h:0px;
+}
+
+/* ── 설문 왼쪽 패널 — 얼굴 사진 대신 9구 LED 헤드 ── */
+.sv--stem .sv__panel{background:#1C1916;overflow:clip}   /* hidden이면 안쪽 레이더 sticky가 안 붙는다 */
+.sv--stem .sv__panel::after{display:none}
+.sv__dots{position:absolute;left:0;right:0;top:0;height:100vh;z-index:0;opacity:.9;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 60%,#000 25%,transparent 100%);
+          mask-image:radial-gradient(ellipse 80% 70% at 50% 60%,#000 25%,transparent 100%)}
+.sv__led{position:absolute;left:50%;top:min(52vh,560px);transform:translate(-50%,-50%);width:min(58%,300px);z-index:1}
+.sv--stem .sv__lock em{font-family:var(--f-ui);color:color-mix(in srgb,var(--led) 70%,#fff)}
+.sv--stem .sv__lock b{font-family:var(--f-title);font-weight:500}
+
+/* 설문 페이지는 푸터 위 여백을 줄인다 */
+body.survey .foot{margin-top:0}
+
+/* 설문 왼쪽 패널 — 노화 신호 레이더 (js/radar.js). 결과가 길어져도 화면에 붙어 있게 sticky */
+.sv__stick{position:sticky;top:var(--head);height:calc(100vh - var(--head));min-height:560px;display:flex;flex-direction:column;padding:40px clamp(28px,3vw,56px) 28px;z-index:1}
+.sv--stem .sv__stick .sv__lock{position:static}
+.sv__orbwrap{position:relative;flex:1;display:grid;place-items:center;min-height:260px}
+.sv__orb{position:relative;width:min(96%,460px);aspect-ratio:1;pointer-events:none}
+.sv__orb canvas{display:block;width:100%;height:100%}
+@media (max-width:1100px){.sv__orbwrap{min-height:0}.sv__orb{width:min(70%,260px)}}
+.sv__radar{position:relative;flex:1;display:grid;place-items:center;min-height:280px}
+.sv__radar svg{width:100%;max-width:430px;height:auto;overflow:visible}
+.sv__sweep{position:absolute;left:50%;top:50%;width:min(64%,290px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 300deg,rgba(240,168,119,.16) 345deg,rgba(240,168,119,.3) 360deg);
+  -webkit-mask:radial-gradient(circle,#000 0 69%,transparent 70%);mask:radial-gradient(circle,#000 0 69%,transparent 70%);
+  animation:svSweep 6s linear infinite;mix-blend-mode:screen}
+@keyframes svSweep{to{rotate:360deg}}
+.sv__radar .rd-axis{font-family:var(--f-kr);font-size:13px;font-weight:600;fill:#bfb3a8}
+.sv__radar .rd-axis.is-on{fill:#fff}
+.sv__radar .rd-role{font-family:var(--f-kr);font-size:10.5px;font-weight:700;fill:#F0A877}
+.sv__radar .rd-dot{fill:#fff;stroke:#C46A3A;stroke-width:2.5}
+.sv__radar .rd-halo{fill:rgba(240,168,119,.4);transform-box:fill-box;transform-origin:center;animation:svHalo 2.2s ease-out infinite}
+@keyframes svHalo{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.8);opacity:0}}
+.sv__radar-foot{font-size:12px;line-height:1.6;color:#a99d92}
+.sv__radar-foot .roles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.sv__radar-foot .roles span{font-size:12px;color:#efe5dc;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.sv__radar-foot .roles b{color:#F0A877;font-weight:700;margin-right:4px}
+@media (max-width:1100px){
+  .sv--stem .sv__panel{height:auto}
+  .sv__stick{position:relative;top:0;height:auto;min-height:0;padding:24px 20px 20px}
+  .sv__radar{min-height:0;padding:4px 0}
+  .sv__radar svg{max-width:300px}
+  .sv--stem .sv__stick .sv__lock b{font-size:26px;margin:8px 0 4px}
+  .sv--stem .sv__stick .sv__lock p{display:block;font-size:13px}
+}
+@media (max-width:640px){
+  .sv__radar svg{max-width:250px}
+  .sv__radar-foot{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){.sv__sweep,.sv__radar .rd-halo{animation:none}}
+
+/* 왼쪽 패널 그래픽 시안 비교 페이지 (survey-p1~4.html) */
+.pvtabs{position:fixed;left:0;right:0;margin:0 auto;width:max-content;bottom:18px;z-index:60;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid #E5DFD8;box-shadow:0 10px 30px -10px rgba(40,25,15,.35);backdrop-filter:blur(8px);max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+.pvtabs a{flex:none;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;color:#5c544d;text-decoration:none;border:1px solid #E5DFD8;background:#fff}
+.pvtabs a i{font-style:normal;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#EFE8E1;font-size:11px}
+.pvtabs a.on{background:#C46A3A;border-color:#C46A3A;color:#fff}
+.pvtabs a.on i{background:rgba(255,255,255,.25)}
+.sv__stick--frame{padding:0}
+.sv__stick--frame iframe{display:block;width:100%;height:100%;border:0;background:#1C1916}
+@media (max-width:1100px){.sv__stick.sv__stick--frame{height:min(74vh,580px);padding:0}}
+@media (max-width:640px){.pvtabs{gap:3px;padding:4px;bottom:12px}.pvtabs a{padding:7px 11px;font-size:12px}.pvtabs a i{display:none}}
+
+/* 설문 시작하기 버튼 — 어두운 알약 + 주황 원형 화살표. 오버 시 주황이 왼쪽에서 차오르고 화살표가 앞으로 */
+.sv__intro .go .btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:18px;
+  padding:10px 10px 10px 30px;border:0;border-radius:999px;cursor:pointer;
+  background:#2B2724;color:#fff;font:600 16px/1 var(--f-ui,"Pretendard",sans-serif);letter-spacing:-.01em;
+  box-shadow:0 14px 30px -14px rgba(43,39,36,.55);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.sv__intro .go .btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  background:linear-gradient(100deg,#C46A3A,#E08A55);transform:translateX(-101%);transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.sv__intro .go .btn::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;z-index:-1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg);
+  animation:svStartShine 3.6s ease-in-out infinite}
+.sv__intro .go .btn span{position:relative;overflow:hidden;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;
+  background:#C46A3A;color:transparent;font-size:0;transition:background .4s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.sv__intro .go .btn span::before,.sv__intro .go .btn span::after{content:"→";position:absolute;inset:0;display:grid;place-items:center;
+  color:#fff;font-size:18px;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+.sv__intro .go .btn span::after{transform:translateX(-140%)}
+.sv__intro .go .btn:hover,.sv__intro .go .btn:focus-visible{transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(196,106,58,.6)}
+.sv__intro .go .btn:hover::before,.sv__intro .go .btn:focus-visible::before{transform:translateX(0)}
+.sv__intro .go .btn:hover span,.sv__intro .go .btn:focus-visible span{background:#fff;transform:rotate(-8deg) scale(1.04)}
+.sv__intro .go .btn:hover span::before,.sv__intro .go .btn:focus-visible span::before{transform:translateX(140%)}
+.sv__intro .go .btn:hover span::after,.sv__intro .go .btn:focus-visible span::after{transform:translateX(0);color:#C46A3A}
+.sv__intro .go .btn:active{transform:translateY(0) scale(.98)}
+.sv__intro .go .btn:focus-visible{outline:2px solid #E08A55;outline-offset:3px}
+@keyframes svStartShine{0%,55%{left:-40%}85%,100%{left:120%}}
+@media (prefers-reduced-motion:reduce){.sv__intro .go .btn::after{animation:none;display:none}}
+
+/* ── survey2.html — 2~5번 탭: 전체 화면 인트로 → 가운데 설문 (js/pvtabs.js) ── */
+/* 인트로: 그래픽이 화면 전체에 깔리고(오른쪽으로 비켜 서서 왼쪽이 자연스럽게 흐려짐) 왼쪽에 인트로 글 */
+.sv--flow.is-hero{display:block;position:relative;min-height:calc(100vh - var(--head));
+  background:radial-gradient(50% 90% at 18% 55%,#2c231e 0%,#1C1916 55%,#141110 100%)}
+.sv--flow.is-hero .sv__panel{position:absolute;inset:0;height:auto;background:transparent}
+.sv--flow.is-hero .sv__dots{display:none}
+.sv--flow.is-hero .sv__stick{position:absolute;inset:0;height:auto;min-height:0}
+.sv--flow.is-hero .sv__stick iframe{background:transparent}
+.sv--flow.is-hero .sv__body{position:relative;z-index:2;width:64%;margin-left:auto;min-height:calc(100vh - var(--head));padding:80px 0 120px;align-items:center;background:transparent}
+.sv--flow.is-hero .sv__form{width:auto;max-width:760px;margin:0 auto 0 clamp(24px,4vw,72px);padding-right:clamp(24px,4vw,72px)}
+.sv--flow.is-hero .sv__intro h1{color:#fff}
+.sv--flow.is-hero .sv__intro .desc{color:rgba(255,255,255,.64);font-size:15px}
+.sv--flow.is-hero .sv__intro .desc br{display:none}
+.sv--flow.is-hero .sv__intro .label span{color:#F0A877}
+.sv--flow.is-hero .sv__intro .label i{background:rgba(240,168,119,.55)}
+.sv--flow.is-hero .sv__chips span{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#d8cfc7;backdrop-filter:blur(6px)}
+.sv--flow.is-hero .sv__chips b{color:#F0A877}
+.sv--flow.is-hero .sv__intro .caution{color:rgba(255,255,255,.4)}
+.sv--flow.is-hero .sv__intro .go .btn{background:#fff;color:#2B2724;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,color .35s .05s;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
+.sv--flow.is-hero .sv__intro .go .btn:hover,.sv--flow.is-hero .sv__intro .go .btn:focus-visible{color:#fff}
+/* 오로라 인트로 — 빛이 화면 전체를 가로지르고, 그 위에 검정 박스가 떠 있고, 글은 가운데 정렬 */
+.sv--flow.is-hero.is-full{background:radial-gradient(80% 90% at 50% 55%,#2c231e 0%,#1C1916 55%,#141110 100%)}
+.sv--flow.is-hero.is-full .sv__body{width:auto;margin:0;justify-content:center}
+.sv--flow.is-hero.is-full .sv__form{margin:0 auto;max-width:720px;padding:clamp(34px,4vw,56px) clamp(24px,4vw,60px);text-align:center;
+  background:rgba(14,11,10,.82);border:1px solid rgba(240,168,119,.18);border-radius:28px;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03) inset;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.sv--flow.is-hero.is-full .sv__intro .label{justify-content:center}
+.sv--flow.is-hero.is-full .sv__chips{justify-content:center}
+.sv--flow.is-hero.is-full .sv__intro .desc{max-width:560px;margin-left:auto;margin-right:auto}
+/* 설문·리포트: 그래픽은 빠지고 가운데 한 줄로 */
+.sv--flow.is-center{grid-template-columns:minmax(0,1fr)}
+.sv--flow.is-center .sv__panel{display:none}
+.sv--flow.is-center .sv__form{width:min(880px,calc(100% - 48px))}
+/* 3D 기기 탭 — 설문하는 동안 오른쪽 아래에서 기기가 돈다 */
+.sv__mini{position:fixed;right:clamp(10px,2vw,32px);bottom:86px;z-index:55;width:150px;height:220px;pointer-events:none;
+  filter:drop-shadow(0 18px 22px rgba(40,25,15,.28));animation:svMiniIn .7s cubic-bezier(.2,.8,.2,1) both}
+.sv__mini iframe{display:block;width:100%;height:100%;border:0;background:transparent;color-scheme:normal}
+@keyframes svMiniIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:none}}
+/* 인트로 글은 차례로 떠오르고, 설문이 시작되면 가운데 설문이 부드럽게 나타난다 */
+.sv--flow.is-hero .sv__intro>*{animation:svRise .9s cubic-bezier(.2,.8,.2,1) both}
+.sv--flow.is-hero .sv__intro>*:nth-child(2){animation-delay:.08s}
+.sv--flow.is-hero .sv__intro>*:nth-child(3){animation-delay:.16s}
+.sv--flow.is-hero .sv__intro>*:nth-child(4){animation-delay:.24s}
+.sv--flow.is-hero .sv__intro>*:nth-child(5){animation-delay:.32s}
+.sv--flow.is-hero .sv__intro>*:nth-child(6){animation-delay:.4s}
+.sv--flow.is-hero .sv__stick{animation:svFade 1.2s ease both}
+.sv--flow:not(.is-hero) .sv__form{animation:svRise .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes svRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes svFade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.sv--flow .sv__intro>*,.sv--flow .sv__form,.sv--flow .sv__stick{animation:none}}
+@media (max-width:1100px){
+  .sv--flow.is-hero .sv__panel{position:relative}
+  .sv--flow.is-hero .sv__stick{position:relative;inset:auto;height:min(58vh,520px);-webkit-mask-image:linear-gradient(180deg,#000 78%,transparent);mask-image:linear-gradient(180deg,#000 78%,transparent)}
+  .sv--flow.is-hero .sv__body{width:auto;min-height:0;padding:10px 0 110px;margin:0}
+  .sv--flow.is-hero .sv__form{margin:0 auto;max-width:calc(100% - 48px)}
+  .sv--flow.is-hero.is-full .sv__panel{position:absolute;inset:0}
+  .sv--flow.is-hero.is-full .sv__stick{position:absolute;inset:0;height:auto;-webkit-mask-image:none;mask-image:none}
+  .sv--flow.is-hero.is-full .sv__body{min-height:calc(100vh - var(--head));padding:40px 0 110px}
+  .sv--flow.is-hero.is-full .sv__form{max-width:calc(100% - 32px)}
+  .sv__mini{width:96px;height:140px;bottom:70px}
+}
+@media (max-width:640px){.sv__intro .label{gap:10px}.sv__intro .label i{width:24px}.sv__intro .label span{font-size:11px;letter-spacing:.1em;white-space:nowrap}}
+.sv--flow.is-hero.is-full .sv__intro h1{font-size:clamp(28px,2.8vw,38px)}
+.sv--flow.is-hero.is-full .sv__intro .label{margin-bottom:22px}
+.sv--flow.is-hero.is-full .sv__intro .desc{margin-top:20px}
+.sv--flow.is-hero.is-full .sv__chips{margin-top:24px}
+.sv--flow.is-hero.is-full .sv__intro .go{margin-top:28px}
+.sv--flow.is-hero.is-full .sv__intro .caution{margin-top:18px;font-size:13px}
+@media (max-width:640px){.sv--flow.is-hero.is-full .sv__form{padding:28px 18px}.sv--flow.is-hero.is-full .sv__intro .label i{display:none}.sv--flow.is-hero.is-full .sv__intro .label span{font-size:10px;letter-spacing:.06em}}
+
+/* 결과지 개선 시안 안에서 띄울 때(?embed=1) — 사이트 메뉴·푸터만 숨긴다. 왼쪽 그래픽 탭 6개는 그대로 */
+.is-embed .header,.is-embed .mnav,.is-embed .foot,.is-embed .aifab,.is-embed .loader,.is-embed .led-glow,.is-embed .led-dot{display:none!important}
+/* 메뉴를 숨긴 만큼 비워 두던 위쪽 여백(검정 띠)도 없앤다 */
+html.is-embed{--head:0px}
+.is-embed .pvtabs{display:none!important}   /* 그래픽은 시안 페이지 위쪽 바에서 고른다 */
+.is-embed .sv{padding-top:0;margin-top:0}

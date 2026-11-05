@@ -1,0 +1,4 @@
+__pycache__/
+_preview_*
+.claude/
+_devtest*

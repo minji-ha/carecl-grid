@@ -1,0 +1,696 @@
+/* =========================================================
+   careCL 상세(서브) 페이지 — STEM 톤 와이드 레이아웃
+   sub.css 위에 얹는다. 본문은 content/*.html의 .dp 블록.
+     · 넓은 폭(최대 1680px) · 큰 제목 · 넉넉한 자간·행간
+     · 사진과 글은 충분히 띄워서 나란히, 섹션마다 큰 사진으로 쉼표
+   ========================================================= */
+
+/* ── 머리말: 제목을 더 크게, 자간은 넓게 ───────── */
+.subhead{padding-top:clamp(80px,9vw,170px)}
+.subhead__title{font-size:clamp(40px,7vw,132px);line-height:1;letter-spacing:.005em}
+.subhead__kr{font-size:clamp(16px,1.35vw,21px);letter-spacing:.06em}
+.sub .subhead .wrap,.sub .subtabs .wrap{max-width:1680px;margin-inline:auto;box-sizing:content-box}
+
+/* ── 섹션 틀 ───────────────────────────────────── */
+.dp{padding-block:clamp(90px,10vw,200px)}
+.dp + .dp{padding-top:0}
+.dp--tint{background:var(--soft);padding-top:clamp(90px,10vw,200px)!important}
+.dp--tint + .dp{padding-top:clamp(90px,10vw,200px)}
+.dp__in{max-width:1680px;margin-inline:auto;padding-inline:var(--gut);box-sizing:content-box}
+
+/* 작은 라벨 — LED 점 + 대문자 */
+.dp-label{display:flex;align-items:center;gap:.8em;margin:0;
+  font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:clamp(12px,.9vw,14px);letter-spacing:.2em;color:var(--ink-2)}
+.dp-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--led);flex:none;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--led) 22%,transparent)}
+
+/* 큰 제목 · 중간 제목 */
+.dp-title{margin:clamp(20px,2vw,34px) 0 0;font-family:var(--f-title);font-weight:500;
+  font-size:clamp(34px,5.2vw,96px);line-height:1.18;letter-spacing:.01em;text-wrap:balance}
+.dp-title em{font-family:var(--f-ui);font-weight:200;font-style:italic;letter-spacing:0}
+.dp-h3{margin:clamp(18px,1.6vw,26px) 0 0;font-family:var(--f-title);font-weight:500;
+  font-size:clamp(26px,3vw,54px);line-height:1.3;letter-spacing:.015em;text-wrap:balance}
+
+/* 본문 — 넓은 행간·자간 */
+.dp-body{margin-top:clamp(24px,2.4vw,40px)}
+.dp-body p{margin:0 0 1.3em;font-size:clamp(15.5px,1.12vw,18.5px);line-height:2;letter-spacing:.025em;color:var(--ink-2);word-break:keep-all}
+.dp-body p:last-child{margin-bottom:0}
+.dp-body strong{color:var(--ink);font-weight:600}
+.dp-lead{margin:0;font-size:clamp(17px,1.4vw,24px);line-height:1.9;letter-spacing:.02em;color:var(--ink);word-break:keep-all}
+.dp-ul{margin:0 0 1.3em;padding:0;list-style:none}
+.dp-ul li{position:relative;padding-left:1.2em;font-size:clamp(15.5px,1.12vw,18.5px);line-height:2;letter-spacing:.025em;color:var(--ink)}
+.dp-ul li::before{content:"";position:absolute;left:0;top:.95em;width:6px;height:1px;background:var(--ink)}
+
+/* 머리 — 왼쪽 제목, 오른쪽 리드 */
+.dp-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(40px,7vw,140px);align-items:end}
+.dp-head .dp-body{margin-top:0}
+.dp-head--stack{display:block;max-width:1120px}
+
+/* ── 사진 ──────────────────────────────────────── */
+.dp-full{position:relative;margin-top:clamp(60px,6vw,120px);overflow:hidden;background:#EEEDEB}
+.dp-full img{display:block;width:100%;aspect-ratio:21/9;object-fit:cover}
+.dp-full--tall img{aspect-ratio:16/8}
+.dp-full figcaption{position:absolute;left:var(--gut);bottom:clamp(20px,2.6vw,44px);
+  font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.22em;color:#fff;
+  text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.dp-full--dark figcaption{color:#fff}
+.dp-full--light figcaption{color:var(--ink);text-shadow:none}
+.dp > .dp-full:first-child{margin-top:0}
+
+/* 사진 + 글 나란히 (사진 쪽이 조금 넓게) */
+.dp-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(48px,8vw,170px);align-items:center}
+.dp-row + .dp-row{margin-top:clamp(90px,9vw,180px)}
+.dp-row--rev .dp-row__img{order:2}
+.dp-row__img{margin:0;overflow:hidden;background:#EEEDEB;aspect-ratio:4/3}
+.dp-row__img--v{aspect-ratio:4/5}
+.dp-row__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.dp-row:hover .dp-row__img img{transform:scale(1.03)}
+.dp-row__copy{max-width:620px}
+
+/* 큰 문장 */
+.dp-quote{margin:0;max-width:1240px;font-family:var(--f-title);font-weight:500;
+  font-size:clamp(26px,3.4vw,62px);line-height:1.4;letter-spacing:.015em;text-wrap:balance;word-break:keep-all}
+.dp-quote small{display:block;margin-top:clamp(22px,2vw,34px);font-family:var(--f-kr);font-weight:400;
+  font-size:clamp(15.5px,1.12vw,18.5px);line-height:2;letter-spacing:.025em;color:var(--ink-2)}
+.dp-quote--center{margin-inline:auto;text-align:center}
+
+/* 번호가 붙은 항목 (2~3열) */
+.dp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(40px,4.4vw,90px) clamp(28px,3.6vw,70px);margin-top:clamp(56px,5.4vw,100px)}
+.dp-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dp-item{border-top:1px solid var(--ink);padding-top:clamp(22px,2vw,34px)}
+.dp-item__no{display:block;font-family:var(--f-ui);font-weight:200;font-style:italic;font-size:clamp(44px,4.4vw,80px);line-height:.9;color:var(--pale)}
+.dp-item h4{margin:clamp(18px,1.6vw,26px) 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(19px,1.55vw,26px);line-height:1.4;letter-spacing:.015em}
+.dp-item h4 small{display:block;margin-top:6px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.18em;color:var(--ink-2)}
+.dp-item p{margin:14px 0 0;font-size:clamp(15px,1.05vw,17px);line-height:1.95;letter-spacing:.02em;color:var(--ink-2);word-break:keep-all}
+.dp-item .dp-quoteline{color:var(--ink);font-weight:500}
+.dp-item .dp-tags{margin-top:18px;padding-top:14px;border-top:1px solid var(--hair);font-size:14px;letter-spacing:.02em;color:var(--ink)}
+.dp-item .dp-tags b{display:block;margin-bottom:4px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:11.5px;letter-spacing:.18em;color:var(--ink-2)}
+
+/* 기술 목록 — 번호 | 이름 | 설명 */
+.dp-list{margin-top:clamp(56px,5.4vw,100px);border-top:1px solid var(--ink)}
+.dp-li{display:grid;grid-template-columns:minmax(0,.35fr) minmax(0,1fr) minmax(0,1.35fr);gap:clamp(24px,4vw,80px);
+  padding-block:clamp(40px,4.4vw,80px);border-bottom:1px solid var(--hair)}
+.dp-li__no{font-family:var(--f-ui);font-weight:200;font-style:italic;font-size:clamp(44px,4.4vw,80px);line-height:.9;color:var(--pale)}
+.dp-li__name b{display:block;font-family:var(--f-title);font-weight:500;text-transform:uppercase;font-size:clamp(22px,2.2vw,38px);line-height:1.15;letter-spacing:.02em}
+.dp-li__name span{display:block;margin-top:12px;font-size:clamp(15px,1.1vw,18px);letter-spacing:.08em;color:var(--ink-2)}
+.dp-li__body .dp-sub{margin:0 0 1em;font-family:var(--f-title);font-weight:500;font-size:clamp(17px,1.4vw,23px);line-height:1.55;letter-spacing:.015em;color:var(--ink)}
+
+/* 3단 흐름 */
+.dp-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(56px,5.4vw,100px);border-top:1px solid var(--ink)}
+.dp-flow > div{padding:clamp(28px,2.6vw,46px) clamp(16px,2vw,36px) 0 0}
+.dp-flow > div + div{padding-left:clamp(16px,2vw,36px);border-left:1px solid var(--hair)}
+.dp-flow em{display:block;font-family:var(--f-ui);font-weight:200;font-style:italic;font-size:clamp(40px,3.6vw,64px);line-height:.9;color:var(--pale)}
+.dp-flow b{display:block;margin-top:18px;font-family:var(--f-ui);font-weight:500;letter-spacing:.2em;font-size:13px}
+.dp-flow p{margin:10px 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(18px,1.6vw,27px);line-height:1.45;letter-spacing:.015em}
+
+/* 비교표 */
+.dp-table{margin-top:clamp(50px,5vw,90px);overflow-x:auto}
+.dp-table table{width:100%;min-width:640px;border-collapse:collapse}
+.dp-table th,.dp-table td{padding:clamp(18px,1.6vw,28px) clamp(10px,1.4vw,24px);text-align:left;vertical-align:top;border-bottom:1px solid var(--hair);
+  font-size:clamp(15px,1.1vw,18px);line-height:1.8;letter-spacing:.02em}
+.dp-table thead th{font-family:var(--f-title);font-weight:500;font-size:clamp(18px,1.6vw,26px);border-bottom:1px solid var(--ink)}
+.dp-table tbody th{width:22%;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12.5px;letter-spacing:.14em;color:var(--ink-2)}
+
+/* 연락처 — 큰 글씨 */
+.dp-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,60px);margin:clamp(56px,5.4vw,100px) 0 0;border-top:1px solid var(--ink)}
+.dp-facts > div{padding-top:clamp(22px,2vw,34px)}
+.dp-facts dt{font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.2em;color:var(--ink-2)}
+.dp-facts dd{margin:12px 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(19px,1.7vw,30px);line-height:1.45;letter-spacing:.02em;word-break:keep-all}
+.dp-facts dd a{border-bottom:1px solid var(--hair)}
+.dp-facts dd a:hover{border-color:var(--ink)}
+
+/* 증빙 두 칸 */
+.dp-proof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3.6vw,70px);margin-top:clamp(56px,5.4vw,100px)}
+.dp-proof > div{border-top:1px solid var(--ink);padding-top:clamp(22px,2vw,34px)}
+.dp-proof .dp-h3{font-size:clamp(20px,1.9vw,32px)}
+.dp-proof p{margin:14px 0 0;font-size:clamp(15px,1.1vw,18px);line-height:1.9;letter-spacing:.02em;color:var(--ink-2)}
+.dp-proof .dp-tagrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.dp-proof .dp-tagrow span{padding:9px 16px;border:1px solid var(--hair);border-radius:100px;font-size:14px;letter-spacing:.04em}
+
+.dp-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(40px,4vw,70px)}
+.dp-note{margin:clamp(24px,2vw,34px) 0 0;font-size:14px;letter-spacing:.02em;color:var(--ink-2)}
+
+/* 문서(인증서·특허) 그리드는 넓은 폭에 맞춰 간격만 키운다 */
+.dp .docgrid{margin-top:clamp(56px,5.4vw,100px);gap:clamp(28px,3.4vw,70px)}
+.dp .map{margin-top:clamp(50px,5vw,90px)}
+
+/* ── 반응형 ────────────────────────────────────── */
+@media (max-width:1024px){
+  .dp-li{grid-template-columns:minmax(0,.3fr) minmax(0,1fr)}
+  .dp-li__body{grid-column:2}
+}
+@media (max-width:860px){
+  .dp-head,.dp-row{grid-template-columns:minmax(0,1fr);gap:clamp(28px,6vw,48px)}
+  .dp-row--rev .dp-row__img{order:0}
+  .dp-row__copy{max-width:none}
+  .dp-grid,.dp-grid--2,.dp-flow,.dp-facts,.dp-proof{grid-template-columns:minmax(0,1fr)}
+  .dp-flow > div + div{border-left:0;padding-left:0;border-top:1px solid var(--hair);margin-top:28px}
+  .dp-full img,.dp-full--tall img{aspect-ratio:4/3}
+  .dp-li{grid-template-columns:minmax(0,1fr);gap:14px}
+  .dp-li__body{grid-column:auto}
+}
+
+/* =========================================================
+   사진 중심 블록 — STEM 상세처럼 사진을 크게, 글은 조금만
+   ========================================================= */
+.dp-acc{margin:0 0 14px;font-size:clamp(14px,1vw,16px);letter-spacing:.03em;color:#C98A6E}
+
+/* 띠 — 사진이 화면 끝까지 붙고 옆에 짧은 글 */
+.dp-band{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;background:var(--soft);margin-block:clamp(60px,6.4vw,130px)}
+.dp-band + .dp-band{margin-top:calc(-1 * clamp(60px,6.4vw,130px))}
+.dp-band--white{background:#fff}
+.dp-band__img{margin:0;height:clamp(280px,28vw,560px);overflow:hidden}
+.dp-band__img img{width:100%;height:100%;object-fit:cover}
+.dp-band__copy{padding:clamp(40px,4.4vw,90px) var(--gut) clamp(40px,4.4vw,90px) clamp(40px,5.4vw,120px);max-width:860px}
+.dp-band--rev .dp-band__img{order:2}
+.dp-band--rev .dp-band__copy{padding:clamp(40px,4.4vw,90px) clamp(40px,5.4vw,120px) clamp(40px,4.4vw,90px) var(--gut);justify-self:end}
+.dp-band__t{margin:0;font-family:var(--f-title);font-weight:400;font-size:clamp(22px,2.4vw,44px);line-height:1.38;letter-spacing:.02em;text-wrap:balance;word-break:keep-all}
+.dp-band__copy p{margin:clamp(18px,1.8vw,30px) 0 0;max-width:620px;font-size:clamp(14.5px,1vw,16.5px);line-height:1.9;letter-spacing:.025em;color:var(--ink-2);word-break:keep-all}
+
+/* 큰 제목 + 세로 사진(화면 끝까지) — 작은 글은 엇갈리게 */
+.dp-tall{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);background:var(--soft);margin-block:clamp(60px,6.4vw,130px)}
+.dp-tall__copy{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(60px,8vw,160px);
+  padding:clamp(56px,5.4vw,110px) clamp(30px,4vw,90px) clamp(56px,5.4vw,110px) var(--gut)}
+.dp-tall__t{margin:0;font-family:var(--f-title);font-weight:500;font-size:clamp(38px,5.6vw,108px);line-height:1.12;letter-spacing:.01em;text-wrap:balance;word-break:keep-all}
+.dp-tall__notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,60px)}
+.dp-tall__notes p{margin:0;font-size:clamp(14.5px,1vw,16.5px);line-height:1.9;letter-spacing:.025em;color:var(--ink-2);word-break:keep-all}
+.dp-tall__notes p + p{align-self:end;transform:translateY(clamp(40px,6vw,120px))}
+.dp-tall__notes:has(p + p){padding-bottom:clamp(40px,6vw,120px)}
+.dp-tall__img{margin:0;min-height:clamp(560px,50vw,980px);overflow:hidden}
+.dp-tall__img img{width:100%;height:100%;object-fit:cover}
+.dp-tall--rev .dp-tall__img{order:-1}
+.dp-tall--rev .dp-tall__copy{padding:clamp(56px,5.4vw,110px) var(--gut) clamp(56px,5.4vw,110px) clamp(30px,4vw,90px)}
+.dp-tall--white{background:#fff}
+
+/* 가장자리로 넘치는 사진 + 글 (흰 바탕) */
+.dp-bleed{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(40px,7vw,150px);margin-block:clamp(60px,6.4vw,130px)}
+.dp-bleed__img{margin:0;aspect-ratio:4/3;overflow:hidden}
+.dp-bleed__img img{width:100%;height:100%;object-fit:cover}
+.dp-bleed__copy{padding-right:var(--gut);max-width:760px}
+.dp-bleed--rev .dp-bleed__img{order:2}
+.dp-bleed--rev .dp-bleed__copy{padding-right:0;padding-left:var(--gut);justify-self:end}
+.dp-bleed__copy .dp-band__t{font-weight:500}
+.dp-bleed__copy p:not(.dp-acc){margin:clamp(14px,1.4vw,24px) 0 0;font-size:clamp(14.5px,1.05vw,17px);line-height:1.9;letter-spacing:.025em;color:var(--ink-2);word-break:keep-all}
+.dp-bleed__copy .dp-band__t + .dp-acc{margin-top:clamp(28px,3vw,50px)}
+
+/* 사진 모음 — 세로 3장 / 가로+세로 */
+.dp-pics{display:grid;gap:clamp(12px,1.4vw,26px);padding-inline:var(--gut);margin-block:clamp(60px,6.4vw,130px)}
+.dp-pics--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dp-pics--wv{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+.dp-pics--vw{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr)}
+.dp-pics figure{margin:0}
+.dp-pics .ph{overflow:hidden;background:#EEEDEB}
+.dp-pics .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.dp-pics figure:hover .ph img{transform:scale(1.03)}
+.dp-pics--3 .ph{aspect-ratio:3/4}
+.dp-pics--wv .ph,.dp-pics--vw .ph{height:clamp(420px,42vw,820px)}
+.dp-pics figcaption{margin-top:14px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.2em;color:var(--ink-2)}
+
+@media (max-width:860px){
+  .dp-band,.dp-tall,.dp-bleed{grid-template-columns:minmax(0,1fr)}
+  .dp-band--rev .dp-band__img,.dp-bleed--rev .dp-bleed__img{order:0}
+  .dp-band__copy,.dp-band--rev .dp-band__copy{padding:36px var(--gut) 44px;justify-self:stretch}
+  .dp-band__img{height:auto;aspect-ratio:4/3}
+  .dp-tall__img{min-height:0;aspect-ratio:4/5;order:-1}
+  .dp-tall__copy,.dp-tall--rev .dp-tall__copy{padding:40px var(--gut) 48px;gap:36px}
+  .dp-tall__notes{grid-template-columns:minmax(0,1fr)}
+  .dp-tall__notes p + p{transform:none}
+  .dp-tall__notes:has(p + p){padding-bottom:0}
+  .dp-bleed{gap:32px}
+  .dp-bleed__copy,.dp-bleed--rev .dp-bleed__copy{padding-inline:var(--gut);justify-self:stretch}
+  .dp-pics--3{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .dp-pics--wv,.dp-pics--vw{grid-template-columns:minmax(0,1fr)}
+  .dp-pics--wv .ph,.dp-pics--vw .ph{height:auto;aspect-ratio:4/3}
+  .dp-pics figcaption{font-size:10px;letter-spacing:.12em}
+}
+/* 띠·넘침 블록의 큰 문장이 본문 크기로 덮이지 않게 */
+.dp-band__copy p.dp-band__t,.dp-bleed__copy p.dp-band__t{margin:0;max-width:none;font-family:var(--f-title);font-size:clamp(24px,2.6vw,48px);line-height:1.36;letter-spacing:.02em;color:var(--ink)}
+.dp-bleed__copy p.dp-label + p.dp-band__t{margin-top:22px}
+.dp-band__copy p.dp-acc,.dp-bleed__copy p.dp-acc{margin:clamp(28px,3vw,50px) 0 0;color:#C98A6E}
+/* sub.css의 .sub-body h2/h3 기본값(작은 크기·좁은 폭·좁은 자간)을 상세 블록에서는 덮어쓴다 */
+.sub-body h2.dp-title{max-width:none;margin:clamp(20px,2vw,34px) 0 0;font-size:clamp(34px,5.2vw,96px);line-height:1.18;letter-spacing:.01em}
+.sub-body h2.dp-tall__t{max-width:none;margin:0;font-size:clamp(38px,5.6vw,108px);line-height:1.12;letter-spacing:.01em}
+.sub-body h3.dp-h3{letter-spacing:.015em}
+
+/* ── 머리말 오른쪽 이미지 (Products · Technology · Aging Lab) ── */
+.subhead__top{position:relative}
+.subhead--vis .subhead__top .wrap{position:relative;z-index:1;min-height:clamp(240px,24vw,440px)}
+.subhead__vis{position:absolute;right:0;top:calc(-1 * clamp(80px,9vw,170px));bottom:calc(-1 * clamp(40px,4.4vw,80px));width:min(56%,1000px);pointer-events:none;z-index:0}
+.subhead__vis img{width:100%;height:100%;display:block}
+/* 누끼 — 오른쪽 아래에 붙여서 */
+.subhead__vis--cut{top:calc(-1 * clamp(40px,4vw,80px));bottom:0}
+.subhead__vis--cut img{object-fit:contain;object-position:right bottom}
+.subhead__vis--cut:not(.cut--tall){width:min(46%,820px);top:0}
+.subhead__vis.cut--tall{width:min(30%,460px);right:clamp(40px,8vw,160px);top:0;bottom:clamp(30px,3vw,56px)}
+.subhead__vis.cut--tall img{object-position:center center}
+/* 사진 — 왼쪽으로 하얗게 사라지게 */
+.subhead__vis--photo img{object-fit:cover;object-position:right 30%}
+.subhead__vis--photo{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%)}
+@media (max-width:860px){
+  .subhead--vis .subhead__top .wrap{min-height:0}
+  .subhead__vis{position:relative;inset:auto;width:100%;height:clamp(200px,52vw,300px);margin-top:28px}
+  .subhead__vis--cut:not(.cut--tall){padding-inline:var(--gut)}
+  .subhead__vis.cut--tall{width:100%;right:auto;top:auto}
+  .subhead__vis--cut img{object-position:center bottom}
+}
+/* Products — 원본 패키지 사진을 오른쪽에 꽉 차게, 왼쪽은 흰색으로 사라지게 */
+.subhead__vis.photo--pkg{width:min(48%,900px)}
+.subhead__vis.photo--pkg img{object-position:60% 45%}
+.subhead__vis.photo--pkg{-webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%)}
+/* Company — 오른쪽 위에서 잘려 보이는 크고 두꺼운 오렌지 C (위쪽은 헤더 아래로 숨는다) */
+.subhead__vis--letter{top:auto;bottom:clamp(60px,6vw,130px);right:calc(-1 * clamp(150px,15vw,320px));width:clamp(400px,36vw,760px);aspect-ratio:1;color:#FCE3D2}
+.subhead__vis--letter svg{display:block;width:100%;height:100%}
+@media (max-width:860px){
+  .subhead__vis--letter{position:absolute;inset:auto;bottom:6px;right:-30vw;width:84vw;height:auto;margin:0}
+}
+
+/* =========================================================
+   모바일 정리 — 사진은 모두 화면 끝까지, 비율 통일
+   ========================================================= */
+.dp-full,.dp-row__img,.dp-band__img,.dp-bleed__img,.dp-tall__img,.dp-pics figure{margin-inline:0}
+@media (max-width:860px){
+  /* 머리말 이미지 — 메뉴마다 같은 높이의 꽉 찬 띠, 아래쪽만 흰색으로 사라지게 */
+  .subhead__vis:not(.subhead__vis--letter),.subhead__vis.cut--tall,.subhead__vis.photo--pkg,.subhead__vis--cut:not(.cut--tall){
+    position:relative;inset:auto;width:auto;height:230px;margin:0 0 26px;padding:0;
+    -webkit-mask-image:linear-gradient(#000 72%,transparent);mask-image:linear-gradient(#000 72%,transparent)}
+  .subhead__vis--photo img,.subhead__vis.photo--pkg img{object-fit:cover;object-position:center 40%}
+  .subhead__vis--cut img{object-fit:contain;object-position:center bottom;padding-top:12px;box-sizing:border-box}
+  .subhead__vis.cut--tall img{object-position:center center}
+
+  /* 큰 사진 — 화면 끝까지, 가로 4:3 · 세로 4:5 */
+  .dp-full img,.dp-full--tall img{aspect-ratio:4/3}
+  .dp-band__img,.dp-bleed__img{aspect-ratio:4/3;height:auto}
+  .dp-tall__img{aspect-ratio:4/5;min-height:0}
+  .dp-row__img{aspect-ratio:4/3;margin-inline:calc(-1 * var(--gut))}
+  .dp-row__img--v{aspect-ratio:4/5}
+
+  /* 사진 모음 — 세 장은 손가락으로 넘기는 가로 줄, 두 장은 위아래로 꽉 차게 */
+  .dp-pics--3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-inline:var(--gut);scrollbar-width:none}
+  .dp-pics--3::-webkit-scrollbar{display:none}
+  .dp-pics--3 figure{flex:0 0 72%;scroll-snap-align:start}
+  .dp-pics--3 .ph{aspect-ratio:4/5}
+  .dp-pics--3 figcaption{font-size:11px;letter-spacing:.16em}
+  .dp-pics--wv,.dp-pics--vw{padding-inline:0;gap:4px}
+  .dp-pics--wv .ph,.dp-pics--vw .ph{aspect-ratio:4/3;height:auto}
+  .dp-pics--wv figure:nth-child(2) .ph,.dp-pics--vw figure:nth-child(1) .ph{aspect-ratio:4/5}
+
+  /* 회사 정보 4칸 → 2칸 */
+  .dp-facts[style]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+/* =========================================================
+   수정요청 261030 — 특허·임상 수치·레퍼런스·5초 비교·모드 탭·사용 가이드
+   ========================================================= */
+/* 특허 4건 — 글자로 강조, 증서는 작게 겹쳐서 */
+.patx{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(40px,5vw,110px);align-items:center;margin-top:clamp(56px,5.4vw,100px)}
+.patx__list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.patx__list li{padding:clamp(22px,2vw,34px) 0;border-bottom:1px solid var(--hair)}
+.patx__list em{display:block;font-style:normal;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12.5px;letter-spacing:.18em;color:var(--accent)}
+.patx__list b{display:block;margin-top:10px;font-family:var(--f-title);font-weight:500;font-size:clamp(24px,2.6vw,46px);line-height:1.2;letter-spacing:.01em;color:var(--ink)}
+.patx__list b i{font-style:normal;color:var(--ink-2);font-weight:300}
+.patx__list p{margin:10px 0 0;font-size:clamp(14.5px,1vw,16.5px);line-height:1.8;color:var(--ink-2);word-break:keep-all}
+.patx__stack{position:relative;aspect-ratio:1/.92}
+.patx__stack img{position:absolute;top:8%;left:calc(var(--i) * 9%);width:34%;aspect-ratio:1/1.414;object-fit:cover;
+  border-radius:4px;background:#fff;box-shadow:0 18px 40px -18px rgba(51,27,15,.45),0 0 0 1px rgba(51,27,15,.06);
+  transform:rotate(calc((var(--i) - 3) * 4deg));transform-origin:50% 120%}
+.dp-tall__img--doc{display:grid;place-items:center;background:var(--soft)}
+.dp-tall__img--doc img{width:min(62%,460px)!important;height:auto!important;object-fit:contain!important;
+  box-shadow:0 30px 60px -30px rgba(51,27,15,.5);transform:rotate(-3deg)}
+
+/* 임상 수치 — 숫자 + 막대 */
+.tres{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,5vw,110px);align-items:start}
+.tres__head .dp-body{margin-top:clamp(24px,2.4vw,40px);font-size:clamp(15.5px,1.12vw,18.5px);line-height:2;color:var(--ink-2);word-break:keep-all}
+.tres__list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.tres__list li{display:grid;grid-template-columns:minmax(0,11em) minmax(0,1fr) auto;gap:clamp(14px,1.6vw,30px);align-items:center;
+  padding:clamp(16px,1.4vw,24px) 0;border-bottom:1px solid var(--hair)}
+.tres__k{font-size:clamp(14.5px,1vw,16.5px);letter-spacing:.01em;color:var(--ink);word-break:keep-all}
+.tres__k sup{color:var(--accent)}
+.tres__bar{height:6px;border-radius:6px;background:rgba(51,27,15,.08);overflow:hidden}
+.tres__bar i{display:block;height:100%;width:var(--w);border-radius:inherit;background:linear-gradient(90deg,#F2B48A,var(--accent))}
+.tres__v{min-width:5.4em;text-align:right;font-family:var(--f-title);font-weight:600;font-size:clamp(24px,2.3vw,40px);letter-spacing:-.01em;color:var(--accent);line-height:1}
+.tres__v small{font-size:.55em;margin-left:2px}
+.tres__note{grid-column:2;margin:-10px 0 0;font-size:13px;line-height:1.7;color:var(--ink-2)}
+
+/* 레퍼런스 박스 (Aging Morphotypes → careCL 6 Aging Types) */
+.refbox{margin-top:clamp(26px,2.4vw,40px);padding:clamp(20px,1.8vw,30px);border:1px solid var(--hair);border-radius:14px;background:rgba(255,255,255,.7);max-width:620px}
+.refbox p.refbox__k{margin:0 0 14px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:11.5px;letter-spacing:.22em;color:var(--ink-2)}
+.refbox__row b{display:block;font-family:var(--f-title);font-weight:500;font-size:clamp(17px,1.4vw,22px);color:var(--ink)}
+.refbox__row span{display:block;margin-top:4px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.refbox__row--on b{color:var(--accent)}
+.refbox__arr{display:block;margin:10px 0;font-style:normal;color:var(--accent)}
+
+/* 왜 5초 — 클리닉 1샷(1초 안 펄스 5번) vs TECH FIT 1샷(5초) */
+.why5__head{max-width:980px;margin-inline:auto;text-align:center}
+.why5__head .dp-label{justify-content:center}
+.why5{margin-top:clamp(50px,5vw,90px);display:grid;gap:clamp(14px,1.4vw,22px)}
+.why5__row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.6fr) minmax(0,1fr);gap:clamp(18px,2vw,40px);align-items:center;
+  padding:clamp(20px,2vw,34px);border-radius:18px;background:#fff;border:1px solid var(--hair)}
+.why5__row--on{background:#FFF6EF;border-color:#F1C7A8}
+.why5__name b{display:block;font-family:var(--f-title);font-weight:600;font-size:clamp(18px,1.6vw,26px);line-height:1.3;color:var(--ink)}
+.why5__row--on .why5__name b{color:var(--accent)}
+.why5__name small{display:block;margin-top:10px;font-size:13.5px;line-height:1.7;color:var(--ink-2);word-break:keep-all}
+.why5__chart{position:relative;padding-top:28px}
+.why5__cap{position:absolute;top:0;left:0;font-family:var(--f-ui);font-weight:600;font-size:12.5px;letter-spacing:.06em;color:var(--ink-2);
+  border-bottom:1px solid currentColor;padding-bottom:4px;white-space:nowrap}
+.why5__row--on .why5__cap{color:var(--accent);text-align:center}
+.why5__track{position:relative;height:clamp(38px,3.4vw,54px)}
+.why5__pulses{position:absolute;left:0;top:10%;bottom:10%;width:20%;display:flex;gap:6%}
+.why5__pulses i{flex:1;border-radius:3px;background:repeating-linear-gradient(90deg,#8E8580 0 1px,#BDB6B1 1px 3px)}
+.why5__pulses::after{content:"";position:absolute;left:115%;width:385%;top:50%;border-top:1px dashed var(--hair)}
+.why5__wave{position:absolute;inset:8% 0;border-radius:6px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20'%3E%3Cpath d='M0 10 3 3 9 17 12 10' fill='none' stroke='%23fff' stroke-width='1.3'/%3E%3C/svg%3E") 0 50%/12px 70% repeat-x,linear-gradient(90deg,#E8763A,var(--accent))}
+.why5__axis{position:relative;height:26px;margin-top:8px;border-top:1px solid var(--hair)}
+.why5__axis span{position:absolute;top:6px;transform:translateX(-50%);font-size:11.5px;color:var(--ink-2)}
+.why5__axis span:first-child{transform:none}
+.why5__axis span:last-child{transform:translateX(-100%)}
+.why5__tag b{display:block;font-family:var(--f-title);font-weight:600;font-size:clamp(20px,1.9vw,30px);line-height:1.25;color:var(--ink-2)}
+.why5__row--on .why5__tag b{color:var(--accent)}
+.why5__tag small{display:block;margin-top:10px;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+.why5__pat{margin:6px 0 0;text-align:center;font-size:13px;letter-spacing:.04em;color:var(--ink-2)}
+
+/* 모드 탭 — 헤드별 LED 빛 (라디오로 동작, JS 없음) */
+.modes{margin-top:clamp(50px,5vw,90px)}
+.modes__r{position:absolute;opacity:0;pointer-events:none}
+.modes__tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mtab{--c:var(--led-red);display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;padding:14px 16px;border-radius:12px;
+  border:1px solid var(--hair);background:#fff;cursor:pointer;transition:border-color .3s,box-shadow .3s,background .3s}
+.mtab i{grid-row:span 2;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 18%,transparent),0 0 12px var(--c)}
+.mtab b{font-family:var(--f-ui);font-weight:700;font-size:13.5px;letter-spacing:.06em;color:var(--ink)}
+.mtab small{font-size:11.5px;letter-spacing:.04em;color:var(--ink-2)}
+.mtab:hover{border-color:color-mix(in srgb,var(--c) 60%,transparent)}
+.mtab--eye{--c:var(--led-green)}
+.mtab--body{--c:var(--led-yellow)}
+.mtab--glow{--c:var(--led-purple)}
+.mtab--ems{--c:#FF8A3D}
+.mtab--ems i{background:conic-gradient(var(--led-red),var(--led-yellow),var(--led-green),var(--led-purple),var(--led-red))}
+.mpanel{--c:var(--led-red);display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(30px,4vw,90px);align-items:center;margin-top:clamp(20px,2vw,30px)}
+.mpanel--eye{--c:var(--led-green)}
+.mpanel--body{--c:var(--led-yellow)}
+.mpanel--glow{--c:var(--led-purple)}
+.mpanel--ems{--c:#FF8A3D}
+#mode-face:checked ~ .modes__panels .mpanel--face,#mode-eye:checked ~ .modes__panels .mpanel--eye,#mode-body:checked ~ .modes__panels .mpanel--body,
+#mode-glow:checked ~ .modes__panels .mpanel--glow,#mode-ems:checked ~ .modes__panels .mpanel--ems{display:grid;animation:mpIn .6s cubic-bezier(.16,1,.3,1)}
+#mode-face:checked ~ .modes__tabs .mtab--face,#mode-eye:checked ~ .modes__tabs .mtab--eye,#mode-body:checked ~ .modes__tabs .mtab--body,
+#mode-glow:checked ~ .modes__tabs .mtab--glow,#mode-ems:checked ~ .modes__tabs .mtab--ems{border-color:var(--c);background:color-mix(in srgb,var(--c) 7%,#fff);box-shadow:0 10px 26px -14px var(--c)}
+.modes__r:focus-visible ~ .modes__tabs{outline:2px solid var(--accent);outline-offset:4px;border-radius:12px}
+@keyframes mpIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.mpanel__vis{position:relative;margin:0;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#141110}
+.mpanel__vis img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) brightness(.8)}
+.mpanel__glow{position:absolute;inset:0;background:radial-gradient(42% 46% at 50% 58%,color-mix(in srgb,var(--c) 75%,transparent),transparent 72%);mix-blend-mode:screen}
+.mpanel--ems .mpanel__glow{background:radial-gradient(42% 46% at 50% 58%,rgba(255,138,61,.6),transparent 72%),conic-gradient(from 90deg at 50% 58%,rgba(255,70,72,.25),rgba(255,206,56,.25),rgba(56,214,120,.25),rgba(158,104,255,.25),rgba(255,70,72,.25))}
+.mpanel__vis figcaption{position:absolute;left:18px;bottom:16px;display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:30px;
+  background:rgba(20,17,16,.6);backdrop-filter:blur(6px);color:#fff;font-family:var(--f-ui);font-weight:600;font-size:12.5px;letter-spacing:.1em}
+.mpanel__vis figcaption i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.mpanel__t{margin:18px 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(26px,2.6vw,44px);line-height:1.3;color:var(--ink);word-break:keep-all}
+.mpanel__body{margin-top:clamp(18px,1.6vw,26px)}
+.mpanel__body p{margin:0 0 1em;font-size:clamp(14.5px,1.02vw,16.5px);line-height:1.9;letter-spacing:.02em;color:var(--ink-2);word-break:keep-all}
+.mpanel__body p.mpanel__pat{font-weight:600;color:var(--ink)}
+.mpanel__spec{display:grid;grid-template-columns:auto 1fr;margin:clamp(18px,1.6vw,26px) 0;border-top:1px solid var(--ink)}
+.mpanel__spec div{display:contents}
+.mpanel__spec dt,.mpanel__spec dd{margin:0;padding:12px 0;border-bottom:1px solid var(--hair)}
+.mpanel__spec dt{padding-right:24px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12px;letter-spacing:.16em;color:var(--ink-2)}
+.mpanel__spec dd{font-size:15.5px;color:var(--ink);font-weight:500}
+.mpanel__body p.mpanel__note{position:relative;padding-left:16px;color:var(--ink)}
+.mpanel__note::before{content:"";position:absolute;left:0;top:.75em;width:6px;height:6px;border-radius:50%;background:var(--c)}
+
+/* 사용 가이드 */
+.howto{list-style:none;margin:0 0 1.6em;padding:0;border-top:1px solid var(--ink)}
+.howto li{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--hair);
+  font-size:clamp(15px,1.1vw,18px);color:var(--ink);word-break:keep-all}
+.howto em{font-style:normal;color:var(--accent)}
+.howto b{font-family:var(--f-ui);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--ink-2)}
+.vid{position:relative;margin-top:clamp(50px,5vw,90px);aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+@media (max-width:860px){
+  .patx,.tres{grid-template-columns:1fr}
+  .patx__stack{max-width:480px;width:100%;margin-inline:auto}
+  .tres__list li{grid-template-columns:1fr auto;row-gap:8px}
+  .tres__bar{grid-column:1/-1;grid-row:2}
+  .tres__note{grid-column:1;margin-top:0}
+  .why5__row{grid-template-columns:1fr;gap:14px}
+  .why5__tag{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .why5__tag b br{display:none}
+  .why5__tag small{margin-top:0}
+  .modes__tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-snap-type:x mandatory}
+  .modes__tabs::-webkit-scrollbar{display:none}
+  .mtab{flex:none;min-width:132px;scroll-snap-align:start}
+  .mpanel{grid-template-columns:1fr}
+}
+
+/* Technology 머리 영상 자리 (261102) — 유튜브 iframe이 들어갈 16:9 칸, 받기 전엔 사진 */
+.vidslot{position:relative;margin:clamp(60px,6vw,120px) var(--gut) 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#EEEDEB}
+.vidslot img,.vidslot iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+@media (max-width:860px){.vidslot{margin-inline:0;border-radius:0}}
+
+/* Why 5 Seconds — 문서 시안처럼 TECH FIT 줄에 사용 컷, 두 줄 차트 폭은 그대로 맞춤 (261102) */
+.why5__head .dp-body p{word-break:keep-all}
+.why5__row{grid-template-columns:minmax(0,.9fr) minmax(0,2.3fr) minmax(0,.85fr) minmax(0,.85fr)}
+.why5__row:not(.why5__row--on) .why5__tag{grid-column:3 / 5}
+.why5__pic{margin:0;align-self:stretch;min-height:150px;border-radius:12px;overflow:hidden;background:#EEEDEB}
+.why5__pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+@media (max-width:860px){
+  .why5__row{grid-template-columns:1fr}
+  .why5__row:not(.why5__row--on) .why5__tag{grid-column:auto}
+  .why5__pic{aspect-ratio:16/10;min-height:0}
+  .why5__head .dp-body br{display:none}
+}
+
+/* 모드 탭 (261102) — 상세페이지의 색상별 헤드 사진, 탭을 바꿔도 글자 높이가 그대로이게 패널을 한 칸에 겹쳐 둔다 */
+.mpanel__vis{background:#F2F1EF}
+.mpanel__vis img{filter:none;object-fit:contain;object-position:50% 100%}
+.mpanel__vis figcaption{background:rgba(255,255,255,.75);color:var(--ink)}
+.modes__panels{display:grid}
+.mpanel{display:grid;grid-area:1 / 1;align-items:start;visibility:hidden;opacity:0;transform:translateY(14px);
+  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),visibility 0s .5s}
+#mode-face:checked ~ .modes__panels .mpanel--face,#mode-eye:checked ~ .modes__panels .mpanel--eye,#mode-body:checked ~ .modes__panels .mpanel--body,
+#mode-glow:checked ~ .modes__panels .mpanel--glow,#mode-ems:checked ~ .modes__panels .mpanel--ems{visibility:visible;opacity:1;transform:none;animation:none;
+  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),visibility 0s}
+
+/* R&D 특허·인증서 (261102) — 부채꼴 대신 수평으로 나란히 겹치게, 특허증은 기울이지 않는다 */
+.patx__stack{aspect-ratio:1/.56}
+.patx__stack img{top:4%;left:calc(var(--i) * 11%);width:34%;transform:none}
+.dp-tall__img--doc img{transform:none}
+
+/* Our Story 03 — 6가지 노화 유형 (261102): 얼굴 사진 + 코드 글자 카드 */
+.mt6{margin-top:clamp(60px,6vw,120px);padding:clamp(40px,4.4vw,80px) clamp(20px,2.6vw,50px);border-radius:24px;
+  background:radial-gradient(60% 50% at 50% 40%,#FBF4EE,#F3E6DC)}
+.mt6__head{text-align:center}
+.mt6__eyebrow{margin:0;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:clamp(12px,1vw,15px);letter-spacing:.42em;color:var(--ink)}
+.mt6__title{margin:clamp(8px,1vw,16px) 0 0;font-family:var(--f-title);font-weight:600;font-size:clamp(38px,5vw,84px);line-height:1.1;color:var(--ink)}
+.mt6__title span{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.25em;color:#9A5A44;margin-right:.04em}
+.mt6__sub{display:flex;align-items:center;justify-content:center;gap:18px;margin:clamp(12px,1.2vw,20px) 0 0;font-size:clamp(14.5px,1.25vw,20px);color:var(--ink)}
+.mt6__sub::before,.mt6__sub::after{content:"";width:clamp(24px,4vw,60px);height:1px;background:#9A5A44}
+.mt6__body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:clamp(12px,1.4vw,26px);align-items:center;margin-top:clamp(30px,3vw,56px)}
+.mt6__col{list-style:none;margin:0;padding:0;display:grid;gap:clamp(18px,2vw,34px)}
+.mt6__card{position:relative;padding:clamp(26px,2vw,34px) clamp(18px,1.6vw,28px) clamp(18px,1.6vw,26px);border-radius:18px;
+  background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);box-shadow:0 14px 34px -22px rgba(120,70,45,.45);backdrop-filter:blur(6px)}
+.mt6__no{position:absolute;top:0;left:clamp(16px,1.4vw,24px);transform:translateY(-50%);padding:4px 14px;border-radius:20px;background:#9A5A44;color:#fff;
+  font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.06em}
+.mt6__card b{display:block;font-family:var(--f-title);font-weight:700;font-size:clamp(20px,1.7vw,28px);line-height:1.25;color:var(--ink)}
+.mt6__card em{display:block;margin-top:4px;padding-bottom:12px;border-bottom:1px solid rgba(154,90,68,.25);font-style:normal;font-size:clamp(13px,1vw,15.5px);color:var(--ink-2)}
+.mt6__card p{margin:12px 0 0;font-size:clamp(13.5px,1vw,15.5px);line-height:1.75;color:var(--ink);word-break:keep-all}
+.mt6__card p small{display:block;font-size:.92em;color:var(--ink-2)}
+.mt6__face{margin:0;align-self:stretch;border-radius:18px;overflow:hidden}
+.mt6__face img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+@media (max-width:860px){
+  .mt6{padding:36px 16px;border-radius:18px}
+  .mt6__sub{font-size:13.5px;gap:10px}
+  .mt6__body{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}
+  .mt6__face{grid-column:1 / -1;grid-row:1;aspect-ratio:1/1;max-width:420px;width:100%;margin-inline:auto}
+  .mt6__col{display:contents}
+  .mt6__card{order:var(--o)}
+  .mt6__face{order:-1}
+  .mt6__card p br{display:none}
+}
+
+/* 모드 탭 사진 (261102) — 실제 점등 촬영컷, EMS는 네 색이 차례로 바뀐다 */
+.mpanel__vis{aspect-ratio:1/1;background:#30302b}
+.mpanel__vis img{object-fit:cover;object-position:50% 45%}
+.mpanel__vis figcaption{background:rgba(20,17,16,.55);color:#fff}
+.mpanel__cycle{position:absolute;inset:0}
+.mpanel__cycle img{position:absolute;inset:0;opacity:0;animation:litCycle 2.4s infinite;animation-delay:calc(var(--k) * .6s)}
+@keyframes litCycle{0%{opacity:0}4%,25%{opacity:1}29%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.mpanel__cycle img{animation:none}.mpanel__cycle img:first-child{opacity:1}}
+@media (max-width:860px){.mpanel__vis{aspect-ratio:4/3}}
+
+/* 임상 수치 (261102) — 화면에 들어오면 막대가 게이지처럼 차오른다 */
+.js .tres__bar i{transform:scaleX(0);transform-origin:left center;transition:transform 1.8s cubic-bezier(.22,1,.36,1) .25s}
+.js .tres__list li.is-in .tres__bar i{transform:none}
+.js .tres__list li[data-d="1"] .tres__bar i{transition-delay:.4s}
+.js .tres__list li[data-d="2"] .tres__bar i{transition-delay:.55s}
+@media (prefers-reduced-motion:reduce){.js .tres__bar i{transform:none;transition:none}}
+
+/* 인증 페이지 (261102) — R&D와 같은 수평 겹침, 마우스를 올린 인증서가 앞으로 */
+.patx__stack--cert{aspect-ratio:1/.6}
+.patx__stack--cert img{left:calc(var(--i) * 13.2%);width:34%;z-index:var(--i);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+.patx__stack--cert img:hover{z-index:10;transform:translateY(-6%) scale(1.06);box-shadow:0 30px 60px -24px rgba(51,27,15,.55),0 0 0 1px rgba(51,27,15,.08)}
+
+/* How to Use 영상 (261102) — 화면 폭에 꽉 차게, 섹션 끝에 붙여서 */
+.vid--full{margin-top:clamp(50px,5vw,90px);border-radius:0}
+.dp--vidend{padding-bottom:0}
+
+/* Our Story 01 현장 (261102) — 가로 사진이 잘리지 않게 글 아래 전체 폭으로 */
+.dp-tall--stack{grid-template-columns:minmax(0,1fr)}
+.dp-tall--stack .dp-tall__copy{gap:clamp(36px,4vw,70px)}
+.dp-tall--stack .dp-tall__notes p + p{transform:none;align-self:start}
+.dp-tall--stack .dp-tall__notes:has(p + p){padding-bottom:0}
+.dp-tall--stack .dp-tall__img{min-height:0;aspect-ratio:16/9;order:0}
+.dp-tall--stack .dp-tall__img img{object-position:50% 50%}
+
+/* 6 Aging Types 대표 고민 (261102) — 한눈에 보이게 뱃지로 */
+.dp-item .dp-tags{display:flex;flex-wrap:wrap;gap:8px}
+.dp-item .dp-tags b{flex:0 0 100%;margin-bottom:4px}
+.dp-item .dp-tags span{display:inline-flex;align-items:center;padding:6px 13px;border-radius:30px;
+  background:color-mix(in srgb,var(--accent) 9%,#fff);border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);
+  font-size:13.5px;font-weight:500;line-height:1.2;color:var(--accent);white-space:nowrap}
+
+/* R&D 특허·인증서도 마우스를 올린 문서가 위로 (261102) */
+.patx__stack img{z-index:var(--i);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+.patx__stack img:hover{z-index:10;transform:translateY(-6%) scale(1.06);box-shadow:0 30px 60px -24px rgba(51,27,15,.55),0 0 0 1px rgba(51,27,15,.08)}
+.dp-tall--stack .dp-tall__notes{grid-template-columns:minmax(0,1fr);gap:1.1em;max-width:860px}
+
+/* How to Use (261102) — 제목 아래 글, 오른쪽 영상 */
+.howto-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,5vw,110px);align-items:center}
+.howto-grid__copy .dp-body{margin-top:clamp(28px,3vw,50px)}
+.howto-grid__vid{margin-top:0}
+@media (max-width:860px){.howto-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* 6 Aging Types 카드 얼굴 (261102) — 유형별로 변화가 먼저 오는 부위 표시 */
+.dp-item__face{margin:18px 0 4px;display:grid;place-items:center;aspect-ratio:1/1;max-width:210px;border-radius:16px;overflow:hidden;background:#FBF8F5}
+.dp-item__face img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* Our Story 머리 사진 (261102) — 제품 전체 구성이 잘리지 않게 16:9, 아래 기준 */
+.dp-full--set img{aspect-ratio:16/9;object-position:50% 100%}
+@media (max-width:860px){.dp-full--set img{aspect-ratio:4/3;object-position:62% 100%}}
+.dp-item__face{width:min(220px,70%);aspect-ratio:4/5;border-radius:18px;background:#F1ECE6;box-shadow:none}
+
+/* Technology 마무리 CTA (261102) */
+.tcta{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;overflow:hidden;background:#32352A;color:#F4EFE9}
+.tcta::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 70% at 78% 40%,rgba(255,70,60,.16),transparent 70%);pointer-events:none}
+.tcta__copy{position:relative;z-index:1;padding:clamp(70px,8vw,150px) clamp(30px,4vw,80px) clamp(70px,8vw,150px) var(--gut)}
+.tcta__label{margin:0;display:flex;align-items:center;gap:10px;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:12.5px;letter-spacing:.22em;color:rgba(244,239,233,.7)}
+.tcta__label::before{content:"";width:8px;height:8px;border-radius:50%;background:#FF4A3D;box-shadow:0 0 12px #FF4A3D}
+.tcta__t{margin:clamp(22px,2.4vw,38px) 0 0;font-family:var(--f-title);font-weight:500;font-size:clamp(34px,4.2vw,76px);line-height:1.18;letter-spacing:-.005em;color:#fff}
+.tcta__t span{display:flex;align-items:baseline;gap:.4em;flex-wrap:wrap}
+.tcta__t small{font-family:var(--f-ui);font-weight:500;font-size:clamp(11px,.85vw,13.5px);letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;border:1px solid rgba(255,255,255,.28);border-radius:30px;color:rgba(255,255,255,.75);transform:translateY(-.5em)}
+.tcta__sub{margin:clamp(22px,2.2vw,36px) 0 0;font-size:clamp(15px,1.15vw,19px);line-height:1.8;color:rgba(244,239,233,.78);word-break:keep-all}
+.tcta__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(30px,3vw,50px)}
+.tcta__btn{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;border-radius:40px;border:1px solid rgba(255,255,255,.45);color:#fff;text-decoration:none;font-weight:500;font-size:15px;letter-spacing:.02em;transition:background .3s,color .3s,border-color .3s}
+.tcta__btn i{font-style:normal;transition:transform .3s}
+.tcta__btn:hover{background:#fff;color:#2a2b23;border-color:#fff}
+.tcta__btn:hover i{transform:translateX(4px)}
+.tcta__btn--fill{background:var(--accent);border-color:var(--accent)}
+.tcta__btn--fill:hover{background:#fff;color:var(--accent)}
+.tcta__vis{position:relative;margin:0;align-self:stretch;min-height:clamp(380px,40vw,720px)}
+.tcta__vis img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 30%);mask-image:linear-gradient(90deg,transparent,#000 30%)}
+@media (max-width:860px){
+  .tcta{grid-template-columns:minmax(0,1fr)}
+  .tcta__vis{order:-1;min-height:0;aspect-ratio:4/3}
+  .tcta__vis img{-webkit-mask-image:linear-gradient(180deg,#000 60%,transparent);mask-image:linear-gradient(180deg,#000 60%,transparent)}
+  .tcta__copy{padding:10px var(--gut) 64px}
+  .tcta__btn{flex:1 1 100%;justify-content:space-between}
+}
+
+/* 마무리 CTA — 모델 사용 컷 버전 (261102): 사진은 왼쪽, 사진 배경색으로 이어진다 */
+.tcta--model{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);background:#EFE6E3;color:var(--ink)}
+.tcta--model::before{background:radial-gradient(45% 70% at 30% 60%,rgba(196,106,58,.10),transparent 70%)}
+.tcta--model .tcta__vis{order:-1}
+.tcta--model .tcta__vis img{object-position:30% 50%;-webkit-mask-image:linear-gradient(270deg,transparent,#000 28%);mask-image:linear-gradient(270deg,transparent,#000 28%)}
+.tcta--model .tcta__copy{padding:clamp(70px,8vw,150px) var(--gut) clamp(70px,8vw,150px) clamp(30px,4vw,80px)}
+.tcta--model .tcta__label{color:var(--ink-2)}
+.tcta--model .tcta__label::before{background:var(--accent);box-shadow:none}
+.tcta--model .tcta__t{color:var(--ink)}
+.tcta--model .tcta__t small{border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:rgba(255,255,255,.55);color:var(--accent)}
+.tcta--model .tcta__sub{color:var(--ink-2)}
+.tcta--model .tcta__btn{border-color:var(--ink);color:var(--ink)}
+.tcta--model .tcta__btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tcta--model .tcta__btn--fill{background:var(--accent);border-color:var(--accent);color:#fff}
+.tcta--model .tcta__btn--fill:hover{background:var(--ink);border-color:var(--ink)}
+@media (max-width:860px){
+  .tcta--model{grid-template-columns:minmax(0,1fr)}
+  .tcta--model .tcta__vis{aspect-ratio:1/1}
+  .tcta--model .tcta__vis img{-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+  .tcta--model .tcta__copy{padding:10px var(--gut) 64px}
+}
+
+/* 마무리 CTA — 사진 통으로 위, 글은 아래 가운데 (261102) */
+.tcta--stack{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;padding-top:clamp(60px,6vw,110px)}
+.tcta--stack .tcta__vis{order:-1;align-self:auto;min-height:0;width:min(860px,100% - 2 * var(--gut));aspect-ratio:860/930;border-radius:20px;overflow:hidden}
+.tcta--stack .tcta__vis img{-webkit-mask-image:none;mask-image:none;object-position:50% 50%}
+.tcta--stack .tcta__copy{padding:clamp(40px,4vw,70px) var(--gut) clamp(70px,8vw,140px);max-width:900px}
+.tcta--stack .tcta__label{justify-content:center}
+.tcta--stack .tcta__t span{justify-content:center}
+.tcta--stack .tcta__btns{justify-content:center}
+@media (max-width:860px){
+  .tcta--stack{padding-top:0}
+  .tcta--stack .tcta__vis{width:100%;border-radius:0}
+  .tcta--stack .tcta__copy{padding:36px var(--gut) 64px}
+}
+
+/* 마무리 CTA — 가로 사진 화면 폭 가득 (261102) */
+.tcta--wide{background:#D6D6E1;padding-top:0}
+.tcta--wide::before{display:none}
+.tcta--wide .tcta__vis{width:100%;aspect-ratio:16/9;border-radius:0}
+.tcta--wide .tcta__t small{background:rgba(255,255,255,.6)}
+@media (max-width:860px){.tcta--wide .tcta__vis{aspect-ratio:4/3}.tcta--wide .tcta__vis img{object-position:58% 50%}}
+/* 261102 — 흰 배경, 글이 위 · 사진이 아래 */
+.tcta--wide{background:#fff}
+.tcta--wide .tcta__vis{order:1}
+.tcta--wide .tcta__copy{padding:clamp(90px,9vw,170px) var(--gut) clamp(50px,5vw,90px)}
+.tcta--wide .tcta__t small{background:color-mix(in srgb,var(--accent) 7%,#fff)}
+@media (max-width:860px){.tcta--wide .tcta__copy{padding:64px var(--gut) 40px}}
+
+/* 모드 탭 (261102) — 사진 대신 intro의 9구 LED 헤드를 모드 색으로 직접 그린다 */
+.mpanel__vis{display:grid;place-items:center;background:radial-gradient(55% 55% at 50% 50%,color-mix(in srgb,var(--c) 14%,#F6F4F1),#EFEDEA 75%)}
+.mpanel--ems .mpanel__vis{background:radial-gradient(55% 55% at 50% 50%,#F8EFE8,#EFEDEA 75%)}
+.mpanel__led{width:min(58%,360px)}
+.mpanel__vis figcaption{background:rgba(255,255,255,.8);color:var(--ink)}
+
+/* 마무리 CTA — 흰 배경, 사진 왼쪽 · 글 오른쪽 왼쪽 정렬 (261102) */
+.tcta--split{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);background:#fff;color:var(--ink);gap:clamp(20px,3vw,60px);padding:clamp(60px,6vw,120px) 0}
+.tcta--split::before{display:none}
+.tcta--split .tcta__vis{order:0;align-self:center;min-height:0;aspect-ratio:1200/1080}
+.tcta--split .tcta__vis img{-webkit-mask-image:none;mask-image:none;object-fit:contain}
+.tcta--split .tcta__copy{padding:0 var(--gut) 0 0}
+.tcta--split .tcta__label{color:var(--ink-2)}
+.tcta--split .tcta__label::before{background:var(--accent);box-shadow:none}
+.tcta--split .tcta__t{color:var(--ink)}
+.tcta--split .tcta__t small{border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:color-mix(in srgb,var(--accent) 7%,#fff);color:var(--accent)}
+.tcta--split .tcta__sub{color:var(--ink-2)}
+.tcta--split .tcta__btn{border-color:var(--ink);color:var(--ink)}
+.tcta--split .tcta__btn:hover{background:var(--ink);color:#fff}
+.tcta--split .tcta__btn--fill{background:var(--accent);border-color:var(--accent);color:#fff}
+.tcta--split .tcta__btn--fill:hover{background:var(--ink);border-color:var(--ink)}
+@media (max-width:860px){
+  .tcta--split{grid-template-columns:minmax(0,1fr);padding:40px 0 64px}
+  .tcta--split .tcta__vis{order:0}
+  .tcta--split .tcta__copy{padding:24px var(--gut) 0}
+}
+.tcta--split .tcta__vis{order:-1}
+@media (max-width:860px){.tcta--split .tcta__vis{order:-1}}
+.mpanel__led{width:min(78%,480px)}
+/* 261102 — 사진은 작게, 글 쪽을 넓게 */
+.tcta--split{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.tcta--split .tcta__vis{aspect-ratio:1230/1080;width:min(100%,600px);justify-self:end}
+@media (max-width:860px){.tcta--split .tcta__vis{width:86%;justify-self:center}}
+@media (max-width:860px){.tcta--split{grid-template-columns:minmax(0,1fr)}}
+
+/* 261102 — 사진 오른쪽 끝에 붙여 크게, 글은 왼쪽에 크게 */
+.tcta--split{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);padding:clamp(40px,4vw,80px) 0}
+.tcta--split .tcta__vis{order:1;width:100%;justify-self:stretch}
+.tcta--split .tcta__copy{padding:0 0 0 var(--gut)}
+.tcta--split .tcta__t{font-size:clamp(40px,5.2vw,96px);line-height:1.16}
+.tcta--split .tcta__t small{font-size:clamp(12px,.95vw,15px);padding:6px 13px}
+.tcta--split .tcta__sub{font-size:clamp(16px,1.35vw,22px)}
+.tcta--split .tcta__label{font-size:13.5px}
+.tcta--split .tcta__btn{padding:18px 30px;font-size:16px}
+@media (max-width:860px){
+  .tcta--split{grid-template-columns:minmax(0,1fr);padding:40px 0 64px}
+  .tcta--split .tcta__vis{order:-1;width:100%}
+  .tcta--split .tcta__copy{padding:24px var(--gut) 0}
+  .tcta--split .tcta__t{font-size:clamp(32px,9vw,44px)}
+}
+/* 261102 — LED 헤드 주변은 색 번짐 없이 아주 연한 회색 */
+.mpanel__vis,.mpanel--ems .mpanel__vis{background:#F5F4F2}

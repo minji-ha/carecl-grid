@@ -1,0 +1,700 @@
+# -*- coding: utf-8 -*-
+"""careCL GRID 시안 (쥬베룩 톤, 2026-11-05 · STEM 최종본에서 복사) — 페이지 생성기
+
+    python build.py
+
+공통 헤더·푸터·로딩 물방울을 한곳에서 관리하고 페이지를 찍어낸다.
+생성된 HTML을 직접 고치면 다음 빌드 때 덮어써진다.
+"""
+import io
+import os
+import re
+import time
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+VER = time.strftime("%y%m%d%H%M%S")
+
+
+def read(p):
+    return io.open(os.path.join(ROOT, p), encoding="utf-8").read()
+
+
+# ── 로고 (벡터, currentColor) ─────────────────────────────
+LOGO = re.sub(r"<title>.*?</title>\s*", "", read("assets/img/carecl-logo.svg"), flags=re.S).strip()
+
+# ── 메뉴 — 노션 '케어클 홈페이지 구성' 메뉴 구조 그대로 (COMPANY / AGING LAB / TECHNOLOGY / PRODUCTS / CONTACT)
+# 헤더 드롭다운·모바일 메뉴·푸터가 모두 이 표를 쓴다. 서브 페이지 탭(MENU)도 같은 순서.
+HNAV = [
+    ("Company", "about.html", [("About careCL", "about.html", "회사 소개"),
+                               ("Our Story", "greeting.html", "브랜드 스토리"),
+                               ("R&amp;D / Patent", "rnd.html", "연구개발 · 특허"),
+                               ("Awards &amp; Certification", "certification.html", "수상 · 인증"),
+                               ("Contact", "contact.html", "문의")]),
+    ("Aging Lab", "aging-types.html", [("6 Aging Types", "aging-types.html", "6가지 노화 타입"),
+                                       ("Aging Map 22", "aging-map.html", "22개 관리 부위")]),
+    ("Technology", "technology.html", [("careCL Technology", "technology.html", "TECH FIT 기술"),
+                                       ("Product", "products.html", "디바이스 · 코스메틱")]),
+]   # 수정요청 261030: Contact는 Company 밑, 기술 두 페이지는 하나로 / 261102: Technology 밑은 careCL Technology · Product 둘
+# 오른쪽 — SHOP · LOGIN · KR/EN(작게). 공식몰·로그인 주소는 받는 대로 바꾼다.
+SHOP_HREF = "products.html"
+LOGIN_HREF = "#"
+
+
+def head(title, desc, sub=False, css=(), body_cls=""):
+    subcss = f'<link rel="stylesheet" href="css/sub.css?v={VER}">\n' if sub else ""
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="icon" href="assets/img/carecl-logo.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/metropolis-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/urbanist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+{"" if sub else '<link rel="preload" href="fonts/caviar-dreams.woff2" as="font" type="font/woff2" crossorigin>' + chr(10)}<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="css/stem.css?v={VER}">
+<link rel="stylesheet" href="css/home261019.css?v={VER}">
+{subcss}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" not in c)}<link rel="stylesheet" href="css/grid.css?v={VER}">
+{"".join(f'<link rel="stylesheet" href="{c}?v={VER}">' + chr(10) for c in css if "grid" in c)}<script type="importmap">{{"imports":{{"three":"./libs/three/three.module.min.js"}}}}</script>
+</head>
+<body{(' class="' + body_cls + '"') if body_cls else ""}>
+"""
+
+
+def loader():
+    return f"""<div class="loader" data-loader aria-hidden="true">
+  <div class="led9 loader__head" data-led9="red" data-led9-mode="progress"><canvas></canvas></div>
+  <span class="loader__logo">{LOGO}</span>
+  <span class="loader__count" data-loader-count>00</span>
+</div>
+"""
+
+
+def header(active=""):
+    def group(t, h, subs):
+        on = active and (active == h or any(active == sh for _, sh, _ in subs))
+        sub = "".join(f'<a href="{sh}"><b>{st}</b><small>{sk}</small></a>' for st, sh, sk in subs)
+        return (f'<div class="hnav"><a class="hnav__top" href="{h}"{" aria-current=\"page\"" if on else ""}>{t}</a>'
+                f'<div class="hnav__sub"><div class="hnav__in">{sub}</div></div></div>')
+    left = "".join(group(*g) for g in HNAV)
+    mnav = "".join(
+        f'<div class="mnav__grp"><a class="mnav__top" href="{h}">{t}</a>'
+        + "".join(f'<a class="mnav__sub" href="{sh}">{st}<small>{sk}</small></a>' for st, sh, sk in subs) + '</div>'
+        for t, h, subs in HNAV)
+    return f"""<div class="glines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<header class="header">
+  <a class="header__logo" href="index.html" aria-label="careCL 홈">{LOGO}</a>
+  <div class="header__pill">
+    <nav class="header__nav" aria-label="주 메뉴">{left}</nav>
+    <nav class="header__nav header__nav--right header__util" aria-label="쇼핑 · 로그인 · 언어">
+      <a href="{SHOP_HREF}">Shop</a><a href="{LOGIN_HREF}">Login</a>
+      <span class="header__lang"><a href="#" aria-current="true" lang="ko">KR</a><i aria-hidden="true">/</i><a href="#" lang="en">EN</a></span>
+    </nav>
+  </div>
+  <button class="header__menu" type="button" data-menu aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+</header>
+<nav class="mnav" aria-label="모바일 메뉴">{mnav}
+  <div class="mnav__util"><a href="{SHOP_HREF}">Shop</a><a href="{LOGIN_HREF}">Login</a><span class="header__lang"><a href="#" aria-current="true">KR</a><i aria-hidden="true">/</i><a href="#">EN</a></span></div>
+</nav>
+"""
+
+
+# 푸터 SNS — 링크 주소는 받는 대로 href에 넣는다. 유튜브만 가로형이라 따로 크기를 준다.
+SNS = [("Instagram", "instagram", ""), ("Facebook", "facebook", ""),
+       ("YouTube", "youtube", ' class="is-wide"'), ("KakaoTalk", "kakaotalk", "")]
+
+FOOTER = f"""<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a class="foot__logo" href="index.html" aria-label="careCL 홈">{LOGO}</a>
+      </div>
+      <div class="foot__side">
+        <h2>AI Skin Test</h2>
+        <p>2분 설문으로 나의 노화 타입과<br>먼저 관리할 부위를 확인하세요.</p>
+        <a class="btn-line" href="survey.html">진단 시작하기</a>
+      </div>
+    </div>
+    <div class="foot__row">
+      <nav class="foot__nav" aria-label="푸터 메뉴">
+        {"".join(f'<a href="{h}">{t}</a>' for t, h, _ in HNAV)}
+      </nav>
+      <div class="foot__sns">{"".join(f'<a href="#" aria-label="{t}"><img{c} src="assets/img/sns/{f}.svg" alt=""></a>' for t, f, c in SNS)}</div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <span>CARECL CO.,Ltd. · CEO Hyungkyu Choi · 사업자등록번호 591-88-03097 · 통신판매업 제2025-고양일산동-0585호</span>
+    <span>TEL +82 31-943-1028 · support@carecl.co.kr</span>
+    <span>© 2026 CARECL. All rights reserved.</span>
+  </div>
+</footer>
+"""
+
+
+AIFAB = ('<a class="aifab" href="survey.html" aria-label="AI 피부 진단 시작하기"><span class="aifab__ico">'
+         '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.2 14 8.4 20.2 10.4 14 12.4 12 18.6 10 12.4 3.8 10.4 10 8.4Z" fill="currentColor"/>'
+         '<circle cx="19.4" cy="4.2" r="1.7" fill="currentColor" opacity=".9"/><circle cx="4.8" cy="18.4" r="1.2" fill="currentColor" opacity=".7"/></svg></span>'
+         '<span class="aifab__txt">AI 피부 진단</span></a>\n')
+
+
+def tail(three=True, js=(), fab=True, mods=()):
+    mod = f'<script type="module" src="js/device3d.js?v={VER}"></script>\n' if three else ""
+    mod += "".join(f'<script type="module" src="{m}?v={VER}"></script>' + chr(10) for m in mods)
+    return (AIFAB if fab else "") + f"""<script src="libs/lenis.min.js"></script>
+<script src="js/led.js?v={VER}"></script>
+<script src="js/stem.js?v={VER}"></script>
+{"".join(f'<script src="{j}?v={VER}"></script>' + chr(10) for j in js)}{mod}</body>
+</html>
+"""
+
+
+# 배경에 깔리는 옅은 물결 면
+WAVE = """<svg viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 210C210 120 380 60 640 92c260 32 330 170 560 182 170 9 300-60 400-120v520c-190 90-360 140-620 110-250-29-330-150-560-150C230 834 90 880 0 900Z"/></svg>"""
+
+
+# ═══════════════════════════════════════════════════════════
+#  메인
+# ═══════════════════════════════════════════════════════════
+# ── 메인 원고 (기존 사이트 메인 순서·문구 그대로) ─────────────
+SOLUTIONS = [
+    ("Device", "Device Solution", "정해진 자리에 머무르는 스탬핑 디바이스",
+     "문지르지 않고 관리할 부위에 머물러 에너지를 전달합니다.", "c-techfit-case.jpg", "products.html"),
+    ("Cosmetics", "Beauty Solution", "디바이스와 함께 쓰는 전용 코스메틱",
+     "그리드 마스크와 전용 제형으로 관리 위치를 정확히 안내합니다.", "c-gel-drop.jpg", "products.html#cosmetics"),
+    ("Aging Map 22", "Care Solution", "얼굴과 목 · 바디를 22개 부위로",
+     "나의 노화 방식을 이해하고 먼저 관리할 곳부터 순서대로 제안합니다.", "n-mask-glass-wide.jpg", "aging-map.html"),
+]
+
+CORE = [  # (번호 EN, 제목, 질문, 링크 문구, 링크, 위치 left%, top%)
+    ("01 Read", "6가지 노화 타입", "나는 어떻게 나이 드는가", "타입 보기", "aging-types.html", 14, 20),
+    ("02 Map", "22개 관리 부위", "어디부터 관리할까", "부위 보기", "aging-map.html", 86, 20),
+    ("03 Tech", "5초 스탬핑샷", "한 칸에 5초", "기술 보기", "technology.html", 14, 74),
+    ("04 Clinic", "17년의 클리닉 경험", "클리닉 노하우를 집으로", "스토리 보기", "greeting.html", 86, 74),
+]   # 수정요청 261030 문구
+
+PRODUCTS = [  # (분류, 이름, 설명, 이미지, 링크, 마우스를 올리면 보이는 같은 제품의 다른 컷)
+    ("Device", "TechFit", "5초 스탬핑 고주파 디바이스", "p-techfit.jpg", "products.html", "n-techfit-stand.jpg"),
+    ("Device", "CLB", "고주파 마사지기", "p-clb.jpg", "products.html", "e-clb-v.jpg"),
+    ("Cosmetic", "Collagen Booster Gel", "콜라겐 부스터 젤", "p-gel.jpg", "products.html#cosmetics", "e-gel-blue-v.jpg"),
+    ("Cosmetic", "Grid Mask", "그리드 마스크", "p-mask.jpg", "products.html#cosmetics", "s-mask-glass.jpg"),
+    ("Cosmetic", "Toning Serum", "라이트 토닝 세럼", "p-serum.jpg", "products.html#cosmetics", "e-serum-warm-v.jpg"),
+    ("Accessory", "Firenze Bag", "케어클 피렌체 백 · 디바이스 전용 가죽 케이스", "p-case.jpg", "products.html", "c-techfit-case.jpg"),
+]
+
+STEPS = [  # (EN, 한글, 설명, 모바일용 사진) — 수정요청 261030 문구
+    ("Notice", "알아차림", "어느 날, 거울 속 얼굴이 낯설어집니다.", "p-gel.jpg"),
+    ("Read", "나의 노화 타입", "6가지 중, 내가 나이 드는 방식을 찾습니다.", "s-mask-glass.jpg"),
+    ("Map", "시작된 자리", "노화가 시작된 자리를 22개 부위에서 짚습니다.", "p-techfit.jpg"),
+    ("Care", "맞춤 케어", "내 타입에 맞는 방법으로 관리합니다.", "p-serum.jpg"),
+    ("Check", "다시 읽기", "다시 읽으면, 변화가 보입니다.", "n-lineup-sq.jpg"),
+]
+
+# 물방울 속에 띄울 누끼 제품 (tools: 흰 배경 제품컷 → 투명 PNG). 순서는 STEPS와 같다
+STEP_CUTS = ["cut-gel.png", "cut-mask.png", "cut-device.png", "cut-serum.png", "cut-case.png"]
+STEP_FINAL_CUT = "cut-fullset.webp"   # 마지막 단계 뒤 가운데 큰 물방울 속
+
+CONTACTS = [
+    ("Global Business", "해외 사업", "수출 · 해외 유통 문의<br>support@carecl.co.kr", "contact.html"),
+    ("Partnership", "유통 · 제휴", "총판 및 제휴 제안<br>support@carecl.co.kr", "partnership.html"),
+    ("Media / PR", "미디어", "취재 · 광고 · 협찬<br>support@carecl.co.kr", "press.html"),
+    ("General", "일반 문의", "제품 사용 · A/S<br>TEL +82 31-943-1028", "inquiry.html"),
+]
+
+
+def hero_merge():
+    """care CLINICAL LEVEL → careCL. C·L만 남기고 LINICAL과 EVEL이 동시에 끝 글자부터 하나씩 사라진 뒤 빈칸이 닫힌다.
+    각 조각의 data-mg-at="시작,끝"은 스크롤 진행도(0~1) 구간 — stem.js heroMerge가 읽는다."""
+    def word(txt):
+        n, out = len(txt), []
+        for j, ch in enumerate(txt):
+            k = n - 1 - j                       # 끝 글자부터
+            st = k / n * 0.62
+            out.append(f'<span class="mg mg--drop" data-mg data-mg-at="{st:.3f},{st + 0.62 / n + 0.06:.3f}">{ch}</span>')
+        return "".join(out)
+    gap = '<span class="mg mg--drop" data-mg data-mg-at=".62,1">&nbsp;</span>'
+    return ('<span class="mg mg--care">care</span>' + gap + '<span class="mg mg--cl">C</span>' + word("LINICAL")
+            + gap + '<span class="mg mg--cl">L</span>' + word("EVEL"))
+
+
+# 메인 물방울(네 가지 기준 로고 물방울 · 데일리 루틴 물방울) — False면 숨김(2026-10-20 사용자 요청).
+# 숨김 중: 네 가지 기준은 가운데 careCL 로고만, 데일리 루틴은 단계별 사진(원형)이 글 옆에 지그재그. True로 바꾸면 그대로 복구.
+MAIN_BUBBLES = False
+# 네 가지 기준 가운데 — 사용자 제공 데모(carecl-bubble.html)의 투명 콜라겐 젤 방울 (js/gel.js)
+MAIN_GEL = False
+# 메인 물방울 — 사용자 제공 물방울구현.html(STEM식 엔진, 주황 빛) : 네 가지 기준 가운데 + 데일리 루틴 (js/stembubble.js)
+MAIN_STEM_BUBBLE = True
+
+
+# ── GRID 시안 메인 (2026-11-05 고객 수정요청: 쥬베룩 톤 — 세로선 그리드 · 둥근 이미지 카드 · 넓은 좌우 여백) ──
+# 사진 카드 규격은 하나: 둥근 모서리 + 아주 옅은 그림자.
+INTRO_FLOATS = [  # (이미지, 세로선 번호 0~5, 처음 위치 vh, 크기 vw, 속도)
+    ("c-gel-drop.jpg", 0, 70, 15, 1.25),
+    ("d-grid-glass2.jpg", 1, 18, 9, 0.9),
+    ("n-techfit-stand.jpg", 2, 104, 9, 1.1),
+    ("e-serum-water-v.jpg", 3, 8, 16, 0.75),
+    ("p-mask.jpg", 4, 86, 9, 1.35),
+    ("c-techfit-case.jpg", 5, 30, 15, 1.0),
+    ("e-gel-glass.jpg", 4, 2, 7, 0.6),
+    ("n-mask-light.jpg", 1, 120, 12, 1.5),
+]
+
+GSTEPS = [  # (번호, EN, 한글, 설명, 사진, 출발 높이 vh — 단계마다 다르게 내려온다)
+    ("01", "Notice", "알아차림", "어느 날, 거울 속 얼굴이 낯설어집니다.", "g-step1.jpg", 120),
+    ("02", "Read", "나의 노화 타입", "6가지 중, 내가 나이 드는 방식을 찾습니다.", "g-step2.jpg", 80),
+    ("03", "Map", "시작된 자리", "노화가 시작된 자리를 22개 부위에서 짚습니다.", "g-step3.jpg", 150),
+    ("04", "Care", "맞춤 케어", "내 타입에 맞는 방법으로 관리합니다.", "g-step4.jpg", 95),
+    ("05", "Check", "다시 읽기", "다시 읽으면, 변화가 보입니다.", "g-step5.jpg", 135),
+]
+
+GWHY_IMG = ["a-zone3.jpg", "d-grid-glass2.jpg", "e-techfit-lit-43.jpg", "g-clinic-session.jpg"]   # CORE 순서
+
+GLINEUP = [  # (분류, 이름, 설명, 누끼, 링크)
+    ("Device", "TechFit", "5초 스탬핑 고주파 디바이스", "cut-device.png", "products.html"),
+    ("Device", "CLB", "고주파 마사지기", "cut-clb.png", "products.html"),
+    ("Cosmetic", "Collagen Booster Gel", "디바이스와 함께 쓰는 콜라겐 부스터 젤", "cut-gel.png", "products.html#cosmetics"),
+    ("Cosmetic", "Grid Mask", "관리 부위를 안내하는 그리드 마스크", "cut-mask.png", "products.html#cosmetics"),
+    ("Cosmetic", "Toning Serum", "디바이스 사용 전후에 쓰는 토닝 세럼", "cut-serum.png", "products.html#cosmetics"),
+    ("Accessory", "Firenze Bag", "디바이스 전용 가죽 케이스", "cut-case.png", "products.html"),
+]
+
+
+def page_index():
+    HERO_MERGE = hero_merge()
+    floats = "\n".join(
+        f'        <figure class="gfloat gcard" data-float="{sp}" style="--line:{ln};--y:{y}vh;--s:{s}vw"><img src="assets/img/{im}" alt="" loading="lazy"></figure>'
+        for im, ln, y, s, sp in INTRO_FLOATS)
+
+    steps = "\n".join(f"""        <li class="gstep" data-gstep style="--from:{fy}vh;--i:{i}">
+          <figure class="gstep__img gcard"><img src="assets/img/{im}?v={VER}" alt="{kr}" loading="lazy"></figure>
+          <div class="gstep__txt">
+            <p class="gstep__head"><em>{no}</em> {en}</p>
+            <b class="gstep__kr">{kr}</b>
+            <p class="gstep__desc">{desc}</p>
+          </div>
+        </li>""" for i, (no, en, kr, desc, im, fy) in enumerate(GSTEPS))
+
+    why_imgs = "\n".join(
+        f'          <img class="gwhy__pic{" is-on" if i == 0 else ""}" data-why-pic src="assets/img/{im}?v={VER}" alt="" loading="lazy">'
+        for i, im in enumerate(GWHY_IMG))
+    why_items = "\n".join(f"""          <article class="gwhy__item{" is-on" if i == 0 else ""}" data-why>
+            <em class="glabel">{no}</em>
+            <h3 class="gwhy__title">{t}</h3>
+            <p class="gwhy__q">{q}</p>
+            <a class="gpill" href="{h}">{lk}</a>
+          </article>""" for i, (no, t, q, lk, h, *_) in enumerate(CORE))
+
+    on = ' class="is-on"'
+    lineup_info = "\n".join(f"""          <div class="gline__info{" is-on" if i == 0 else ""}" data-line-info>
+            <em class="glabel">{tag}</em>
+            <h3>{name}</h3>
+            <p>{desc}</p>
+            <a class="gpill gpill--sm" href="{h}">Learn more</a>
+          </div>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
+    lineup_cuts = "\n".join(
+        f'            <button type="button" class="gline__cut{" is-on" if i == 0 else ""}" data-line-cut aria-label="{name}"><img src="assets/img/{cut}?v={VER}" alt="{name}" loading="lazy"></button>'
+        for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
+    lineup_dots = "".join(f'<i{on if i == 0 else ""}></i>' for i in range(len(GLINEUP)))
+
+    contact_links = "".join(f'<a href="{h}">{kr}<span>{en}</span></a>' for en, kr, desc, h in CONTACTS)
+
+    body = f"""<main class="ghome">
+
+  <!-- 01 메인 영상 (그대로) -->
+  <section class="hero" aria-label="메인 영상">
+    <img class="hero__poster" src="assets/img/main-film-poster.jpg?v={VER}" alt="">
+    <video class="hero__video" src="assets/video/main-film.mp4?v={VER}" poster="assets/img/main-film-poster.jpg?v={VER}"
+           autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <div class="hero__copy" data-merge>
+      <h1 class="hero__title hero__title--merge" aria-label="care Clinical Level — careCL">{HERO_MERGE}</h1>
+    </div>
+  </section>
+
+  <!-- 02 철학 — 세로선을 따라 사진이 흘러가고 가운데 글은 멈춰 있다 -->
+  <section class="gintro" data-gintro aria-labelledby="gintro-title">
+    <div class="gintro__pin">
+      <div class="gintro__floats" aria-hidden="true">
+{floats}
+      </div>
+      <div class="gintro__copy">
+        <p class="glabel">The Philosophy of careCL</p>
+        <span class="gintro__logo" aria-hidden="true">{LOGO}</span>
+        <h2 class="gintro__title" id="gintro-title">같은 나이, 다른 노화.</h2>
+        <p class="gintro__sub">케어클은 주름보다 먼저 나이 드는 방식을 읽습니다.</p>
+        <a class="gpill" href="about.html">Why careCL</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 홈케어 5단계 — 사진이 세로선을 타고 내려와 한 줄로 맞춰진다 -->
+  <section class="gsteps" data-gsteps aria-labelledby="gsteps-title">
+    <div class="gsteps__pin">
+      <div class="ghead">
+        <p class="glabel">Home Aging Care</p>
+        <h2 class="ghead__big" id="gsteps-title">5 STEPS</h2>
+        <p class="ghead__kr">내 노화 타입에 맞춘 홈케어 5단계</p>
+      </div>
+      <ol class="gsteps__row">
+{steps}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 네 가지 기준 — 왼쪽 큰 사진 카드(멈춤) + 오른쪽 글 -->
+  <section class="gwhy" data-gwhy aria-labelledby="gwhy-title">
+    <div class="gwrap">
+      <div class="ghead">
+        <p class="glabel">How careCL Works</p>
+        <h2 class="ghead__title" id="gwhy-title">케어클의 <span class="gacc">네 가지 기준</span></h2>
+      </div>
+      <div class="gwhy__grid">
+        <div class="gwhy__media gcard" aria-hidden="true">
+{why_imgs}
+        </div>
+        <div class="gwhy__list">
+{why_items}
+        </div>
+      </div>
+      <div class="core__cta">
+        <a class="gpill gpill--solid" href="survey.html">AI 피부 진단 시작하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 라인업 — 둥근 판 위 왼쪽 정보 카드 + 오른쪽 제품 -->
+  <section class="gline" data-gline aria-labelledby="gline-title">
+    <div class="gwrap">
+      <div class="ghead">
+        <p class="glabel">careCL Lineup</p>
+        <h2 class="ghead__title" id="gline-title">진단 결과에 맞춰 <span class="gacc">조합하는 제품</span></h2>
+        <p class="ghead__kr">디바이스와 전용 코스메틱을 내 노화 타입에 맞게 고릅니다.</p>
+      </div>
+      <div class="gline__board">
+        <div class="gline__card">
+{lineup_info}
+          <div class="gline__dots" data-line-dots>{lineup_dots}</div>
+        </div>
+        <div class="gline__stage">
+          <button type="button" class="gline__nav gline__nav--prev" data-line-prev aria-label="이전 제품"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div class="gline__track" data-line-track>
+{lineup_cuts}
+          </div>
+          <button type="button" class="gline__nav gline__nav--next" data-line-next aria-label="다음 제품"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 공식몰 -->
+  <section class="gshop" aria-labelledby="gshop-title">
+    <div class="gwrap">
+      <div class="gshop__card gcard">
+        <img src="assets/img/m-model-set.jpg?v={VER}" alt="TechFit 풀세트와 디바이스를 든 모델" loading="lazy">
+        <div class="gshop__copy">
+          <h2 id="gshop-title">Shop the Official Store</h2>
+          <p>진단 결과에 맞는 구성으로 담아 보세요.</p>
+          <a class="gpill gpill--light" href="{SHOP_HREF}">Shop 바로가기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 문의 — 한 줄로 (해외·유통·미디어는 아래 작은 링크로) -->
+  <section class="gcontact" aria-labelledby="gcontact-title">
+    <div class="gwrap">
+      <h2 class="ghead__big ghead__big--ink" id="gcontact-title">Contact us</h2>
+      <p class="ghead__kr">careCL — 정밀하게 읽고, 부위별로 되돌리다</p>
+      <a class="gpill gpill--solid" href="inquiry.html">문의하기</a>
+      <nav class="gcontact__links" aria-label="문의 종류">{contact_links}</nav>
+    </div>
+  </section>
+
+</main>
+"""
+    return (head("careCL 케어클 — 정밀하게 읽고, 부위별로 되돌리다",
+                 "얼굴을 22개 부위로 나누어 읽고, 먼저 관리해야 할 곳부터 제안하는 홈 에이징 케어",
+                 css=("css/grid-home.css",))
+            + loader() + header() + body + FOOTER + tail(three=False, js=("js/grid-home.js",)))
+
+
+PAGES = {"index.html": page_index}
+
+# ═══════════════════════════════════════════════════════════
+#  서브 페이지 (14개) — 본문은 content/<파일>.html (기존 사이트 원고)
+# ═══════════════════════════════════════════════════════════
+# (1뎁스 EN, LED 색, [(2뎁스 EN, 파일, 한글)])
+MENU = [
+    ("Company", "purple", [("About careCL", "about.html", "회사 소개"),
+                           ("Our Story", "greeting.html", "브랜드 스토리"),
+                           ("R&D / Patent", "rnd.html", "연구개발 · 특허"),
+                           ("Awards & Certification", "certification.html", "수상 · 인증"),
+                           ("Contact", "contact.html", "문의")]),
+    ("Aging Lab", "green", [("6 Aging Types", "aging-types.html", "6가지 노화 타입"),
+                            ("Aging Map 22", "aging-map.html", "22개 관리 부위")]),
+    ("Technology", "red", [("careCL Technology", "technology.html", "TECH FIT 기술"),
+                           ("Product", "products.html", "디바이스 · 코스메틱")]),
+    ("Contact", "green", [("Global Business", "contact.html", "해외 사업 문의"),
+                          ("Distributor / Partnership", "partnership.html", "유통 · 제휴 문의"),
+                          ("Media / PR", "press.html", "미디어 문의"),
+                          ("General Inquiry", "inquiry.html", "일반 문의")]),
+]
+# 머리말 제목 줄바꿈 (탭 이름은 그대로 한 줄)
+TITLE_BREAK = {"careCL Technology": "careCL<br>Technology", "Awards & Certification": "Awards &amp;<br>Certification"}
+
+# 메뉴별 머리말 오른쪽 이미지 (회사 소개는 오렌지 C, 문의는 없음)
+HEAD_VISUAL = {"Company": ("C", "letter"),
+               "products.html": ("h-package.jpg", "photo photo--pkg"),   # 제품 탭은 Technology 밑이지만 머리말은 패키지 사진
+               "Technology": ("h-techfit-lit.webp", "cut cut--tall"),
+               "Aging Lab": ("h-model.jpg", "photo")}
+GROUP_HREF = {"Company": "about.html", "Aging Lab": "aging-types.html", "Technology": "technology.html",
+              "Products": "products.html", "Contact": "contact.html"}
+
+# 기존 사진 → 새 사진 (사람 모델이 나온 사진은 제품·정물 컷으로)
+IMG_MAP = {
+    "cc-model-c.jpg": "c-beam.jpg",
+    "p-leaning.jpg": "c-techfit-case.jpg",
+    "p-skin.jpg": "c-gel-silk.jpg",
+    "p-eye.jpg": "n-techfit-side.jpg",
+    "cc-stamping-c.jpg": "n-techfit-stand.jpg",
+    "p-mask-close.jpg": "s-mask-glass.jpg",
+    "p-devices.jpg": "c-overhead.jpg",
+    "p-cheek.jpg": "c-techfit-case.jpg",
+    "p-mask-face.jpg": "n-mask-packs.jpg",
+    "p-mask-hands.jpg": "n-mask-glass-wide.jpg",
+    "product-techfit.jpg": "p-techfit.jpg",
+    "product-clb.png": "p-clb.jpg",
+    "product-gel.png": "p-gel.jpg",
+    "product-mask.jpg": "p-mask.jpg",
+    "product-serum.jpg": "p-serum.jpg",
+}
+
+
+def sub_page(group, led, items, idx):
+    title_en, slug, title_kr = items[idx]
+    body = read("content/" + slug)
+
+    def img(m):
+        src = m.group(1)
+        name = src.split("/")[-1].split("?")[0]
+        if "/doc/" in src:
+            return 'src="assets/img/doc/' + name + '"'
+        return 'src="assets/img/' + IMG_MAP.get(name, name) + '"'
+    body = re.sub(r'src="(assets/img/[^"]+)"', img, body)
+    # 섹션마다 LED 색 지정
+    body = re.sub(r'<section class="(sec|figbreak|dp)', lambda m: '<section data-led="' + led + '" class="' + m.group(1), body)
+    # 회사 소개의 파티클 캔버스 → 9구 LED 헤드
+    body = re.sub(r'<div class="about__visual ceo__visual" id="brandParticles">.*?</div></div>',
+                  '<div class="about__visual"><div class="led9 about__led" data-led9><canvas></canvas></div>'
+                  '<span class="about__tag">Ageless Beauty</span></div>', body, flags=re.S)
+    # 지도 자리 → 구글 지도 (주소 그대로 검색)
+    body = re.sub(r'<div class="map( rv)?">.*?</div>',
+                  lambda m: '<div class="map' + (m.group(1) or '') + '"><iframe title="케어클 위치 — 경기도 고양시 일산동구 동국로 32" loading="lazy" '
+                  'referrerpolicy="no-referrer-when-downgrade" '
+                  'src="https://www.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EC%9D%BC%EC%82%B0%EB%8F%99%EA%B5%AC%20%EB%8F%99%EA%B5%AD%EB%A1%9C%2032&output=embed"></iframe></div>',
+                  body, count=1, flags=re.S)
+
+    tabs = "".join(
+        f'<a href="{h}"{" aria-current=\"page\"" if h == slug else ""}>{t}</a>' for t, h, _ in items)
+    vis = HEAD_VISUAL.get(slug) or HEAD_VISUAL.get(group)
+    if vis and vis[0] == "C":
+        # 회사 소개 — 화면 오른쪽에 잘려 보이는 크고 두꺼운 오렌지 C
+        vis_html = ('<div class="subhead__vis subhead__vis--letter" aria-hidden="true">'
+                    '<svg viewBox="0 0 1000 1000"><path d="M 768 259 A 360 360 0 1 0 768 741" '
+                    'fill="none" stroke="currentColor" stroke-width="200" stroke-linecap="round"/></svg></div>')
+    else:
+        vis_html = (f'<div class="subhead__vis subhead__vis--{vis[1]}" aria-hidden="true">'
+                    f'<img src="assets/img/{vis[0]}?v={VER}" alt="" decoding="async"></div>') if vis else ""
+    head_html = f"""<main class="sub">
+  <section class="subhead{' subhead--vis' if vis else ''}" data-led="{led}">
+    <div class="subhead__top">
+      {vis_html}
+      <div class="wrap">
+        <p class="label">{group}</p>
+        <h1 class="subhead__title">{TITLE_BREAK.get(title_en, title_en)}</h1>
+        <p class="subhead__kr">{title_kr}</p>
+      </div>
+    </div>
+    <nav class="subtabs" aria-label="{group} 하위 메뉴"><div class="wrap subtabs__in">{tabs}</div></nav>
+  </section>
+  <div class="sub-body">
+{body}
+  </div>
+</main>
+"""
+    return (head(f"{title_kr} | careCL 케어클", f"careCL {title_kr}", sub=True, css=("css/detail.css",))
+            + header(GROUP_HREF[group]) + head_html + FOOTER + tail(three=False))
+
+
+for _g, _led, _items in MENU:
+    for _i, (_, _slug, _) in enumerate(_items):
+        PAGES[_slug] = (lambda g=_g, l=_led, it=_items, i=_i: sub_page(g, l, it, i))
+
+# 코스메틱은 Product 페이지 안으로 (261102) — 예전 주소는 그 자리로
+PAGES["cosmetics.html"] = lambda: ('<!doctype html><meta charset="utf-8"><title>Product</title>'
+                                   '<meta http-equiv="refresh" content="0;url=products.html#cosmetics">'
+                                   '<link rel="canonical" href="products.html"><a href="products.html#cosmetics">Product</a>')
+# 예전 careCL Technology 주소 → 하나로 합친 Technology 페이지로 (261030)
+PAGES["carecl-technology.html"] = lambda: ('<!doctype html><meta charset="utf-8"><title>careCL Technology</title>'
+                                           '<meta http-equiv="refresh" content="0;url=technology.html">'
+                                           '<link rel="canonical" href="technology.html"><a href="technology.html">Technology</a>')
+
+
+
+# ═══════════════════════════════════════════════════════════
+#  AI 피부 진단 설문 · 결과 리포트
+# ═══════════════════════════════════════════════════════════
+def page_survey():
+    body = """<script>if(/[?&]embed=1/.test(location.search))document.documentElement.classList.add('is-embed')</script>
+<main class="sv sv--stem" data-led="red">
+  <aside class="sv__panel">
+    <div class="sv__dots" data-dotfield></div>
+    <div class="sv__stick">
+      <div class="sv__lock">
+        <em>AI Skin Agent</em>
+        <b>Aging Map 22</b>
+        <p>얼굴을 22개 좌표로 나누어<br>당신의 노화 타입을 진단합니다</p>
+      </div>
+      <!-- 왼쪽 그래픽 자리 (임시: 살아 움직이는 구체 — 새 AI 진단 그래픽으로 바꿀 예정) -->
+      <div class="sv__orbwrap"><div class="sv__orb" data-orb aria-hidden="true"><canvas></canvas></div></div>
+    </div>
+  </aside>
+  <section class="sv__body"><div class="sv__form" id="svForm"></div></section>
+</main>
+"""
+    return (head("노화 타입 진단 | Aging Map 22 — careCL 케어클", "2분 설문으로 나의 노화 타입과 먼저 관리할 부위를 확인하세요",
+                 css=("css/bridge.css", "css/survey.css", "css/checkup-result.css", "css/report.css"), body_cls="survey")
+            + header("aging-types.html") + body + FOOTER
+            + tail(three=False, js=("js/report-data.js", "js/report.js", "js/radar.js", "js/survey.js", "js/orb.js"), fab=False))
+
+
+def page_report():
+    body = """<script>if(/[?&]embed=1/.test(location.search))document.documentElement.classList.add('is-embed')</script>
+<main class="sub">
+  <section class="subhead" data-led="purple">
+    <div class="wrap">
+      <p class="label">Aging Lab</p>
+      <h1 class="subhead__title">Aging Report</h1>
+      <p class="subhead__kr">진단 결과 리포트</p>
+    </div>
+  </section>
+  <div class="report-body" data-led="purple"><div data-rpt-out></div></div>
+</main>
+"""
+    return (head("진단 결과 리포트 | Aging Map 22 — careCL 케어클", "careCL 노화 타입 진단 결과 리포트",
+                 sub=True, css=("css/bridge.css", "css/checkup-result.css", "css/report.css"))
+            + header("aging-types.html") + body + FOOTER
+            + tail(three=False, js=("js/report-data.js", "js/report.js", "js/radar.js", "js/reportpage.js"), fab=False))
+
+
+PAGES["survey.html"] = page_survey
+
+
+# ── 왼쪽 패널 그래픽 시안별 리포트 (로그인 전 화면 비교용) ──
+PANEL_VARIANTS = [
+    ("survey-p1.html", "lab/left-1-particle-face.html", "입자 얼굴"),
+    ("survey-p2.html", "lab/left-3-terminal.html", "터미널"),
+    ("survey-p3.html", "lab/left-4-hologram-device.html", "홀로그램"),
+    ("survey-p4.html", "lab/left-5-aurora.html", "오로라"),
+    ("survey-p5.html", "lab/left-6-device-3d.html", "3D 기기"),
+    ("survey-p6.html", "lab/left-7-zone-photo.html", "부위 사진"),
+]
+
+
+def page_survey_panel(idx):
+    name, src, _ = PANEL_VARIANTS[idx]
+    tabs = "".join(f'<a href="{n}" data-src="{s_}"{" class=on" if i == idx else ""}><i>{i + 1}</i>{label}</a>'
+                   for i, (n, s_, label) in enumerate(PANEL_VARIANTS))
+    out = page_survey()
+    out = re.sub(r'<div class="sv__stick">.*?</div>\n    </div>\n  </aside>',
+                 f'<div class="sv__stick sv__stick--frame"><iframe src="{src}?embed=1&amp;v={VER}" title="AI 진단 그래픽" loading="eager"></iframe></div>\n  </aside>',
+                 out, count=1, flags=re.S)
+    out = out.replace('<main class="sv sv--stem"', f'<nav class="pvtabs" aria-label="왼쪽 그래픽 시안">{tabs}</nav>\n<main class="sv sv--stem sv--framed"', 1)
+    out = out.replace('<script src="js/orb.js', '<script data-off="js/orb.js', 1)
+    # 탭은 페이지 이동 없이 왼쪽 그래픽만 바꾼다 (js/pvtabs.js)
+    out = out.replace('</body>', f'<script src="js/pvtabs.js?v={VER}"></script>' + chr(10) + '</body>', 1)
+    return out
+
+
+for _i, (_n, _s, _l) in enumerate(PANEL_VARIANTS):
+    PAGES[_n] = (lambda i=_i: page_survey_panel(i))
+PAGES["survey.html"] = lambda: page_survey_panel(0)
+
+
+def page_survey_flow():
+    """survey2.html — 1번은 왼쪽 패널, 2~5번은 전체 화면 인트로 → 가운데 설문 (js/pvtabs.js data-flow)"""
+    out = page_survey_panel(0)
+    out = re.sub(r'href="survey-p(\d)\.html"', r'href="survey2.html?g=\1"', out)
+    out = out.replace('<nav class="pvtabs"', '<nav class="pvtabs" data-flow', 1)
+    out = out.replace('sv--framed"', 'sv--framed sv--flow"', 1)
+    out = out.replace('</main>', '<div class="sv__mini" hidden aria-hidden="true"><iframe title="TECH FIT 3D" tabindex="-1"></iframe></div>\n</main>', 1)
+    return out
+
+
+PAGES["survey2.html"] = page_survey_flow
+   # 시안 확인용 사이트 — 기본 설문에도 그래픽 탭 6개
+PAGES["report.html"] = page_report
+
+# ── AI 피부 진단 공개 여부 ──────────────────────────────
+# False: 진단(survey.html) · 리포트(report.html)로 가는 링크를 모든 페이지에서 뗀다.
+#        두 페이지 파일은 그대로 만들되 검색에 안 잡히게 한다(주소를 아는 사람만 열 수 있음).
+# True : 작업이 끝나면 이 값만 바꾸면 버튼 · 메뉴 · 푸터 · 본문 링크가 모두 다시 붙는다.
+AI_TEST_PUBLIC = False
+# 비공개 동안 진단·리포트 화면은 이 접두어가 붙은 주소로만 만든다 (예: lab-410bf9f9c6-survey.html)
+# survey.html · report.html 같은 짐작 가능한 주소는 지워서 열리지 않게 한다.
+AI_SECRET = "lab-410bf9f9c6"
+
+
+def hide_ai_test(html):
+    html = re.sub(r'<a class="aifab".*?</a>\n?', '', html, flags=re.S)                       # 오른쪽 아래 버튼
+    html = re.sub(r'<div class="foot__side">.*?</div>\s*(?=</div>\s*<div class="foot__row")', '', html, flags=re.S)  # 푸터 진단 안내
+    html = re.sub(r'<div class="core__cta">.*?</div>', '', html, flags=re.S)                   # 메인 '나의 Aging Type 알아보기'
+    html = re.sub(r'<a[^>]*href="(?:survey|report)\.html[^"]*"[^>]*>.*?</a>', '', html, flags=re.S)  # 나머지 링크
+    html = re.sub(r'<p>\s*</p>', '', html)
+    return html
+
+
+def is_ai_page(name):
+    return name.startswith("survey") or name.startswith("report")
+
+
+def secret_links(html):
+    """비공개 화면끼리 거는 링크를 비밀 주소로 바꾸고, 스크립트가 만드는 링크에도 접두어를 알려준다."""
+    html = re.sub(r'(href=")((?:survey|report)[\w-]*\.html)', lambda m: m.group(1) + AI_SECRET + "-" + m.group(2), html)
+    return html.replace("</head>", f'<script>window.CL_AI_PREFIX="{AI_SECRET}-";</script>\n</head>', 1)
+
+
+def ai_cleanup():
+    """공개 여부에 맞지 않는 진단 파일을 지운다 (비공개: 원래 주소, 공개: 비밀 주소)."""
+    for f in os.listdir(ROOT):
+        if not f.endswith(".html"):
+            continue
+        secret = f.startswith(AI_SECRET + "-")
+        if (not AI_TEST_PUBLIC and is_ai_page(f)) or (AI_TEST_PUBLIC and secret):
+            os.remove(os.path.join(ROOT, f))
+
+
+if __name__ == "__main__":
+    # 결과지 개선 시안 — 원본은 content/report-preview.src. 비공개면 비밀 주소로, 공개면 report-preview.html로 만든다
+    ai_cleanup()
+    preview_src = io.open(os.path.join(ROOT, "content", "report-preview.src"), encoding="utf-8").read()
+    if AI_TEST_PUBLIC:
+        io.open(os.path.join(ROOT, "report-preview.html"), "w", encoding="utf-8").write(preview_src)
+    else:
+        io.open(os.path.join(ROOT, AI_SECRET + "-report-preview.html"), "w", encoding="utf-8").write(secret_links(preview_src))
+    for name, fn in PAGES.items():
+        out = fn()
+        if name.startswith("survey-p") or name == "survey2.html":   # 왼쪽 그래픽 비교용 시안 페이지는 공개 후에도 검색에서 뺀다
+            out = out.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex, nofollow">', 1)
+        elif not AI_TEST_PUBLIC:
+            if name.startswith("survey") or name == "report.html":
+                out = out.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex, nofollow">', 1)
+            else:
+                out = hide_ai_test(out)
+        if not AI_TEST_PUBLIC and is_ai_page(name):
+            out = secret_links(out)
+            name = AI_SECRET + "-" + name
+        io.open(os.path.join(ROOT, name), "w", encoding="utf-8").write(out)
+        print("built", name)
+    print("v=" + VER)
