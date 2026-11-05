@@ -179,3 +179,13 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
   -webkit-text-stroke:.035em currentColor;paint-order:stroke fill;
 }
 .hnav__top,.header__util > a,.subtabs a,.mnav a.mnav__sub,.hnav__in b{-webkit-text-stroke:.6px currentColor}
+
+/* 다시 나오는 헤더 — 반투명 오렌지 + 뒤 블러 (쥬베룩처럼 뒤가 비친다) */
+.header.is-solid{
+  background:rgba(224,102,43,.72)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(1.4)!important;backdrop-filter:blur(20px) saturate(1.4)!important;
+}
+
+/* 전체 글씨 두껍게 — 본문 SUIT 600, 영문 Caviar Dreams는 획 덧그리기 */
+body{font-weight:600;-webkit-text-stroke:.35px currentColor}
+.hnav__top,.header__util > a,.header__lang a,.subtabs a,.mnav a{font-weight:800;-webkit-text-stroke:.9px currentColor}
