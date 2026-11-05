@@ -205,3 +205,13 @@ body,
 /* 굵기 최종 — 상세페이지 머리말 제목만 두껍게, 나머지는 모두 일반 두께 */
 .en,.ghead__big .en,.ghead__title .en,.gwhy__title .en,.sec-title .en,.dp-title .en,.gshop__copy h2 .en,.sub-body h2 .en{-webkit-text-stroke:0!important}
 .subhead__title .en{-webkit-text-stroke:.03em currentColor!important;paint-order:stroke fill}
+
+/* 다시 나오는 헤더 — 흰 반투명 + 뒤 블러, 글자·로고는 검정 */
+.header.is-solid{background:rgba(255,255,255,.62)!important;border-bottom:1px solid rgba(30,26,23,.06);box-shadow:0 8px 30px -18px rgba(30,20,10,.25)}
+.header.is-solid .header__logo,
+.header.is-solid .hnav__top,
+.header.is-solid .header__util > a,
+.header.is-solid .header__lang,
+.header.is-solid .header__lang a{color:var(--ink)!important}
+.header.is-solid .hnav:hover .hnav__top,.header.is-solid .hnav__top[aria-current="page"],.header.is-solid .header__util > a:hover{color:var(--accent)!important}
+.header.is-solid .header__menu span{background:var(--ink)}
