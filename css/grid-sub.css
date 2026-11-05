@@ -1,20 +1,20 @@
 /* =========================================================
    GRID 시안 — 상세페이지 정리 레이아웃 (2026-11-05 · "글자나 이미지가 중구난방")
-   · 모든 블록을 같은 폭(최대 1200px) 안에 정렬 — 화면 끝까지 붙는 사진 없음
+   · 모든 블록을 같은 폭(최대 1480px) 안에 정렬 — 화면 끝까지 붙는 사진 없음
    · 제목 → 본문을 위아래로 (좌우로 흩어진 2단 머리 없앰), 글자 크기 한 단계로 통일
    · 사진은 같은 카드 규격(둥근 모서리), 비율 3가지만(4:5 · 4:3 · 21:9)
    · 계단식으로 어긋나던 글(translate), 거대한 제목·기울인 숫자 정리
    ========================================================= */
-:root{--cw:1200px;--side:max(var(--gut),calc((100% - var(--cw)) / 2))}
+:root{--cw:1480px;--sgut:clamp(20px,4.2vw,80px);--side:max(var(--sgut),calc((100% - var(--cw)) / 2))}
 
 /* 섹션 간격 하나로 */
 .sub-body .dp{padding-block:clamp(70px,7vw,130px)}
 .sub-body .dp + .dp{padding-top:0}
 .sub-body .dp--tint{background:transparent}
-.sub-body .dp__in{max-width:var(--cw);padding-inline:var(--gut)}
+.sub-body .dp__in{max-width:var(--cw);padding-inline:var(--sgut)}
 
 /* 머리 — 라벨 · 제목 · 본문을 한 줄로 쌓는다 */
-.sub-body .dp-head{display:block;max-width:820px}
+.sub-body .dp-head{display:block;max-width:980px}
 .sub-body .dp-head .dp-body{margin-top:clamp(18px,1.8vw,28px)}
 .sub-body .dp-title{font-size:clamp(28px,2.7vw,44px)!important;line-height:1.38!important;letter-spacing:-.01em}
 .sub-body .dp-title em{font-style:normal;font-weight:inherit;color:var(--accent)}
@@ -71,3 +71,6 @@
   .sub-body .dp-pics--wv,.sub-body .dp-pics--vw{grid-template-columns:1fr}
   .sub-body .dp-full img,.sub-body .dp-full--tall img{aspect-ratio:4/3}
 }
+
+/* 머리말 · 탭도 본문과 같은 왼쪽 선에 */
+.sub .subhead .wrap,.sub .subtabs .wrap{padding-inline:var(--side)}

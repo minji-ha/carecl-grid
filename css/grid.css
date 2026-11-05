@@ -257,3 +257,15 @@ body,body *{font-weight:300!important}
 /* 메뉴 펼침 — 영문 크게, 한글 작게 */
 .hnav__in b{font-size:17px!important;line-height:1.3}
 .hnav__in small{font-size:11px!important;margin-top:3px;color:var(--ink-2)}
+
+/* 한글 서체 → SUIT Light (SIL OFL — 상업적 이용 무료). 숫자 · &도 SUIT */
+:root{
+  --f-title:"Caviar Dreams","SUIT",system-ui,sans-serif;
+  --f-ui:"Caviar Dreams","SUIT",system-ui,sans-serif;
+  --f-kr:"Caviar Dreams","SUIT","Pretendard",system-ui,sans-serif;
+}
+body,
+.subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
+  font-family:"Caviar Dreams","SUIT",system-ui,sans-serif
+}
