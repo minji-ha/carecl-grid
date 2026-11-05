@@ -331,3 +331,35 @@
   opacity:.32;filter:blur(10px);pointer-events:none}
 .qcard__logo svg{display:block;width:100%;height:auto}
 .qcard > *:not(.qcard__logo){position:relative}
+
+/* Our Story 01~04 지그재그 — 모두 같은 틀: 글 | 사진(또는 번호 박스), 다음 칸은 좌우 반대 */
+.sub-body .zz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,110px);margin:clamp(90px,10vw,170px) var(--side)}
+.sub-body .zz__t{margin:22px 0 0;font-family:var(--f-title);font-weight:400;font-size:clamp(30px,2.9vw,46px);line-height:1.35;letter-spacing:-.01em;color:var(--ink)}
+.sub-body .zz__copy p:not(.dp-label){margin:clamp(18px,1.6vw,26px) 0 0;font-size:clamp(17px,1.35vw,20px);line-height:1.8;color:#433B35}
+.sub-body .zz__copy strong{color:var(--accent);font-weight:400}
+.sub-body .zz__acc{color:var(--accent)!important}
+.sub-body .zz__img{margin:0;aspect-ratio:4/3;max-height:calc(100svh - var(--head) - 120px);width:100%;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);position:relative}
+.sub-body .zz__img img{width:100%;height:100%;object-fit:cover;border-radius:0!important}
+/* 03 번호 박스 — 주황 네모 번호 + 질문 */
+.sub-body .zz__nums{list-style:none;margin:0;padding:0;display:grid;gap:clamp(12px,1.2vw,18px)}
+.sub-body .zz__nums li{display:flex;align-items:center;gap:clamp(18px,1.8vw,30px);padding:clamp(18px,1.8vw,28px) clamp(20px,2vw,32px);
+  border-radius:var(--r);background:#fff;box-shadow:var(--shadow);border:1px solid rgba(224,102,43,.12);transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .3s ease}
+.sub-body .zz__nums li:hover{transform:translateX(8px);border-color:var(--accent)}
+.sub-body .zz__no{flex:none;display:grid;place-items:center;width:clamp(56px,4.6vw,72px);aspect-ratio:1;border-radius:clamp(12px,1vw,16px);
+  background:var(--accent);color:#fff;font-family:var(--f-title);font-size:clamp(20px,1.7vw,26px);letter-spacing:.02em;box-shadow:0 10px 22px -10px rgba(224,102,43,.7)}
+.sub-body .zz__nums li:nth-child(2) .zz__no{background:#E9834F}
+.sub-body .zz__nums li:nth-child(3) .zz__no{background:#F0A177}
+.sub-body .zz__nums b{font-weight:400;font-size:clamp(19px,1.6vw,25px);line-height:1.4;color:var(--ink)}
+@media (max-width:860px){
+  .sub-body .zz{grid-template-columns:1fr;gap:26px}
+  .sub-body .zz--rev .zz__img{order:-1}
+  .sub-body .zz:not(.zz--rev) .zz__img{order:-1}
+  .sub-body .zz__copy p br{display:none}
+}
+
+/* Our Story 문구 카드 v2 — 흐린 물방울 위에 반투명 주황을 깔고 글·버튼은 흰색, 큰 로고는 잘리지 않게 안쪽으로 */
+.sub-body .dp--quotecard .qcard{background:linear-gradient(rgba(224,102,43,.62),rgba(224,102,43,.62)),url(../assets/img/g-quote-bubble.jpg) center/cover no-repeat}
+.sub-body .dp--quotecard .dp-quote,.sub-body .dp--quotecard .dp-quote small{color:#fff!important}
+.sub-body .dp--quotecard .btn-line{border-color:#fff;color:#fff;background:transparent}
+.sub-body .dp--quotecard .btn-line:hover{background:#fff;color:var(--accent)}
+.qcard__logo{right:4%;bottom:7%;width:min(58%,820px);color:#B8460F;opacity:.42;filter:blur(8px)}
