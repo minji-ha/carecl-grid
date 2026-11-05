@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-<link rel="stylesheet" href="css/stem.css?v=261106020349">
-<link rel="stylesheet" href="css/home261019.css?v=261106020349">
-<link rel="stylesheet" href="css/sub.css?v=261106020349">
-<link rel="stylesheet" href="css/detail.css?v=261106020349">
-<link rel="stylesheet" href="css/grid.css?v=261106020349">
-<link rel="stylesheet" href="css/grid-sub.css?v=261106020349">
+<link rel="stylesheet" href="css/stem.css?v=261106020530">
+<link rel="stylesheet" href="css/home261019.css?v=261106020530">
+<link rel="stylesheet" href="css/sub.css?v=261106020530">
+<link rel="stylesheet" href="css/detail.css?v=261106020530">
+<link rel="stylesheet" href="css/grid.css?v=261106020530">
+<link rel="stylesheet" href="css/grid-sub.css?v=261106020530">
 <script type="importmap">{"imports":{"three":"./libs/three/three.module.min.js"}}</script>
 </head>
 <body>
@@ -66,39 +66,34 @@
         <p>문의 종류를 확인하시고 메일 또는 전화로 연락 주세요. 담당자가 확인 후 회신드립니다.</p>
       </div>
     </div>
-    <div class="dp-grid dp-grid--2">
-      <article class="dp-item rv" id="global" data-d="0">
-        <span class="dp-item__no">01</span>
-        <h4>해외 유통과 수출,<br>함께 논의하겠습니다<small>Global Business · 해외 사업 문의</small></h4>
-        <p>국가별 유통 구조와 인허가 요건에 맞춰 공급 조건을 협의합니다. 관심 품목과 희망 지역을 함께 보내주시면 담당자가 회신드립니다.</p>
-        <p class="ct-links"><a href="mailto:support@carecl.co.kr">support@carecl.co.kr</a><br><a href="tel:+82319431028">+82 31-943-1028</a></p>
-      </article>
-      <article class="dp-item rv" id="partnership" data-d="1">
-        <span class="dp-item__no">02</span>
-        <h4>총판 · 제휴 제안을<br>기다립니다<small>Distributor / Partnership · 유통 · 제휴 문의</small></h4>
-        <p>국내외 총판, 리테일 입점, 브랜드 협업 등 제휴 제안을 받습니다. 회사 소개와 제안 개요를 함께 보내주세요.</p>
-        <p class="ct-links"><a href="mailto:support@carecl.co.kr">support@carecl.co.kr</a></p>
-      </article>
-      <article class="dp-item rv" id="press" data-d="2">
-        <span class="dp-item__no">03</span>
-        <h4>취재 · 광고 · 협찬<br>문의를 받습니다<small>Media / PR · 미디어 문의</small></h4>
-        <p>브랜드 자료와 제품 이미지, 인터뷰 일정은 미디어 담당자가 안내드립니다.</p>
-        <p class="ct-links"><a href="mailto:support@carecl.co.kr">support@carecl.co.kr</a><br><a href="tel:+82319431028">+82 31-943-1028</a></p>
-      </article>
-      <article class="dp-item rv" id="inquiry" data-d="3">
-        <span class="dp-item__no">04</span>
-        <h4>제품 사용과 A/S<br>무엇이든 물어보세요<small>General Inquiry · 일반 문의</small></h4>
-        <p>사용 방법, 교환 · 반품, A/S 접수는 고객센터로 문의해 주세요.</p>
-        <p class="ct-links"><a href="mailto:support@carecl.co.kr">support@carecl.co.kr</a><br><a href="tel:+82319431028">+82 31-943-1028</a></p>
-      </article>
+    <div class="ct-cards">
+      <a class="ct-card" id="global" href="mailto:support@carecl.co.kr" style="--i:0">
+        <span class="ct-card__no">01</span>
+        <b class="ct-card__en">Global Business</b>
+        <span class="ct-card__kr">해외 사업 문의</span>
+        <i class="ct-card__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+      </a>
+      <a class="ct-card" id="partnership" href="mailto:support@carecl.co.kr" style="--i:1">
+        <span class="ct-card__no">02</span>
+        <b class="ct-card__en">Distributor / Partnership</b>
+        <span class="ct-card__kr">유통 · 제휴 문의</span>
+        <i class="ct-card__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+      </a>
+      <a class="ct-card" id="press" href="mailto:support@carecl.co.kr" style="--i:2">
+        <span class="ct-card__no">03</span>
+        <b class="ct-card__en">Media / PR</b>
+        <span class="ct-card__kr">미디어 문의</span>
+        <i class="ct-card__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+      </a>
+      <a class="ct-card" id="inquiry" href="mailto:support@carecl.co.kr" style="--i:3">
+        <span class="ct-card__no">04</span>
+        <b class="ct-card__en">General Inquiry</b>
+        <span class="ct-card__kr">일반 문의</span>
+        <i class="ct-card__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+      </a>
     </div>
     <dl class="dp-facts rv"><div><dt>Email</dt><dd><a href="mailto:support@carecl.co.kr">support@carecl.co.kr</a></dd></div><div><dt>Tel</dt><dd><a href="tel:+82319431028">+82 31-943-1028</a></dd></div><div><dt>Hours</dt><dd>Mon – Fri 10:00 – 18:00<br><span style="font-size:.62em;color:var(--ink-2)">Lunch 12:00 – 13:00 / 주말 · 공휴일 휴무</span></dd></div></dl>
   </div>
-</section>
-
-<section data-led="purple" class="dp-pics dp-pics--wv">
-  <figure class="rv"><div class="ph"><img src="assets/img/d-gel-blue.jpg" alt="careCL 콜라겐 젤" loading="lazy"></div></figure>
-  <figure class="rv" data-d="1"><div class="ph"><img src="assets/img/d-lineup.jpg" alt="careCL 제품 라인업" loading="lazy"></div></figure>
 </section>
 
 <section data-led="purple" class="dp" id="location">
@@ -148,9 +143,9 @@
   </div>
 </footer>
 <script src="libs/lenis.min.js"></script>
-<script src="js/led.js?v=261106020349"></script>
-<script src="js/stem.js?v=261106020349"></script>
+<script src="js/led.js?v=261106020530"></script>
+<script src="js/stem.js?v=261106020530"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-<script src="js/grid-header.js?v=261106020349"></script>
+<script src="js/grid-header.js?v=261106020530"></script>
 </body>
 </html>
