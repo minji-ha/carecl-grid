@@ -237,7 +237,7 @@ GSTEPS = [  # (번호, EN, 한글, 설명, 사진, 출발 높이 vh — 단계�
     ("02", "Read", "나의 노화 타입", "6가지 중, 내가 나이 드는 방식을 찾습니다.", "g-step2.jpg", 80),
     ("03", "Map", "시작된 자리", "노화가 시작된 자리를 22개 부위에서 짚습니다.", "g-step5.jpg", 150),
     ("04", "Care", "맞춤 케어", "내 타입에 맞는 방법으로 관리합니다.", "g-step4.jpg", 95),
-    ("05", "Check", "다시 읽기", "다시 읽으면, 변화가 보입니다.", "g-step3.jpg", 135),
+    ("05", "Check", "다시 읽기", "다시 읽으면, 변화가 보입니다.", "g-step5b.jpg", 135),
 ]
 
 GWHY_IMG = ["a-zone3.jpg", "d-grid-glass2.jpg", "e-techfit-lit-43.jpg", "g-clinic-session.jpg"]   # CORE 순서
