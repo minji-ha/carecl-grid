@@ -671,3 +671,4 @@ body:has(main.sub) .foot{margin-top:0!important}
 /* Aging Lab 머리말 v3 — '배경.png' 사진, 가운데 기준(화면이 넓어져도 가운데가 보이게, 얼굴이 잘리지 않게 위쪽 우선) */
 .sub .subhead--aging-lab::before{background:url(../assets/img/a-head-bg.jpg) center 18%/cover no-repeat}
 @media (max-width:767px){ .sub .subhead--aging-lab::before{background-position:center 18%} }
+.sub-body .tcta__btn--fill:hover{background:#B8501C!important;border-color:#B8501C!important;color:#fff!important}
