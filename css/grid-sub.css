@@ -137,11 +137,11 @@
 /* 하위 메뉴(탭) 없앰 — 헤더 메뉴 펼침으로 이동 */
 .sub .subtabs{display:none}
 
-/* Aging Lab 머리말 — 예전 여자 사진을 오른쪽에 다시, Technology 배경과 같은 높이(맨 위 헤더 뒤 ~ 머리말 끝) */
+/* Aging Lab 머리말 — Technology와 같은 방식: 화면 맨 위(헤더 뒤)부터 머리말 끝까지 깔리는 배경.
+   예전 여자 사진(h-model.jpg)을 넓은 배경으로 다시 짜서 살짝 흐리고 연하게 (assets/img/a-head-model.jpg) */
 .sub .subhead--aging-lab{position:relative;isolation:isolate}
-.sub .subhead--aging-lab .subhead__vis{
-  display:block;position:absolute;z-index:-1;right:0;top:calc(-1 * var(--head));bottom:0;width:min(52%,960px);margin:0;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%);
+.sub .subhead--aging-lab::before{
+  content:"";position:absolute;left:0;right:0;top:calc(-1 * var(--head));bottom:0;z-index:-1;
+  background:url(../assets/img/a-head-model.jpg) right 30%/cover no-repeat;
 }
-.sub .subhead--aging-lab .subhead__vis img{width:100%;height:100%;object-fit:cover;object-position:60% 22%;border-radius:0!important}
-@media (max-width:767px){ .sub .subhead--aging-lab .subhead__vis{width:70%;opacity:.55} }
+@media (max-width:767px){ .sub .subhead--aging-lab::before{background-position:85% 30%} }
