@@ -272,3 +272,8 @@ body,
 
 /* 좌우 여백 하나로 — 헤더 로고 선 = 메인 · 상세 본문 선 (90px@1440 → 60px@1440) */
 :root{--gut:clamp(20px,4.2vw,80px)}
+
+/* 영문과 붙어 나오는 숫자만 로고 서체 숫자로 (5 STEPS · 01 Notice …) — 한글 옆 숫자는 SUIT 그대로.
+   어느 숫자가 영문 옆인지는 js/grid-header.js가 골라 <span class="num-en">으로 감싼다 */
+@font-face{font-family:"Caviar Num";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0030-0039}
+.num-en{font-family:"Caviar Num","Caviar Dreams","SUIT",system-ui,sans-serif}

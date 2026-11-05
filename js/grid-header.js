@@ -18,6 +18,49 @@
     });
   });
 
+  // 숫자 짝 맞추기 — 숫자 앞뒤에서 가장 가까운 글자가 영문이면 영문(로고) 서체 숫자로, 한글이면 그대로
+  (function () {
+    var BLOCK = /^(P|H1|H2|H3|H4|H5|H6|LI|A|BUTTON|DT|DD|FIGCAPTION|TD|TH|SPAN|EM|B|STRONG|SMALL|LABEL|DIV)$/;
+    var root = document.body, all = [], w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) { var p = n.parentNode; return /^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/.test(p.nodeName) || p.closest('svg') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    });
+    while (w.nextNode()) all.push(w.currentNode);
+    function block(n) { var e = n.parentNode; while (e && e !== root && getComputedStyle(e).display.indexOf('inline') === 0) e = e.parentNode; return e; }
+    function near(i, pos, dir) {   // i번째 텍스트 노드의 pos부터 dir 방향으로 같은 블록 안에서 가장 가까운 글자
+      var b = block(all[i]);
+      for (var k = i; k >= 0 && k < all.length; k += dir) {
+        if (k !== i && block(all[k]) !== b) break;
+        var t = all[k].nodeValue, j = k === i ? pos : (dir > 0 ? 0 : t.length - 1);
+        for (; j >= 0 && j < t.length; j += dir) {
+          var c = t[j];
+          if (/[A-Za-z]/.test(c)) return 'en';
+          if (/[가-힣ㄱ-ㆎ]/.test(c)) return 'ko';
+        }
+      }
+      return '';
+    }
+    for (var i = all.length - 1; i >= 0; i--) {
+      var n = all[i], t = n.nodeValue;
+      if (!/[0-9]/.test(t) || n.parentNode.classList.contains('num-en')) continue;
+      var re = /[0-9]+/g, m, cuts = [];
+      while ((m = re.exec(t))) {
+        var before = near(i, m.index - 1, -1), after = near(i, m.index + m[0].length, 1);
+        // 바로 붙은 쪽 우선: 숫자 뒤 첫 글자, 없으면 앞 글자
+        var side = after || before;
+        if (side === 'en' && before !== 'ko' || (before === 'en' && !after)) cuts.push([m.index, m[0].length]);
+      }
+      if (!cuts.length) continue;
+      var frag = document.createDocumentFragment(), at = 0;
+      cuts.forEach(function (c) {
+        if (c[0] > at) frag.appendChild(document.createTextNode(t.slice(at, c[0])));
+        var sp = document.createElement('span'); sp.className = 'num-en'; sp.textContent = t.substr(c[0], c[1]); frag.appendChild(sp);
+        at = c[0] + c[1];
+      });
+      if (at < t.length) frag.appendChild(document.createTextNode(t.slice(at)));
+      n.parentNode.replaceChild(frag, n);
+    }
+  })();
+
   var h = document.querySelector('.header');
   if (!h) return;
   var hero = document.querySelector('.hero');
