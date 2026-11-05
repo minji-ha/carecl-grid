@@ -41,19 +41,23 @@
     }
     for (var i = all.length - 1; i >= 0; i--) {
       var n = all[i], t = n.nodeValue;
-      if (!/[0-9]/.test(t) || n.parentNode.classList.contains('num-en')) continue;
+      if (!/[0-9A-Za-z]/.test(t) || n.parentNode.classList.contains('num-en') || n.parentNode.classList.contains('lat')) continue;
       var re = /[0-9]+/g, m, cuts = [];
-      while ((m = re.exec(t))) {
+      while (/[0-9]/.test(t) && (m = re.exec(t))) {
         var before = near(i, m.index - 1, -1), after = near(i, m.index + m[0].length, 1);
         // 바로 붙은 쪽 우선: 숫자 뒤 첫 글자, 없으면 앞 글자
         var side = after || before;
-        if (side === 'en' && before !== 'ko' || (before === 'en' && !after)) cuts.push([m.index, m[0].length]);
+        if (side === 'en' && before !== 'ko' || (before === 'en' && !after)) cuts.push([m.index, m[0].length, 'num-en']);
       }
+      // 영문 글자 묶음은 span.lat (작은 영문 굵기 보정용)
+      var lr = /[A-Za-z][A-Za-z'’.\-]*/g;
+      while ((m = lr.exec(t))) cuts.push([m.index, m[0].length, 'lat']);
+      cuts.sort(function (a, b) { return a[0] - b[0]; });
       if (!cuts.length) continue;
       var frag = document.createDocumentFragment(), at = 0;
       cuts.forEach(function (c) {
         if (c[0] > at) frag.appendChild(document.createTextNode(t.slice(at, c[0])));
-        var sp = document.createElement('span'); sp.className = 'num-en'; sp.textContent = t.substr(c[0], c[1]); frag.appendChild(sp);
+        var sp = document.createElement('span'); sp.className = c[2]; sp.textContent = t.substr(c[0], c[1]); frag.appendChild(sp);
         at = c[0] + c[1];
       });
       if (at < t.length) frag.appendChild(document.createTextNode(t.slice(at)));

@@ -79,3 +79,24 @@
 :root{--side:var(--gut);--sgut:var(--gut)}
 .sub-body .dp__in{max-width:none}
 .sub .subhead .wrap,.sub .subtabs .wrap{max-width:none;margin-inline:0}
+
+/* 머리말 가운데 정렬 — 라벨 · 제목 · 하위 메뉴를 가운데에. 옆 장식 그림은 가운데 제목과 겹쳐서 뺀다 */
+.sub .subhead__vis{display:none}
+.sub .subhead__top .wrap{text-align:center;padding-bottom:clamp(36px,3.6vw,64px)}
+.sub .subhead .label{justify-content:center}
+.sub .subhead__title{margin-inline:auto}
+
+/* 하위 메뉴 — 밑줄 탭 대신 가운데 둥근 알약 버튼 묶음 */
+.sub .subtabs{border:0;background:transparent;margin:0;padding-bottom:clamp(10px,1vw,20px)}
+.sub .subtabs__in{justify-content:center;flex-wrap:wrap;gap:10px;overflow:visible}
+.sub .subtabs a{
+  padding:11px 24px;border:1.5px solid var(--hair);border-radius:999px;color:var(--ink-2);font-size:14px;line-height:1;
+  transition:border-color .3s ease,background .3s ease,color .3s ease
+}
+.sub .subtabs a::after{display:none!important}
+.sub .subtabs a:hover{border-color:var(--accent);color:var(--accent)}
+.sub .subtabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:767px){
+  .sub .subtabs__in{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .sub .subtabs a{flex:none;padding:10px 18px;font-size:13px}
+}
