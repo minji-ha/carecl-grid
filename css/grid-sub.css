@@ -513,3 +513,18 @@
   .sub-body #results .tres2{height:650px;--rx:330px;--ry:330px;--cy:262px}
   .sub-body #results .tcard{width:196px!important}
 }
+/* v6 — 보내주신 그림처럼: 위·가운데·아래 줄 간격 똑같이, 좌우 대칭, 가운데 줄이 가장 넓게 둥근 모양 + 맨 아래 가운데 1개
+   (원 반지름 R=2s 위의 점: 줄 y = -s, 0, +s, +2s / 가로 = ±0.87R, ±R, ±0.87R, 0) */
+@media (min-width:1081px){
+  .sub-body #results .tres2{height:590px;--s:150px;--cy:220px}
+  .sub-body #results .tres2__dev{top:calc(var(--cy) - 180px)}
+  .sub-body #results .tcard{left:calc(50% + var(--x))!important;top:calc(var(--cy) + var(--y))!important;translate:-50% -50%!important}
+  .sub-body #results .tres2__col--l .tcard:nth-child(1){--x:-260px;--y:calc(var(--s) * -1)}
+  .sub-body #results .tres2__col--l .tcard:nth-child(2){--x:-300px;--y:0px}
+  .sub-body #results .tres2__col--l .tcard:nth-child(3){--x:-260px;--y:var(--s)}
+  .sub-body #results .tres2__col--l .tcard:nth-child(4){--x:0px;--y:calc(var(--s) * 2)}
+  .sub-body #results .tres2__col--r .tcard:nth-child(1){--x:260px;--y:calc(var(--s) * -1)}
+  .sub-body #results .tres2__col--r .tcard:nth-child(2){--x:300px;--y:0px}
+  .sub-body #results .tres2__col--r .tcard:nth-child(3){--x:260px;--y:var(--s)}
+}
+@media (min-width:1081px){ .sub-body #results .tres2__col--l .tcard:nth-child(4){left:50%!important;top:calc(var(--cy) + var(--s) * 2)!important} }
