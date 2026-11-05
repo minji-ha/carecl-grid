@@ -189,3 +189,10 @@
 .sub-body .dp-tall__img{justify-self:start}
 .sub-body .dp-tall--rev .dp-tall__img{justify-self:end}
 @media (max-width:860px){ .sub-body .dp-band__img,.sub-body .dp-bleed__img,.sub-body .dp-tall__img{justify-self:stretch} }
+
+/* v2 — 사진 폭은 칸에 꽉 채우고(위치 일정), 높이만 화면 안으로 자른다 (넘치면 사진 위아래가 살짝 잘림) */
+.sub-body .dp-band__img,.sub-body .dp-tall__img,.sub-body .dp-bleed__img{
+  width:100%!important;justify-self:stretch!important;max-height:calc(100svh - var(--head) - 120px)
+}
+.sub-body .dp-band__img img,.sub-body .dp-tall__img img,.sub-body .dp-bleed__img img{object-position:50% 30%}
+@media (max-width:860px){ .sub-body .dp-band__img,.sub-body .dp-tall__img,.sub-body .dp-bleed__img{max-height:none} }
