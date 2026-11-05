@@ -294,3 +294,6 @@
 /* 떠 있는 기기 — 눕히지 않고 똑바로 */
 .ab-float img{transform:none}
 .ab-float{width:clamp(36px,2.8vw,50px)}
+
+/* 각 섹션 제목 위 작은 영문 라벨(● Our Story 등) — 주황색 */
+.sub-body .dp-label{color:var(--accent)!important}
