@@ -528,3 +528,11 @@
   .sub-body #results .tres2__col--r .tcard:nth-child(3){--x:260px;--y:var(--s)}
 }
 @media (min-width:1081px){ .sub-body #results .tres2__col--l .tcard:nth-child(4){left:50%!important;top:calc(var(--cy) + var(--s) * 2)!important} }
+
+/* 모든 상세페이지 — 본문 시작(머리말 아래)과 끝(푸터 위) 여백을 똑같이 */
+.sub-body{padding-block:var(--vgap)}
+.sub-body > :first-child{margin-top:0!important;padding-top:0!important}
+.sub-body > :last-child{margin-bottom:0!important;padding-bottom:0!important}
+.sub-body > :last-child > .dp__in > :last-child{margin-bottom:0}
+body:has(main.sub) .foot{margin-top:0!important}
+.sub-body > section:first-child,.sub-body > section.dp:first-child{padding-top:0!important;margin-top:0!important}
