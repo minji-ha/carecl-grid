@@ -121,3 +121,7 @@
 .sub-body .ct-links a{border-bottom:1px solid var(--hair)}
 .sub-body .ct-links a:hover{color:var(--accent);border-color:var(--accent)}
 .sub-body [id]{scroll-margin-top:calc(var(--head) + 30px)}
+
+/* 상세페이지 제목은 모두 한 줄 — 좁은 화면에서는 글자 크기를 화면 폭에 맞춰 줄인다 */
+.sub .subhead__title{white-space:nowrap}
+@media (max-width:767px){ .sub .subhead__title{font-size:min(8.2vw,40px)} }

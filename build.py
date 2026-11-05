@@ -400,7 +400,7 @@ MENU = [
                            ("Product", "products.html", "디바이스 · 코스메틱")]),
 ]
 # 머리말 제목 줄바꿈 (탭 이름은 그대로 한 줄)
-TITLE_BREAK = {"careCL Technology": "careCL<br>Technology", "Awards & Certification": "Awards &amp;<br>Certification"}
+TITLE_BREAK = {}   # GRID 시안: 상세페이지 제목은 모두 한 줄
 
 # 메뉴별 머리말 오른쪽 이미지 (회사 소개는 오렌지 C, 문의는 없음)
 HEAD_VISUAL = {"Company": ("C", "letter"),
