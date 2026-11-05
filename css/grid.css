@@ -6,6 +6,9 @@
    · 전체 서체 Caviar Dreams (한글은 Pretendard)
    stem.css · home261019.css 위에 얹는다 (모든 페이지)
    ========================================================= */
+@font-face{font-family:"S-Core Dream";font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff) format("woff")}
+@font-face{font-family:"S-Core Dream";font-weight:800;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff) format("woff")}
+@font-face{font-family:"S-Core Dream";font-weight:600;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff) format("woff")}
 :root{
   --ink:#1E1A17;
   --ink-2:#6B625C;
@@ -16,10 +19,11 @@
   --hair:rgba(30,26,23,.12);
   --line:rgba(30,26,23,.07);   /* 배경 세로선 */
   --led:var(--accent);
-  /* 전체 서체 Caviar Dreams (자료/drive/10. 글꼴/CaviarDreams.ttf) — 한글 글자는 없어 Pretendard로 이어진다 */
-  --f-title:"Caviar Dreams","Pretendard",system-ui,sans-serif;
-  --f-ui:"Caviar Dreams","Pretendard",system-ui,sans-serif;
-  --f-kr:"Caviar Dreams","Pretendard",system-ui,sans-serif;
+  /* 영문은 Caviar Dreams (자료/drive/10. 글꼴/CaviarDreams.ttf) — 한글 글자는 없어 아래 한글 서체로 이어진다
+     한글: 제목 에스코어드림 · 본문 SUIT (둘 다 상업적 이용 무료) */
+  --f-title:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;
+  --f-ui:"Caviar Dreams","SUIT",system-ui,sans-serif;
+  --f-kr:"Caviar Dreams","SUIT","Pretendard",system-ui,sans-serif;
   --gut:clamp(20px,6.25vw,120px);   /* 좌우 여백 — STEM 45px → 90px@1440 */
   --head:88px;
   --sec:clamp(100px,11vw,200px);
@@ -146,3 +150,32 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
 .header.is-solid .hnav__top::after,.header.is-solid .header__util > a::after{background:#fff}
 .header.is-solid .header__menu span{background:#fff}
 .header.is-solid .hnav__in{border-top-color:var(--ink)}
+
+/* 메뉴 펼침 상자 — 네 모서리 모두 둥글게, 위 선 없이, 메인 메뉴 바로 밑에 붙게 */
+.hnav__sub{top:calc(50% + 22px)}
+.hnav__sub::before{top:-24px;height:24px}
+.hnav__in,.header.is-solid .hnav__in{border-radius:18px;border-top:0}
+.hnav__in b{color:#111;font-weight:700;font-synthesis-weight:auto;font-synthesis:weight}   /* 영문 제목만 굵고 검게 */
+/* 메인 메뉴 밑 표시(점·줄) 없애기 */
+.hnav__top::after,.header__util > a::after,.header__nav a::after{display:none!important}
+
+/* 제목·메뉴·라벨을 대문자로 바꾸지 않고 원고 그대로 (About careCL, Aging Lab …) */
+*,*::before,*::after{text-transform:none!important}
+/* Caviar Dreams는 굵은 글꼴이 없어 획을 살짝 덧그려 굵게 */
+.hnav__in b{-webkit-text-stroke:.45px currentColor}
+
+/* 서브 머리말 여백 줄이기 (의견: 제목 부분 여백이 너무 넓다) */
+.subhead{padding-top:clamp(36px,4vw,72px)}
+.subhead__title{font-size:clamp(40px,5.4vw,100px)}
+.subhead__vis{top:calc(-1 * clamp(36px,4vw,72px))}
+.subtabs{margin-top:clamp(28px,2.8vw,50px)}
+.sub-body > .dp:first-child,.sub-body > section:first-child{padding-top:clamp(56px,6vw,110px)}
+
+/* 제목 · 메뉴명은 최대한 두껍게 — 한글은 에스코어드림 Heavy, 영문 Caviar Dreams는 굵은 글꼴이 없어 획을 덧그린다 */
+.subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
+.sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,
+.hnav__top,.header__util > a,.subtabs a,.mnav a.mnav__top,.mnav a.mnav__sub,.hnav__in b{
+  font-family:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;font-weight:800;
+  -webkit-text-stroke:.035em currentColor;paint-order:stroke fill;
+}
+.hnav__top,.header__util > a,.subtabs a,.mnav a.mnav__sub,.hnav__in b{-webkit-text-stroke:.6px currentColor}
