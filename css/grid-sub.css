@@ -214,3 +214,36 @@
   .sub-body .ab-wide__bg{position:relative;height:auto;aspect-ratio:4/3;object-position:left center}
   .sub-body .ab-wide__copy{position:static;transform:none;padding:26px 22px 30px}
 }
+
+/* R&D 숫자 결과 — 가운데 TECH FIT, 양옆 엇갈린 카드에 숫자가 올라간다 */
+.sub-body .tres--center{display:block}
+.sub-body .tres--center .tres__head{text-align:center;max-width:760px;margin:0 auto}
+.sub-body .tres--center .tres__head .dp-label{justify-content:center}
+.sub-body .tres--center .tres__note{text-align:center;margin:clamp(30px,3vw,50px) 0 0}
+.tres2{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.7fr) minmax(0,1fr);align-items:center;gap:clamp(16px,2vw,40px);margin-top:clamp(40px,4vw,70px)}
+.tres2__col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tres2__col .tcard:nth-child(even){translate:0 42%}
+.tres2__col--r .tcard:nth-child(odd){translate:0 42%}
+.tres2__col--r .tcard:nth-child(even){translate:none}
+.tcard{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:clamp(150px,13vw,200px);padding:clamp(18px,1.6vw,26px);
+  border-radius:var(--r);background:#fff;box-shadow:var(--shadow);border:1px solid rgba(30,26,23,.05)}
+.tcard .tres__v{min-width:0;text-align:left;font-size:clamp(28px,2.6vw,44px);font-weight:400}
+.tcard .tres__k{font-size:clamp(14px,1vw,16px);line-height:1.5;color:#433B35}
+.tres2__dev{position:relative;margin:0;display:grid;place-items:center;height:clamp(380px,36vw,540px)}
+.tres2__dev::before{content:"";position:absolute;width:120%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(224,102,43,.18),rgba(224,102,43,0) 62%)}
+.tres2__dev img{position:relative;height:clamp(380px,36vw,540px);width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(30,20,10,.22));border-radius:0!important}
+@media (max-width:1080px){
+  .tres2{grid-template-columns:1fr}
+  .tres2__dev{order:-1;height:360px}
+  .tres2__dev img{height:340px}
+  .tres2__col .tcard,.tres2__col--r .tcard{translate:none!important}
+}
+
+/* Our Story 마지막 문구 — 물방울 사진(6254)을 흐리게 깐 둥근 큰 카드, 글은 가운데 */
+.sub-body .dp--quotecard .qcard{
+  position:relative;overflow:hidden;border-radius:var(--r);box-shadow:var(--shadow);
+  padding:clamp(70px,8vw,140px) clamp(24px,5vw,90px);text-align:center;
+  background:url(../assets/img/g-quote-bubble.jpg) center/cover no-repeat
+}
+.sub-body .dp--quotecard .dp-quote{margin-inline:auto;text-align:center}
+.sub-body .dp--quotecard .dp-cta{justify-content:center}
