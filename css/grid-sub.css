@@ -247,3 +247,20 @@
 }
 .sub-body .dp--quotecard .dp-quote{margin-inline:auto;text-align:center}
 .sub-body .dp--quotecard .dp-cta{justify-content:center}
+
+/* About 살구색 카드 v2 — 높이를 줄이고(3:1) 사진은 높이에 맞춰 왼쪽에(여성이 작아짐), 나머지는 같은 살구색. 글은 크게 */
+.sub-body .ab-wide{aspect-ratio:3/1;background:linear-gradient(180deg,#FED3C2,#FED9C9 50%)}
+.sub-body .ab-wide__bg{width:auto;height:100%;right:auto;object-fit:contain;object-position:left center}
+.sub-body .ab-wide__copy{left:46%;right:5%}
+.sub-body .ab-wide__copy .dp-band__t{font-size:clamp(30px,3vw,52px)!important;line-height:1.35!important}
+.sub-body .ab-wide__copy p:not(.dp-band__t){font-size:clamp(17px,1.4vw,22px)!important;margin-top:1.1em}
+@media (max-width:860px){
+  .sub-body .ab-wide{aspect-ratio:auto}
+  .sub-body .ab-wide__bg{width:100%;height:auto;object-fit:cover}
+}
+
+/* 본문 한 단계 더 크게 (17~19px → 18~21px) */
+.sub-body .dp-body p,.sub-body .dp-lead,.sub-body .dp-band__copy p:not(.dp-band__t),.sub-body .dp-bleed__copy p:not(.dp-acc):not(.dp-band__t),
+.sub-body .dp-tall__notes p,.sub-body .dp-item p,.sub-body .ab-wide__copy p:not(.dp-band__t){font-size:clamp(17px,1.4vw,21px)!important;line-height:1.8!important}
+.sub-body .dp-body,.sub-body .dp-band__copy,.sub-body .dp-tall__copy,.sub-body .dp-bleed__copy{max-width:34em}
+.sub-body .tcard .tres__k,.sub-body .dp-facts dd{font-size:clamp(16px,1.15vw,19px)}
