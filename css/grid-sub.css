@@ -709,3 +709,12 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .tcta--split{margin-inline:var(--side)!important;width:auto;column-gap:clamp(36px,5vw,90px)}
 .sub-body .tcta--split .tcta__copy{padding-left:0!important}
 .sub-body .tcta__vis{margin:0!important}
+
+/* 출처 박스 — 원래 박스 그대로, 'Reference' 제목만 박스 오른쪽에 세로로 */
+.sub-body .refbox--side{display:flex;align-items:stretch;gap:0;padding:0!important;overflow:hidden;max-width:560px}
+.sub-body .refbox--side .refbox__body{flex:1;padding:clamp(18px,1.6vw,26px)}
+.sub-body .refbox--side p.refbox__k{margin:0!important;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;
+  padding:12px 9px;background:#FDF0E8;border-left:1px solid var(--hair);font-size:11px!important;letter-spacing:.24em!important;color:var(--accent)!important}
+.sub-body .refbox--side .refbox__row b{font-size:clamp(15px,1.1vw,18px)}
+.sub-body .refbox--side .refbox__row span{font-size:13px}
+.sub-body .refbox--side .refbox__arr{margin:6px 0}
