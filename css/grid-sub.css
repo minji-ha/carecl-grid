@@ -363,3 +363,7 @@
 .sub-body .dp--quotecard .btn-line{border-color:#fff;color:#fff;background:transparent}
 .sub-body .dp--quotecard .btn-line:hover{background:#fff;color:var(--accent)}
 .qcard__logo{right:4%;bottom:7%;width:min(58%,820px);color:#B8460F;opacity:.42;filter:blur(8px)}
+/* 문구 카드 큰 문장 — 더 두껍게 (SUIT 600), 아래 작은 문장은 그대로 */
+.sub-body .dp--quotecard .dp-quote{font-weight:600!important}
+.sub-body .dp--quotecard .dp-quote .lat,.sub-body .dp--quotecard .dp-quote .en{font-weight:600!important;-webkit-text-stroke:.6px currentColor!important}
+.sub-body .dp--quotecard .dp-quote small,.sub-body .dp--quotecard .dp-quote small *{font-weight:400!important;-webkit-text-stroke:0!important}
