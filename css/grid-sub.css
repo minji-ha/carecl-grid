@@ -586,3 +586,7 @@ body:has(main.sub) .foot{margin-top:0!important}
 .ct-card:hover::before{background:linear-gradient(180deg,rgba(224,102,43,.25) 0%,rgba(224,102,43,.15) 40%,rgba(160,60,20,.85) 100%)}
 @media (max-width:480px){ .ct-card{aspect-ratio:16/10} }
 .ct-card{cursor:default}
+/* 섹션 사이 간격 한 번만 — 글 섹션(.dp)의 안쪽 여백과 이웃 블록의 바깥 여백이 겹쳐 두 배가 되던 곳 정리 */
+.sub-body .dp:has(+ :not(.dp)){padding-bottom:0}
+.sub-body :not(.dp) + .dp{padding-top:0}
+.sub-body .dp > .dp__in > :first-child{margin-top:0!important}
