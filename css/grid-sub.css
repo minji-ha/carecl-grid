@@ -145,3 +145,7 @@
   background:url(../assets/img/a-head-model.jpg) right 30%/cover no-repeat;
 }
 @media (max-width:767px){ .sub .subhead--aging-lab::before{background-position:85% 30%} }
+
+/* 머리말 글 묶음(라벨 ~ 제목 글자 바닥)을 배경 띠의 세로 가운데로 — 위 여백은 줄이고 아래는 늘려 높이는 그대로 */
+.sub .subhead{padding-top:clamp(48px,5.2vw,100px)}
+.sub .subhead__top .wrap{padding-bottom:clamp(50px,4.9vw,90px)}
