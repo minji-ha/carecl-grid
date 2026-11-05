@@ -585,3 +585,4 @@ body:has(main.sub) .foot{margin-top:0!important}
 .ct-card:hover .ct-card__bg{transform:scale(1.07)}
 .ct-card:hover::before{background:linear-gradient(180deg,rgba(224,102,43,.25) 0%,rgba(224,102,43,.15) 40%,rgba(160,60,20,.85) 100%)}
 @media (max-width:480px){ .ct-card{aspect-ratio:16/10} }
+.ct-card{cursor:default}
