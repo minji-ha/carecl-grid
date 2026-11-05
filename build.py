@@ -476,7 +476,6 @@ def sub_page(group, led, items, idx):
       <div class="wrap">
         <p class="label">{group}</p>
         <h1 class="subhead__title">{TITLE_BREAK.get(title_en, title_en)}</h1>
-        <p class="subhead__kr">{title_kr}</p>
       </div>
     </div>
     <nav class="subtabs" aria-label="{group} 하위 메뉴"><div class="wrap subtabs__in">{tabs}</div></nav>
