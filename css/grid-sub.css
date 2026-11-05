@@ -153,3 +153,7 @@
 /* About careCL 제품 라인업 큰 사진 — 높이 조금 더 (21:9 → 2:1) */
 .sub-body .dp-full--tall img{aspect-ratio:2/1!important}
 @media (max-width:860px){ .sub-body .dp-full--tall img{aspect-ratio:4/3!important} }
+
+/* 세로 인물 사진이 들어가는 사진+글 블록 — 4:5로 얼굴이 잘리지 않게 */
+.sub-body .dp-band__img--portrait{aspect-ratio:4/5!important}
+.sub-body .dp-band__img--portrait img{object-position:50% 20%}
