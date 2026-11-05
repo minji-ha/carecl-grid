@@ -426,3 +426,34 @@
 .sub-body #results .tres__head .dp-label::before{display:none}
 .sub-body #results .tres__head .dp-label{justify-content:center}
 .sub-body #results .tres__head .dp-label{color:#FF9A62!important}
+
+/* R&D 숫자 결과 v3 — 카드를 기기 둘레 원형으로 (왼쪽 4개 · 오른쪽 3개가 둥글게 감싼다), 카드 글은 가운데 */
+@media (min-width:1081px){
+  .sub-body #results .tres2{position:relative;display:block;height:clamp(560px,46vw,680px);max-width:none;
+    --rx:clamp(300px,29vw,440px);--ry:clamp(200px,17vw,250px)}
+  .sub-body #results .tres2__col{display:contents}
+  .sub-body #results .tres2__dev{position:absolute;left:50%;top:50%;translate:-50% -50%;height:auto}
+  .sub-body #results .tcard{position:absolute;left:calc(50% + cos(var(--a)) * var(--rx));top:calc(50% + sin(var(--a)) * var(--ry));
+    width:clamp(150px,12.5vw,186px);min-height:0;translate:-50% -50%!important}
+  .sub-body #results .tres2__col--l .tcard:nth-child(1){--a:228deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(2){--a:196deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(3){--a:164deg}
+  .sub-body #results .tres2__col--l .tcard:nth-child(4){--a:132deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(1){--a:-42deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(2){--a:0deg}
+  .sub-body #results .tres2__col--r .tcard:nth-child(3){--a:42deg}
+}
+.sub-body #results .tcard{align-items:center;justify-content:center;text-align:center}
+.sub-body #results .tcard .tres__v{text-align:center}
+.sub-body #results .tcard .tres__k{font-size:clamp(12px,.82vw,13.5px)!important;color:rgba(255,255,255,.82)}
+/* 기기 — 흰 테두리처럼 보이던 빛기둥 대신 뒤 원형 은은한 빛 + 바닥 반사, 가장자리 정리한 누끼 */
+.sub-body #results .tres--center::before{left:50%;top:50%;bottom:auto;width:clamp(360px,34vw,520px);height:clamp(360px,34vw,520px);translate:-50% -38%;
+  border-radius:50%;background:radial-gradient(closest-side,rgba(255,170,120,.30),rgba(255,140,90,.10) 60%,rgba(255,140,90,0));filter:none}
+.sub-body #results .tres2__dev img{height:clamp(300px,27vw,420px);filter:drop-shadow(0 26px 30px rgba(0,0,0,.55)) brightness(.97)}
+.sub-body #results .tres2__dev::after{content:"";position:absolute;left:50%;bottom:-14px;width:120%;height:22px;translate:-50% 0;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,180,140,.28),rgba(255,180,140,0))}
+@media (max-width:1080px){
+  .sub-body #results .tres2{grid-template-columns:1fr}
+  .sub-body #results .tres2__col{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sub-body #results .tres--center{padding-inline:16px}
+}

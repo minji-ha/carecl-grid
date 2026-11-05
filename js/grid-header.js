@@ -42,7 +42,7 @@
     }
     for (var i = all.length - 1; i >= 0; i--) {
       var n = all[i], t = n.nodeValue;
-      if (!/[0-9A-Za-z]/.test(t) || n.parentNode.classList.contains('num-en') || n.parentNode.classList.contains('lat')) continue;
+      if (!/[0-9A-Za-z&]/.test(t) || n.parentNode.classList.contains('num-en') || n.parentNode.classList.contains('lat') || n.parentNode.classList.contains('amp')) continue;
       if (/flex|grid/.test(getComputedStyle(n.parentNode).display)) continue;   // 플렉스·그리드 바로 안의 글은 쪼개면 글자마다 칸이 되어 줄이 바뀐다
       var re = /[0-9]+/g, m, cuts = [];
       while (/[0-9]/.test(t) && (m = re.exec(t))) {
@@ -54,6 +54,8 @@
       // 영문 글자 묶음은 span.lat (작은 영문 굵기 보정용)
       var lr = /[A-Za-z][A-Za-z'’.\-]*/g;
       while ((m = lr.exec(t))) cuts.push([m.index, m[0].length, 'lat']);
+      var ar = /&/g;   // & 기호 — 로고 서체 옆에서 튀지 않게 얇은 한글 서체 &로
+      while ((m = ar.exec(t))) cuts.push([m.index, 1, 'amp']);
       cuts.sort(function (a, b) { return a[0] - b[0]; });
       if (!cuts.length) continue;
       var frag = document.createDocumentFragment(), at = 0;

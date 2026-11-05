@@ -312,3 +312,6 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 @keyframes fadeInDown{from{opacity:0;transform:translate3d(0,-40px,0)}to{opacity:1;transform:none}}
 .wow.animated{animation-duration:.9s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
 .wow{visibility:hidden}
+
+/* & 기호 — 로고 서체(가는 획) 옆에서 두껍게 튀지 않도록 얇은 SUIT &, 획 덧그리기 없음 */
+.amp{display:inline!important;font-family:"SUIT",sans-serif!important;font-weight:200!important;-webkit-text-stroke:0!important;font-size:.92em}
