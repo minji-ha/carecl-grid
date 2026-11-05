@@ -609,3 +609,6 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body #results .tcard .tres__k{color:#4A423C}
 .sub-body #results .tres2__dev img{filter:drop-shadow(0 26px 28px rgba(150,70,30,.28))}
 .sub-body #results .tres2__dev::after{background:radial-gradient(closest-side,rgba(190,100,50,.25),rgba(190,100,50,0))}
+/* R&D 특허증 — 뒤 회색 판·그림자 없이 특허증만 */
+.sub-body .dp-tall__img--doc{background:none!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
+.sub-body .dp-tall__img--doc img{width:min(72%,480px)!important;box-shadow:0 18px 40px -20px rgba(30,20,10,.35)}
