@@ -1,7 +1,7 @@
 /* GRID 시안 메인 (2026-11-05)
    · 5 STEPS: 사진이 세로선을 타고 서로 다른 높이에서 내려와 한 줄로 맞춰진 뒤 글이 나온다
    · 네 가지 기준: 오른쪽 글이 화면 가운데 오면 왼쪽 사진이 바뀐다
-   · 라인업: 화면에 들어오면 카드가 차례로 올라온다
+   · 라인업: 좌우 슬라이더 (화살표 · 끌기 · 진행 막대), 처음엔 카드가 차례로 들어온다
    · 공식몰: 도착하면 사진이 살짝 확대, 다시 올라가면 원래대로 */
 (function () {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -64,14 +64,51 @@
     whyItems.forEach(function (el) { wio.observe(el); });
   }
 
-  // 라인업
-  var grid = document.querySelector('[data-gtiles]');
-  if (grid && !reduce && 'IntersectionObserver' in window) {
-    document.documentElement.classList.add('js-tiles');
-    var tio = new IntersectionObserver(function (es) {
-      if (es[0].isIntersecting) { grid.classList.add('is-in'); tio.disconnect(); }
-    }, { rootMargin: '0px 0px -15% 0px' });
-    tio.observe(grid);
+  // 라인업 슬라이더 — 화살표 · 마우스 끌기 · 진행 막대
+  var slider = document.querySelector('[data-line-slider]');
+  if (slider) {
+    var track = slider.querySelector('[data-gtiles]');
+    var bar = document.querySelector('[data-line-bar]');
+    var prev = document.querySelector('[data-line-prev]'), next = document.querySelector('[data-line-next]');
+    function step() { var t = track.querySelector('.gtile'); return t.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0); }
+    function sync() {
+      var max = slider.scrollWidth - slider.clientWidth;
+      var vis = slider.clientWidth / slider.scrollWidth;
+      bar.style.width = (vis * 100) + '%';
+      bar.style.transform = 'translateX(' + (max > 0 ? slider.scrollLeft / max * (1 / vis - 1) * 100 : 0) + '%)';
+      prev.disabled = slider.scrollLeft < 4;
+      next.disabled = slider.scrollLeft > max - 4;
+    }
+    prev.addEventListener('click', function () { slider.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { slider.scrollBy({ left: step(), behavior: 'smooth' }); });
+    slider.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    sync();
+    // 마우스로 끌어서 넘기기 (터치는 기본 스크롤)
+    var down = null;
+    slider.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: slider.scrollLeft, moved: false }; });
+    addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - down.x;
+      if (!down.moved && Math.abs(dx) > 5) { down.moved = true; slider.classList.add('is-drag'); }
+      if (down.moved) slider.scrollLeft = down.l - dx;
+    });
+    addEventListener('pointerup', function () {
+      if (!down) return;
+      var moved = down.moved; down = null;
+      if (moved) {   // 놓으면 가까운 카드에 맞춘다
+        var st = step(), target = Math.round(slider.scrollLeft / st) * st;
+        slider.classList.remove('is-drag');
+        slider.scrollTo({ left: target, behavior: 'smooth' });
+      }
+    });
+    if (!reduce && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('js-tiles');
+      var tio = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { track.classList.add('is-in'); tio.disconnect(); }
+      }, { rootMargin: '0px 0px -15% 0px' });
+      tio.observe(track);
+    }
   }
 
   // 공식몰 사진 확대/축소

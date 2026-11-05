@@ -271,14 +271,12 @@ def page_index():
             <a class="gpill" href="{h}">{lk}</a>
           </article>""" for i, (no, t, q, lk, h, *_) in enumerate(CORE))
 
-    tiles = "\n".join(f"""        <a class="gtile" href="{h}" style="--i:{i}">
-          <span class="gtile__no">{i + 1:02d}</span>
-          <em class="gtile__tag">{tag}</em>
-          <span class="gtile__img"><img src="assets/img/{cut}?v={VER}" alt="" loading="lazy"></span>
-          <b class="gtile__name">{name}</b>
-          <span class="gtile__desc">{desc}</span>
-          <span class="gtile__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
+    tiles = "\n".join(f"""          <a class="gtile" href="{h}" style="--i:{i}" draggable="false">
+            <span class="gtile__no">{i + 1:02d}</span>
+            <span class="gtile__img"><img src="assets/img/{cut}?v={VER}" alt="" loading="lazy" draggable="false"></span>
+            <em class="gtile__tag">{tag}</em>
+            <b class="gtile__name">{name}</b>
+          </a>""" for i, (tag, name, desc, cut, h) in enumerate(GLINEUP))
 
     contact_links = "".join(f'<a href="{h}">{kr}<span>{en}</span></a>' for en, kr, desc, h in CONTACTS)
 
@@ -343,18 +341,24 @@ def page_index():
     </div>
   </section>
 
-  <!-- 05 라인업 — 제품마다 따로 선 카드 (들어올 때 차례로 올라온다) -->
+  <!-- 05 라인업 — 좌우로 넘기는 제품 카드 (끌기 · 화살표 · 진행 막대) -->
   <section class="gline" data-gline aria-labelledby="gline-title">
-    <div class="gwrap">
-      <div class="ghead">
+    <div class="gwrap gline__head">
+      <div>
         <p class="glabel">careCL Lineup</p>
         <h2 class="ghead__title" id="gline-title">진단 결과에 맞춰 <span class="gacc">조합하는 제품</span></h2>
-        <p class="ghead__kr">디바이스와 전용 코스메틱을 내 노화 타입에 맞게 고릅니다.</p>
       </div>
-      <div class="gline__grid" data-gtiles>
+      <div class="gline__btns">
+        <button type="button" class="gline__nav" data-line-prev aria-label="이전 제품"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="gline__nav" data-line-next aria-label="다음 제품"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="gline__slider" data-line-slider>
+      <div class="gline__track" data-gtiles>
 {tiles}
       </div>
     </div>
+    <div class="gwrap"><div class="gline__bar" aria-hidden="true"><i data-line-bar></i></div></div>
   </section>
 
   <!-- 06 공식몰 -->
