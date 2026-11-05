@@ -815,7 +815,7 @@ body:has(main.sub) .foot{margin-top:0!important}
 .sub-body .howto2__plan{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;margin-top:clamp(14px,1.4vw,22px);padding:16px clamp(18px,2vw,28px);border-radius:var(--r);background:#F5F6F8}
 .sub-body .howto2__plan strong{font-weight:400;color:var(--ink);font-size:clamp(14.5px,1.05vw,16px)}
 .sub-body .howto2__plan span{color:var(--ink-2);font-size:clamp(13.5px,.98vw,15px)}
-.sub-body .howto2__vid{max-width:960px;margin:clamp(40px,4vw,64px) auto 0!important}
+.sub-body .howto2__vid{max-width:none;width:100%;margin:clamp(40px,4vw,64px) 0 0!important}
 @media (max-width:860px){
   .sub-body .howto2 .dp-title{white-space:normal}
   .sub-body .howto2__steps{grid-template-columns:1fr}
