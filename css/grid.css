@@ -9,6 +9,8 @@
 @font-face{font-family:"S-Core Dream";font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff) format("woff")}
 @font-face{font-family:"S-Core Dream";font-weight:800;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff) format("woff")}
 @font-face{font-family:"S-Core Dream";font-weight:600;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff) format("woff")}
+/* 전체 서체 URW Classico (2026-11-09 요청, 로고는 SVG라 그대로) — 한글은 이 서체에 없어 SUIT로 */
+@font-face{font-family:"URW Classico";src:url(../fonts/urw-classico.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
   --ink:#1E1A17;
   --ink-2:#6B625C;
@@ -21,9 +23,9 @@
   --led:var(--accent);
   /* 영문은 Caviar Dreams (자료/drive/10. 글꼴/CaviarDreams.ttf) — 한글 글자는 없어 아래 한글 서체로 이어진다
      한글: 제목 에스코어드림 · 본문 SUIT (둘 다 상업적 이용 무료) */
-  --f-title:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;
-  --f-ui:"Caviar Dreams","SUIT",system-ui,sans-serif;
-  --f-kr:"Caviar Dreams","SUIT","Pretendard",system-ui,sans-serif;
+  --f-title:"URW Classico","S-Core Dream","SUIT",system-ui,sans-serif;
+  --f-ui:"URW Classico","SUIT",system-ui,sans-serif;
+  --f-kr:"URW Classico","SUIT","Pretendard",system-ui,sans-serif;
   --gut:clamp(20px,6.25vw,120px);   /* 좌우 여백 — STEM 45px → 90px@1440 */
   --head:88px;
   --sec:clamp(100px,11vw,200px);
@@ -175,7 +177,7 @@ body.on-hero .header:not(.is-solid) .header__menu span{background:#fff}
    영문 글자 묶음은 js/grid-header.js가 <span class="en">으로 감싼다 */
 .subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
-  font-family:"Caviar Dreams","S-Core Dream","SUIT",system-ui,sans-serif;font-weight:600;
+  font-family:"URW Classico","S-Core Dream","SUIT",system-ui,sans-serif;font-weight:600;
 }
 .en{-webkit-text-stroke:.035em currentColor;paint-order:stroke fill}
 .hnav__in b .en,.gstep__head .en,.gtile__name .en{-webkit-text-stroke:.7px currentColor}
@@ -219,14 +221,14 @@ body,
 /* 한글 서체 → 나눔스퀘어라운드 (네이버, 상업적 이용 무료)
    로고 서체 Caviar Dreams처럼 획 끝이 둥글고 반듯한 기하형이라 섞여도 한 서체처럼 보인다 */
 :root{
-  --f-title:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif;
-  --f-ui:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif;
-  --f-kr:"Caviar Dreams","NanumSquareRound","Pretendard",system-ui,sans-serif;
+  --f-title:"URW Classico","NanumSquareRound",system-ui,sans-serif;
+  --f-ui:"URW Classico","NanumSquareRound",system-ui,sans-serif;
+  --f-kr:"URW Classico","NanumSquareRound","Pretendard",system-ui,sans-serif;
 }
 body,
 .subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
-  font-family:"Caviar Dreams","NanumSquareRound",system-ui,sans-serif
+  font-family:"URW Classico","NanumSquareRound",system-ui,sans-serif
 }
 
 /* 서브 머리말 여백 다시 맞추기 — 헤더와 라벨 사이는 넉넉히, 제목 아래 탭까지는 짧게 */
@@ -243,14 +245,14 @@ html[data-led-now]{--led:var(--accent)!important}
 
 /* 한글 서체 → IBM Plex Sans KR Light (SIL OFL — 상업적 이용 무료). & 기호도 이 서체로 나온다 (Caviar Dreams에서 & 제외) */
 :root{
-  --f-title:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif;
-  --f-ui:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif;
-  --f-kr:"Caviar Dreams","IBM Plex Sans KR","Pretendard",system-ui,sans-serif;
+  --f-title:"URW Classico","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-ui:"URW Classico","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-kr:"URW Classico","IBM Plex Sans KR","Pretendard",system-ui,sans-serif;
 }
 body,
 .subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
-  font-family:"Caviar Dreams","IBM Plex Sans KR",system-ui,sans-serif
+  font-family:"URW Classico","IBM Plex Sans KR",system-ui,sans-serif
 }
 body,body *{font-weight:400!important}
 
@@ -260,14 +262,14 @@ body,body *{font-weight:400!important}
 
 /* 한글 서체 → SUIT Light (SIL OFL — 상업적 이용 무료). 숫자 · &도 SUIT */
 :root{
-  --f-title:"Caviar Dreams","SUIT",system-ui,sans-serif;
-  --f-ui:"Caviar Dreams","SUIT",system-ui,sans-serif;
-  --f-kr:"Caviar Dreams","SUIT","Pretendard",system-ui,sans-serif;
+  --f-title:"URW Classico","SUIT",system-ui,sans-serif;
+  --f-ui:"URW Classico","SUIT",system-ui,sans-serif;
+  --f-kr:"URW Classico","SUIT","Pretendard",system-ui,sans-serif;
 }
 body,
 .subhead__title,.ghead__big,.ghead__title,.gwhy__title,.gtile__name,.gstep__head,.gstep__kr,
 .sec-title,.sub-body h2,.sub-body h3,.sub-body .dp-title,.gshop__copy h2,.foot__side h2,.hnav__in b{
-  font-family:"Caviar Dreams","SUIT",system-ui,sans-serif
+  font-family:"URW Classico","SUIT",system-ui,sans-serif
 }
 
 /* 좌우 여백 하나로 — 헤더 로고 선 = 메인 · 상세 본문 선 (90px@1440 → 60px@1440) */
@@ -276,9 +278,9 @@ body,
 /* 영문과 붙어 나오는 숫자만 로고 서체 숫자로 (5 STEPS · 01 Notice …) — 한글 옆 숫자는 SUIT 그대로.
    어느 숫자가 영문 옆인지는 js/grid-header.js가 골라 <span class="num-en">으로 감싼다 */
 @font-face{font-family:"Caviar Num";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0030-0039}
-.num-en{font-family:"Caviar Num","Caviar Dreams","SUIT",system-ui,sans-serif}
+.num-en{font-family:"URW Classico","SUIT",system-ui,sans-serif}
 /* Caviar Dreams 숫자는 대문자보다 약 6% 낮아(74 : 79) 영문 옆에서 작고 가늘어 보인다 → 대문자 높이에 맞춘다 */
-.num-en{font-size:1.06em;line-height:0}
+.num-en{font-size:1em}
 
 /* 상세페이지 헤더 — 메인과 같은 흰 반투명 블러 (맨 위에서도) */
 body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bottom:1px solid rgba(30,26,23,.06);
@@ -314,6 +316,6 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 .wow{visibility:hidden}
 
 /* & 기호 — 로고 서체(가는 획) 옆에서 두껍게 튀지 않도록 얇은 SUIT &, 획 덧그리기 없음 */
-.amp{display:inline!important;font-family:"SUIT",sans-serif!important;font-weight:200!important;-webkit-text-stroke:0!important;font-size:.92em}
+.amp{display:inline!important;font-family:"URW Classico","SUIT",sans-serif!important;font-weight:400!important;-webkit-text-stroke:0!important;font-size:.92em}
 /* AI 피부 진단 플로팅 버튼 — 링크 없는 <button>이라 기본 버튼 모양만 지움 */
 button.aifab{border:0;font:inherit;cursor:default;-webkit-appearance:none;appearance:none}

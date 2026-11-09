@@ -478,7 +478,7 @@
 .mt6__head{text-align:center}
 .mt6__eyebrow{margin:0;font-family:var(--f-ui);font-weight:500;text-transform:uppercase;font-size:clamp(12px,1vw,15px);letter-spacing:.42em;color:var(--ink)}
 .mt6__title{margin:clamp(8px,1vw,16px) 0 0;font-family:var(--f-title);font-weight:600;font-size:clamp(38px,5vw,84px);line-height:1.1;color:var(--ink)}
-.mt6__title span{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.25em;color:#9A5A44;margin-right:.04em}
+.mt6__title span{font-family:"URW Classico",Georgia,serif;font-weight:400;font-size:1.25em;color:#9A5A44;margin-right:.04em}
 .mt6__sub{display:flex;align-items:center;justify-content:center;gap:18px;margin:clamp(12px,1.2vw,20px) 0 0;font-size:clamp(14.5px,1.25vw,20px);color:var(--ink)}
 .mt6__sub::before,.mt6__sub::after{content:"";width:clamp(24px,4vw,60px);height:1px;background:#9A5A44}
 .mt6__body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:clamp(12px,1.4vw,26px);align-items:center;margin-top:clamp(30px,3vw,56px)}
