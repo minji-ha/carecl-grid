@@ -12,6 +12,8 @@
   var bar = document.querySelector('.svc__bar');
   if (!S || !thread) return;
 
+  /* AI 아이콘 — 사이트 'AI 피부 진단' 버튼과 같은 반짝임 */
+  var ICO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.2 14 8.4 20.2 10.4 14 12.4 12 18.6 10 12.4 3.8 10.4 10 8.4Z" fill="currentColor"/><circle cx="19.4" cy="4.2" r="1.7" fill="currentColor" opacity=".9"/><circle cx="4.8" cy="18.4" r="1.2" fill="currentColor" opacity=".7"/></svg>';
   var Q = S.Q, N = Q.length, answers = {}, cur = -1, busy = false, turns = [];
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, reduce ? 0 : ms); }); };
@@ -37,12 +39,12 @@
   }
   function aiSay(box, html, meta, small) {
     var m = el('div', 'svc-ai' + (small ? ' svc-ai--small' : ''));
-    m.innerHTML = '<p class="svc-ai__by"><b>careCL AI</b>' + (meta ? '<span>' + meta + '</span>' : '') + '<time>' + now() + '</time></p><p class="svc-ai__t"></p>';
+    m.innerHTML = '<p class="svc-ai__by"><i class="svc-ai__ico">' + ICO + '</i><b><span class="lf">careCL</span> AI</b>' + (meta ? '<span>' + meta + '</span>' : '') + '<time>' + now() + '</time></p><p class="svc-ai__t"></p>';
     box.appendChild(m);
     var out = m.querySelector('.svc-ai__t');
-    var parts = html.split(/(<br>|<em>|<\/em>)/), i = 0, j = 0, holder = out;
+    var parts = html.split(/(<br>|<em>|<\/em>|<i>|<\/i>)/), i = 0, j = 0, holder = out;
     return new Promise(function (done) {
-      if (reduce) { out.innerHTML = html; follow(m); return done(m); }
+      if (reduce) { out.innerHTML = html.replace(/<i>/g, '<span class="lf">').replace(/<\/i>/g, '</span>'); follow(m); return done(m); }
       out.classList.add('is-typing');
       (function tick() {
         if (i >= parts.length) { out.classList.remove('is-typing'); follow(m); return done(m); }
@@ -50,6 +52,8 @@
         if (p === '<br>') { holder.appendChild(document.createElement('br')); i++; return tick(); }
         if (p === '<em>') { holder = out.appendChild(document.createElement('em')); i++; return tick(); }
         if (p === '</em>') { holder = out; i++; return tick(); }
+        if (p === '<i>') { holder = out.appendChild(document.createElement('span')); holder.className = 'lf'; i++; return tick(); }   // careCL — 로고 글꼴
+        if (p === '</i>') { holder = out; i++; return tick(); }
         if (j < p.length) { holder.appendChild(document.createTextNode(p.charAt(j++))); follow(m); setTimeout(tick, small ? 8 : 22); }
         else { j = 0; i++; tick(); }
       })();
@@ -127,7 +131,7 @@
   async function start() {
     var turn = el('div', 'svc-turn svc-turn--intro'); thread.appendChild(turn);
     await sleep(400);
-    await ai(turn, '안녕하세요. careCL AI 피부 에이전트예요.');
+    await ai(turn, '안녕하세요. <i>careCL</i> AI 피부 에이전트예요.');
     await ai(turn, '18개의 질문으로 <em>당신의 노화 타입</em>과,<br>얼굴 22개 부위 중 <em>먼저 관리할 곳</em>을 찾아 드릴게요.');
     await ai(turn, '이 상담은 피부과 전문의 인나 콜구넨코(Inna Kolgunenko) 박사의 5가지 노화 형태(Morphotypes)와 한국인 피부 노화 연구를 바탕으로, 노화를 6가지 타입과 22개 부위로 나누어 봅니다. 비회원도 참여할 수 있어요.', null, true);
     var c = el('div', 'svc-pick svc-pick--start',
@@ -160,10 +164,10 @@
     var d = new Date(), ymd = d.getFullYear() + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + ('0' + d.getDate()).slice(-2);
     var no = String(d.getFullYear()).slice(2) + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + String(Math.floor(1000 + Math.random() * 9000));
     res.insertAdjacentHTML('afterbegin',
-      '<header class="svc-doc"><p class="svc-doc__brand">careCL<span>AI Skin Diagnosis Report</span></p>' +
+      '<header class="svc-doc"><p class="svc-doc__brand"><b class="lf">careCL</b><span>AI Skin Diagnosis Report</span></p>' +
       '<dl class="svc-doc__meta"><div><dt>No.</dt><dd>' + no + '</dd></div><div><dt>Date</dt><dd>' + ymd + '</dd></div><div><dt>Method</dt><dd>Aging Map 22 · 18 Q</dd></div></dl></header>');
     var cover = res.querySelector('.cku-cover');
-    if (cover) cover.insertAdjacentHTML('beforeend', '<span class="svc-stamp" aria-hidden="true"><b>careCL</b>AI 진단<br>완료</span>');
+    if (cover) cover.insertAdjacentHTML('beforeend', '<span class="svc-stamp" aria-hidden="true"><b class="lf">careCL</b>AI 진단<br>완료</span>');
   }
   new MutationObserver(decorate).observe(form, { childList: true, subtree: false });
   decorate();

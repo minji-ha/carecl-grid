@@ -38,7 +38,7 @@
 </style>
 </head>
 <body>
-<script>try{if(parent!==window&&parent.document.querySelector(".sv--grid,.sv--chat"))document.documentElement.classList.add("is-grid")}catch(e){}</script>
+<script>try{if(parent!==window&&parent.document.querySelector(".sv--grid,.sv--chat"))document.documentElement.classList.add("is-grid");if(parent!==window&&parent.document.querySelector(".sv--chat"))document.documentElement.classList.add("is-chat")}catch(e){}</script>
 <div class="panel photo">
   <div class="layer">
     <img class="base" src="zone-photo.jpg" alt="Aging Map 22 관리 부위 — 이마·미간·눈가·앞광대·턱·목" draggable="false">
@@ -66,7 +66,11 @@
     var w = W / H >= 1.2 ? Math.max(W, H / IA) : Math.max(W * 1.7, Math.min(W * 2.4, H * 0.62 / IA));
     var h = w * IA, x = W * 0.5 - w * (document.documentElement.classList.contains('is-grid') ? 0.575 : 0.53), y = h > H ? H * 0.46 - h * 0.42 : (H - h) * 0.5;
     x = Math.min(0, Math.max(W - w, x)); if (h > H) y = Math.min(0, Math.max(H - h, y));
-    if (document.documentElement.classList.contains('is-grid') && W / H < 1.2) {   // GRID 설문 카드: 사진을 조금 키워 아래쪽에 붙인다 (위는 제목 자리)
+    if (document.documentElement.classList.contains('is-chat')) {   // 대화형 설문 카드: 사진이 카드를 꽉 채우게 (위아래 번짐 없이)
+      w = Math.max(W / 0.535, W); h = w * IA;                      // 사진 가로 26.5%~80% — 얼굴과 오른쪽 부위 이름(U2 미간…)까지, 왼쪽 Upper·Mid·Lower 글자는 밖으로
+      if (h > H) { h = H; w = h / IA; }
+      x = Math.min(0, Math.max(W - w, -w * 0.265)); y = H - h;      // 아래에 붙이고 위는 바탕색으로 (제목 자리)
+    } else if (document.documentElement.classList.contains('is-grid') && W / H < 1.2) {   // GRID 설문 카드: 사진을 조금 키워 아래쪽에 붙인다 (위는 제목 자리)
       w = Math.min(W * 2.4, Math.max(W * 1.7, H * 0.74 / IA)); h = w * IA;
       x = Math.min(0, Math.max(W - w, W * 0.5 - w * 0.575)); y = Math.max((H - h) * 0.5, H - h * 0.97);
     }
@@ -74,6 +78,7 @@
     var lay = panel.querySelector('.layer'), hero = document.documentElement.classList.contains('is-hero');
     lay.style.setProperty('--t', (y > 0 ? y : -1) + 'px'); lay.style.setProperty('--b', (h > H ? H + 1 : y + h) + 'px');
     lay.style.setProperty('--f', Math.round(h * (hero ? 0.22 : 0.12)) + 'px');
+    if (document.documentElement.classList.contains('is-chat')) { lay.style.setProperty('--t', (y > 0 ? y : -2) + 'px'); lay.style.setProperty('--b', (H + 2) + 'px'); lay.style.setProperty('--f', Math.round(h * 0.16) + 'px'); }
     base.style.left = x + 'px'; base.style.top = y + 'px'; base.style.width = w + 'px'; base.style.height = h + 'px';
     cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     mask.width = Math.ceil(W / 2); mask.height = Math.ceil(H / 2);
@@ -127,6 +132,7 @@
   function frame(now) {
     var dt = Math.min(0.05, prev ? (now - prev) / 1000 : 0.016); prev = now;
     if (reduce) { blots.forEach(function (b) { b.r = b.rT; }); }
+    if (!W || !H || !mask.width) { requestAnimationFrame(frame); return; }   // 숨겨진 칸(크기 0)에서는 그리지 않는다
     drawMask(dt);
     ctx.clearRect(0, 0, W, H);
     if (grid.complete && grid.naturalWidth) {

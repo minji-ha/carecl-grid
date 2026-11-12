@@ -7,19 +7,19 @@
    · 리포트 내용·순서는 report.js 그대로, 겉모습만
    ========================================================= */
 .sv--chat{
-  --peach:#FFD6BF; --lilac:#D9D4FF; --cream:#FFF8F2; --coral:#FF7E5F;
-  --grad:linear-gradient(120deg,#FF8A5B 0%,#E0662B 55%,#D9497A 120%);
-  --grad-soft:linear-gradient(135deg,#FFE3D2 0%,#F3E4F4 55%,#DCD8FF 100%);
-  --glass:rgba(255,255,255,.72);
-  --sh:0 1px 0 rgba(255,255,255,.8) inset,0 18px 40px -22px rgba(120,60,40,.35);
+  --peach:#FFE6D8; --cream:#FBF8F5; --sand:#F4EFEA; --line2:#EEE6DF;
+  --grad:linear-gradient(120deg,#F28A55 0%,#E0662B 100%);
+  --grad-soft:linear-gradient(135deg,#FFF1E8 0%,#FBF6F1 100%);
+  --glass:#fff;
+  --sh:0 0 0 1px var(--line2),0 14px 32px -24px rgba(90,60,40,.28);
   --ease:cubic-bezier(.16,1,.3,1);
   position:relative;display:block;min-height:0;background:var(--cream);isolation:isolate;overflow:clip
 }
 body.survey--chat .foot{margin-top:0}
 /* 떠다니는 빛 */
-.sv--chat::before,.sv--chat::after{content:"";position:fixed;z-index:-1;width:60vmax;height:60vmax;border-radius:50%;filter:blur(70px);opacity:.75;pointer-events:none}
+.sv--chat::before,.sv--chat::after{content:"";position:fixed;z-index:-1;width:60vmax;height:60vmax;border-radius:50%;filter:blur(80px);opacity:.45;pointer-events:none}
 .sv--chat::before{left:-18vmax;top:-10vmax;background:radial-gradient(circle,#FFC9AE 0%,rgba(255,201,174,0) 65%);animation:svcDrift 18s ease-in-out infinite alternate}
-.sv--chat::after{right:-20vmax;bottom:-18vmax;background:radial-gradient(circle,#D5CCFF 0%,rgba(213,204,255,0) 65%);animation:svcDrift 22s ease-in-out infinite alternate-reverse}
+.sv--chat::after{right:-20vmax;bottom:-18vmax;background:radial-gradient(circle,#FFE2D0 0%,rgba(255,226,208,0) 65%);animation:svcDrift 22s ease-in-out infinite alternate-reverse}
 @keyframes svcDrift{to{transform:translate(8vmax,6vmax) scale(1.12)}}
 
 /* ── 상담 화면 ── */
@@ -35,7 +35,7 @@ body.survey--chat .foot{margin-top:0}
 .svc__meta{font-size:12px;color:var(--ink-2)}
 /* AI 아바타 — 돌아가는 빛 구슬 */
 .svc__orb,.svc-ai__by::before{flex:none;display:block;border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,#fff 0 8%,rgba(255,255,255,0) 30%),conic-gradient(from 0deg,#FF8A5B,#FFC2A3,#C9C0FF,#E0662B,#FF8A5B);
+  background:radial-gradient(circle at 32% 28%,#fff 0 8%,rgba(255,255,255,0) 30%),conic-gradient(from 0deg,#F28A55,#FFD9C2,#fff,#E0662B,#F28A55);
   animation:svcSpin 6s linear infinite;box-shadow:0 6px 16px -6px rgba(224,102,43,.7)}
 .svc__orb{width:40px;height:40px}
 @keyframes svcSpin{to{rotate:360deg}}
@@ -46,7 +46,7 @@ body.survey--chat .foot{margin-top:0}
 .svc-ai__by{display:flex;align-items:center;gap:8px;margin:0 0 8px 2px;font-size:11.5px;color:#A79B92}
 .svc-ai__by::before{content:"";width:18px;height:18px}
 .svc-ai__by b{font-weight:400;color:var(--ink)}
-.svc-ai__by span{padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.7);font-size:11px;color:var(--ink-2)}
+.svc-ai__by > span{padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.7);font-size:11px;color:var(--ink-2)}
 .svc-ai__by time{margin-left:auto;font-family:var(--f-ui)}
 .svc-ai__t{margin:0;padding:22px 26px;border-radius:26px 26px 26px 8px;background:var(--glass);box-shadow:var(--sh);
   -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
@@ -54,7 +54,7 @@ body.survey--chat .foot{margin-top:0}
 .svc-ai__t em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .svc-ai__t.is-typing::after{content:"";display:inline-block;width:2px;height:.9em;margin-left:3px;vertical-align:-.08em;background:var(--accent);animation:svcBlink .7s steps(1) infinite}
 @keyframes svcBlink{50%{opacity:0}}
-.svc-ai + .svc-ai .svc-ai__by:not(:has(span)),.svc-ai--small .svc-ai__by{display:none}
+.svc-ai + .svc-ai .svc-ai__by:not(:has(> span)),.svc-ai--small .svc-ai__by{display:none}
 .svc-ai + .svc-ai{margin-top:8px}
 .svc-ai + .svc-ai .svc-ai__t{border-radius:8px 26px 26px 8px}
 .svc-ai--small .svc-ai__t{padding:16px 22px;background:rgba(255,255,255,.5);font-family:var(--f-kr);font-size:13.5px;line-height:1.75;letter-spacing:-.01em;color:var(--ink-2)}
@@ -63,7 +63,7 @@ body.survey--chat .foot{margin-top:0}
 
 .svc-typing{display:inline-flex;gap:5px;margin-top:16px;padding:14px 18px;border-radius:20px 20px 20px 6px;background:var(--glass);box-shadow:var(--sh)}
 .svc-typing i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:svcDot 1s ease-in-out infinite}
-.svc-typing i:nth-child(2){animation-delay:.15s;background:#F08F9E}.svc-typing i:nth-child(3){animation-delay:.3s;background:#A99CF5}
+.svc-typing i:nth-child(2){animation-delay:.15s}.svc-typing i:nth-child(3){animation-delay:.3s}
 @keyframes svcDot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-5px)}}
 
 /* 내 답 — 그라데이션 알약 */
@@ -91,8 +91,8 @@ body.survey--chat .foot{margin-top:0}
 .svc-pick--ab{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(620px,100%);margin-left:auto}
 .svc-pick--ab .svc-pick__help{grid-column:1/-1;justify-self:end}
 .svc-pick--ab .svc-opt{position:relative;overflow:hidden;flex-direction:column;align-items:flex-start;justify-content:flex-end;max-width:none;min-height:170px;padding:22px;
-  border:0;border-radius:28px;background:linear-gradient(150deg,#FFE7DA,#FFC9AE);box-shadow:0 18px 34px -22px rgba(224,102,43,.7)}
-.svc-pick--ab .svc-opt + .svc-opt{background:linear-gradient(150deg,#ECE9FF,#CFC6FF);box-shadow:0 18px 34px -22px rgba(110,90,220,.6)}
+  border:0;border-radius:28px;background:linear-gradient(150deg,#FFF0E6,#FFD9C4);box-shadow:0 18px 34px -22px rgba(224,102,43,.55)}
+.svc-pick--ab .svc-opt + .svc-opt{background:linear-gradient(150deg,#F7F3EF,#ECE4DC);box-shadow:0 18px 34px -22px rgba(90,60,40,.45)}
 .svc-pick--ab .svc-opt__k{position:absolute;right:14px;top:4px;width:auto;height:auto;border-radius:0;background:none;
   font-size:104px;line-height:1;color:rgba(255,255,255,.75);transition:transform .5s var(--ease)}
 .svc-pick--ab .svc-opt__t{position:relative;font-size:16px;line-height:1.5;padding-right:10px}
@@ -128,22 +128,22 @@ body.survey--chat .foot{margin-top:0}
 .svc-scan__grid{display:grid;grid-template-columns:repeat(11,12px);gap:6px}
 .svc-scan__grid i{width:12px;height:12px;border-radius:50%;background:#EADFD7;transition:background .3s,box-shadow .3s,transform .3s}
 .svc-scan__grid i.is-on{background:var(--accent);box-shadow:0 0 10px rgba(224,102,43,.7);transform:scale(1.15)}
-.svc-scan__grid i:nth-child(3n).is-on{background:#F08F9E}.svc-scan__grid i:nth-child(4n).is-on{background:#A99CF5;box-shadow:0 0 10px rgba(169,156,245,.8)}
+
 .svc-scan.is-done .svc-scan__grid i{transform:none;box-shadow:none}
 .svc-scan__t{margin:0;font-family:var(--f-ui);font-size:12px;letter-spacing:.14em;color:var(--ink-2)}
 
 /* 아래 진행 막대 — 떠 있는 알약 */
 .svc__bar{position:fixed;left:50%;bottom:20px;z-index:20;translate:-50% 0;display:flex;align-items:center;gap:18px;
-  width:min(560px,calc(100% - 2 * var(--gut)));padding:10px 22px 10px 10px;border-radius:999px;background:rgba(30,26,23,.88);color:#fff;
-  box-shadow:0 20px 40px -20px rgba(30,26,23,.7);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  width:min(560px,calc(100% - 2 * var(--gut)));padding:10px 22px 10px 10px;border-radius:999px;background:rgba(255,255,255,.96);color:var(--ink);
+  box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .svc__bar[hidden]{display:none}
-.svc__back{flex:none;padding:10px 16px;border:0;border-radius:999px;background:rgba(255,255,255,.1);font:inherit;font-size:13px;color:#fff;cursor:pointer;transition:background .25s}
-.svc__back:hover{background:rgba(255,255,255,.2)}
+.svc__back{flex:none;padding:10px 16px;border:0;border-radius:999px;background:var(--sand);font:inherit;font-size:13px;color:var(--ink);cursor:pointer;transition:background .25s}
+.svc__back:hover{background:#EDE4DC}
 .svc__back:disabled{opacity:.3;cursor:default}
-.svc__track{position:relative;flex:1;height:6px;border-radius:999px;background:rgba(255,255,255,.15);overflow:hidden}
+.svc__track{position:relative;flex:1;height:6px;border-radius:999px;background:var(--sand);overflow:hidden}
 .svc__track i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:999px;background:var(--grad);transition:width .6s var(--ease)}
-.svc__cnt{flex:none;font-family:var(--f-title);font-size:15px;color:rgba(255,255,255,.5)}
-.svc__cnt b{font-weight:400;color:#fff}
+.svc__cnt{flex:none;font-family:var(--f-title);font-size:15px;color:#B5ABA2}
+.svc__cnt b{font-weight:400;color:var(--ink)}
 
 /* ══ 스킨 리포트 — 벤토 ══ */
 .svc__report{display:none;position:relative;padding:clamp(40px,5vw,80px) 0 clamp(80px,8vw,140px)}
@@ -166,13 +166,13 @@ body.survey--chat .foot{margin-top:0}
 
 /* 진단명 — 큰 그라데이션 카드 */
 .sv--chat .checkup .cku-cover{position:relative;overflow:hidden;margin:0;padding:clamp(28px,4vw,56px);border-radius:36px;
-  background:var(--grad-soft);color:var(--ink);box-shadow:0 30px 60px -36px rgba(150,80,60,.55)}
+  background:linear-gradient(140deg,#FFF3EB 0%,#FFFFFF 60%);color:var(--ink);box-shadow:var(--sh)}
 .sv--chat .checkup .cku-cover::before{content:"";display:block;position:absolute;right:-12%;top:-30%;width:60%;aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle,rgba(255,255,255,.8),rgba(255,255,255,0) 65%);pointer-events:none}
 .sv--chat .checkup .cku-cover::after{display:none}
 .sv--chat .checkup .cku-cover .cku-result-eyebrow{display:inline-block;justify-self:start;padding:7px 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.16em}
 .sv--chat .checkup .cku-cover .cku-result-eyebrow::before{display:none}
-.sv--chat .checkup .cku-cover .cku-result-title{margin-top:20px;font-family:var(--f-title);font-size:clamp(52px,6.4vw,104px);line-height:1;letter-spacing:-.045em;color:var(--ink)}
+.sv--chat .checkup .cku-cover .cku-result-title{margin-top:20px;font-family:var(--f-title);font-size:clamp(44px,5vw,84px);line-height:1.05;letter-spacing:-.045em;color:var(--ink);word-break:keep-all}
 .sv--chat .checkup .cku-cover .cku-result-title .cku-code{display:block;margin-bottom:10px;font-family:var(--f-ui);font-size:clamp(13px,1vw,15px);letter-spacing:.2em;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sv--chat .checkup .cku-cover .cku-result-tagline{position:relative;font-family:var(--f-title);font-size:clamp(18px,1.6vw,23px);color:var(--ink)}
@@ -206,7 +206,7 @@ body.survey--chat .foot{margin-top:0}
   background:var(--grad);color:#fff;font-family:var(--f-title);font-size:15px;box-shadow:0 10px 20px -10px rgba(224,102,43,.8)}
 .sv--chat .cku-card-icon{display:none}
 .sv--chat .cku-result-desc{color:var(--ink);font-size:15px;line-height:1.85}
-.sv--chat .checkup .cku-card-dark{background:linear-gradient(140deg,#2A2320 0%,#3B2B3F 100%);color:#fff}
+.sv--chat .checkup .cku-card-dark{background:var(--ink);color:#fff}
 .sv--chat .checkup .cku-card-dark > .cku-card-title{color:#fff}
 
 /* 칩 · 상자 · 막대 */
@@ -227,7 +227,7 @@ body.survey--chat .foot{margin-top:0}
 .sv--chat .checkup .cku-shot-item{border:0;border-radius:20px;background:#FFF4EC;box-shadow:none}
 .sv--chat .checkup .cku-shot-bar{height:8px;border-radius:999px;background:#F3E3D7}
 .sv--chat .checkup .cku-shot-bar span{border-radius:999px;background:var(--grad)}
-.sv--chat .checkup .cku-shot-total{border-radius:22px;background:linear-gradient(140deg,#2A2320,#3B2B3F)}
+.sv--chat .checkup .cku-shot-total{border-radius:22px;background:var(--ink)}
 .sv--chat .cku-device-table td,.sv--chat .cku-device-table th{border-color:#F1E6DE}
 .sv--chat .cku-btn{border-radius:999px!important}
 .sv--chat .cku-btn-primary{background:var(--grad)!important;color:#fff!important;border:0!important;box-shadow:0 14px 28px -14px rgba(224,102,43,.8)!important}
@@ -269,7 +269,7 @@ body.survey--chat .foot{margin-top:0}
 .svc-wrap{display:grid;grid-template-columns:minmax(340px,38%) 1fr;gap:clamp(28px,4vw,72px);padding:0 var(--gut)}
 .svc-wrap[hidden]{display:none}
 .svc-face{position:sticky;top:calc(var(--head) + 20px);align-self:start;height:calc(100svh - var(--head) - 40px);min-height:520px;margin-top:20px;
-  border-radius:36px;overflow:hidden;background:#c7cad6;box-shadow:0 40px 80px -40px rgba(110,80,120,.55)}
+  border-radius:36px;overflow:hidden;background:#c9ccd7;box-shadow:0 30px 60px -40px rgba(60,50,70,.45)}
 .svc-face iframe{display:block;width:100%;height:100%;border:0}
 .svc-wrap .svc{width:auto;max-width:780px;margin:0}
 /* 진행 막대는 대화 칸 아래에 붙어 따라옴 */
@@ -279,3 +279,20 @@ body.survey--chat .foot{margin-top:0}
   .svc-face{position:relative;top:0;height:min(52vh,420px);min-height:0;margin-top:16px;border-radius:28px}
   .svc-wrap .svc{max-width:none}
 }
+
+/* careCL 글자는 무조건 로고 글꼴 (2026-11-12 요청) */
+@font-face{font-family:"careCL Logo";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block}
+.sv--chat .lf{font-family:"careCL Logo",var(--f-ui);font-weight:400;letter-spacing:0}
+.svc-doc__brand .lf{font-weight:400}
+/* AI 아이콘 — 'AI 피부 진단' 버튼의 반짝임 (돌아가는 구슬 대신) */
+.svc__orb,.svc-ai__ico{flex:none;display:grid;place-items:center;border-radius:50%;background:var(--grad);color:#fff;animation:none;box-shadow:0 8px 18px -8px rgba(224,102,43,.7)}
+.svc__orb{width:40px;height:40px}.svc__orb svg{width:20px;height:20px}
+.svc-ai__ico{width:20px;height:20px;box-shadow:none}.svc-ai__ico svg{width:11px;height:11px}
+.svc-ai__by::before{display:none}
+.svc__orb svg path{transform-origin:12px 10.4px;animation:svcTwinkle 2.4s ease-in-out infinite}
+@keyframes svcTwinkle{50%{transform:scale(.82) rotate(45deg)}}
+/* 왼쪽 사진 카드 — 위아래 여백을 넉넉히 */
+.svc-face{top:calc(var(--head) + 48px);height:min(calc(100svh - var(--head) - 96px),780px);min-height:480px;margin:48px 0}
+@media (max-width:1000px){.svc-face{top:0;height:min(52vh,420px);min-height:0;margin:20px 0 8px}}
+/* 위 고정 메뉴 밑에서 시작 (main이 0에서 시작해 사진 카드 윗부분이 메뉴에 가려지던 것) */
+.sv--chat{padding-top:var(--head)}
