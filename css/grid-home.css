@@ -231,3 +231,13 @@
 /* 네 가지 기준 — 선명하지 않은 항목도 읽을 수 있을 만큼은 보이게 */
 .gwhy__item{opacity:.38;transition:opacity .45s ease}
 .gwhy__item.is-on{opacity:1}
+
+/* 네 가지 기준 — 모바일은 고정 이미지 대신 항목마다 자기 이미지가 글과 함께 스크롤 (2026-11-12) */
+.gwhy__mpic{display:none}
+@media (max-width:767px){
+  .gwhy__media{display:none}
+  .gwhy__mpic{display:block;width:100%;aspect-ratio:4/3;margin:0 0 22px}
+  .gwhy__mpic img{display:block;width:100%;height:100%;object-fit:cover}
+  .gwhy__item,.gwhy__item.is-on{min-height:0;opacity:1;padding-block:28px}
+  .gwhy__item + .gwhy__item{border-top:1px solid var(--line)}
+}

@@ -268,6 +268,7 @@ def page_index():
         f'          <img class="gwhy__pic{" is-on" if i == 0 else ""}" data-why-pic src="assets/img/{im}?v={VER}" alt="" loading="lazy">'
         for i, im in enumerate(GWHY_IMG))
     why_items = "\n".join(f"""          <article class="gwhy__item{" is-on" if i == 0 else ""}" data-why>
+            <figure class="gwhy__mpic gcard"><img src="assets/img/{GWHY_IMG[i]}?v={VER}" alt="" loading="lazy"></figure>
             <em class="glabel">{no}</em>
             <h3 class="gwhy__title">{t}</h3>
             <p class="gwhy__q">{q}</p>
