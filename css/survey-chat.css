@@ -394,3 +394,12 @@ body.survey--chat .foot{margin-top:0}
 @media (prefers-reduced-motion:reduce){
   .sv--chat .cku-cover-radar svg *,.sv--chat .checkup .cku-cover-radar .sv__sweep,.sv--chat .checkup .cku-cover-radar::after{animation:none!important}
 }
+/* 리포트 맨 위 진단명 박스 — 오렌지 (2026-11-12) */
+.sv--chat .checkup .cku-cover{background:var(--accent);color:#fff}
+.sv--chat .checkup .cku-cover .cku-result-eyebrow{background:#fff;color:var(--accent)}
+.sv--chat .checkup .cku-cover .cku-result-title,.sv--chat .checkup .cku-cover .cku-result-tagline{color:#fff}
+.sv--chat .checkup .cku-cover .cku-result-title .cku-code{color:rgba(255,255,255,.75)}
+.sv--chat .checkup .cku-cover .cku-stat{background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.sv--chat .checkup .cku-cover .cku-stat-label,.sv--chat .checkup .cku-cover .cku-stat-note{color:rgba(255,255,255,.75)}
+.sv--chat .checkup .cku-cover .cku-stat-value{color:#fff}
+.sv--chat .checkup .cku-cover-radar::after{border-color:rgba(255,255,255,.55)}
