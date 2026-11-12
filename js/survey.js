@@ -99,6 +99,7 @@
   var form = document.getElementById('svForm');
   /* 고르면 바로 다음 문항으로 (GRID 설문 survey-g.html — main.sv--auto). '다음' 버튼은 여러 개 고르는 문항에만 */
   var AUTO = !!document.querySelector('.sv--auto'), autoT = 0;
+  var CHAT = !!document.querySelector('.sv--chat');
 
   var CHECK_SVG = '<svg viewBox="0 0 20 16" fill="none"><path d="M2 8.2 L7.2 13.4 L18 2.6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -262,7 +263,7 @@
     else { renderQuestion(step); syncRadar({}); }
     if (AUTO) { form.classList.remove('is-enter'); void form.offsetWidth; form.classList.add('is-enter'); }
     /* 문항 이동 시 스크롤 위치 유지 (인트로/완료 화면 진입 때만 상단으로) */
-    if ((step === -1 || step >= TOTAL) && window.scrollY > 40) {
+    if (!CHAT && (step === -1 || step >= TOTAL) && window.scrollY > 40) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
@@ -273,6 +274,7 @@
 
     if (e.target.closest('[data-restart]')) {
       PREVIEW = null; if (main) main.classList.remove('is-locked');
+      if (CHAT) { location.href = location.pathname; return; }   // 대화형은 처음부터 다시 대화
       if (location.search) history.replaceState(null, '', location.pathname);
       answers = {}; step = -1; render(); syncRadar({});
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -312,6 +314,11 @@
       render();
     }
   });
+
+  /* 대화형 설문(survey-c.html — main.sv--chat): 문항 그리기는 js/survey-chat.js가 하고,
+     여기서는 문항 데이터와 결과(리포트) 그리기만 빌려준다. 미리보기(?view=)는 바로 리포트 */
+  window.ckuSurvey = { Q: QUESTIONS, finish: function (a) { answers = a; step = TOTAL; render(); } };
+  if (CHAT && !PREVIEW) return;
 
   if (PREVIEW) step = TOTAL;
   /* 시안 확인용: ?q=5 → 5번 문항(설문 중 화면)부터 */
