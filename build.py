@@ -629,8 +629,8 @@ def page_survey_chat():
     body = """<main class="sv sv--chat">
   <section class="svc">
     <div class="svc__head">
-      <span class="svc__agent"><i class="svc__live" aria-hidden="true"></i>careCL AI Skin Agent</span>
-      <span class="svc__meta">Aging Map 22 · 노화 타입 상담</span>
+      <span class="svc__agent"><i class="svc__orb" aria-hidden="true"></i><span><b>careCL AI</b><small><i class="svc__live" aria-hidden="true"></i>상담 중 · Aging Map 22</small></span></span>
+      <span class="svc__meta">노화 타입 상담</span>
     </div>
     <div class="svc__thread" id="svChat" aria-live="polite"></div>
   </section>
