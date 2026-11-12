@@ -97,6 +97,8 @@
   var answers = {};          // index -> value(문자열) | 배열
   var step = -1;             // -1: intro,  0..17: 문항,  TOTAL: 완료
   var form = document.getElementById('svForm');
+  /* 고르면 바로 다음 문항으로 (GRID 설문 survey-g.html — main.sv--auto). '다음' 버튼은 여러 개 고르는 문항에만 */
+  var AUTO = !!document.querySelector('.sv--auto'), autoT = 0;
 
   var CHECK_SVG = '<svg viewBox="0 0 20 16" fill="none"><path d="M2 8.2 L7.2 13.4 L18 2.6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -112,7 +114,7 @@
 
   function optionsHTML(q, idx) {
     var cur = answers[idx];
-    var cls = 'sv__opts' + (q.grid ? ' is-grid' : (q.two ? ' is-two' : ''));
+    var cls = 'sv__opts' + (q.grid ? ' is-grid' : (q.two ? ' is-two' : '')) + (AUTO && !q.grid && !q.two && q.opts.length === 2 ? ' is-ab' : '');   // 둘 중 하나 고르기 → 좌우 큰 칸
     var html = '<div class="' + cls + '">';
     q.opts.forEach(function (o, i) {
       var val = o.t;
@@ -129,6 +131,9 @@
     var cur = answers[idx];
     var ok = Array.isArray(cur) ? cur.length > 0 : !!cur;
     var nextLabel = q.last ? '설문 결과 보기' : '다음';
+    if (AUTO && !q.multi) return '<div class="sv__nav is-auto">' +
+      '<button type="button" class="prev" data-go="-1"><span>←</span> 이전</button></div>';
+    if (AUTO) nextLabel = '선택 완료';
     return '<div class="sv__nav">' +
       '<button type="button" class="prev" data-go="-1"><span>←</span> 이전</button>' +
       '<button type="button" class="next" data-go="1"' + (ok ? '' : ' disabled') + '>' + nextLabel + ' <span>→</span></button>' +
@@ -255,6 +260,7 @@
     if (step === -1) renderIntro();
     else if (step >= TOTAL) renderDone();
     else { renderQuestion(step); syncRadar({}); }
+    if (AUTO) { form.classList.remove('is-enter'); void form.offsetWidth; form.classList.add('is-enter'); }
     /* 문항 이동 시 스크롤 위치 유지 (인트로/완료 화면 진입 때만 상단으로) */
     if ((step === -1 || step >= TOTAL) && window.scrollY > 40) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -289,12 +295,18 @@
       }
       syncOptions(q, step);   // 다시 그리지 않고 상태만 갱신 → 깜빡임 제거
       if (!q.multi) syncRadar({});
+      if (AUTO && !q.multi) {   // 고른 표시를 잠깐 보여 주고 다음 문항으로
+        clearTimeout(autoT);
+        var at0 = step;
+        autoT = setTimeout(function () { if (step === at0) { step++; render(); } }, 420);
+      }
       return;
     }
 
     var go = e.target.closest('[data-go]');
     if (go) {
       var dir = parseInt(go.dataset.go, 10);
+      clearTimeout(autoT);
       step += dir;
       if (step < -1) step = -1;
       render();

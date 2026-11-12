@@ -615,8 +615,7 @@ def page_survey_grid():
     문항·리포트 내용은 그대로, 디자인은 css/grid-survey.css"""
     out = page_survey_panel(5)
     out = out.replace('<nav class="pvtabs"', '<nav class="pvtabs" hidden', 1)   # 탭은 숨기고 그래픽 전환 로직만 쓴다
-    out = out.replace('<main class="sv sv--stem sv--framed"', '<main class="sv sv--stem sv--framed sv--grid"', 1)
-    out = out.replace('<section class="sv__body">', '<section class="sv__body"><div class="sv__lines" aria-hidden="true"><i></i><i></i><i></i></div>', 1)
+    out = out.replace('<main class="sv sv--stem sv--framed"', '<main class="sv sv--stem sv--framed sv--grid sv--auto"', 1)
     out = out.replace('</head>', f'<link rel="stylesheet" href="css/grid-survey.css?v={VER}">\n</head>', 1)
     return out
 
