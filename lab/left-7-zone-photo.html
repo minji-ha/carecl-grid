@@ -25,9 +25,20 @@
 .photo.touched .hint{opacity:0}
 .is-embed .photo .hint,.is-mini .photo .hint{display:none}
 @media (hover:none){.photo .hint{display:none}}
+/* GRID 톤 설문(survey-g.html) 안에서 — 글꼴 · 오렌지만 맞춘다 */
+@font-face{font-family:"URW Classico";src:url(../fonts/urw-classico.woff2) format("woff2");font-weight:400;font-display:swap}
+.is-grid .head em{font-family:"URW Classico",sans-serif;font-size:11px;letter-spacing:.24em;color:#E0662B}
+.is-grid .head b{font-family:"URW Classico","SUIT",sans-serif;font-weight:400;font-size:clamp(28px,2.6vw,40px);color:#1E1A17}
+.is-grid .head p{color:#4f4842}
+/* 그래픽 속 문항 표시는 실제 설문과 따로 돌아 헷갈리므로 숨긴다 */
+.is-grid .hud{display:none}
+@media (max-width:480px){.is-grid .head p{display:none}}   /* 좁은 카드에선 설명이 머리카락에 겹친다 */
+.is-grid .hud .q b{font-family:"URW Classico",sans-serif;font-size:12px;letter-spacing:.16em;color:#E0662B}
+.is-grid .hud .pct{font-family:"URW Classico",sans-serif;font-weight:400;font-size:34px;color:#1E1A17}
 </style>
 </head>
 <body>
+<script>try{if(parent!==window&&parent.document.querySelector(".sv--grid"))document.documentElement.classList.add("is-grid")}catch(e){}</script>
 <div class="panel photo">
   <div class="layer">
     <img class="base" src="zone-photo.jpg" alt="Aging Map 22 관리 부위 — 이마·미간·눈가·앞광대·턱·목" draggable="false">
@@ -53,8 +64,12 @@
   function layout() {
     W = panel.clientWidth; H = panel.clientHeight;
     var w = W / H >= 1.2 ? Math.max(W, H / IA) : Math.max(W * 1.7, Math.min(W * 2.4, H * 0.62 / IA));
-    var h = w * IA, x = W * 0.5 - w * 0.53, y = h > H ? H * 0.46 - h * 0.42 : (H - h) * 0.5;
+    var h = w * IA, x = W * 0.5 - w * (document.documentElement.classList.contains('is-grid') ? 0.575 : 0.53), y = h > H ? H * 0.46 - h * 0.42 : (H - h) * 0.5;
     x = Math.min(0, Math.max(W - w, x)); if (h > H) y = Math.min(0, Math.max(H - h, y));
+    if (document.documentElement.classList.contains('is-grid') && W / H < 1.2) {   // GRID 설문 카드: 사진을 조금 키워 아래쪽에 붙인다 (위는 제목 자리)
+      w = Math.min(W * 2.4, Math.max(W * 1.7, H * 0.74 / IA)); h = w * IA;
+      x = Math.min(0, Math.max(W - w, W * 0.5 - w * 0.575)); y = Math.max((H - h) * 0.5, H - h * 0.97);
+    }
     R = { x: x, y: y, w: w, h: h };
     var lay = panel.querySelector('.layer'), hero = document.documentElement.classList.contains('is-hero');
     lay.style.setProperty('--t', (y > 0 ? y : -1) + 'px'); lay.style.setProperty('--b', (h > H ? H + 1 : y + h) + 'px');

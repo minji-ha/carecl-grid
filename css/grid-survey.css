@@ -1,0 +1,110 @@
+/* =========================================================
+   GRID 톤 설문 (survey-g.html, 2026-11-12)
+   기존 설문(survey.js · report.js)의 문항·결과 내용은 그대로 두고 겉모습만 GRID 시안에 맞춘다.
+   왼쪽: 6번 '부위 사진' 그래픽을 둥근 카드로, 오른쪽: 흰 바탕 + 세로선 + 오렌지
+   ========================================================= */
+.sv--grid{
+  --sky-50:#FDF1EA; --sky-100:var(--accent-2); --sky-400:#EE8B5A;
+  --sky-500:var(--accent); --sky-600:#C9541C; --sky-700:#B54A17;
+  grid-template-columns:minmax(380px,40%) 1fr;background:#fff
+}
+.pvtabs[hidden]{display:none!important}
+
+/* ── 왼쪽: 사진 카드 (스크롤해도 화면에 붙어 있음) ── */
+.sv--grid .sv__panel{background:#fff;overflow:clip}
+.sv--grid .sv__dots{display:none}
+.sv--grid .sv__stick--frame{padding:20px 0 24px var(--gut)}
+.sv--grid .sv__stick--frame iframe{border-radius:var(--r);background:#c7cad6;box-shadow:0 30px 60px -36px rgba(30,20,10,.35)}
+
+/* ── 오른쪽: 세로선 배경 ── */
+.sv--grid .sv__body{position:relative;padding:clamp(56px,6vw,96px) 0 clamp(80px,8vw,140px)}
+.sv__lines{position:absolute;inset:0;pointer-events:none;z-index:0}
+.sv__lines i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.sv__lines i:nth-child(1){left:25%}.sv__lines i:nth-child(2){left:50%}.sv__lines i:nth-child(3){left:75%}
+.sv--grid .sv__form{position:relative;z-index:1;width:min(760px,calc(100% - 2 * var(--gut)))}
+
+/* ── 인트로 ── */
+.sv--grid .sv__intro .label{gap:14px;margin-bottom:28px}
+.sv--grid .sv__intro .label i{width:28px;background:var(--accent)}
+.sv--grid .sv__intro .label span{font-family:var(--f-ui);font-size:12px;letter-spacing:.24em;color:var(--accent)}
+.sv--grid .sv__intro h1{font-family:var(--f-title);font-size:clamp(32px,3.2vw,52px);line-height:1.3;letter-spacing:-.03em;color:var(--ink)}
+.sv--grid .sv__intro .desc{margin-top:28px;font-size:15.5px;line-height:1.9;color:var(--ink-2)}
+/* 숫자 세 개 — 칩 대신 큰 숫자 + 세로 구분선 */
+.sv--grid .sv__chips{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.sv--grid .sv__chips span{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:22px 0 22px 24px;border:0;border-radius:0;background:none;
+  font-size:13px;color:var(--ink-2)}
+.sv--grid .sv__chips span+span{border-left:1px solid var(--hair)}
+.sv--grid .sv__chips span:first-child{padding-left:0}
+.sv--grid .sv__chips b{font-family:var(--f-title);font-size:clamp(34px,3vw,46px);line-height:1;color:var(--accent);letter-spacing:-.02em}
+.sv--grid .sv__intro .go{margin-top:44px}
+.sv--grid .sv__intro .go .btn{background:var(--accent);font-weight:400;box-shadow:0 16px 32px -14px rgba(224,102,43,.6)}
+.sv--grid .sv__intro .go .btn::before{background:linear-gradient(100deg,#C9541C,#E0662B)}
+.sv--grid .sv__intro .go .btn span{background:#fff}
+.sv--grid .sv__intro .go .btn span::before,.sv--grid .sv__intro .go .btn span::after{color:var(--accent)}
+.sv--grid .sv__intro .caution{margin-top:22px;font-size:13px;color:#A39A93}
+
+/* ── 문항: 큰 번호 + 18칸 진행 막대 ── */
+.sv--grid .sv__progress{margin-bottom:44px}
+.sv--grid .sv__progress .row{margin-bottom:14px}
+.sv--grid .sv__progress .sect{font-size:13px;letter-spacing:.02em;color:var(--ink-2)}
+.sv--grid .sv__progress .cnt{font-family:var(--f-title);font-size:15px}
+.sv--grid .sv__progress .cnt b{font-weight:400;color:var(--accent)}
+.sv--grid .sv__progress .cnt em{color:#B9B0A8}
+.sv--grid .sv__progress .track{height:3px;border-radius:0;background:
+  repeating-linear-gradient(90deg,transparent 0 calc(100% / 18 - 3px),#fff calc(100% / 18 - 3px) calc(100% / 18)),#ECE8E4}
+.sv--grid .sv__progress .fill{border-radius:0;background:var(--accent)}
+.sv--grid .sv__qlabel{font-family:var(--f-title);font-size:clamp(40px,3.6vw,60px);line-height:1;letter-spacing:-.02em;color:var(--accent)}
+.sv--grid .sv__q{margin:20px 0 14px;font-family:var(--f-title);font-size:clamp(24px,2.1vw,32px);line-height:1.45;letter-spacing:-.03em;color:var(--ink)}
+.sv--grid .sv__help{font-size:14px;color:var(--ink-2)}
+.sv--grid .sv__count{color:var(--accent)}
+
+/* 보기 — 흰 카드, 고르면 오렌지 테두리 + 연한 오렌지 바탕 */
+.sv--grid .sv__opts{margin-top:30px;gap:10px;min-height:0}
+.sv--grid .opt{padding:18px 22px;gap:16px;border-radius:14px;border:1px solid var(--hair);background:#fff;
+  transition:border-color .25s ease,background .25s ease,box-shadow .25s ease}
+.sv--grid .opt:hover{transform:none;border-color:var(--accent);box-shadow:0 10px 24px -16px rgba(224,102,43,.5)}
+.sv--grid .opt .key{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:50%;border:1px solid var(--hair);
+  font-family:var(--f-ui);font-size:13px;color:var(--ink-2);transition:all .25s ease}
+.sv--grid .opt .txt{font-size:15.5px;color:var(--ink)}
+.sv--grid .opt .mark{display:none}
+.sv--grid .opt.is-on{padding:17px 21px;border:2px solid var(--accent);background:#FDF3EC}
+.sv--grid .opt.is-on .key{background:var(--accent);border-color:var(--accent);color:#fff}
+.sv--grid .opt.is-on .txt{font-weight:400}
+/* 부위 고르기(3열) · 연령(2열)은 키 번호 없이 가운데 정렬 */
+.sv--grid .sv__opts.is-grid .opt{justify-content:center;text-align:center;padding:18px 12px}
+.sv--grid .sv__opts.is-grid .opt.is-on{padding:17px 11px}
+
+.sv--grid .sv__explain{margin-top:36px;padding:28px 32px;border-radius:var(--r);background:var(--soft);border:0}
+.sv--grid .sv__explain h3{font-family:var(--f-title);font-size:17px;color:var(--ink)}
+.sv--grid .sv__explain p{font-size:14px;color:var(--ink-2)}
+.sv--grid .sv__explain p+p{font-size:15px;color:var(--ink)}
+
+/* 이전 · 다음 */
+.sv--grid .sv__nav{margin-top:40px;align-items:center}
+.sv--grid .sv__nav button{width:auto;padding:17px 34px;font-size:15.5px;border-radius:999px}
+.sv--grid .sv__nav .prev{border:0;background:none;padding-left:0;color:var(--ink-2)}
+.sv--grid .sv__nav .prev:hover{color:var(--ink);transform:none}
+.sv--grid .sv__nav .next{min-width:200px;background:var(--accent);box-shadow:0 16px 32px -14px rgba(224,102,43,.6)}
+.sv--grid .sv__nav button:disabled{opacity:1;background:#E9E5E1;box-shadow:none;color:#A39A93}
+
+/* ── 결과: 리포트 내용은 그대로, 바탕만 흰색 + 세로선 위에 ── */
+.sv--grid .sv__body:has(.cku-result){background:var(--soft)}
+.sv--grid .sv__form:has(.cku-result){width:min(980px,calc(100% - 2 * var(--gut)))}
+
+/* ── 태블릿 · 모바일 ── */
+@media (max-width:1100px){
+  .sv--grid{grid-template-columns:1fr}
+  .sv--grid .sv__stick--frame{padding:16px var(--gut) 0}
+  .sv--grid .sv__stick.sv__stick--frame{height:min(64vh,520px)}
+  .sv__lines i:nth-child(2){display:none}
+}
+@media (max-width:640px){
+  .sv--grid .sv__stick.sv__stick--frame{height:min(56vh,420px)}
+  .sv--grid .sv__chips span{padding-left:14px}
+  .sv--grid .sv__chips b{font-size:30px}
+  .sv--grid .opt{padding:15px 16px;gap:12px}
+  .sv--grid .opt.is-on{padding:14px 15px}
+  .sv--grid .opt .txt{font-size:14px}
+  .sv--grid .sv__nav .next{flex:1;min-width:0}
+  .sv--grid .sv__nav .prev{flex:0 0 auto}
+}
