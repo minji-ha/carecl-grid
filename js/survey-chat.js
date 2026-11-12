@@ -175,8 +175,6 @@
     res.insertAdjacentHTML('afterbegin',
       '<header class="svc-doc"><p class="svc-doc__brand"><b class="lf">careCL</b><span>AI Skin Diagnosis Report</span></p>' +
       '<dl class="svc-doc__meta"><div><dt>No.</dt><dd>' + no + '</dd></div><div><dt>Date</dt><dd>' + ymd + '</dd></div><div><dt>Method</dt><dd>Aging Map 22 · 18 Q</dd></div></dl></header>');
-    var cover = res.querySelector('.cku-cover');
-    if (cover) cover.insertAdjacentHTML('beforeend', '<span class="svc-stamp" aria-hidden="true"><b class="lf">careCL</b>AI 진단<br>완료</span>');
   }
   new MutationObserver(decorate).observe(form, { childList: true, subtree: false });
   decorate();
