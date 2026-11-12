@@ -261,3 +261,21 @@ body.survey--chat .foot{margin-top:0}
 .sv--chat .checkup .cku-care-order > *,.sv--chat .checkup .cku-mode-step,.sv--chat .checkup .cku-faq-item{border:0!important;border-radius:20px!important;background:#FFF4EC!important;box-shadow:none!important}
 .sv--chat .checkup .cku-care-no{border-radius:50%;background:var(--grad);color:#fff;border:0}
 .sv--chat .checkup .cku-mode-badge{border-radius:999px;background:var(--grad);color:#fff}
+/* 위 상담 머리 — 화면에 붙어 있으면 스크롤할 때 대화가 그 밑으로 겹쳐 보여서(2026-11-12 지적) 맨 위에 한 번만 둔다. 진행은 아래 막대가 보여 줌 */
+.svc__head{position:relative;top:auto;background:#fff}
+.svc__thread{padding-top:clamp(30px,3vw,44px)}
+
+/* ── 왼쪽 여성 얼굴 (부위 사진 그래픽) + 오른쪽 대화 — 2026-11-12 요청 ── */
+.svc-wrap{display:grid;grid-template-columns:minmax(340px,38%) 1fr;gap:clamp(28px,4vw,72px);padding:0 var(--gut)}
+.svc-wrap[hidden]{display:none}
+.svc-face{position:sticky;top:calc(var(--head) + 20px);align-self:start;height:calc(100svh - var(--head) - 40px);min-height:520px;margin-top:20px;
+  border-radius:36px;overflow:hidden;background:#c7cad6;box-shadow:0 40px 80px -40px rgba(110,80,120,.55)}
+.svc-face iframe{display:block;width:100%;height:100%;border:0}
+.svc-wrap .svc{width:auto;max-width:780px;margin:0}
+/* 진행 막대는 대화 칸 아래에 붙어 따라옴 */
+.svc__bar{position:sticky;left:auto;bottom:20px;translate:none;width:auto;max-width:560px;margin:40px auto 0}
+@media (max-width:1000px){
+  .svc-wrap{grid-template-columns:1fr;gap:0}
+  .svc-face{position:relative;top:0;height:min(52vh,420px);min-height:0;margin-top:16px;border-radius:28px}
+  .svc-wrap .svc{max-width:none}
+}

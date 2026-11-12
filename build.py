@@ -627,19 +627,22 @@ def page_survey_chat():
     """survey-c.html — AI 상담 대화형 설문 + 진단서 리포트 (2026-11-12 B안).
     문항·결과 내용은 survey.js · report.js 그대로, 대화는 js/survey-chat.js, 모양은 css/survey-chat.css"""
     body = """<main class="sv sv--chat">
-  <section class="svc">
-    <div class="svc__head">
-      <span class="svc__agent"><i class="svc__orb" aria-hidden="true"></i><span><b>careCL AI</b><small><i class="svc__live" aria-hidden="true"></i>상담 중 · Aging Map 22</small></span></span>
-      <span class="svc__meta">노화 타입 상담</span>
-    </div>
-    <div class="svc__thread" id="svChat" aria-live="polite"></div>
-  </section>
+  <div class="svc-wrap">
+    <aside class="svc-face" aria-hidden="true"><iframe src="lab/left-7-zone-photo.html?embed=loop&amp;v=""" + VER + """" title="Aging Map 22 얼굴 부위" tabindex="-1" loading="eager"></iframe></aside>
+    <section class="svc">
+      <div class="svc__head">
+        <span class="svc__agent"><i class="svc__orb" aria-hidden="true"></i><span><b>careCL AI</b><small><i class="svc__live" aria-hidden="true"></i>상담 중 · Aging Map 22</small></span></span>
+        <span class="svc__meta">노화 타입 상담</span>
+      </div>
+      <div class="svc__thread" id="svChat" aria-live="polite"></div>
+      <nav class="svc__bar" hidden>
+        <button type="button" class="svc__back" data-back>← 이전 질문</button>
+        <span class="svc__track" aria-hidden="true"><i></i></span>
+        <span class="svc__cnt"><b>01</b> / 18</span>
+      </nav>
+    </section>
+  </div>
   <section class="svc__report" id="svReport"><div class="sv__form" id="svForm"></div></section>
-  <nav class="svc__bar" hidden>
-    <button type="button" class="svc__back" data-back>← 이전 질문</button>
-    <span class="svc__track" aria-hidden="true"><i></i></span>
-    <span class="svc__cnt"><b>01</b> / 18</span>
-  </nav>
 </main>
 """
     return (head("AI 피부 상담 | Aging Map 22 — careCL 케어클", "AI 피부 에이전트와 대화하며 나의 노화 타입과 먼저 관리할 부위를 확인하세요",

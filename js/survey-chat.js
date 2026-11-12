@@ -19,6 +19,7 @@
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function now() { var d = new Date(); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
   function follow(node) {   // 새 말이 보이게 아래로
+    if (cur < 0) return;   // 인사말 동안은 그대로 (위 상담 머리가 화면 밖으로 밀려나지 않게)
     var r = node.getBoundingClientRect(), pad = 140;
     if (r.bottom > innerHeight - pad) scrollBy({ top: r.bottom - innerHeight + pad, behavior: reduce ? 'auto' : 'smooth' });
   }
@@ -166,7 +167,7 @@
   }
   new MutationObserver(decorate).observe(form, { childList: true, subtree: false });
   decorate();
-  if (form.querySelector('.cku-result')) { report.classList.add('is-on'); document.querySelector('.svc').hidden = true; return; }   // ?view= 미리보기
+  if (form.querySelector('.cku-result')) { report.classList.add('is-on'); document.querySelector('.svc-wrap').hidden = true; return; }   // ?view= 미리보기
 
   /* ── 클릭 ── */
   thread.addEventListener('click', function (e) {
