@@ -10,7 +10,7 @@
   var S = window.ckuSurvey, thread = document.getElementById('svChat');
   var report = document.getElementById('svReport'), form = document.getElementById('svForm');
   var bar = document.querySelector('.svc__bar');
-  if (!S || !thread) return;
+  if (!S || (!thread && !document.querySelector('.sv--result'))) return;
 
   /* AI 아이콘 — 사이트 'AI 피부 진단' 버튼과 같은 반짝임 */
   var ICO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.2 14 8.4 20.2 10.4 14 12.4 12 18.6 10 12.4 3.8 10.4 10 8.4Z" fill="currentColor"/><circle cx="19.4" cy="4.2" r="1.7" fill="currentColor" opacity=".9"/><circle cx="4.8" cy="18.4" r="1.2" fill="currentColor" opacity=".7"/></svg>';
@@ -159,11 +159,13 @@
     for (var k = 0; k < dots.length; k++) { dots[k].classList.add('is-on'); await sleep(55); }
     await sleep(500);
     scan.classList.add('is-done'); scan.querySelector('.svc-scan__t').textContent = 'Aging Map 22 · 분석 완료';
-    await ai(turn, '진단서가 나왔어요. 아래에서 확인해 보세요.');
-    S.finish(answers);
-    report.classList.add('is-on');
-    setTimeout(function () { report.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, 300);
-    busy = false;
+    await ai(turn, '진단서가 나왔어요. 결과 화면으로 이동할게요.');
+    /* 리포트는 별도 화면(…-survey-c-result.html)에서 — 답은 이 창에서만 쓰는 저장소로 넘긴다 */
+    try { sessionStorage.setItem('ckuAnswers', JSON.stringify(answers)); } catch (e) {}
+    await sleep(900);
+    document.body.classList.add('is-leaving');
+    await sleep(reduce ? 0 : 450);
+    location.href = location.pathname.replace(/\.html$/, '-result.html');
   }
 
   /* ── 진단서 머리 (문서 번호 · 날짜 · 도장) — 리포트 내용은 건드리지 않고 위에 얹기만 ── */
@@ -178,6 +180,18 @@
   }
   new MutationObserver(decorate).observe(form, { childList: true, subtree: false });
   decorate();
+
+  /* 결과 화면: 설문에서 넘긴 답으로 리포트를 그린다. 답이 없으면(주소로 바로 들어옴) 예시 리포트 */
+  if (document.querySelector('.sv--result')) {
+    var saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem('ckuAnswers') || 'null'); } catch (e) {}
+    if (!form.querySelector('.cku-result')) {
+      if (saved) S.finish(saved);
+      else { location.replace(location.pathname + '?view=member&type=mixed'); return; }
+    }
+    report.classList.add('is-on');
+    return;
+  }
   if (form.querySelector('.cku-result')) { report.classList.add('is-on'); document.querySelector('.svc-wrap').hidden = true; return; }   // ?view= 미리보기
 
   /* ── 클릭 ── */

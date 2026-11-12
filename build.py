@@ -653,6 +653,18 @@ def page_survey_chat():
 
 
 PAGES["survey-c.html"] = page_survey_chat
+
+
+def page_survey_chat_result():
+    """survey-c-result.html — 대화형 설문이 끝나면 넘어오는 리포트 전용 화면 (2026-11-12 요청: 설문과 리포트를 별도 화면으로)"""
+    out = page_survey_chat()
+    out = out.replace('<main class="sv sv--chat">', '<main class="sv sv--chat sv--result">', 1)
+    out = re.sub(r'  <div class="svc-wrap">.*?\n  </div>\n', '', out, count=1, flags=re.S)
+    out = out.replace('<title>AI 피부 상담 |', '<title>AI 진단 리포트 |', 1)
+    return out
+
+
+PAGES["survey-c-result.html"] = page_survey_chat_result
    # 시안 확인용 사이트 — 기본 설문에도 그래픽 탭 6개
 PAGES["report.html"] = page_report
 

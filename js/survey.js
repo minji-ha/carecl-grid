@@ -274,7 +274,7 @@
 
     if (e.target.closest('[data-restart]')) {
       PREVIEW = null; if (main) main.classList.remove('is-locked');
-      if (CHAT) { location.href = location.pathname; return; }   // 대화형은 처음부터 다시 대화
+      if (CHAT) { try { sessionStorage.removeItem('ckuAnswers'); } catch (e) {} location.href = location.pathname.replace(/-result\.html$/, '.html'); return; }   // 대화형은 처음부터 다시 대화
       if (location.search) history.replaceState(null, '', location.pathname);
       answers = {}; step = -1; render(); syncRadar({});
       window.scrollTo({ top: 0, behavior: 'smooth' });

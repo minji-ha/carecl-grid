@@ -454,3 +454,8 @@ body.survey--chat .foot{margin-top:0}
 .sv--chat .checkup .cku-cover-radar{position:relative;background:radial-gradient(circle at 50% 40%,#fff 0%,#FBF9F7 70%,#F3EFEB 100%);
   box-shadow:0 0 0 10px rgba(255,255,255,.14),0 0 0 22px rgba(255,255,255,.07),0 30px 50px -24px rgba(110,35,5,.55),inset 0 -6px 16px rgba(120,60,30,.06)}
 .sv--chat .checkup .cku-cover-radar::after{border-color:rgba(224,102,43,.28)}
+
+/* 리포트 전용 화면 (survey-c-result.html) — 대화 없이 리포트만, 들어올 때 부드럽게 */
+.sv--result .svc__report{display:block;padding-top:calc(var(--head) * 0 + clamp(40px,5vw,72px))}
+body.survey--chat{transition:opacity .45s ease}
+body.survey--chat.is-leaving{opacity:0}
