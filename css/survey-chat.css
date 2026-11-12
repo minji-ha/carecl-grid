@@ -274,7 +274,7 @@ body.survey--chat .foot{margin-top:0}
 .svc-wrap .svc{width:auto;max-width:780px;margin:0}
 /* 진행 막대는 대화 칸 아래에 붙어 따라옴 */
 .svc__bar{position:sticky;left:auto;bottom:20px;translate:none;width:auto;max-width:560px;margin:40px auto 0}
-@media (max-width:1000px){
+@media (max-width:1100px){
   .svc-wrap{grid-template-columns:1fr;gap:0}
   .svc-face{position:relative;top:0;height:min(52vh,420px);min-height:0;margin-top:16px;border-radius:28px}
   .svc-wrap .svc{max-width:none}
@@ -293,6 +293,19 @@ body.survey--chat .foot{margin-top:0}
 @keyframes svcTwinkle{50%{transform:scale(.82) rotate(45deg)}}
 /* 왼쪽 사진 카드 — 위아래 여백을 넉넉히 */
 .svc-face{top:calc(var(--head) + 48px);height:min(calc(100svh - var(--head) - 96px),780px);min-height:480px;margin:48px 0}
-@media (max-width:1000px){.svc-face{top:0;height:min(52vh,420px);min-height:0;margin:20px 0 8px}}
+@media (max-width:1100px){.svc-face{top:0;height:min(52vh,420px);min-height:0;margin:20px 0 8px}}
 /* 위 고정 메뉴 밑에서 시작 (main이 0에서 시작해 사진 카드 윗부분이 메뉴에 가려지던 것) */
 .sv--chat{padding-top:var(--head)}
+
+/* ── 왼쪽 사진을 카드 대신 배경처럼 (2026-11-12) — 화면 왼쪽 끝부터, 위는 메뉴 밑, 아래는 화면 끝까지.
+      사진의 위·오른쪽 가장자리는 바탕색으로 녹여 대화 칸과 이어지게 ── */
+.svc-wrap{grid-template-columns:minmax(360px,44%) 1fr;padding:0 var(--gut) 0 0}
+.svc-face{top:var(--head);height:calc(100svh - var(--head));min-height:560px;margin:0;border-radius:0;box-shadow:none;background:var(--cream)}
+.svc-face iframe{background:var(--cream)}
+.svc-face::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(251,248,245,0) 84%,var(--cream) 100%)}
+@media (max-width:1100px){
+  .svc-wrap{grid-template-columns:1fr;padding:0 var(--gut)}
+  .svc-face{position:relative;top:0;height:min(50vh,420px);min-height:0;margin:0 calc(-1 * var(--gut));border-radius:0}
+  .svc-face::after{background:linear-gradient(180deg,rgba(251,248,245,0) 70%,var(--cream) 100%)}
+}
