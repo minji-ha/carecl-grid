@@ -64,6 +64,15 @@
     return aiSay(box, html, meta, small);
   }
 
+  /* ── AI가 보여 주는 얼굴 사진 (부위 사진 그래픽: 22좌표 그리드가 번짐) — embed=loop 상담 중 / 1 분석 끝까지 ── */
+  var VER = ((document.querySelector('script[src*="survey-chat.js"]') || {}).src || '').split('v=')[1] || '';
+  async function photo(box, mode) {
+    var t = typing(box); await sleep(500); t.remove();
+    var m = el('div', 'svc-ai svc-media');
+    m.innerHTML = '<iframe src="lab/left-7-zone-photo.html?embed=' + mode + '&amp;v=' + VER + '" title="Aging Map 22 얼굴 부위" tabindex="-1" loading="eager"></iframe>';
+    box.appendChild(m); follow(m); await sleep(700); return m;
+  }
+
   /* ── 내 답 ── */
   function mine(box, text, qi) {
     var m = el('div', 'svc-me', '<p class="svc-me__by">' + (qi != null ? Q[qi].label + ' · ' : '') + '나</p><p class="svc-me__t">' + esc(text) + '</p>');
@@ -132,6 +141,7 @@
     var turn = el('div', 'svc-turn svc-turn--intro'); thread.appendChild(turn);
     await sleep(400);
     await ai(turn, '안녕하세요. <i>careCL</i> AI 피부 에이전트예요.');
+    await photo(turn, 'loop');
     await ai(turn, '18개의 질문으로 <em>당신의 노화 타입</em>과,<br>얼굴 22개 부위 중 <em>먼저 관리할 곳</em>을 찾아 드릴게요.');
     await ai(turn, '이 상담은 피부과 전문의 인나 콜구넨코(Inna Kolgunenko) 박사의 5가지 노화 형태(Morphotypes)와 한국인 피부 노화 연구를 바탕으로, 노화를 6가지 타입과 22개 부위로 나누어 봅니다. 비회원도 참여할 수 있어요.', null, true);
     var c = el('div', 'svc-pick svc-pick--start',
@@ -144,6 +154,7 @@
     cur = N; progress(); busy = true;
     var turn = el('div', 'svc-turn svc-turn--end'); thread.appendChild(turn);
     await ai(turn, '고마워요. 답변을 바탕으로 노화 타입을 분석할게요.');
+    await photo(turn, '1');
     var scan = el('div', 'svc-scan', '<div class="svc-scan__grid">' + new Array(22 + 1).join('<i></i>') + '</div><p class="svc-scan__t">Aging Map 22 · 분석 중</p>');
     turn.appendChild(scan); follow(scan);
     var dots = scan.querySelectorAll('i');

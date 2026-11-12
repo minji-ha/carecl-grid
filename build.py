@@ -628,7 +628,6 @@ def page_survey_chat():
     문항·결과 내용은 survey.js · report.js 그대로, 대화는 js/survey-chat.js, 모양은 css/survey-chat.css"""
     body = """<main class="sv sv--chat">
   <div class="svc-wrap">
-    <aside class="svc-face" aria-hidden="true"><iframe src="lab/left-7-zone-photo.html?embed=loop&amp;v=""" + VER + """" title="Aging Map 22 얼굴 부위" tabindex="-1" loading="eager"></iframe></aside>
     <section class="svc">
       <div class="svc__head">
         <span class="svc__agent"><i class="svc__orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.2 14 8.4 20.2 10.4 14 12.4 12 18.6 10 12.4 3.8 10.4 10 8.4Z" fill="currentColor"/><circle cx="19.4" cy="4.2" r="1.7" fill="currentColor" opacity=".9"/><circle cx="4.8" cy="18.4" r="1.2" fill="currentColor" opacity=".7"/></svg></i><span><b><span class="lf">careCL</span> AI</b><small><i class="svc__live" aria-hidden="true"></i>상담 중 · Aging Map 22</small></span></span>

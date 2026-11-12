@@ -32,7 +32,8 @@
 .is-grid .head p{color:#4f4842}
 /* 그래픽 속 문항 표시는 실제 설문과 따로 돌아 헷갈리므로 숨긴다 */
 .is-grid .hud{display:none}
-.is-chat .panel.photo{background:#FBF8F5}   /* 대화형 설문: 사진 위쪽이 페이지 바탕색으로 녹아들게 */
+.is-chat .panel.photo{background:#c9ccd7}
+.is-chat .head{display:none}   /* 대화 속 사진: 제목은 대화가 대신 */   /* 대화형 설문: 사진 위쪽이 페이지 바탕색으로 녹아들게 */
 @media (max-width:480px){.is-grid .head p{display:none}}   /* 좁은 카드에선 설명이 머리카락에 겹친다 */
 .is-grid .hud .q b{font-family:"URW Classico",sans-serif;font-size:12px;letter-spacing:.16em;color:#E0662B}
 .is-grid .hud .pct{font-family:"URW Classico",sans-serif;font-weight:400;font-size:34px;color:#1E1A17}
@@ -67,7 +68,7 @@
     var w = W / H >= 1.2 ? Math.max(W, H / IA) : Math.max(W * 1.7, Math.min(W * 2.4, H * 0.62 / IA));
     var h = w * IA, x = W * 0.5 - w * (document.documentElement.classList.contains('is-grid') ? 0.575 : 0.53), y = h > H ? H * 0.46 - h * 0.42 : (H - h) * 0.5;
     x = Math.min(0, Math.max(W - w, x)); if (h > H) y = Math.min(0, Math.max(H - h, y));
-    if (document.documentElement.classList.contains('is-chat')) {   // 대화형 설문 카드: 사진이 카드를 꽉 채우게 (위아래 번짐 없이)
+    if (document.documentElement.classList.contains('is-chat') && W / H < 1.2) {   // 대화형 설문 세로 카드: 사진이 카드를 꽉 채우게 (위아래 번짐 없이)
       w = Math.max(W / 0.535, W); h = w * IA;                      // 사진 가로 26.5%~80% — 얼굴과 오른쪽 부위 이름(U2 미간…)까지, 왼쪽 Upper·Mid·Lower 글자는 밖으로
       if (h > H) { h = H; w = h / IA; }
       x = Math.min(0, Math.max(W - w, -w * 0.265)); y = H - h;      // 아래에 붙이고 위는 바탕색으로 (제목 자리)

@@ -309,3 +309,68 @@ body.survey--chat .foot{margin-top:0}
   .svc-face{position:relative;top:0;height:min(50vh,420px);min-height:0;margin:0 calc(-1 * var(--gut));border-radius:0}
   .svc-face::after{background:linear-gradient(180deg,rgba(251,248,245,0) 70%,var(--cream) 100%)}
 }
+
+/* ── 얼굴 사진은 대화 속 메시지로 (2026-11-12 결정) — 왼쪽 패널 없이 대화를 가운데 한 줄로 ── */
+.svc-wrap,.svc-wrap{display:block;padding:0}
+.svc-wrap .svc{width:min(780px,calc(100% - 2 * var(--gut)));max-width:none;margin:0 auto}
+.svc-media{max-width:min(560px,100%);aspect-ratio:16 / 10;margin-top:8px;border-radius:8px 26px 26px 8px;overflow:hidden;background:#c9ccd7;box-shadow:var(--sh)}
+.svc-media iframe{display:block;width:100%;height:100%;border:0;pointer-events:auto}
+@media (max-width:640px){.svc-media{aspect-ratio:4 / 3}}
+
+/* ══ v3 미니멀 (2026-11-12) — 크림·피치·그라데이션을 걷어내고 흰 바탕 + 검정 + 옅은 회색.
+      오렌지(브랜드)는 AI 아이콘 · 강조 글자 · 진행 막대에만 ══ */
+.sv--chat{--cream:#fff;--sand:#F4F4F5;--line2:#E7E7E9;--grad:#111;--grad-soft:#F4F4F5;--glass:#F4F4F5;--sh:0 0 0 1px #EBEBED;background:#fff}
+.sv--chat::before,.sv--chat::after{display:none}
+.svc__head{background:#fff;box-shadow:0 0 0 1px var(--line2)}
+.svc__orb,.svc-ai__ico{background:var(--accent);box-shadow:none}
+.svc-ai__t{background:#F4F4F5;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.svc-ai__t em{background:none;color:var(--accent)}
+.svc-ai--small .svc-ai__t{background:none;padding:6px 2px;color:#71717A}
+.svc-ai__by > span{background:#F4F4F5}
+.svc-typing{background:#F4F4F5;box-shadow:none}
+.svc-typing i{background:#A1A1AA}
+.svc-me__t{background:#111;box-shadow:none}
+.svc-opt{border:1px solid var(--line2);box-shadow:none}
+.svc-opt:hover{transform:none;border-color:#111;box-shadow:none}
+.svc-opt__k{background:#F4F4F5;color:#52525B}
+.svc-opt:hover .svc-opt__k{background:#111;color:#fff}
+.svc-opt.is-on,.svc-pick--ab .svc-opt.is-on{background:#111;border-color:#111;color:#fff}
+.svc-pick--ab .svc-opt,.svc-pick--ab .svc-opt + .svc-opt{background:#F4F4F5;box-shadow:none;border:1px solid transparent}
+.svc-pick--ab .svc-opt__k{color:#fff}
+.svc-pick--ab .svc-opt:hover,.svc-pick--ab .svc-opt + .svc-opt:hover{transform:none;background:#EEEEF0;border-color:#111}
+.svc-pick--ab .svc-opt:hover .svc-opt__k{color:#fff;transform:none}
+.svc-pick--ab .svc-opt.is-on .svc-opt__k{color:rgba(255,255,255,.18)}
+.svc-pick__n{background:#F4F4F5}
+.svc-go{box-shadow:none}
+.svc-opt--start{box-shadow:none}
+.svc-opt--start::after{background:var(--accent)}
+.svc-scan{background:#F4F4F5;box-shadow:none}
+.svc-scan__grid i{background:#E4E4E7}
+.svc-scan__grid i.is-on{background:#111;box-shadow:none;transform:none}
+.svc-scan.is-done .svc-scan__grid i{background:var(--accent)}
+.svc-media{box-shadow:none}
+.svc__bar{background:rgba(255,255,255,.96);box-shadow:0 0 0 1px var(--line2),0 10px 30px -18px rgba(0,0,0,.25)}
+.svc__track i{background:var(--accent)}
+/* 리포트 */
+.svc-doc__meta div{background:#F4F4F5;box-shadow:none}
+.sv--chat .checkup .cku-cover{background:#F4F4F5;box-shadow:none}
+.sv--chat .checkup .cku-cover::before{display:none}
+.sv--chat .checkup .cku-cover .cku-result-title .cku-code{background:none;color:var(--accent)}
+.sv--chat .checkup .cku-cover .cku-stat{background:#fff;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.sv--chat .checkup .cku-cover .cku-stat-note{color:#71717A}
+.sv--chat .checkup .cku-cover-radar{background:#fff;box-shadow:none}
+.svc-stamp{background:#111;box-shadow:none}
+.sv--chat .checkup .cku-card{background:#fff;box-shadow:0 0 0 1px var(--line2);-webkit-backdrop-filter:none;backdrop-filter:none}
+.sv--chat .cku-card > .cku-card-title::before{box-shadow:none}
+.sv--chat .cku-result-traits li,.sv--chat .cku-chip{background:#F4F4F5!important}
+.sv--chat .cku-result-concern,.sv--chat .cku-evidence,.sv--chat .cku-callout,.sv--chat .cku-steps li,.sv--chat .cku-coupon,.sv--chat .cku-review,.sv--chat .cku-rank,
+.sv--chat .checkup .cku-shot-item,.sv--chat .checkup .cku-care-order > *,.sv--chat .checkup .cku-mode-step,.sv--chat .checkup .cku-faq-item{background:#F7F7F8!important}
+.sv--chat .cku-result-concern,.sv--chat .cku-callout{border-left:2px solid #111!important}
+.sv--chat .cku-rank.primary{background:#111!important}
+.sv--chat .cku-rank.primary .cku-rank-no{color:#111}
+.sv--chat .cku-dist-track{background:#EFEFF1!important}
+.sv--chat .cku-dist-track i{background:#C4C4C8!important}
+.sv--chat .cku-dist-list li.is-on .cku-dist-track i{background:var(--accent)!important}
+.sv--chat .checkup .cku-shot-bar{background:#EBEBED}
+.sv--chat .checkup .cku-shot-bar span{background:#111}
+.sv--chat .cku-btn-primary{box-shadow:none!important}
