@@ -319,3 +319,8 @@ body:has(main.sub) .header{background:rgba(255,255,255,.62)!important;border-bot
 .amp{display:inline!important;font-family:"URW Classico","SUIT",sans-serif!important;font-weight:400!important;-webkit-text-stroke:0!important;font-size:.92em}
 /* AI 피부 진단 플로팅 버튼 — 링크 없는 <button>이라 기본 버튼 모양만 지움 */
 button.aifab{border:0;font:inherit;cursor:default;-webkit-appearance:none;appearance:none}
+
+/* careCL 글자는 어디서든 로고 서체 (build.py logo_font가 본문 텍스트를 .lf로 감쌈) */
+@font-face{font-family:"careCL Logo";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block}
+.lf{font-family:"careCL Logo",var(--f-ui),sans-serif;font-weight:400;letter-spacing:0}
+b .lf,strong .lf{font-weight:400}

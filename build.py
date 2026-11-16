@@ -679,6 +679,28 @@ AI_TEST_PUBLIC = False
 AI_SECRET = "lab-410bf9f9c6"
 
 
+_LF_SKIP = ("script", "style", "title", "textarea", "svg")
+def logo_font(html):
+    """본문에 보이는 careCL 글자는 모두 로고 서체(.lf)로 감싼다 — 태그 속성·head·script 안은 건드리지 않음"""
+    parts = re.split(r"(<[^>]+>)", html)
+    stack = []; out = []; inbody = False
+    for i, p in enumerate(parts):
+        if p.startswith("<"):
+            m = re.match(r"<(/?)([a-zA-Z0-9]+)", p)
+            if m:
+                tag = m.group(2).lower()
+                if tag == "body": inbody = not m.group(1)
+                if tag in _LF_SKIP and not p.endswith("/>"):
+                    if m.group(1):
+                        if stack and stack[-1] == tag: stack.pop()
+                    else: stack.append(tag)
+            out.append(p)
+        elif inbody and not stack and "careCL" in p and not (out and out[-1].startswith('<span class="lf"')):
+            out.append(p.replace("careCL", '<span class="lf">careCL</span>'))
+        else:
+            out.append(p)
+    return "".join(out)
+
 def hide_ai_test(html):
     html = re.sub(r'<a class="aifab".*?</a>\n?', '', html, flags=re.S)                       # 오른쪽 아래 버튼
     html = re.sub(r'<div class="foot__side">.*?</div>\s*(?=</div>\s*<div class="foot__row")', '', html, flags=re.S)  # 푸터 진단 안내
@@ -728,6 +750,7 @@ if __name__ == "__main__":
         if not AI_TEST_PUBLIC and is_ai_page(name):
             out = secret_links(out)
             name = AI_SECRET + "-" + name
+        out = logo_font(out)
         io.open(os.path.join(ROOT, name), "w", encoding="utf-8").write(out)
         print("built", name)
     print("v=" + VER)
