@@ -294,8 +294,11 @@ def page_index():
   <!-- 01 메인 영상 (그대로) -->
   <section class="hero" aria-label="메인 영상">
     <img class="hero__poster" src="assets/img/main-film-poster.jpg?v={VER}" alt="">
-    <video class="hero__video" src="assets/video/main-film.mp4?v={VER}" poster="assets/img/main-film-poster.jpg?v={VER}"
-           autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video class="hero__video" poster="assets/img/main-film-poster.jpg?v={VER}"
+           autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="assets/video/main-film-m.mp4?v={VER}" media="(max-width: 767px)" type="video/mp4">
+      <source src="assets/video/main-film.mp4?v={VER}" type="video/mp4">
+    </video>
     <div class="hero__copy" data-merge>
       <h1 class="hero__title hero__title--merge" aria-label="care Clinical Level — careCL">{HERO_MERGE}</h1>
     </div>
