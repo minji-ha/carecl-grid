@@ -695,8 +695,8 @@ def logo_font(html):
                         if stack and stack[-1] == tag: stack.pop()
                     else: stack.append(tag)
             out.append(p)
-        elif inbody and not stack and "careCL" in p and not (out and out[-1].startswith('<span class="lf"')):
-            out.append(p.replace("careCL", '<span class="lf">careCL</span>'))
+        elif inbody and not stack and ("careCL" in p or "care Clinical Level" in p) and not (out and out[-1].startswith('<span class="lf"')):
+            out.append(re.sub(r"care Clinical Level|careCL", lambda m: '<span class="lf">' + m.group(0) + '</span>', p))
         else:
             out.append(p)
     return "".join(out)

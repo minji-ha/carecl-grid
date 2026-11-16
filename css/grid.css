@@ -324,3 +324,4 @@ button.aifab{border:0;font:inherit;cursor:default;-webkit-appearance:none;appear
 @font-face{font-family:"careCL Logo";src:url(../fonts/caviar-dreams.woff2) format("woff2");font-weight:400;font-display:block}
 .lf{font-family:"careCL Logo",var(--f-ui),sans-serif;font-weight:400;letter-spacing:0}
 b .lf,strong .lf{font-weight:400}
+.lf em,.lf i{font-family:inherit!important}
